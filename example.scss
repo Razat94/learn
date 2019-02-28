@@ -1,0 +1,160 @@
+// Variables
+$primary-color: #ff0;
+$number: 5px + 25px; // plain arithmetic
+
+$no-default: 60px;
+$no-default: 600000px;
+//$no-default will have the latter specs.
+
+// The '!default' case is used as a fallback:
+// if variable already has a value, it won’t be re-assigned 
+// but if it doesn’t have a value yet, it will be given one.
+$default: 40px;
+$default: 400000px !default;
+
+// initialize empty variable with keyword null.
+$default-ex-2: null;
+$default-ex-2: 300000px !default;
+
+body {
+  color: $primary-color;
+  height: $no-default;
+  width: $default;
+  border-width: $default-ex-2;
+}
+
+// mixins
+@mixin setWidthHeight ( $argument: 50px ) {
+  width: $argument;
+  height: $argument;
+}
+
+.box {
+  @include setWidthHeight (100px);
+}
+
+.box2 {
+  @include setWidthHeight ();
+}
+
+// Remember, when using mixins with multiple parameters 
+// put the non-default values FIRST, and then place default values LAST
+@mixin blah ( $v1, $v2: 30px, $v3: 50px ) {
+  height: $v1;
+  width: $v2;
+  max-height: $v3;
+}
+
+.box8 {
+  @include blah ( 20px, 20px );
+}
+
+// Remember: the output from a function is a single value. 
+@function my-calculation-function($some-number, $another-number){
+  @return $some-number + $another-number
+}
+
+.my-module {
+  padding: my-calculation-function(10px, 5px);
+  height: $number;
+}
+
+// PLACEHOLDERS | EXTEND KEYWORD | INHERITANCE 
+// Placeholder Class
+%container {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+%message-shared {
+  border: 1px solid #ccc;
+  padding: 10px;
+  color: #333;
+}
+
+.message {
+  @extend %message-shared;
+  height: 50/10px;
+}
+
+// Interpolation
+$blah: a;
+
+div #{$blah} {
+  color: red;
+}
+
+// if statements
+$color: blue;
+
+@if $color != "white" {
+  .box3 {
+    color: $color;
+  }
+}
+
+$section: "#header";
+$newfont: null;
+
+@if ( $section == "#header" ) {
+  $newfont: 20px; 
+} @else if ( $section == "#footer") {
+  $newfont: 30px;
+} @else { $newfont: 50px; }
+
+#{$section} {
+  font-size: $newfont;
+}
+
+// Lists
+$list: ( Raza, Dad, Mom );
+$list2: ( "#li1", "#li2", "#li3" );
+$list3: ( 1px, 2px, 3px );
+
+.box9 {
+  height: length($list);
+  width: nth($list, 1);
+  background-size: nth($list, 2);
+  border-width: nth($list, 3);
+}
+
+// @for <$variable> from <start> through <end>
+  // Sass code goes here...
+
+$sum: 0px;
+@for $i from 1 through length($list3) {
+  $sum: $sum + $i;
+}
+
+.box10 {
+  width: $sum;
+}
+
+// https://alligator.io/sass/each-loops/
+@each $item in $list2 {
+  #{$item} {
+    color: green;
+  }
+}
+
+// Map
+$theme: (
+  primary: #f00,
+  secondary: #0f0,
+  neutral: #f2f2f2
+);
+
+a {
+ color: map-get($theme, primary);
+}
+
+$map: (
+  h1: 20px,
+  h2: 16px,
+  h3: 14px
+);
+
+@each $element, $size in $map {
+  #{$element} {
+    font-size: $size;
+  }
+}
