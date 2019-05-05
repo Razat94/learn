@@ -1,0 +1,18 @@
+Sass Fundamentals
+- Variables
+- Nesting
+- Partials
+- Mixins / Functions
+- @extend method
+- Referencing parent selectors with &
+- KNOW DIFF B/W MAP & LIST
+
+Working with SassScript
+- Using comments
+- Math Operations
+- Modifying Colors
+- Creating List Elements
+- Using @content container
+- @if/@else statements
+- Looping using @for
+- Looping using @each
