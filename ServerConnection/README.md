@@ -91,7 +91,7 @@ In my case, Ramnode has documentation for it [here](https://clientarea.ramnode.c
 > You MUST attach your SSH keys to the server instance. <br /> </br>In the last, you have successfully added your public key to the cloud provider. When you create/rebuild the instance, you will then have to select that SSH key(s) to that instance and/or enter a root password as desired.
   
 <div align = "center">
-    <img src = "images/addKeysToInstance.PNG">
+    <img src = "images/addKeysToInstance.png">
 </div>
 
 Once you're done with that, Click 'CREATE INSTANCE' to launch a new VPS!
