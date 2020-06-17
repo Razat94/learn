@@ -32,6 +32,10 @@
 2. [Create Cloud Instance & Get Connected](#createInstance)
 3. [Transfer HTML Page to Document Root](#transfer)
 
+
+
+
+
 <br></br>
 ### <p align="center" id = "ssh"> Create SSH Keys | [Back to ToC](#toc) </p>
 <h4>  Use SSH Keys to connect and authenticate to remote servers and services </h4>
@@ -79,6 +83,9 @@ After this process completes, two new files will be in your ~/.ssh directory:
 2) id_rsa.pub (your public key).
 
 Once you have created the keys, you will need to upload the public key to the server provider.
+
+
+
 
 
 <br></br>
@@ -157,6 +164,8 @@ root@generalvps:~# free
               total        used        free      shared  buff/cache   available
 Mem:        1004556      181600      162828         988      660128      663924
 ```
+
+
 
 
 
