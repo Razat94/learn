@@ -1249,6 +1249,7 @@ select {
 .cards-section .item .title {
   font-size: 16px;
   font-weight: 600;
+  color: black;
 }
 
 .cards-section .item .intro {
@@ -1275,91 +1276,124 @@ select {
   background: #f5f5f5;
 }
 
+/* Primary */
 .cards-section .item-primary .item-inner {
   border-top: 3px solid #40babd;
-}
-
-.cards-section .item-primary .item-inner:hover .title {
-  color: #2d8284;
 }
 
 .cards-section .item-primary .icon {
   color: #40babd;
 }
 
-.cards-section .item-green .item-inner {
-  border-top: 3px solid #75c181;
+.cards-section .item-primary .item-inner:hover .title {
+  color: #2d8284;
 }
 
-.cards-section .item-green .item-inner:hover .title {
-  color: #48a156;
+/* Green */
+.cards-section .item-green .item-inner {
+  border-top: 3px solid #75c181;
 }
 
 .cards-section .item-green .icon {
   color: #75c181;
 }
 
-.cards-section .item-blue .item-inner {
-  border-top: 3px solid #58bbee;
+.cards-section .item-green .item-inner:hover {
+  border-bottom: 3px solid #75c181;
 }
 
-.cards-section .item-blue .item-inner:hover .title {
-  color: #179de2;
+.cards-section .item-green .item-inner:hover .title {
+  color: #48a156;
+}
+
+
+/* Blue */
+.cards-section .item-blue .item-inner {
+  border-top: 3px solid #58bbee;
 }
 
 .cards-section .item-blue .icon {
   color: #58bbee;
 }
 
+.cards-section .item-blue .item-inner:hover .title {
+  color: #179de2;
+}
+
+.cards-section .item-blue .item-inner:hover {
+  border-bottom: 3px solid #179de2;
+}
+
+/* Orange */
 .cards-section .item-orange .item-inner {
   border-top: 3px solid #F88C30;
+}
+
+.cards-section .item-orange .item-inner:hover .title {
   color: #d46607;
 }
 
-/* Upon hover, originally gave the title an orange effect; useless with redesign */
-.cards-section .item-orange .item-inner:hover .title {
-  color: #d46607; 
+.cards-section .item-orange .item-inner:hover {
+  border-bottom: 3px solid #F88C30;
 }
 
 .cards-section .item-orange .icon {
   color: #F88C30;
 }
 
+/* Red */
 .cards-section .item-red .item-inner {
   border-top: 3px solid #f77b6b;
-}
-
-.cards-section .item-red .item-inner:hover .title {
-  color: #f33a22;
 }
 
 .cards-section .item-red .icon {
   color: #f77b6b;
 }
 
-.cards-section .item-pink .item-inner {
-  border-top: 3px solid #EA5395;
+.cards-section .item-red .item-inner:hover {
+  border-bottom: 3px solid #f77b6b;
 }
 
-.cards-section .item-pink .item-inner:hover .title {
-  color: #d61a6c;
+.cards-section .item-red .item-inner:hover .title {
+  color: #f33a22;
+}
+
+
+/* Pink */
+.cards-section .item-pink .item-inner {
+  border-top: 3px solid #EA5395;
 }
 
 .cards-section .item-pink .icon {
   color: #EA5395;
 }
 
+.cards-section .item-pink .item-inner:hover {
+  border-bottom: 3px solid #EA5395;
+}
+
+.cards-section .item-pink .item-inner:hover .title {
+  color: #d61a6c;
+}
+
+/* Purple */
 .cards-section .item-purple .item-inner {
   border-top: 3px solid #8A40A7;
+}
+
+.cards-section .item-purple .icon {
+  color: #8A40A7;
+}
+
+.cards-section .item-purple .item-inner:hover {
+  border-bottom: 3px solid #8A40A7;
 }
 
 .cards-section .item-purple .item-inner:hover .title {
   color: #5c2b70;
 }
 
-.cards-section .item-purple .icon {
-  color: #8A40A7;
-}
+
 
 @media (max-width: 767.98px) {
   .cards-section .item-inner {
