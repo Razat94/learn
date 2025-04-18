@@ -1,0 +1,359 @@
+Burn down Chart:
+	Shows how much work remains till the end of the Sprint. Optional!
+	The vertical axis shows the amount of work/remaining work.	
+
+Cone of Uncertainty
+	How much is known about the Product over time
+
+Events
+	The Sprint is the heartbeat of scrum
+	The Sprint is a container for all other events
+	Sprints are intentionally short - Maximum sprint length is 1 calendar month
+		Each Sprint may be considered a short project.
+
+	For each sprint, the Scrum Team comes together in the Sprint Planning meeting 
+		& assesses which items from top of Product Backlog they can pull into sprint\
+
+		
+	Team will work on the sprint, do daily standups, 
+		and when the sprint is complete, they will deliver a releasable product increment
+		E.G. Getting the approval to pushing to master
+
+	Sprint Review meeting will then evaluate the work.
+		
+		IDEALLY, NO NEW WORK IS PUSHED INTO SPRINT (omegalulz)
+
+	Various practices exist to forecast progress, like burn-downs, burn-ups, or cumulative flows.
+
+	
+
+	===
+	Sprint Planning Meeting
+
+		- sprint goal is why the work of that Sprint is important
+			- sprint backlog is what & how	
+			
+		Questions to ask:
+			what can be delivered? 
+			how can it be delivered? 
+			Why is the sprint valuable?
+
+		- timeboxed to a maximum of eight hours for a one-month Sprint. 
+			For shorter Sprints, the event is usually shorter.
+		- used to plan the work of the Sprint
+		- first event within the sprint
+		- plan is created by the collaborative work of ENTIRE scrum team.
+
+
+		The Scrum Guide requires only the work planned for the first days of the Sprint is 
+			decomposed by the end of the Sprint Planning, often to units of one day or less.
+
+		
+		INPUT for Sprint Planning:
+			the Product Backlog, 
+			the latest product Increment, 
+			projected capacity of the Development Team during the Sprint, 
+			and past performance of the Development Team.
+
+		Sprint backlog is primary output for sprint planning!!!!!!!!!!!
+		The more the Developers know about their past performance, their upcoming capacity, and their Definition of Done, 
+			the more confident they will be in their Sprint forecasts.
+
+		During Sprint Planning, the Development Team may also invite other people to attend in order to provide technical or domain advice.
+
+		[REPEAT] After the Development Team forecasts the Product Backlog items it will deliver in the Sprint, 
+			the Scrum Team crafts a Sprint Goal.
+
+	Sprint Goal
+		- high level objective that will be accomplished by completing the Product Backlog items 
+		- helps ensure a shared understanding of the whole Sprint purpose (puts everything on the table)
+		- Once settled, THE SPRINT GOAL SHOULD NEVER CHANGE . The scope however may be clarified/renogitioted. 	
+
+		
+
+	SCRUM Daily Standup
+		At max 15 min standup.		
+	
+		What did I do yesterday?
+		What will I do today?
+		Do I see any stucks or impediments?
+
+		THERE IS NO PRESCRIBED STRUCTURE!  
+
+		The Daily Scrum is an internal meeting for the DEVELOPMENT TEAM!
+			If others are present, the Scrum Master ensures that they do not disrupt the meeting.
+
+
+	Sprint Review Meeting
+		Held at end of the sprint
+		Inspects the outcome of the Sprint and determine future adaptations
+			the Scrum Team and stakeholders review what was accomplished in the Sprint and what has changed in their environment
+
+
+		The Key Stakeholders are allowed to participate only in the Sprint Review meeting. However, any member of the Scrum Team can interact with them any time.
+
+		The Sprint Review is the second to last event of the Sprint and is timeboxed to a maximum of four hours for a one-month Sprint. 
+			For shorter Sprints, the event is usually shorter.
+
+		Output/Result:
+			Revised Product Backlog [that defines the probable Product Backlog items for the next Sprint]
+		
+
+
+	The Sprint Retrospective 
+		concludes the Sprint. 
+		is an opportunity for Scrum team to inspect itself & create improvement plans for next Sprint.
+		SPRINT RETROSPECTIVE IS AN INTERNAL EVENT FOR SCRUM TEAM		
+
+		identifies the most helpful changes to improve its effectiveness
+			how'd the last sprint go
+			potential improvements & improvement plan 
+		It is timeboxed to a maximum of three hours for a one-month Sprint. For shorter Sprints, the event is usually shorter.
+		
+		Definition of Done can be reviewed and adapted during each Sprint Retrospective.
+
+		EX:
+			There should be more emphasis on unit testing
+
+		=== 
+		The purpose of the Sprint Retrospective is to:
+
+			Inspect how the last Sprint went with regards to people, relationships, process, and tools;
+			Identify and order the major items that went well and potential improvements; and,
+			Create a plan for implementing improvements to the way the Scrum Team does its work.
+
+		When does a Sprint conclude?
+			When the sprint retrospective is complete.
+
+		During the Sprint:
+			No changes are made that would endanger the Sprint Goal;
+			Quality goals do not decrease; and,
+			Scope may be clarified and re-negotiated between the Product Owner and Development Team as more is learned
+
+
+		What happens when a Sprint is cancelled?
+			if sprint goal becomes obsolete, then sprint can be cancelled.
+
+			When a Sprint is cancelled, any completed and “Done” Product Backlog items are reviewed. 
+			If part of the work is potentially releasable, the Product Owner typically accepts it. 
+			All incomplete Product Backlog Items are re-estimated and put back on the Product Backlog.
+
+			If some work could not be done by end of Sprint, the Sprint Backlog should be re-negotiated between the Product Owner and Development Team.
+
+			WHO HAS AUTHORITY TO CANCEL THE SPRINT?
+				Only the Product Owner has the authority to cancel the Sprint
+
+Artifacts
+	- something we make or a tool to solve a problem
+	- share goals to maximize transparency & shared understanding of work.
+	- both backlogs demonstrate work to be done that will define value
+
+	Who's responsible for coping with incomplete artifact transparency?
+		The Scrum Master’s job is to work with the Scrum Team and the organization to increase the transparency of the artifacts. 
+			This work usually involves learning, convincing, and change.
+
+	Product Backlog
+		an ordered list of everything that is known to be needed in the product
+		Product Owner is SOLE person responsible
+		is dynamic and is never complete. As long as product exists, the Product Backlog also exists.
+
+		single source of requirements for any changes but sorted by WHATEVER IS DEEMED MOST APPROPRIATE BY THE PRODUCT OWNER (since stakeholders have unlimited needs). 
+			However, most valuable & clear items should be placed on top.
+		Products have one Product Backlog, regardless of how many Scrum Teams are used.
+		
+		Key Notes:
+			- list of requirements that product team has to work on
+			- dyanic list - evolves over time
+			- higher priority items are on top of the list
+
+		typically each item has a description, estimate & value
+
+		the Product Backlog emerges to define “what” will fulfill the Product Goal.
+			The Product Goal describes a future state of the product & is the long-term objective for the Scrum Team
+			throughout sprint, can be refined by adding descriptions, estimates & order.
+		
+
+		Who is responsible for all estimates in the Product Backlog?
+			The Development Team is responsible for all estimates in the Product Backlog. 
+			The Product Owner may influence the Development Team by helping it understand and select trade-offs, but the people who will perform the work make the final estimate.
+
+		Product Backlog management includes:
+				Clearly expressing Product Backlog items;
+				Ordering the items in the Product Backlog to best achieve goals and missions;
+				Optimizing the value of the work the Development Team performs;
+				Ensuring that the Product Backlog is visible, transparent, and clear to all, and shows what the Scrum Team will work on next; and,
+				Ensuring the Development Team understands items in the Product Backlog to the level needed.
+		
+		
+	Sprint Backlog
+		- Development teams plan on HOW they'll deliver the new product increment
+
+		- The Product Backlog items selected for this Sprint plus the plan for delivering them
+		- The Developers modify the Sprint Backlog throughout the Sprint, and the Sprint Backlog emerges during the Sprint.
+		
+		Who is allowed to change the Sprint Backlog during the Sprint
+			- SOLE DEVELOPERS
+
+
+		- what & how of the sprint
+		- during sprint planning, scrum team creates sprint goal & sprint backlog
+	
+		- created during sprint plannning by & for DEVELOPMENT team.
+			- pull in items from product backlog for that sprint
+			- completes Sprint Goal
+			- sometimes helps team plan in advance for next Sprint Planning. i.e. "What to work on next?" 
+		- their plan on how to deliver the sprint goal
+		- regularly updated during sprint. IT REGURLARLY CHANGES.
+		
+		The Sprint Goal, the Product Backlog items selected for the Sprint, 
+			plus the plan for delivering them are together referred to as the Sprint Backlog.
+
+		[REPEAT] After the Development Team forecasts the Product Backlog items it will deliver in the Sprint, 
+			the Scrum Team crafts a Sprint Goal.
+
+
+	Increment
+		created by Development Team
+		sum of all completed Product Backlog items in a given sprint AND values of increments in previous sprints
+		The sum of all Increments form a product.
+
+		provides transparent "snapshot" of the state of product at end of Sprint
+			- "Working software is the primary measure of progess"
+		meets the teams definition of "Done"
+		usable by stakeholders!
+
+		the "Done" portion of product completed during a sprint that defines the COMPLETE and valuable work produced by the Developers during a Sprint. 
+			
+		
+		Increment should be realease to end users when product owners are most comfortable or when they think its the best.
+
+	Definition of Done
+		Definition of Done can be reviewed and adapted during each Sprint Retrospective.
+		During each Sprint Retrospective, the Scrum Team plans ways to increase product quality by adapting the definition of “Done” as appropriate.
+
+		What to take into account:
+			If the definition of “done” for an increment is part of the conventions, 
+				standards or guidelines of the development organization, 
+				all Scrum Teams must follow it as a minimum. 
+
+		The development team is responsible for creating "Definition of Done"
+		If “done” for an increment is not a convention of the development organization, 
+			the Development Team of the Scrum Team must define a definition of “done” appropriate for the product. 
+	
+			If there are multiple Scrum Teams working on the system or product release, the development teams on all of the Scrum Teams must mutually define the definition of “Done.”
+
+		DoD is used to assess when work is complete on the product Increment
+		DoD guides the Development Team in knowing how many Product Backlog items it can select during a Sprint Planning
+		DoD ensures artifact transparency
+
+non functional arguments should be addressed every sprint.
+
+STAKEHOLDERS CAN BE INVITED BY SCRUM TEAM TO WHICH EVENTS?
+	Sprint planning and review.
+
+who is required to attend the daily scrum?
+	the developers & scrum master (although scrum master can leave if they know devs have everything settled)
+	
+Does Scrum Master have to attend daily scrum?
+	They do not have to be there;  they only ensure daily scrum is there.
+
+three pillars of empiricism?
+
+who manages the progress of work during a sprint?
+	Developers
+
+which event has shortest time box event?
+	retrospective
+
+Next Sprint begins after end of previous sprint
+
+Upon what type of process control is Scrum based?
+	Empirical
+
+When should a Developer on a scrum team be replaced?
+	As needed, while taking into account a short-term reduction in productivity.
+
+Who has final say on order of Product Backlog?	
+	Product Owner
+
+Who's on the scrum team?
+
+Product backlog is ordered by
+	whatever is deemed most appropriate by the product owner
+
+Sprint Review?
+	scrum team & shareholders inspect the outcome of a sprint and figure out what to do next.
+
+Scrum team size?
+	10 or fewer.
+
+who creates the definition of done?
+	- if not an organization standard, 
+		the scrum team must create a DoD appropriate for the prodcut.
+
+	All scrum teams must have a definition of done
+
+
+product owner
+	maximizes the value of the work the Scrum team does.
+
+THE CEO asks the developers to add a "very important" item in middle of  a sprint. What should devs do?
+	inform other members of scrum team so that they can decide on what to do.
+
+Does the product increment MUST be released to production at the end of the sprint?
+	FALSE:
+	The product Increment should be usable and releasable at the end of every Sprint, 
+		but it does not have to be released.
+
+The Sprint is a container for the following timeboxed events: 
+	Sprint Planning, Daily Scrum, Sprint Review, and Sprint Retrospective
+
+
+
+The Scrum Master serves the Product Owner in several ways, including:
+
+	Ensuring that goals, scope, and product domain are understood by everyone on the Scrum Team as well as possible;
+	Finding techniques for effective Product Backlog management;
+	Helping the Scrum Team understand the need for clear and concise Product Backlog items;
+	Understanding product planning in an empirical environment;
+	Ensuring the Product Owner knows how to arrange the Product Backlog to maximize value;
+	Understanding and practicing agility; and,
+	Facilitating Scrum events as requested or needed.
+
+The Scrum Master serves the Development Team including:
+	Coaching the Development Team in self-organization and cross-functionality;
+	Helping the Development Team to create high-value products;
+	Removing impediments to the Development Team’s progress;
+	Facilitating Scrum events as requested or needed; and,
+	Coaching the Development Team in organizational environments in which Scrum is not yet fully adopted and understood.
+
+
+In Scrum Lingo, what is "Development"?
+	When the words “develop” and “development” are used in the Scrum Guide, they refer to complex work including 
+		software and hardware development, 
+		development and releasing of products and enhancements, 
+		development and sustaining product operational environments, 
+		research and identifying of viable markets and technologies, and even more.
+
+
+How should a group of 50 devs divide into teams?
+	Understanding the pdouct, product vision and scrum framework
+		they should self organize.
+
+Management has no official role or accountability on a Scrum Team. 
+	However, management external to the Scrum Team is relevant in setting the vision and strategy to guide the overall direction of the organization.
+
+Who creates the Definition of Done?
+	If not an organizational standard, Scrum Team
+
+Typical size of scrum team?
+	10 or fewer
+
+Customer satisfaction should be measured frequently
+
+
+
+Sprint concludes
+	when sprint retrospective is complete.
+
+This means that when many Scrum Teams are working on a single product, they are expected to adhere to a single Definition of Done for the Increment
