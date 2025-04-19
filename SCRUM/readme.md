@@ -16,11 +16,11 @@
 
 
 <br></br>
-### <p align="center" id = "purpose">  Purpose | [Back to ToC](#toc) </p>
+## <p align="center" id = "purpose">  Purpose | [Back to ToC](#toc) </p>
 
 <p> This guide is a simplified version of the SCRUM Guide for educational purposes. Please support the official release.</p>
 
-### <p align="center" id = "whatIsScrum"> "What is Scrum?" | [Back to ToC](#toc) </p>
+## <p align="center" id = "whatIsScrum"> "What is Scrum?" | [Back to ToC](#toc) </p>
 
 Scrum is a lightweight framework. It consists of roles, events & artifacts & employs various processes and techniques. 
 
@@ -54,14 +54,14 @@ Scrum works best when people follow these 5 Values (FROCC):
 	Courage
 ```
 
-### <p align="center" id = "scrumTeam"> "Meet the Scrum Team" | [Back to ToC](#toc) </p>
+## <p align="center" id = "scrumTeam"> "Meet the Scrum Team" | [Back to ToC](#toc) </p>
 
 Scrum Teams are:
   - a small group of people (typically 10 or fewer)   
   - cross-functional, meaning the members have all the skills necessary to create value each Sprint. 
   E.G. Research, Sales, & Marketing are all apart of the team.
   - self-managing, meaning they internally decide who does what, when, and how.
-  Note: NOT directed by others outside the team. The team has ALL THE POWER
+    - Note: NOT directed by others outside the team. The team has ALL THE POWER
   - The entire Scrum Team share collective responsibility.
   - Scrum manager manages the process, not the people!!
 
@@ -75,7 +75,7 @@ and anything else that might be required.
 Scrum defines 3 Roles within the Scrum Team (typical size for scrum team is 10 or less):
     the Developers, the Product Owner, and the Scrum Master.
 
-Product Owner
+### Product Owner 
   - maximizes value of product and the work the Scrum team does.
   - monitors progress towards high level goals
   - manages work via product backlog
@@ -89,7 +89,7 @@ In an Agile environment, Product Owner decides to release an increment when an i
 > Q: Who should know the most about the progress toward a business objective or a release, and can explain the alternatives most clearly?
 > Answer: Product Owner!
 
-Development Team
+### Development Team
   - Build the actual product increment
   - cross functional & self organizing
   - Less than 10 members
@@ -100,14 +100,14 @@ Development Team
   The entire scrum team is accountable for creating value every sprint. 
   Scrum recognizes no titles for Development Team members, regardless of the work being performed by the person.
 
-Scrum Master
+### Scrum Master
   - act as guide on Scrum Theory, practices & rules
   - applies SCRUM correctly
   - The Scrum Master ensures that the Developers have the DAILY SCRUM, 
 		but the Developers are responsible for conducting the Daily Scrum. 
   - The Scrum Master teaches the Developers to keep the Daily Scrum within the 15-minute timebox. 
 
-### <p align="center" id = "scrumevent"> "Life’s a Scrum Event, Sprint with it." | [Back to ToC](#toc) </p>
+## <p align="center" id = "scrumevent"> "Life’s a Scrum Event, Sprint with it." | [Back to ToC](#toc) </p>
 
 The Sprint is the heartbeat of Scrum during which a usable and potentially releasable Product Increment is created, 
 similar to that of a short project.
@@ -243,7 +243,7 @@ When a Sprint is cancelled:
 	- If some work could not be done by end of Sprint, 
 	the Sprint Backlog should be re-negotiated between the Product Owner and Development Team.
 
-### <p align="center" id = "artifacts"> "The Scrum Artifact—where love and hate coexist beautifully." | [Back to ToC](#toc) </p>
+## <p align="center" id = "artifacts"> "The Scrum Artifact—where love and hate coexist beautifully." | [Back to ToC](#toc) </p>
 
 Artifacts are key tools or important things we create to solve a problem. 
 
