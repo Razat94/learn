@@ -97,7 +97,8 @@ Development Team
   - Can include the Product Owner and Scrum Master but it's not ideal as it may cause a conflict of interest.
   - Developers should have all the skills needed to turn selected backlog items into a Product Increment.
 	
-  The entire scrum team is accountable for creating value every sprint. Scrum recognizes no titles for Development Team members, regardless of the work being performed by the person.
+  The entire scrum team is accountable for creating value every sprint. 
+  Scrum recognizes no titles for Development Team members, regardless of the work being performed by the person.
 
 Scrum Master
   - act as guide on Scrum Theory, practices & rules
@@ -117,7 +118,8 @@ Sprints are intentionally short - Maximum sprint length is 1 calendar month
 For each sprint, the Scrum Team comes together in 3 parts:
   - the Sprint Planning meeting: 
   	The team assesses which items from top of Product Backlog they can pull into sprint.
-  - The team will then work on the sprint, hold daily standups, and, when the sprint is complete, deliver a releasable product increment e.g. getting approval to push to master.
+  - The team will then work on the sprint, hold daily standups, and, 
+  when the sprint is complete, deliver a releasable product increment e.g. getting approval to push to master.
   -  the Sprint Review meeting occurs at the end that evaluates the work completed.
 	IDEALLY, NO NEW WORK IS PUSHED
 
@@ -190,7 +192,8 @@ Sprint Review Meeting
   - Inspects the outcome of the Sprint and determine future adaptations
   - the Scrum Team and stakeholders review what was accomplished in the Sprint and what has changed in their environment
 
-> Note: The Key Stakeholders are allowed to participate only in the Sprint Review meeting. However, any member of the Scrum Team can interact with them any time.
+> Note: The Key Stakeholders are allowed to participate only in the Sprint Review meeting. 
+However, any member of the Scrum Team can interact with them any time.
 
 ```
 Output/Result:
@@ -237,7 +240,8 @@ When a Sprint is cancelled:
   - any completed and “Done” Product Backlog items are reviewed. 
   - If part of the work is potentially releasable, the Product Owner typically accepts it. 
   - All incomplete Product Backlog Items are re-estimated and put back on the Product Backlog.
-	- If some work could not be done by end of Sprint, the Sprint Backlog should be re-negotiated between the Product Owner and Development Team.
+	- If some work could not be done by end of Sprint, 
+	the Sprint Backlog should be re-negotiated between the Product Owner and Development Team.
 
 ### <p align="center" id = "artifacts"> "The Scrum Artifact—where love and hate coexist beautifully." | [Back to ToC](#toc) </p>
 
@@ -256,7 +260,8 @@ Product Backlog
   - Product Owner is SOLE person responsible
   - is dynamic and requires ongoing refinement for as long as the product exists. 
   - The Development Team is responsible for all estimates in the Product Backlog. 
-	- The Product Owner may influence the Development Team by helping it understand and select trade-offs, but the people who will perform the work make the final estimate.
+	- The Product Owner may influence the Development Team by helping it understand and select trade-offs, 
+	but the people who will perform the work make the final estimate.
   - Items are sorted by what the Product Owner deems most appropriate (since stakeholders have unlimited needs). 
 	- Typically, most valuable & clearly defined items should be placed on top.
 	- A product has one Product Backlog, no matter how many Scrum Teams work on it
@@ -317,7 +322,8 @@ Increments:
 Definition of Done
   - Can be reviewed and adapted during each Sprint Retrospective.
   - The development team defines what DoD e.g. "Done" means for an increment.
-  - If there are multiple Scrum Teams working on the system or product release, the development teams on all of the Scrum Teams must mutually define the definition of “Done.”
+  - If there are multiple Scrum Teams working on the system or product release, 
+  the development teams on all of the Scrum Teams must mutually define the definition of “Done.”
   - DoD is used to assess when work is complete on the product Increment by ensuring artifact transparency.
 	- DoD guides the Development Team in knowing how many Product Backlog items it can select during a Sprint Planning
 	
