@@ -163,7 +163,7 @@ Sprint Planning Meeting
   plus the plan for delivering them are together referred to as the Sprint Backlog." - Scrum Guide
 
   	The more the Developers know about:
-	their past performance, their upcoming capacity, and their Definition of Done, 
+		their past performance, their upcoming capacity, and their Definition of Done, 
 	the more confident they will be in their Sprint forecasts.
 
 	[REPEAT] 
@@ -172,7 +172,7 @@ Sprint Planning Meeting
 	
 Scrum Daily Standup
   - At max 15 min standup.		
-	The Daily Scrum is an internal meeting for the DEVELOPMENT TEAM!
+  - The Daily Scrum is an internal meeting for the DEVELOPMENT TEAM!
 			If others are present, the Scrum Master ensures that they do not disrupt the meeting.
 
 	Think:
@@ -264,7 +264,8 @@ Product Backlog
 		- list of requirements that product team has to work on
 		- dyanamic list - the backlog evolves over time
 		- higher priority items are on top of the list
-		- The Development Team is responsible for all estimates in the Product Backlog. The Product Owner may influence the Development Team by helping it understand and select trade-offs, but the people who will perform the work make the final estimate.
+		- The Development Team is responsible for all estimates in the Product Backlog. 
+		The Product Owner may influence the Development Team by helping it understand and select trade-offs, but the people who will perform the work make the final estimate.
 	```
 	
 	> The Product Backlog emerges to define “what” will fulfill the Product Goal.
