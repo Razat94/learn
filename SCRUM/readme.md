@@ -20,6 +20,8 @@
 
 <p> This guide is a simplified version of the SCRUM Guide for educational purposes. Please support the official release.</p>
 
+
+
 ## <p align="center" id = "whatIsScrum"> "What is Scrum?" | [Back to ToC](#toc) </p>
 
 Scrum is a lightweight framework. It consists of roles, events & artifacts & employs various processes and techniques. 
@@ -54,6 +56,8 @@ Scrum works best when people follow these 5 Values (FROCC):
 	Courage
 ```
 
+
+
 ## <p align="center" id = "scrumTeam"> "Meet the Scrum Team" | [Back to ToC](#toc) </p>
 
 Scrum Teams are:
@@ -75,7 +79,7 @@ and anything else that might be required.
 Scrum defines 3 Roles within the Scrum Team (typical size for scrum team is 10 or less):
     the Developers, the Product Owner, and the Scrum Master.
 
-### Product Owner 
+<b> Product Owner </b> 
   - maximizes value of product and the work the Scrum team does.
   - monitors progress towards high level goals
   - manages work via product backlog
@@ -89,7 +93,7 @@ In an Agile environment, Product Owner decides to release an increment when an i
 > Q: Who should know the most about the progress toward a business objective or a release, and can explain the alternatives most clearly?
 > Answer: Product Owner!
 
-### Development Team
+<b> Development Team </b>
   - Build the actual product increment
   - cross functional & self organizing
   - Less than 10 members
@@ -100,12 +104,14 @@ In an Agile environment, Product Owner decides to release an increment when an i
   The entire scrum team is accountable for creating value every sprint. 
   Scrum recognizes no titles for Development Team members, regardless of the work being performed by the person.
 
-### Scrum Master
+<b> Scrum Master </b>
   - act as guide on Scrum Theory, practices & rules
   - applies SCRUM correctly
   - The Scrum Master ensures that the Developers have the DAILY SCRUM, 
 		but the Developers are responsible for conducting the Daily Scrum. 
   - The Scrum Master teaches the Developers to keep the Daily Scrum within the 15-minute timebox. 
+
+
 
 ## <p align="center" id = "scrumevent"> "Life’s a Scrum Event, Sprint with it." | [Back to ToC](#toc) </p>
 
@@ -124,7 +130,6 @@ For each sprint, the Scrum Team comes together in 3 parts:
 	IDEALLY, NO NEW WORK IS PUSHED
 
 Various practices exist to forecast progress, like burn-downs, burn-ups, or cumulative flows.
-
 
 
 Sprint Planning Meeting
@@ -185,7 +190,6 @@ Scrum Daily Standup
 > Note: THERE IS NO PRESCRIBED STRUCTURE!  
 
 
-
 Sprint Review Meeting
   - Is the second to last event of the Sprint and is timeboxed to a maximum of four hours for a one-month Sprint. 
   - For shorter Sprints, the event is usually shorter.
@@ -200,7 +204,6 @@ Output/Result:
 	Revised Product Backlog 
 	[that defines the probable Product Backlog items for the next Sprint]
 ```
-
 
 
 The Sprint Retrospective 
@@ -242,6 +245,8 @@ When a Sprint is cancelled:
   - All incomplete Product Backlog Items are re-estimated and put back on the Product Backlog.
 	- If some work could not be done by end of Sprint, 
 	the Sprint Backlog should be re-negotiated between the Product Owner and Development Team.
+
+
 
 ## <p align="center" id = "artifacts"> "The Scrum Artifact—where love and hate coexist beautifully." | [Back to ToC](#toc) </p>
 
@@ -285,7 +290,6 @@ Product Backlog
 	  - Ensures the Development Team understands items at the necessary level
 		
 		
-
 Sprint Backlog
   - Development Team plans HOW they'll deliver the new product increment and achieve the Sprint Goal
   - Owned and managed by the Development Team.
@@ -306,7 +310,6 @@ Sprint Backlog
 	plus the plan for delivering them are together referred to as the Sprint Backlog.
 
 
-
 Increments:
   - are a working product at the end of a Sprint.
   - created by the Development Team
@@ -318,6 +321,7 @@ Increments:
 	- "Working software is the primary measure of progess"
   - meets the teams definition of "Done" and are usable by stakeholders!
   - Can be released to end users when the Product Owner feels it’s the right time.
+
 
 Definition of Done
   - Can be reviewed and adapted during each Sprint Retrospective.
