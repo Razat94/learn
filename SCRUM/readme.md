@@ -121,123 +121,113 @@ For each sprint, the Scrum Team comes together in 3 parts:
 
 Various practices exist to forecast progress, like burn-downs, burn-ups, or cumulative flows.
 
-	Sprint Planning Meeting
-
-		- sprint goal is why the work of that Sprint is important
-			- sprint backlog is what & how	
-			
-		Questions to ask:
-			what can be delivered? 
-			how can it be delivered? 
-			Why is the sprint valuable?
-
-		- timeboxed to a maximum of eight hours for a one-month Sprint. 
-			For shorter Sprints, the event is usually shorter.
-		- used to plan the work of the Sprint
-		- first event within the sprint
-		- plan is created by the collaborative work of ENTIRE scrum team.
 
 
-		The Scrum Guide requires only the work planned for the first days of the Sprint is 
-			decomposed by the end of the Sprint Planning, often to units of one day or less.
+Sprint Planning Meeting
+  - first event within the sprint
+  - the collaborative work of ENTIRE scrum team.
+  - Sprint Planning is timeboxed to a maximum of eight hours for a one-month Sprint. 
+	- For shorter Sprints, the event is usually shorter.
 
-		
-		INPUT for Sprint Planning:
-			the Product Backlog, 
-			the latest product Increment, 
-			projected capacity of the Development Team during the Sprint, 
-			and past performance of the Development Team.
+  - Sprint goal is defined. Explains the plan of work for the Sprint and why the work of that Sprint is important.
+  - i.e. After the Development Team forecasts the Product Backlog items it will deliver in the Sprint, the Scrum Team crafts a Sprint Goal.
+	- During Sprint Planning, the Development Team may also invite other people to attend in order to provide technical or domain advice.
 
-		Sprint backlog is primary output for sprint planning!!!!!!!!!!!
-		The more the Developers know about their past performance, their upcoming capacity, and their Definition of Done, 
-			the more confident they will be in their Sprint forecasts.
-
-		During Sprint Planning, the Development Team may also invite other people to attend in order to provide technical or domain advice.
-
-		[REPEAT] After the Development Team forecasts the Product Backlog items it will deliver in the Sprint, 
-			the Scrum Team crafts a Sprint Goal.
-
+	```
 	Sprint Goal
 		- high level objective that will be accomplished by completing the Product Backlog items 
 		- helps ensure a shared understanding of the whole Sprint purpose (puts everything on the table)
-		- Once settled, THE SPRINT GOAL SHOULD NEVER CHANGE . The scope however may be clarified/renogitioted. 	
-		- 
+		- Once settled, THE SPRINT GOAL IDEALLY SHOULD NEVER CHANGE (except by Product Owner). The scope however may be clarified/renogitioted.
+	```
 
-		
+	Questions to ask:
+  	- what can be delivered? 
+  	- how can it be delivered? 
+  	- Why is the sprint valuable?
+
+	INPUT for Sprint Planning:
+	  - the Product Backlog, 
+	  - the latest product Increment, 
+	  - projected capacity of the Development Team during the Sprint, 
+	  - and past performance of the Development Team.
+
+	Primary output for Sprint Planning: The Sprint backlog!
+		- Sprint backlog is what & how;
+		 		
+  > "The Sprint Goal, the Product Backlog items selected for the Sprint, plus the plan for delivering them are together referred to as the Sprint Backlog." - Scrum Guide
+
+  	The more the Developers know about their past performance, their upcoming capacity, and their Definition of Done, 
+		the more confident they will be in their Sprint forecasts.
 
 
-
-	SCRUM Daily Standup
-		At max 15 min standup.		
 	
-		What did I do yesterday?
-		What will I do today?
-		Do I see any stucks or impediments?
-
-		THERE IS NO PRESCRIBED STRUCTURE!  
-
-		The Daily Scrum is an internal meeting for the DEVELOPMENT TEAM!
+SCRUM Daily Standup
+	- At max 15 min standup.		
+	The Daily Scrum is an internal meeting for the DEVELOPMENT TEAM!
 			If others are present, the Scrum Master ensures that they do not disrupt the meeting.
 
+	Think:
+	  - What did I do yesterday?
+	  - What will I do today?
+	  - Do I see any stucks or impediments?
 
-	Sprint Review Meeting
-		Held at end of the sprint
-		Inspects the outcome of the Sprint and determine future adaptations
-			the Scrum Team and stakeholders review what was accomplished in the Sprint and what has changed in their environment
-
-
-		The Key Stakeholders are allowed to participate only in the Sprint Review meeting. However, any member of the Scrum Team can interact with them any time.
-
-		The Sprint Review is the second to last event of the Sprint and is timeboxed to a maximum of four hours for a one-month Sprint. 
-			For shorter Sprints, the event is usually shorter.
-
-		Output/Result:
-			Revised Product Backlog [that defines the probable Product Backlog items for the next Sprint]
-		
+> Note: THERE IS NO PRESCRIBED STRUCTURE!  
 
 
-	The Sprint Retrospective 
-		concludes the Sprint. 
-		is an opportunity for Scrum team to inspect itself & create improvement plans for next Sprint.
-		SPRINT RETROSPECTIVE IS AN INTERNAL EVENT FOR SCRUM TEAM		
 
-		identifies the most helpful changes to improve its effectiveness
-			how'd the last sprint go
-			potential improvements & improvement plan 
-		It is timeboxed to a maximum of three hours for a one-month Sprint. For shorter Sprints, the event is usually shorter.
-		
-		Definition of Done can be reviewed and adapted during each Sprint Retrospective.
+Sprint Review Meeting
+  - Is the second to last event of the Sprint and is timeboxed to a maximum of four hours for a one-month Sprint. 
+  - For shorter Sprints, the event is usually shorter.
+  - Inspects the outcome of the Sprint and determine future adaptations
+  - the Scrum Team and stakeholders review what was accomplished in the Sprint and what has changed in their environment
 
-		EX:
-			There should be more emphasis on unit testing
+> Note: The Key Stakeholders are allowed to participate only in the Sprint Review meeting. However, any member of the Scrum Team can interact with them any time.
 
-		=== 
-		The purpose of the Sprint Retrospective is to:
-
-			Inspect how the last Sprint went with regards to people, relationships, process, and tools;
-			Identify and order the major items that went well and potential improvements; and,
-			Create a plan for implementing improvements to the way the Scrum Team does its work.
-
-		When does a Sprint conclude?
-			When the sprint retrospective is complete.
-
-		During the Sprint:
-			No changes are made that would endanger the Sprint Goal;
-			Quality goals do not decrease; and,
-			Scope may be clarified and re-negotiated between the Product Owner and Development Team as more is learned
+```
+Output/Result:
+	Revised Product Backlog 
+	[that defines the probable Product Backlog items for the next Sprint]
+```
 
 
-		What happens when a Sprint is cancelled?
-			if sprint goal becomes obsolete, then sprint can be cancelled.
 
-			When a Sprint is cancelled, any completed and “Done” Product Backlog items are reviewed. 
-			If part of the work is potentially releasable, the Product Owner typically accepts it. 
-			All incomplete Product Backlog Items are re-estimated and put back on the Product Backlog.
+The Sprint Retrospective 
+  - concludes the Sprint. 
+  - similar to Lessons Learned; it's an opportunity for Scrum team to inspect itself & create improvement plans for next Sprint.
+  - SPRINT RETROSPECTIVE IS INTERNAL ONLY FOR SCRUM TEAM	since it identifies the most helpful changes to improve its effectiveness such as:
+	- how'd the last sprint go
+	- potential improvements & improvement plan 
+  - Timeboxed to a maximum of three hours for a one-month Sprint. For shorter Sprints, the event is usually shorter.
+ 
+  - To recap, the purpose of the Sprint Retrospective is to:
 
-			If some work could not be done by end of Sprint, the Sprint Backlog should be re-negotiated between the Product Owner and Development Team.
+	- Inspect how the last Sprint went with regards to people, relationships, process, and tools;
+	- Identify and order the major items that went well and potential improvements; and,
+	- Create a plan for implementing improvements to the way the Scrum Team does its work.
 
-			WHO HAS AUTHORITY TO CANCEL THE SPRINT?
-				Only the Product Owner has the authority to cancel the Sprint
+Definition of Done can be reviewed and adapted during each Sprint Retrospective e.g. there should be more emphasis on unit testing
+
+Before talking about Sprint Artifacts, here are a few FAQ's:
+	
+	> When does a Sprint conclude?
+	When the sprint retrospective is complete.
+
+  During the Sprint:
+  - No changes are made that would endanger the Sprint Goal;
+  - Quality goals do not decrease; and,
+  - Scope may be clarified and re-negotiated between the Product Owner and Development Team as more is learned
+
+	> What happens when a Sprint is cancelled?
+		If the sprint goal becomes obsolete, then sprint can be cancelled.
+
+		When a Sprint is cancelled, any completed and “Done” Product Backlog items are reviewed. 
+		If part of the work is potentially releasable, the Product Owner typically accepts it. 
+		All incomplete Product Backlog Items are re-estimated and put back on the Product Backlog.
+
+		If some work could not be done by end of Sprint, the Sprint Backlog should be re-negotiated between the Product Owner and Development Team.
+
+	> WHO HAS AUTHORITY TO CANCEL THE SPRINT?
+			Only the Product Owner has the authority to cancel the Sprint
 
 ### <p align="center" id = "artifacts"> "The Scrum Artifact—where love and hate coexist beautifully." | [Back to ToC](#toc) </p>
 
