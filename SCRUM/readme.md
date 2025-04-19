@@ -137,13 +137,13 @@ Sprint Planning Meeting
 	- During Sprint Planning, the Development Team may invite other people to attend 
 	in order to provide technical or domain advice.
 
-	```
-	Sprint Goal
-		- high level objective that will be accomplished by completing the Product Backlog items 
-		- helps ensure a shared understanding of the whole Sprint purpose (puts everything on the table)
-		- Once settled, THE SPRINT GOAL IDEALLY SHOULD NEVER CHANGE (except by Product Owner). 
-			The scope however may be clarified/renogitioted.
-	```
+  ```
+  Sprint Goal
+	- high level objective that will be accomplished by completing the Product Backlog items 
+	- helps ensure a shared understanding of the whole Sprint purpose (puts everything on the table)
+	- Once settled, THE SPRINT GOAL IDEALLY SHOULD NEVER CHANGE (except by Product Owner). 
+	  - The scope however may be clarified/renogitioted.
+  ```
 
 	Questions to ask:
   	- what can be delivered? 
@@ -163,14 +163,14 @@ Sprint Planning Meeting
   plus the plan for delivering them are together referred to as the Sprint Backlog." - Scrum Guide
 
   	The more the Developers know about their past performance, their upcoming capacity, and their Definition of Done, 
-		the more confident they will be in their Sprint forecasts.
+	the more confident they will be in their Sprint forecasts.
 
 	[REPEAT] 
 	After the Development Team forecasts what it can deliver, the Scrum Team defines a Sprint Goal.
 
 	
-SCRUM Daily Standup
-	- At max 15 min standup.		
+Scrum Daily Standup
+  - At max 15 min standup.		
 	The Daily Scrum is an internal meeting for the DEVELOPMENT TEAM!
 			If others are present, the Scrum Master ensures that they do not disrupt the meeting.
 
@@ -218,25 +218,25 @@ Definition of Done can be reviewed and adapted during each Sprint Retrospective 
 
 Before talking about Sprint Artifacts, here are a few FAQ's:
 	
-	> When does a Sprint conclude?
+  > When does a Sprint conclude? <br/>
 	When the sprint retrospective is complete.
 
-  During the Sprint:
+  > What happens when a Sprint is cancelled? <br/>
+		If the sprint goal becomes obsolete, then sprint can be cancelled.
+
+  > WHO HAS AUTHORITY TO CANCEL THE SPRINT? <br/>
+		Only the Product Owner has the authority to cancel the Sprint
+
+During the Sprint:
   - No changes are made that would endanger the Sprint Goal;
   - Quality goals do not decrease; and,
   - Scope may be clarified and re-negotiated between the Product Owner and Development Team as more is learned
 
-	> What happens when a Sprint is cancelled?
-		If the sprint goal becomes obsolete, then sprint can be cancelled.
-
-		When a Sprint is cancelled, any completed and “Done” Product Backlog items are reviewed. 
-		If part of the work is potentially releasable, the Product Owner typically accepts it. 
-		All incomplete Product Backlog Items are re-estimated and put back on the Product Backlog.
-
-		If some work could not be done by end of Sprint, the Sprint Backlog should be re-negotiated between the Product Owner and Development Team.
-
-	> WHO HAS AUTHORITY TO CANCEL THE SPRINT?
-			Only the Product Owner has the authority to cancel the Sprint
+When a Sprint is cancelled: 
+  - any completed and “Done” Product Backlog items are reviewed. 
+  - If part of the work is potentially releasable, the Product Owner typically accepts it. 
+  - All incomplete Product Backlog Items are re-estimated and put back on the Product Backlog.
+	- If some work could not be done by end of Sprint, the Sprint Backlog should be re-negotiated between the Product Owner and Development Team.
 
 ### <p align="center" id = "artifacts"> "The Scrum Artifact—where love and hate coexist beautifully." | [Back to ToC](#toc) </p>
 
@@ -292,30 +292,30 @@ Sprint Backlog
   	- It is continuously updated and refined
 	
 Remember: 	
-	- This backlog represents the "what" and "how" of the Sprint
-	- Created during Sprint Planning along with the sprint goal. It is used by and for the Development Team
-	- Items are pulled from the Product Backlog for that Sprint
-	- The Scrum Team sets the Sprint Goal and builds the Sprint Backlog together
-		- Working on sprint backlog guides the team to complete the Sprint Goal
-		- May also prepare the team for future Sprints (e.g., “What should we work on next?”)
-	- The plan within the Sprint Backlog is actively maintained and regularly updated during the Sprint
+  - This backlog represents the "what" and "how" of the Sprint
+  - Created during Sprint Planning along with the sprint goal. It is used by and for the Development Team
+  - Items are pulled from the Product Backlog for that Sprint
+  - The Scrum Team sets the Sprint Goal and builds the Sprint Backlog together
+	- Working on sprint backlog guides the team to complete the Sprint Goal
+	- May also prepare the team for future Sprints (e.g., “What should we work on next?”)
+  - The plan within the Sprint Backlog is actively maintained and regularly updated during the Sprint
 		
-	> The Sprint Goal, the Product Backlog items selected for the Sprint, 
+  > The Sprint Goal, the Product Backlog items selected for the Sprint, 
 	plus the plan for delivering them are together referred to as the Sprint Backlog.
 
 
 
 Increments:
-	- are a working product at the end of a Sprint.
-	- created by the Development Team
-	- The "Done" part of the product that is complete and valuable.
-	- includes all Product Backlog items finished in the Sprint plus value from previous Increments.
-		- The sum of all Increments form a product.
-	- provides transparent "snapshot" of the state of product at end of Sprint
-		- "concrete stepping stone toward the Product Goal."
-		- "Working software is the primary measure of progess"
-	- meets the teams definition of "Done" and are usable by stakeholders!
-	- Can be released to end users when the Product Owner feels it’s the right time.
+  - are a working product at the end of a Sprint.
+  - created by the Development Team
+  - The "Done" part of the product that is complete and valuable.
+  - includes all Product Backlog items finished in the Sprint plus value from previous Increments.
+	- The sum of all Increments form a product.
+  - provides transparent "snapshot" of the state of product at end of Sprint
+  	- "concrete stepping stone toward the Product Goal."
+	- "Working software is the primary measure of progess"
+  - meets the teams definition of "Done" and are usable by stakeholders!
+  - Can be released to end users when the Product Owner feels it’s the right time.
 
 Definition of Done
   - Can be reviewed and adapted during each Sprint Retrospective.
