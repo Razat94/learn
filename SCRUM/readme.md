@@ -37,7 +37,7 @@ which has three pillars for making good observations:
 
 ```
 	Transparent
-		Scrumts events & artifacts should be visible to all those involved
+		Scrums events & artifacts should be visible to all those involved
 	Inspective
 		Frequently inspect scrum artifacts & progress towards sprint goal to detect undesirable variances
 	Adaptation
