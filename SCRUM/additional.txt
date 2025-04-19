@@ -7,6 +7,8 @@ Burn down Chart:
 Cone of Uncertainty
 	How much is known about the Product over time
 
+Who is allowed to change the Sprint Backlog during the Sprint
+	- SOLE DEVELOPERS
 
 non functional arguments should be addressed every sprint.
 
