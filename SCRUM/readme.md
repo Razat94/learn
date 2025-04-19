@@ -255,6 +255,8 @@ Product Backlog
   - Typically each Product Backlog Item has a description, estimate & value.
   - Product Owner is SOLE person responsible
   - is dynamic and requires ongoing refinement for as long as the product exists. 
+  - The Development Team is responsible for all estimates in the Product Backlog. 
+	- The Product Owner may influence the Development Team by helping it understand and select trade-offs, but the people who will perform the work make the final estimate.
   - Items are sorted by what the Product Owner deems most appropriate (since stakeholders have unlimited needs). 
 	- Typically, most valuable & clearly defined items should be placed on top.
 	- A product has one Product Backlog, no matter how many Scrum Teams work on it
@@ -264,8 +266,6 @@ Product Backlog
 		- list of requirements that product team has to work on
 		- dyanamic list - the backlog evolves over time
 		- higher priority items are on top of the list
-		- The Development Team is responsible for all estimates in the Product Backlog. 
-		The Product Owner may influence the Development Team by helping it understand and select trade-offs, but the people who will perform the work make the final estimate.
 	```
 	
 	> The Product Backlog emerges to define “what” will fulfill the Product Goal.
