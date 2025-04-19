@@ -162,7 +162,8 @@ Sprint Planning Meeting
   > "The Sprint Goal, the Product Backlog items selected for the Sprint, 
   plus the plan for delivering them are together referred to as the Sprint Backlog." - Scrum Guide
 
-  	The more the Developers know about their past performance, their upcoming capacity, and their Definition of Done, 
+  	The more the Developers know about:
+	their past performance, their upcoming capacity, and their Definition of Done, 
 	the more confident they will be in their Sprint forecasts.
 
 	[REPEAT] 
@@ -245,8 +246,8 @@ Artifacts are key tools or important things we create to solve a problem.
 Artifacts maximize transparency & shared understanding of work.
   - both backlogs demonstrate work to be done that will define value
 
-> Who's responsible for coping with incomplete artifact transparency? <br/></br>
-The Scrum Master helps the team and organization make artifacts more transparent 
+> Q: Who's responsible for coping with incomplete artifact transparency? <br/></br>
+A: The Scrum Master helps the team and organization make artifacts more transparent 
 through learning, influencing, and driving change.
 
 Product Backlog
@@ -263,16 +264,12 @@ Product Backlog
 		- list of requirements that product team has to work on
 		- dyanamic list - the backlog evolves over time
 		- higher priority items are on top of the list
+		- The Development Team is responsible for all estimates in the Product Backlog. The Product Owner may influence the Development Team by helping it understand and select trade-offs, but the people who will perform the work make the final estimate.
 	```
 	
 	> The Product Backlog emerges to define “what” will fulfill the Product Goal.
 	  - The Product Goal describes a future state of the product & is the long-term objective for the Scrum Team
 	  - Throughout sprint, this can be refined by adding descriptions, estimates & order.
-		
-	> Who is responsible for all estimates in the Product Backlog? <br/> </br>
-		The Development Team is responsible for all estimates in the Product Backlog. 
-		The Product Owner may influence the Development Team by helping it understand and select trade-offs, 
-		but the people who will perform the work make the final estimate.
 
 	Product Backlog management includes:
 	  - Clearly expressing Product Backlog items
@@ -290,15 +287,14 @@ Sprint Backlog
   includes the selected Product Backlog items and the plan to deliver them.
   - The Developers modify the Sprint Backlog throughout the Sprint
   	- It is continuously updated and refined
-	
-Remember: 	
-  - This backlog represents the "what" and "how" of the Sprint
-  - Created during Sprint Planning along with the sprint goal. It is used by and for the Development Team
-  - Items are pulled from the Product Backlog for that Sprint
-  - The Scrum Team sets the Sprint Goal and builds the Sprint Backlog together
-	- Working on sprint backlog guides the team to complete the Sprint Goal
-	- May also prepare the team for future Sprints (e.g., “What should we work on next?”)
-  - The plan within the Sprint Backlog is actively maintained and regularly updated during the Sprint
+	- Remember: 	
+  		- This backlog represents the "what" and "how" of the Sprint
+  		- Created during Sprint Planning along with the sprint goal. It is used by and for the Development Team
+  		- Items are pulled from the Product Backlog for that Sprint
+  		- The Scrum Team sets the Sprint Goal and builds the Sprint Backlog together
+		- Working on sprint backlog guides the team to complete the Sprint Goal
+		- May also prepare the team for future Sprints (e.g., “What should we work on next?”)
+  	- The plan within the Sprint Backlog is actively maintained and regularly updated during the Sprint
 		
   > The Sprint Goal, the Product Backlog items selected for the Sprint, 
 	plus the plan for delivering them are together referred to as the Sprint Backlog.
