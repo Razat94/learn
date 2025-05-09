@@ -248,7 +248,7 @@ When a Sprint is cancelled:
 
 
 
-## <p align="center" id = "artifacts"> "The Scrum Artifact—where love and hate coexist beautifully." | [Back to ToC](#toc) </p>
+## <p align="center" id = "artifacts"> "The Scrum Artifact" | [Back to ToC](#toc) </p>
 
 Artifacts are key tools or important things we create to solve a problem. 
 
