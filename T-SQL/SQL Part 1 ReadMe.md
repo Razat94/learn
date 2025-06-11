@@ -56,7 +56,7 @@ SELECT 'After Insertion:'
 ```
 
 To run the query, F5 is the shortcut. We could also use Ctrl+E OR Alt-X.  
-You can run multiple SELECT statements at once if they are included in the same query.
+You can run multiple SELECT statements at once if they are included in the same query as below:
 
 ```
 SELECT 1+3;
@@ -101,7 +101,7 @@ SELECT COUNT(*)
 FROM Slspers;  
 -- in SSMS, Clicking on "Messages" will display output of Count of Rows as well.
 
-/* Show Row #'s for each rows */  
+-- Show Row #'s for each row
 SELECT   
 	ROW_NUMBER() OVER (ORDER BY repid) AS row_num,  	
 	*  
@@ -112,11 +112,15 @@ FROM Slspers
 SELECT pubdate, bktitle, 'Non-Fiction' AS category, '12345' AS static_col  
 FROM Titles;
 
+#### Calculated column
+A calculated column doesn't exist in the table, but SQL calculates it for each row when the query runs. 
+
+-- Calculated Column Example:
 SELECT  
 	partnum,   
 	bktitle,  
 	slprice,  
-	-- AS A JOKE -- slprice * 1.1 AS slprice_inflation,   
+	-- slprice * 1.2 AS slprice_inflation,   
 	slprice - slprice * 0.07 AS discounted_price  
 FROM Titles
 	
@@ -192,8 +196,8 @@ CREATE TABLE Authors (
 INSERT INTO AUTHORS(AuthorID, FirstName, LastName)   
 VALUES    
 (NULL , 'Raza', 'M'), 	-- Will return error because Primary Key can not be null 	-- Fix by changing NULL to number  
-(2, NULL, 'Z'), 	-- Will return error because Firstname can not be null 		-- Fix by adding a name
-(3, 'Maria', NULL),  
+(2, NULL, 'Z'), 	-- Will return error because Firstname can not be null 		-- Fix by adding a name  
+(3, 'Maria', NULL),	-- Will work fine.
 (4, 'Raza');		-- Will return error because  
 			-- # of columns for each row in a table value constructor must be the same. -- Solution: -- (4, 'Raza', NULL)
 
@@ -213,10 +217,10 @@ CREATE TABLE Reviews (
 ```
 
 
-> Delete a table:  
+> To delete a table:  
 DROP TABLE IF EXISTS titles_backup  
 
-> TRUNCATE can remove all rows from table  
+> To TRUNCATE means to remove all rows from table  
 TRUNCATE TABLE titles_backup  
 
 
