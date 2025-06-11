@@ -12,32 +12,35 @@
 /* -------------------------------------------------------
 ## <p id = "0"> LESSON 0: Before We Begin </p>
 ---------------------------------------------------------- */
+
 ----- 
 
-About the Data:
+### About the Data:  
 We’ll be working with data from a publishing company that sells books to bookstores.
 
-You can download SQL Server Management Studio(SSMS) online [here](https://www.microsoft.com/en-us/sql-server/sql-server-downloads)
+You can download SQL Server Management Studio(SSMS) online [here](https://www.microsoft.com/en-us/sql-server/sql-server-downloads).
 
+The main parts of the SSMS interface are the:
 - Object Explorer: Navigate through databases, tables, views, stored procedures, etc. 
     - We can hide/unhide this pane if needed.
-- The Query Editor: Write and run SQL queries.
+- Query Editor: Write and run SQL queries.
 ```
-	To Show Lines in the Query Editor, go to Tools > Options, then: 
-		Expand Text Editor -> Transact-SQL -> General. 
-		Check the Line numbers box and click OK
+	To Show Lines in the Query Editor:
+		1. Go to Tools > Options 
+		2. Expand 'Text Editor' -> Transact-SQL -> General. 
+		3. Check the Line numbers box and click OK
 ```
 - Results Pane: Ctrl + R - Toggles the results pane
 
 
+> NOTE:  
+> Suppose we use Task Manager to close SQL Server Management Studio (SSMS).
+Reopening SSMS could cause problems, so we’ll use SQL Server 20XX Configuration Manager to start the service.  
+Additional Note: Don’t use Windows Services to start SSMS.
 
-> Suppose Task Manager is used to close SQL Server Management Studio (SSMS).
-Reopening SSMS could cause problems, so we’ll use SQL Server 20XX Configuration Manager to start the service.
-Note: Don’t use Windows Services to start SSMS.
-
-- Type in "Configuration Manager" to launch the application
-- Start the service for "SQL Server" (SQL EXPRESS)
-- Relaunch SSMS normally.
+1. Type in "Configuration Manager" to launch the application
+2. Start the service for "SQL Server" (SQL EXPRESS)
+3. Relaunch SSMS normally.
 
 [Stack Overflow Reference](https://stackoverflow.com/questions/35630344/unable-to-connect-to-local-sql-server-after-ending-tasks)
 
@@ -47,46 +50,63 @@ Note: Don’t use Windows Services to start SSMS.
 ## <p id = "1"> LESSON 1: Executing a Simple Query | [Back to ToC](#toc) </p>
 ---------------------------------------------------------- */
 
+To output simple text:
+```
 SELECT 'After Insertion:' 
+```
+
+To run the query, F5 is the shortcut. We could also use Ctrl+E OR Alt-X.
 
 ```
 SELECT 1+3;
-SELECT FORMAT(123.4900, '0.##')
-SELECT ROUND(235.415, 2) -- AS RoundValue;
--- Two -'s are used to write a comment: The above statement rounds up to the nearest number.
--- CHECK EXCEL = ROUND(D2,0) -- Given that D2 = 235.415
+SELECT FORMAT(123.490000000, '0.##')	-- Output: 123.49
+SELECT ROUND(235.415, 2) AS RoundValue;	-- Output: 235.420 
+-- Two -'s are used to write a comment:
 ```
 
-> We can run two commands at once!
-> F5 is the shortcut OR Ctrl+E OR Alt-X OR F5
- 
+> You can run multiple SELECT statements at once if they are included in the same query.
+> Note: In Excel, we also have a round function = ROUND(D2,0) -- given that D2 = 235.415
+
+
 USE Pub1  
 SELECT *  
-FROM Titles;  
+FROM slspers;  
 
-SELECT bktitle  
-FROM Titles;
+-- To output only 2 column
+SELECT fname, lname
+FROM slspers;
 
 -- ALSO WORKS
-
 SELECT 
-	Customers.custname, Customers.state  
-FROM Customers;
+	Slspers.fname, Slspers.lname
+FROM Slspers;
+
+#### WE CAN WRITE:
+SELECT Sales.*
+FROM Sales
+
+-- instead of
+
+SELECT *
+FROM Sales
+
+#### MORE TO DISCUSS IN CHAPTER 5! [Link to Lesson 5](#5). 
+
+-- Alias 'AS' Keyword --  
+SELECT fname, lname AS 'Last Name'  
+FROM Slspers;
 
 
 SELECT COUNT(*)  
-FROM Titles;  
+FROM Slspers;  
 -- in SSMS, Clicking on "Messages" will display output of Count of Rows as well.
 
 /* Show Row #'s for each rows */  
 SELECT   
-	-- ROW_NUMBER() OVER (ORDER BY repid) AS row_num,  
-    *  
-FROM Titles
+	ROW_NUMBER() OVER (ORDER BY repid) AS row_num,  	
+	*  
+FROM Slspers
 
--- Alias 'AS' Keyword --  
-SELECT custname, state AS 'Customer_State'  
-FROM Customers;
 
 -- Adds a new column with a constant static value  
 SELECT pubdate, bktitle, 'Non-Fiction' AS category, '12345' AS static_col  
@@ -96,7 +116,7 @@ SELECT
 	partnum,   
 	bktitle,  
 	slprice,  
-	-- AS A JOKE -- slprice + 100 AS slprice_inflation,   
+	-- AS A JOKE -- slprice * 1.1 AS slprice_inflation,   
 	slprice - slprice * 0.07 AS discounted_price  
 FROM Titles
 	
@@ -108,6 +128,7 @@ SELECT
 FROM TITLES
 
 
+### Keyboard Shortcuts:
 > Ctrl+K; Ctrl+C (comment)
 > Ctrl+K; Ctrl+U (uncomment)
 
@@ -119,7 +140,7 @@ FROM TITLES
 -- Create a Backup Table --  
 SELECT * INTO titles_backup  
 FROM titles;  
--- After completion, make sure to select Refresh on Object Explorer.
+-- After completion, make sure to select 'Refresh' on Object Explorer.
 
 -- FROM w3SCHOOLS  
 SELECT * INTO CustomersBackup2017  
@@ -136,11 +157,11 @@ WHERE 1 = 0;
 -- use WHERE 1 = 0 or similar condition.
 
 
-> Create simple table 'Vendors' who are partners involved in publishing.  
+> Excercise: Create simple table 'Vendors' who are partners involved in publishing.  
 
 ```
 CREATE TABLE Vendors (  
-    VendorID INT PRIMARY KEY IDENTITY(1000,1), -- KEYWORD 'IDENTITY' AUTOINCREMENTS; START AT 1000 and increment 1 for each new row!  
+    VendorID INT PRIMARY KEY IDENTITY(1000,1), -- KEYWORD 'IDENTITY' AUTOINCREMENTS; FIRST ROW WILL START AT 1000 and increment 1 for each new row!  
     Name VARCHAR(100),  
     Phone VARCHAR(20),  
     Email VARCHAR(100)  
@@ -170,17 +191,13 @@ CREATE TABLE Authors (
 
 INSERT INTO AUTHORS(AuthorID, FirstName, LastName)   
 VALUES    
-(NULL , 'Raza', 'M'), 	-- Will return error because Primary Key can not be null -- Fix by changing NULL to number  
-(2, NULL, 'Z'), 	-- Will return error because Firstname can not be null  
-(3, 'Maria', NULL);  
+(NULL , 'Raza', 'M'), 	-- Will return error because Primary Key can not be null 	-- Fix by changing NULL to number  
+(2, NULL, 'Z'), 	-- Will return error because Firstname can not be null 		-- Fix by adding a name
+(3, 'Maria', NULL),
+(4, 'Raza');		-- Will return error because  
+			-- # of columns for each row in a table value constructor must be the same. -- Solution: -- (4, 'Raza', NULL)
 
 SELECT * FROM AUTHORS
-
-> Note: You can't add (4, 'Raza') because  
-The number of columns for each row in a table value constructor must be the same.   
-Solution: -- (4, 'Raza', NULL)
-
-
 
 ```
 -- Good potential table:  
@@ -202,20 +219,6 @@ DROP TABLE IF EXISTS titles_backup
 > TRUNCATE can remove all rows from table  
 TRUNCATE TABLE titles_backup  
 
-
-> NOTE: WE CAN WRITE:
-```		
-	SELECT Sales.*
-	FROM Sales
-
-	AS
-
-	SELECT Sales.*
-	FROM Sales
-
-```
-
-> MORE TO DISCUSS IN CHAPTER 5!!!
 
 
 > To Run T-SQL via the command line:  
