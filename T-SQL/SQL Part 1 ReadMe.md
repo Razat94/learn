@@ -395,12 +395,12 @@ Q: Show me people who live either in NY or CA. Amongst those people, they MUST h
 Select *  
 from Customers  
 WHERE Customers.state = 'NY' OR state='CA' AND zipcode = '92704' 
-ORDER BY zipcode 
--- This will return multiple NY resident without the zipcode 92704 
--- Solution: -- WHERE (Customers.state = 'NY' OR state='CA') AND zipcode = '92704'
+ORDER BY zipcode  
+-- This will return multiple NY resident without the zipcode 92704  
+-- Solution: -- WHERE (Customers.state = 'NY' OR state='CA') AND zipcode = '92704'  
 
 
-
+#### LIKE 
 -- Get all people whose first name starts with the letter "A"  
 SELECT *  
 FROM Slspers  
