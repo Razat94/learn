@@ -55,7 +55,8 @@ To output simple text:
 SELECT 'After Insertion:' 
 ```
 
-To run the query, F5 is the shortcut. We could also use Ctrl+E OR Alt-X.
+To run the query, F5 is the shortcut. We could also use Ctrl+E OR Alt-X.  
+You can run multiple SELECT statements at once if they are included in the same query.
 
 ```
 SELECT 1+3;
@@ -64,7 +65,6 @@ SELECT ROUND(235.415, 2) AS RoundValue;	-- Output: 235.420
 -- Two -'s are used to write a comment:
 ```
 
-> You can run multiple SELECT statements at once if they are included in the same query.
 > Note: In Excel, we also have a round function = ROUND(D2,0) -- given that D2 = 235.415
 
 
@@ -72,16 +72,16 @@ USE Pub1
 SELECT *  
 FROM slspers;  
 
--- To output only 2 column
+-- To output only 2 columns  
 SELECT fname, lname
 FROM slspers;
 
--- ALSO WORKS
+-- This also works:  
 SELECT 
 	Slspers.fname, Slspers.lname
 FROM Slspers;
 
-#### WE CAN WRITE:
+#### WE CAN WRITE:  
 SELECT Sales.*
 FROM Sales
 
@@ -90,7 +90,7 @@ FROM Sales
 SELECT *
 FROM Sales
 
-#### MORE TO DISCUSS IN CHAPTER 5! [Link to Lesson 5](#5). 
+#### more to discuss in CHAPTER 5! [Link to Lesson 5](#5). 
 
 -- Alias 'AS' Keyword --  
 SELECT fname, lname AS 'Last Name'  
@@ -140,15 +140,15 @@ FROM TITLES
 -- Create a Backup Table --  
 SELECT * INTO titles_backup  
 FROM titles;  
--- After completion, make sure to select 'Refresh' on Object Explorer.
+> After completion, make sure to select 'Refresh' on Object Explorer.
 
--- FROM w3SCHOOLS  
+-- Example from w3SCHOOLS  
 SELECT * INTO CustomersBackup2017  
 FROM Customers  
 -- WHERE state = 'CA'  
 
 
--- Create 'NewCustomers' table but structure only
+-- Create 'NewCustomers' table but structure only  
 SELECT *  
 INTO NewCustomers  
 FROM Customers  
@@ -193,11 +193,11 @@ INSERT INTO AUTHORS(AuthorID, FirstName, LastName)
 VALUES    
 (NULL , 'Raza', 'M'), 	-- Will return error because Primary Key can not be null 	-- Fix by changing NULL to number  
 (2, NULL, 'Z'), 	-- Will return error because Firstname can not be null 		-- Fix by adding a name
-(3, 'Maria', NULL),
+(3, 'Maria', NULL),  
 (4, 'Raza');		-- Will return error because  
 			-- # of columns for each row in a table value constructor must be the same. -- Solution: -- (4, 'Raza', NULL)
 
-SELECT * FROM AUTHORS
+SELECT * FROM AUTHORS;
 
 ```
 -- Good potential table:  
