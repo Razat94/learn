@@ -262,7 +262,7 @@ WHERE TABLE_NAME = 'Titles'
 
 <!-- SORTING & FILTERING CHAPTER -->
 
-### To sort data by a column  
+#### To sort data by a column  
 SELECT *  
 FROM Titles   
 ORDER BY bktitle ASC -- Sort by bktitle  
@@ -272,7 +272,7 @@ Select *
 FROM Titles  
 ORDER BY slprice DESC, bkTitle ASC  
 
-### To get top 5 rows  
+#### To get top 5 rows  
 SELECT  
 TOP 5  
 *  
@@ -284,7 +284,7 @@ ORDER BY bktitle ASC
 -- i.e. "Specify the maxinum number of rows to return before the server stops processing
 
 
-### WHERE clause acts as a Filter 
+#### WHERE clause acts as a Filter 
 SELECT *  
 FROM Customers  
 WHERE state = 'NY'   
@@ -333,7 +333,7 @@ ORDER BY discounted_price DESC  -- WILL WORK!
 
 
 
--- NULL --  
+#### WHERE clause with NULL:  
 SELECT *  
 FROM Titles  
 WHERE devcost IS  
@@ -361,8 +361,7 @@ ORDER BY custname
 
 
 ### AND
-BOTH of the conditions MUST be true. [Based off of Excel Function]
-
+EVERY (All) condition MUST be true. [Similar to Excel Function]
 
 SELECT *  
 FROM customers  
@@ -384,6 +383,9 @@ ORDER BY slprice ASC
 
 
 ### OR  
+ANY condition MUST be true. [Similar to Excel Function]
+
+
 SELECT custname, city, state FROM Customers    
 WHERE state = 'CA' OR state = 'NY'    
 -- Also works: -- WHERE state IN ('CA', 'NY', 'TX');  
@@ -394,13 +396,13 @@ Q: Show me people who live either in NY or CA. Amongst those people, they MUST h
 
 Select *  
 from Customers  
-WHERE Customers.state = 'NY' OR state='CA' AND zipcode = '92704' 
+WHERE Customers.state = 'NY' OR state='CA' AND zipcode = '92704'  
 ORDER BY zipcode  
 -- This will return multiple NY resident without the zipcode 92704  
 -- Solution: -- WHERE (Customers.state = 'NY' OR state='CA') AND zipcode = '92704'  
 
 
-#### LIKE 
+#### omg LIKE Operator 
 -- Get all people whose first name starts with the letter "A"  
 SELECT *  
 FROM Slspers  
@@ -415,7 +417,7 @@ WHERE bktitle = 'Sailing'
 
 VS.
  
-##### CONTAINS MATCH
+#### CONTAINS MATCH
 SELECT *
 FROM Titles
 WHERE bktitle LIKE '%Art%' -- filters rows
