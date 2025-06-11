@@ -197,7 +197,7 @@ INSERT INTO AUTHORS(AuthorID, FirstName, LastName)
 VALUES    
 (NULL , 'Raza', 'M'), 	-- Will return error because Primary Key can not be null 	-- Fix by changing NULL to number  
 (2, NULL, 'Z'), 	-- Will return error because Firstname can not be null 		-- Fix by adding a name  
-(3, 'Maria', NULL),	-- Will work fine.
+(3, 'Maria', NULL),  
 (4, 'Raza');		-- Will return error because  
 			-- # of columns for each row in a table value constructor must be the same. -- Solution: -- (4, 'Raza', NULL)
 
@@ -220,7 +220,7 @@ CREATE TABLE Reviews (
 > To delete a table:  
 DROP TABLE IF EXISTS titles_backup  
 
-> To TRUNCATE means to remove all rows from table  
+> To TRUNCATE a table i.e. to remove all rows from table:   
 TRUNCATE TABLE titles_backup  
 
 
