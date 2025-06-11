@@ -90,7 +90,7 @@ FROM Sales
 SELECT *
 FROM Sales
 
-#### more to discuss in CHAPTER 5! [Link to Lesson 5](#5). 
+#### ...more to discuss in CHAPTER 5! [Link to Lesson 5](#5). 
 
 -- Alias 'AS' Keyword --  
 SELECT fname, lname AS 'Last Name'  
@@ -101,8 +101,8 @@ SELECT COUNT(*)
 FROM Slspers;  
 -- in SSMS, Clicking on "Messages" will display output of Count of Rows as well.
 
--- Show Row #'s for each row
-SELECT   
+-- Show Row #'s for each row  
+SELECT  
 	ROW_NUMBER() OVER (ORDER BY repid) AS row_num,  	
 	*  
 FROM Slspers
@@ -112,10 +112,10 @@ FROM Slspers
 SELECT pubdate, bktitle, 'Non-Fiction' AS category, '12345' AS static_col  
 FROM Titles;
 
-#### Calculated column
+### Calculated column
 A calculated column doesn't exist in the table, but SQL calculates it for each row when the query runs. 
 
--- Calculated Column Example:
+-- Calculated Column Example:  
 SELECT  
 	partnum,   
 	bktitle,  
@@ -126,9 +126,10 @@ FROM Titles
 	
 SELECT  
 	slprice,  
+	ROUND(slprice,0) -- Round to nearest number  
+
 	-- To remove trailing 0's without rounding?   
 	-- FORMAT(slprice - slprice * 0.07, '0.##') AS discounted_price  
-	-- ROUND(slprice,0) -- Round to nearest number  
 FROM TITLES
 
 
@@ -141,7 +142,7 @@ FROM TITLES
 > CTRL + Shift + L (Lowercase)
 
 
--- Create a Backup Table --  
+### Create a Backup Table
 SELECT * INTO titles_backup  
 FROM titles;  
 > After completion, make sure to select 'Refresh' on Object Explorer.
@@ -150,7 +151,6 @@ FROM titles;
 SELECT * INTO CustomersBackup2017  
 FROM Customers  
 -- WHERE state = 'CA'  
-
 
 -- Create 'NewCustomers' table but structure only  
 SELECT *  
@@ -220,7 +220,7 @@ CREATE TABLE Reviews (
 > To delete a table:  
 DROP TABLE IF EXISTS titles_backup  
 
-> To TRUNCATE a table i.e. to remove all rows from table:   
+> To truncate a table i.e. to remove all rows from table:   
 TRUNCATE TABLE titles_backup  
 
 
@@ -262,16 +262,17 @@ WHERE TABLE_NAME = 'Titles'
 
 <!-- SORTING & FILTERING CHAPTER -->
 
+### To sort data by a column  
 SELECT *  
 FROM Titles   
 ORDER BY bktitle ASC -- Sort by bktitle  
 
--- Multilevel
+-- Multilevel Sort  
 Select *  
 FROM Titles  
 ORDER BY slprice DESC, bkTitle ASC  
 
-
+### To get top 5 rows  
 SELECT  
 TOP 5  
 *  
@@ -283,13 +284,14 @@ ORDER BY bktitle ASC
 -- i.e. "Specify the maxinum number of rows to return before the server stops processing
 
 
+### WHERE clause acts as a Filter 
 SELECT *  
 FROM Customers  
 WHERE state = 'NY'   
--- WHERE clause acts like a Filter -- verify that 6 people are there.
+-- verify that 6 people are there.
 
 
--- NOT  
+#### NOT   
 SELECT *  
 FROM Customers  
 WHERE NOT state = 'NY'  
@@ -304,35 +306,23 @@ slprice      >            50
 column    operator       value
 
 
--- WHERE clause with dates;  
+#### WHERE clause with dates:  
 -- Show titles published past 1/1/2017  
 SELECT bktitle, CAST(pubdate AS DATE) -- CAST is used to truncate the time portion  
 FROM Titles  
-WHERE pubdate > '2017-01-01' -- Actual date must be wrapped in ''  
+WHERE pubdate > '2017-01-01' -- Note: Actual date must be wrapped in ''  
 ORDER BY pubdate
 
 
--- Remember, we can create a new table from a filtered table.
-SELECT   
-	*  
-	-- INTO CA_Customers  
-FROM Customers  
-WHERE state = 'CA'  
-ORDER BY state
-
->TO DELETE:  
--- DROP TABLE CA_Customers  
-
-
+#### WHERE clause with numbers:
 SELECT *  
 INTO HighEarners  
 FROM Employees  
 WHERE Salary > 80000;  
 
-
 -- BE CAREFUL: Computed or alias columns aren't part of the actual table, so they can't be used in the `WHERE` clause since WHERE is evaluated before SELECT.
 
-SELECT
+SELECT  
 	partnum,  
 	bktitle,  
 	slprice - slprice * 0.07 AS discounted_price  
@@ -343,17 +333,31 @@ ORDER BY discounted_price DESC  -- WILL WORK!
 
 
 
--- NULL --
-SELECT *
-FROM Titles
-WHERE devcost IS 
--- NOT
-NULL 
+-- NULL --  
+SELECT *  
+FROM Titles  
+WHERE devcost IS  
+-- NOT  
+NULL  
 
 
 2:45
-// Already covered:
+// Already covered:  
 ISNULL() / IFNULL()	Replace nulls; Excel: IF(ISBLANK())
+
+
+
+-- Remember, we can create a new table from a filtered table:  
+SELECT   
+	*  
+	INTO CA_Customers  -- Creates a new table 'CA_Customers'
+FROM Customers  
+WHERE state = 'CA'  
+ORDER BY custname
+
+> TO DELETE:  
+-- DROP TABLE CA_Customers  
+
 
 
 ### AND
@@ -385,14 +389,14 @@ WHERE state = 'CA' OR state = 'NY'
 -- Also works: -- WHERE state IN ('CA', 'NY', 'TX');  
 
 
--- Activity 2.3  
-What's the problem?  
+#### Activity 2.3: Find the Problem:
 Q: Show me people who live either in NY or CA. Amongst those people, they MUST have a zipcode of 92704.
 
 Select *  
 from Customers  
-where Customers.state = 'NY' OR state='CA' AND zipcode = '92704'  
--- Showing me multiple NY resident  
+WHERE Customers.state = 'NY' OR state='CA' AND zipcode = '92704' 
+ORDER BY zipcode 
+-- This will return multiple NY resident without the zipcode 92704 
 -- Solution: -- WHERE (Customers.state = 'NY' OR state='CA') AND zipcode = '92704'
 
 
@@ -404,14 +408,14 @@ WHERE fname LIKE 'A%';
 
 
 
--- EXACT MATCH --  
+#### EXACT MATCH 
 SELECT *
 FROM Titles
 WHERE bktitle = 'Sailing'
 
 VS.
  
--- CONTAINS MATCH --  
+##### CONTAINS MATCH
 SELECT *
 FROM Titles
 WHERE bktitle LIKE '%Art%' -- filters rows
@@ -434,7 +438,6 @@ ORDER BY bktitle ASC
 
 -- SELECT title, director FROM movies   
 -- WHERE title LIKE "Toy Story%";
-
 
 
 
