@@ -59,7 +59,7 @@ To run the query, F5 is the shortcut. We could also use Ctrl+E OR Alt-X.
 You can run multiple SELECT statements at once if they are included in the same query as below:
 
 ```
-SELECT 1+3;
+SELECT 1+3; -- T-SQL is a Declarative language that supports some precedural syntax.
 SELECT FORMAT(123.490000000, '0.##')	-- Output: 123.49
 SELECT ROUND(235.415, 2) AS RoundValue;	-- Output: 235.420 
 -- Two -'s are used to write a comment:
@@ -453,10 +453,14 @@ ORDER BY bktitle ASC
 
 SELECT 	
 	bktitle,   
-	(pubdate), 	-- This works with or without ()  
-	(slprice * 0.9) -- Similar to EXCEL Formula = (A1 * 0.9)
+	(pubdate),  	-- This works with or without ()  
+	(slprice * 0.9) -- Similar to EXCEL Formula = (A1 * 0.9)  
 FROM Titles  
 
+
+SELECT GETDATE();
+SELECT YEAR( GETDATE() ); -- like Excel, you also have MONTH( date ) AND DAY( date ) too.  
+-- Also works: -- SELECT DATEPART( year, GETDATE() )
 
 SELECT 
 	pubdate  
@@ -470,17 +474,16 @@ SELECT
 	bktitle,   
 	pubdate,  
 	-- To remove time:   
-	-- CAST(pubdate AS DATE) AS pubdate_without_time,
-	YEAR(pubdate) -- Use Year function to just return YEAR   
-	-- like Excel, you also have MONTH(pubdate) AND DAY(pubdate)  
+	-- CAST(pubdate AS DATE) AS pubdate_without_time,  
+	YEAR(pubdate) -- Use Year function to return YEAR of each record.  
 FROM Titles  
-WHERE YEAR(pubdate) = 2017
+WHERE YEAR(pubdate) = 2017  
 
 
 
 /* RECAP*/  
 Select  
-	CAST(pubdate AS DATE)  
+ 	CAST(pubdate AS DATE)  
 	-- To leave just year: 	-- DATEPART(year, pubdate) AS pubdate_year  
 FROM Obsolete_Titles  
 WHERE MONTH(pubdate) BETWEEN 6 AND 8  
@@ -492,11 +495,11 @@ SELECT
 	pubdate + 1 AS next_day,  
 	DATEADD(YEAR, 1, pubdate) AS Pub_Date_1_Year_Earlier -- Adds 1 year to the publication date  
 FROM Titles  
-WHERE pubdate BETWEEN '1/1/1994' AND '12/31/2013'
+WHERE pubdate BETWEEN '1/1/1994' AND '12/31/2013'  
 
 
 
-### AGGREGATE FUNCTIONS
+### AGGREGATE FUNCTIONS  
 
 SELECT	
 	COUNT(*),  
@@ -565,7 +568,7 @@ SELECT TRIM(fname) + ', ' + lname
 FROM Slspers
 
 
-SELECT  
+SELECT   
 	LOWER(  
 		CONCAT(TRIM(fname), ' ', lname)  
 	) AS Full_Name  
@@ -581,7 +584,7 @@ FROM CUSTOMERS
 ASSIGNMENT:  
 -- Long and unneeded since prev 2 do the trick but feel free to try:  
 -- SELECT CustomerName, Address + ', ' + PostalCode + ' ' + City + ', ' + Country AS Address  
--- FROM Customers;
+-- FROM Customers;  
 
 
 
