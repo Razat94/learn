@@ -50,6 +50,8 @@ Additional Note: Don’t use Windows Services to start SSMS.
 ## <p id = "1"> LESSON 1: Executing a Simple Query | [Back to ToC](#toc) </p>
 ---------------------------------------------------------- */
 
+
+
 To output simple text:
 ```
 SELECT 'After Insertion:' 
@@ -254,10 +256,10 @@ WHERE TABLE_NAME = 'Titles'
 
 
 
-
 /* -------------------------------------------------------
 ## <p id = "2"> LESSON 2: Performing a Conditional Search | [Back to ToC](#toc) </p>
 ---------------------------------------------------------- */
+
 
 
 <!-- SORTING & FILTERING CHAPTER -->
@@ -443,14 +445,15 @@ ORDER BY bktitle ASC
 
 
 
-
-
 /* -------------------------------------------------------
 ## <p id = "3"> LESSON 3: Working with Functions | [Back to ToC](#toc)</p>
 ---------------------------------------------------------- */
 
+
+
 ### Date Functions
 
+#### Columns can be wrapped in () 
 SELECT 	
 	bktitle,   
 	(pubdate),  	-- This works with or without ()  
@@ -458,42 +461,40 @@ SELECT
 FROM Titles  
 
 
-SELECT GETDATE();
+SELECT GETDATE();  
 SELECT YEAR( GETDATE() ); -- like Excel, you also have MONTH( date ) AND DAY( date ) too.  
 -- Also works: -- SELECT DATEPART( year, GETDATE() )
+
 
 SELECT 
 	pubdate  
 FROM Titles  
 -- Filter by 2011: 	-- WHERE Year(pubdate) = 2011  
 -- Same as: 		-- WHERE DATEPART(year, pubdate) = 2011  
-ORDER BY Month(pubdate)
+ORDER BY YEAR(pubdate), Month(pubdate)
 
 
 SELECT   	
 	bktitle,   
 	pubdate,  
-	-- To remove time:   
-	-- CAST(pubdate AS DATE) AS pubdate_without_time,  
-	YEAR(pubdate) -- Use Year function to return YEAR of each record.  
+	YEAR(pubdate), -- Use Year function to return YEAR of each record. 
+	-- To remove time:   -- CAST(pubdate AS DATE) AS pubdate_without_time
 FROM Titles  
-WHERE YEAR(pubdate) = 2017  
+WHERE YEAR(pubdate) = 2017  -- Filter by 2017
 
 
-
-/* RECAP*/  
-Select  
+#### Filter for months between May & Oct  
+SELECT  
  	CAST(pubdate AS DATE)  
-	-- To leave just year: 	-- DATEPART(year, pubdate) AS pubdate_year  
 FROM Obsolete_Titles  
-WHERE MONTH(pubdate) BETWEEN 6 AND 8  
+WHERE MONTH(pubdate) BETWEEN 5 AND 10  
 
 
 
 SELECT  
 	pubdate,   
 	pubdate + 1 AS next_day,  
-	DATEADD(YEAR, 1, pubdate) AS Pub_Date_1_Year_Earlier -- Adds 1 year to the publication date  
+	DATEADD(YEAR, 1, pubdate) AS Pub_Date_1_Year_Later -- Adds 1 year to the publication date  
 FROM Titles  
 WHERE pubdate BETWEEN '1/1/1994' AND '12/31/2013'  
 
@@ -504,7 +505,7 @@ WHERE pubdate BETWEEN '1/1/1994' AND '12/31/2013'
 SELECT	
 	COUNT(*),  
 	COUNT(DISTINCT pubdate) AS distinct_publish_dates  
-FROM  TITLES  
+FROM	TITLES  
 WHERE 	YEAR(pubdate) = 2017  
 
 
@@ -533,11 +534,11 @@ You can however do a row-wise sum across columns like Q1 + Q2:
 
 ```
 SELECT 
-    id,
-    Q1,
-    Q2,
-    Q1 + Q2 AS Total
-    FROM sales;
+    id,  
+    Q1,  
+    Q2,  
+    Q1 + Q2 AS Total  
+    FROM sales;  
 ```
 
 WE CAN WRAP SELECT QUERIES IN PARENTHESIS just like in Excel!
@@ -563,11 +564,14 @@ WHERE commrate > (SELECT AVG(commrate) From Slspers)
 
 ### String Functions
 
+
+#### Concatenate text to make full name
 SELECT TRIM(fname) + ', ' + lname  
 -- Also works: -- SELECT CONCAT(TRIM(fname), ' ', lname) AS full_name   
 FROM Slspers
 
 
+#### Convert Concatenated Text to Lowercase 
 SELECT   
 	LOWER(  
 		CONCAT(TRIM(fname), ' ', lname)  
@@ -575,23 +579,25 @@ SELECT
 FROM Slspers;
 
 
+#### TRIM Function  
 SELECT city + ', ' + state  
--- THERE IS TRAILING SPACE LIKE SO (will be fixed with trim)  -- Rochester           (<- space ends here  
+-- TRIM Function removes TRAILING SPACE -- Rochester           <- space ends here  
 -- SELECT TRIM(city) + ', ' + state  
 FROM CUSTOMERS
 
 
-ASSIGNMENT:  
--- Long and unneeded since prev 2 do the trick but feel free to try:  
+> Optional Excercise: Create a column that contains the full address  
+-- Solution:  
 -- SELECT CustomerName, Address + ', ' + PostalCode + ' ' + City + ', ' + Country AS Address  
 -- FROM Customers;  
-
 
 
 
 /* -------------------------------------------------------
 ## <p id = "4"> LESSON 4: Organizing Data | [Back to ToC](#toc)</p> 
 ---------------------------------------------------------- */
+
+
 
 > Remember if I want to show rows as a seperate column:
 
@@ -721,11 +727,10 @@ PIVOT (
 
 
 
-
 /* -------------------------------------------------------
 ## <p id = "5"> Lesson 5: Retrieving Data from Multiple Tables | [Back to ToC](#toc)</p> 
-
 ---------------------------------------------------------- */
+
 
 
 ### /* ------------ Unions Statement ------------ */
@@ -856,11 +861,10 @@ GROUP BY sp.repid, sp.fname;
 
 
 
-
-
 /* -------------------------------------------------------
 ## <p id = "6"> LESSON 6: Exporting Query Results | [Back to ToC](#toc)</p> 
 ---------------------------------------------------------- */
+
 
 
 EXPORTING  
