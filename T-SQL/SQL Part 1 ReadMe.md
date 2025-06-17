@@ -453,16 +453,16 @@ ORDER BY bktitle ASC
 
 ### Date Functions
 
-#### Columns can be wrapped in () 
+#### Columns can be wrapped in ( ) 
 SELECT 	
 	bktitle,   
-	(pubdate),  	-- This works with or without ()  
-	(slprice * 0.9) -- Similar to EXCEL Formula = (A1 * 0.9)  
+	(pubdate),  			-- This works with or without ()  
+	(slprice * 0.9) 		-- Similar to EXCEL Formula = (A1 * 0.9)  
 FROM Titles  
 
 
 SELECT GETDATE();  
-SELECT YEAR( GETDATE() ); -- like Excel, you also have MONTH( date ) AND DAY( date ) too.  
+SELECT YEAR( GETDATE() ); 	-- like Excel, you also have MONTH( date ) AND DAY( date ) too.  
 -- Also works: -- SELECT DATEPART( year, GETDATE() )
 
 
@@ -477,7 +477,7 @@ ORDER BY YEAR(pubdate), Month(pubdate)
 SELECT   	
 	bktitle,   
 	pubdate,  
-	YEAR(pubdate), -- Use Year function to return YEAR of each record. 
+	YEAR(pubdate), -- Use Year function to return YEAR of each record.  
 	-- To remove time:   -- CAST(pubdate AS DATE) AS pubdate_without_time
 FROM Titles  
 WHERE YEAR(pubdate) = 2017  -- Filter by 2017
@@ -528,7 +528,8 @@ SELECT AVG(CAST( commrate AS DECIMAL(10,1) )) FROM Slspers
 Q: Can we use a sum function across a row?
 
 Short answer:  
-No, you can't use `SUM()` to add values across columns like `Q1 + Q2` in a single row. `SUM()` works vertically, adding values down one column over many rows.
+No, you can't use `SUM()` to add values across columns like `Q1 + Q2` in a single row.  
+`SUM()` works vertically by adding values in one column over many rows
 
 You can however do a row-wise sum across columns like Q1 + Q2:
 
@@ -541,8 +542,7 @@ SELECT
     FROM sales;  
 ```
 
-WE CAN WRAP SELECT QUERIES IN PARENTHESIS just like in Excel!
-
+> Note: We can wrap SELECT QUERIES in parenthesis just like in Excel!
 (  
 SELECT AVG(commrate) From Slspers -- RESULT: 0.037  
 )  
@@ -553,7 +553,7 @@ WHERE commrate > 0.02
 -- ORDER BY commrate DESC  
 
 
--- Combining the last 2 queries together...  
+> Combining the last 2 queries together...  
 SELECT fname, commrate From Slspers  
 WHERE commrate > (SELECT AVG(commrate) From Slspers)  
 -- ORDER BY commrate DESC  
