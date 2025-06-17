@@ -543,6 +543,7 @@ SELECT
 ```
 
 > Note: We can wrap SELECT QUERIES in parenthesis just like in Excel!
+
 (  
 SELECT AVG(commrate) From Slspers -- RESULT: 0.037  
 )  
@@ -554,6 +555,7 @@ WHERE commrate > 0.02
 
 
 > Combining the last 2 queries together...  
+
 SELECT fname, commrate From Slspers  
 WHERE commrate > (SELECT AVG(commrate) From Slspers)  
 -- ORDER BY commrate DESC  
