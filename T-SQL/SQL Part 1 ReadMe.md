@@ -478,7 +478,7 @@ SELECT
 	bktitle,   
 	pubdate,  
 	YEAR(pubdate), -- Use Year function to return YEAR of each record.  
-	-- To remove time:   -- CAST(pubdate AS DATE) AS pubdate_without_time
+	-- To remove time:   -- CAST(pubdate AS DATE) AS pubdate_without_time  
 FROM Titles  
 WHERE YEAR(pubdate) = 2017  -- Filter by 2017
 
