@@ -1393,6 +1393,24 @@ select {
   color: #5c2b70;
 }
 
+/* Yellow */
+.cards-section .item-yellow .item-inner {
+  border-top: 3px solid #eec850;
+}
+
+.cards-section .item-yellow .icon {
+  color: #eec850;
+}
+
+.cards-section .item-yellow .item-inner:hover {
+  border-bottom: 3px solid #eec850;
+}
+
+.cards-section .item-yellow .item-inner:hover .title {
+  color: #f0ad4e;
+}
+
+
 
 
 @media (max-width: 767.98px) {
