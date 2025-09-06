@@ -712,6 +712,7 @@ If you’re familiar with PivotTables and PivotCharts, you’ll notice some simi
 					-> Change Width
 			- Change bar colors on the chart: 
 				 Format Visuals -> Bars (Remember: We have a bar chart, not column chart!) -> Color
+				TASK: MAKE THE CHARTS TO HAVE RED BARS INSTEAD OF TRADITIONAL BLUE!
 
 	
 			- Change the color of a particular point 
@@ -1071,8 +1072,20 @@ Helpful Links:
 
 	Q: https://learn.microsoft.com/en-us/training/modules/configure-semantic-model-power-bi/9-check
 
-	-- Lunch --
+		
 
+	Recap: Understand:
+		- interactivity
+			- cross highlight - 	Click on the bar item to highlight all charts.
+						Click outside the bar (but not outside the entire chart) to undo all.
+		- filters 
+			- moving an area to filters pane will allow you to filter (similar to PivotCharts!)
+		- add slicers - just like how it's done in PivotCharts.
+		- understand hierarchys & drill down.	
+
+	
+	
+	-- Lunch --
 
 
 /* -------------------------------------------------------
@@ -1222,43 +1235,126 @@ As you know, Tooltips are pop ups that display extra details about a data point 
 ---------------------------------------------------------- */
 
 
+- Calculated Columns -
+	In Power BI, a calculated column is a new column that you create using a formula.
+	This new column:
+		- is a custom field that was created by using DAX
+		- calculates a value for every row in that table.
+		- this custom field doesn't come from the raw data source & we can use it in visuals, filters, or slicers just like any other field.
 
-	You decide to remove unnecessary columns from your data model.
 
-	What are two potential performance benefits of doing this? Each correct answer presents a complete solution.
+	Note: How to create a formula in Power BI (Calculated Column):
+		Option 1: In Power Query, use Custom Column
+		Option 2: In Table View within Power BI, click New Column to add it directly in the data model.
+		⚠️ Note: Columns created in Table View will not appear in Power Query. 
+			Power Query is mainly for initial data transformations i.e. before the data is loaded into the model.
 	
 
+	Task: Create a simple text calculated columns
+		Go to Table View (You can also create a calculated column in Report View, but Table View is helpful for instantly seeing the results.)
+		
+		We can start to create a new column via:
+			Tables Tools (Contextual Tab) -> New Column 
+			OR
+			Home Tab -> New Column 
+			OR
+			In the data pane, right clicking the table name -> New Column
+ 
 
+		In the formula bar, type:
+			Solution: firstNewColumn = "Hello World"
+			NOTICE: With Calculated Columns, we can't change the value for any specific row 
+				i.e. ALL columns will then have "Hello World!"
+	
+		Try chaning the value of the sampleColumn to "I love PowerBI"
+		
 
-	Using calculated columns
-		In Power BI, a calculated column is a new column that you create using a formula.
-		It doesn’t come from your original data 
-			— instead, you make it by combining or changing existing data in your table.
+	Task: Use ROUND() function to create Rounded Total Sales Column
+		Under the same Table View, click New Column & enter the formula:
+		Solution: Rounded Total Sales = ROUND(SalesData[Total Sales], 0)
+	
+	Optional Task:
+		- ConcatColumn = SalesData[Region] & "-" & SalesData[State]
+		- Create a tax related column.
 
-		newColumn = "Hello World"
-		= ROUND(SalesData[Total Sales],0)
-
-
-
-	Adding a calculated column
-		introduces redundancy and inefficiency
-
-		Under Table View -> Tables Tools -> New Column
-		Created "Duration" column for "Ship Date" - "Order Date".
-			Go to Column Tools & Change it to a WHOLE NUMBER
-		Create "Duration-Status-Message" that is an IF Statement for "acceptable" & "late"
-			COLUMN = IF()
+	Task: 
+		Create a Duration column to calculate the difference between Ship Date and Order Date 
+		Solution: 
+			Duration = SalesData[Shipped Date] - SalesData[Order Date]
+			Afterwards, go to Column Tools & Change column data type to a WHOLE NUMBER	
 			
-			Solution: 
+
+	Task:
+		Create a "Duration-Status-Message" column. Using the IF Statement, if the duration is <3 then the value is "acceptable" else it's "late"
+		Solution: 
 			Duration-Status-Message = IF(SalesData[Duration] < 3, "Acceptable", "Late")
+				
 		
-		Create a card where the fields contain the Message measure.
-		
-	Create a bar chart for "acceptable" & "late" 
-		by simply using the Status column for BOTH X & Y Axis 
-		(Note: Usually we want to use a non-empty field like ID but in this case it's fine).
+		Subtask: Let's create a visual:		
+			Create a bar chart for "Acceptable" & "late" 
+			by simply using the column chart and use this same field for BOTH X & Y Axis 
+			Optional: Create 1 card that outputs the earlier Message measure, & another with the Count.
 
 
+
+	Optional IF Task: 		NewColumn = IF(SalesData[Total Sales] > 1000, "Big Sale","Not Big Sale")		
+	
+
+	NOTE:
+		Calculated columns are computed row by row
+		Values are stored in the data model => taking up memory => increase file size and slow refreshes for large tables
+		Overall: Good but inefficient.
+
+	 
+
+- Measures -
+
+	Measures are similar to formulas.
+	
+	- Measures are calculated on the fly only when used in a visual, so they don’t consume extra storage.
+	- Measures do not create new columns of values but rather show calculations only when used in visuals.
+		- For instance, Power BI can’t create relationships using measures - only columns. 
+			- Although they exist in the semantic model, bogus results are returned when we attempt something.
+	- You can create and name measures just like calculated columns, BUT no calculation occurs UNTIL the measure is added to a visual.
+	- Measures don’t calculate values for each row (i.e. No per-row calculation); they operate on entire fields and only appear in the Fields pane and used in visuals.
+
+
+	Situation: We use a measure when we need a summary value (like average, comission)				
+	Task: Create a commission based measure
+		Type in Formula Bar: Comission = SUM(SalesData[Total Sales]) * 0.02
+			
+		- Once we've created our measure, no new column is added to the table so thus no new value is added for each row.
+		- The measure is for the entire field (only shows on side pane) which can next display values when used in visuals
+		TASK: 
+			Create a new page for Salespeople.
+			Create a bar chart that maps out SalesPeople Total Sales
+			Create a GAGE CHART out of Measure Commission
+			(Optional) Create a card showing sales person name/sales
+					
+
+			
+			Note: Measures are explicit. 
+			If I do average of sales, then I can't change it to a sum via the pane field! 
+			I'll have to change the formula.
+			
+
+
+	Recap:
+		Measures:
+			Calculated only when needed (mainly when you use them in a visual or report).
+			Don't take up extra space in your data model.
+			Measures are most efficient for larger data sets when calculations don’t need to be stored row by row.
+
+		Calculated Columns:
+			Stored in memory for every row in your table, increasing the size of your model.
+			Always calculated, even if not used in your report.
+				link two tables based on a calculated value,
+			- Unlike a measure, a calculated column can be used in a slicer to place filter options on the report page.
+
+
+
+	
+- Display Folder -
 	In Power BI, a Display Folder is a way to organize fields (columns, measures, hierarchies) in the Fields pane 
 	without changing the underlying data model. It’s purely for presentation and usability, especially in large models.
 	
@@ -1270,147 +1366,19 @@ As you know, Tooltips are pop ups that display extra details about a data point 
   		├─ Average Sales
   		└─ Sales Growth
 
-	COPYPASTA
-		Measures are similar to formulas
-		Unlike a measure, a calculated column can be used in a slicer to place filter options on the report page.
 
-
-			measures can be created and stored but no calculations happen 
-				UNTIL we add it into a visual
-			we can name measures just like how we name calculated columns
-
-
-			measure doesn't give you a calculation for each row!
-			measure is for entire field (only shows on side pane)
-
-			in short:
-			Measures:
-				Calculated only when needed (like when you use them in a visual or report).
-				Don't take up extra space in your data model.
-
-			Calculated Columns:
-				Stored in memory for every row in your table, increasing the size of your model.
-				Always calculated, even if not used in your report.
-					link two tables based on a calculated value,
-
-
-			Comission = SUM( SalesData[Total Sales]) * 0.02
-
-			Use a measure when you need a summary value (like average, comission)
-			But for instance, Power BI can’t create relationships using measures — only columns.
-
-			Correct — measures cannot be used directly as filters or slicers in Power BI.
-				ROUNDABOUT WAY
-
-
-How to make a formula in PowerBI
-	calculated column
-		1st way: YES WE CAN MAKE IT THROUGH POWER QUERY USING = custom column or IN POWERBI sNEW COLUMN [very similar to powerpivot}
-
-		2nd way: Via TABLE VIEW in POWERBI, click new COLUMN to add a new column on TABULAR VIEW!
-			NOTE!!!!
-			When we create a calculated column via table view, then it will NOT show up on powerquery editor
-				powerquery editor is useful when doing INITIAL transformations.
-
-
-			TASK: MAKE A FORMULA THAT ROUNDS TOTAL SALES
-			= ROUND(SalesData[Total Sales],0)
-
-
-
-		Task:
-		Create a column 
-			myColumn = "Hello World!"
-			NOTICE: With Calculated Columns, we can't change the value for any specific row 
-				i.e. ALL columns will then have "Hello World!". None can't be "Bye World"
-		Create a column sampleColumn = "I love PowerBI"
-		Create a calculated column where
-			ConcatColumn =  "I love " & SalesData[Total] & "-" & SalesData[Total]
-
-		FOR POWERQUERY, THIS WOULD BE A GREAT EXAMPLE TO USE!!!!
-		
-		Create a calculated column with if statement
-			If duration > 5 output "too long"
-					else output "just fine"
-
-			Column = IF(SalesData[Total Sales] > 1000, "Great","Uh-Oh")
-
-
-
-
-
-
-	GOOD, BUT VERY SLOW!!!!
-	ESPECIALLY IN LONG TERM
-
-		3rd Way: MEASURE!!
-
-		doesn't show up for every row; only shows up when you make a visual
-
-			REMEMBER: When we make a measure, we can do it on table view BUT 
-			we will not see a column get created. 
-
-			measures are just like formulas
-
-			measures can be created and stored but no calculations happen 
-				UNTIL we add it into a visual
-			we can name measures just like how we name calculated columns
-
-
-			measure doesn't give you a calculation for each row!
-			measure is for entire field (only shows on side pane)
-
-
-			TASK: MAKE A MEASURE OUT OF THE SAME CALCULATED COLUMN THAT GOT GENERATED!
-				Measure = SUM(SalesData[Total Sales])
-
-	
-
-			TASK: Create a GAGE CHART out of TOTAL SALES, make a MEASURE for maximum value			
-
-			TASK: CREATE A CARD
-				Ex: Card showing average hours worked by all employees
-		when it comes to visuals, remember what we click on will allow us to change what is needed!
-
-
-			
-			with measure, it's explicit. If I do average of sales, 
-			then I can't change it to a sum via the pane field! 
-			I'll have to change the formula.
-		calculated columns is for rows
-			
-		Task: Add a table that shows quarterly sales with the calculations & measurees
-			Measures are most efficient for larger ros
-		Measures are for when we need to look at visuals
-
-		task: Add interactivity
-
-			understand hierarchys & drill down.	
-
-
-
-
-			simple filter - click on the bar item to filter all charts
-				click outside the bar (but not outside the entire chart) to undo all.
-
-			moving to filters area will allow you to filter like how you learned in PivotCharts
-
-
-			add slicers - just like how it's done in PivotCharts!
-
-				REMEMBER: WE can add style visualizations
-					TASK: MAKE THE CHARTS TO HAVE RED BARS INSTEAD OF TRADITIONAL BLUE!
-
-			Unlike a measure, a calculated column can be used in a slicer to place filter options on the report page.
 
 	-- 
 	Correct. A measure is a named DAX formula that summarizes model data.
-
-
-Parameter
-Incorrect. A parameter allows what-if scenarios or field selection
+	
+	Parameter
+	Incorrect. A parameter allows what-if scenarios or field selection
 
 	-- 
+
+	You decide to remove unnecessary columns from your data model.
+	What are two potential performance benefits of doing this? Each correct answer presents a complete solution.
+
 
 
 	OPTIONAL EXCERCISE:
