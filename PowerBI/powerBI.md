@@ -1,0 +1,1588 @@
+# Data Visualization with Microsoft Power BI
+
+[Click to Download Files](https://files.educate360.com/temp/2025%20PowerBI%20Courseware.zip)
+> Make sure .ZIP file is unzipped before using files.
+
+
+## <p id = "toc"> Table of Contents </p>
+0. [Lesson 0: What is PowerBI?](#0)
+1. [Lesson 1: General Structure](#1)
+2. [Lesson 2: Connecting to Data](#2)
+3. [Lesson 3: PowerQuery = Data Transformation](#3)
+4. [Lesson 4: Visualizations](#4)
+5. [Lesson 5: Creating Interactive Visualizations - Filtering, Controls & Navigation](#5)
+6. [Lesson 6: Enhancing Data Analysis](#6)
+7. [Lesson 7: Data Modeling w/Calculated Columns & Measures](#7)
+
+
+## Welcome! 
+This document outlines the two-day Power BI workshop curriculum, focusing on data transformation and visualization.
+
+This course is designed to guide you through the essential components of Power BI, from importing raw data to building insightful and interactive dashboards.
+
+### Day 1: Data Fundamentals & Transformation
+The first day is focused on the foundations:
+- Learn the basics of Power BI and its overall structure
+- Import data from various sources
+- Transform, clean, and model data using the Power Query Editor
+- Understand cardinality and its impact on data modeling
+- Get a brief overview of creating basic reports
+
+### Day 2: Advanced Visualization & Calculations
+Day Two centers more heavily on analyzing & visualizing data through:
+- In-Depth Visualizations: Creating, configuring, and formatting a variety of visuals
+- Discussion of Advanced Settings: Exploring complex visual properties and settings
+- Calculated Columns & Measures: Understanding the difference between columns and measures, and creating them using DAX
+
+
+### Useful Links:  
+- [Main MS Learn Course PL-300T00-A](https://learn.microsoft.com/en-us/training/courses/pl-300t00)
+- [Practice Exam](learn.microsoft.com/en-us/credentials/certifications/data-analyst-associate/practice/assessment?assessment-type=practice&assessmentId=48)  
+
+
+/* -------------------------------------------------------
+## <p id = "0"> Lesson 0: What is PowerBI? | [Back to ToC](#toc)</p> 
+---------------------------------------------------------- */
+
+### /* ------------ Lesson 0 - What is PowerBI?  ------------ */
+
+
+Useful Links:  
+- [Module: Get started building with Power BI](https://learn.microsoft.com/en-us/training/modules/get-started-with-power-bi/)
+
+PowerBI
+"At its heart, PowerBI is a data visualization tool".  
+
+It's a tool to:
+- Analyze business data  
+- Combine various sources of data
+- Create reports
+- Visualize and share insights across the company
+			
+Note: PowerBI is NOT meant for manual data entry.
+E.g. Not good for adding/deleting/updating rows/records. 
+		We can modify columns if need be.
+	
+	Excel is better for data entry and quick analysis, 
+	while Power BI excels at building interactive, scalable, and shareable visual reports.
+		- Overall yes excel can create 1 off reports, but PowerBI does it a lot better.
+
+	Note: 	It doesn't support SAS
+		We might need to export to an excel spreadsheet but it can be problem with large data sets.
+	
+	How many data sources can PowerBI have?
+		According to [https://learn.microsoft.com/en-us/power-bi//connect-data/service-get-data](Link),
+		"You can use hundreds of different data sources with Power BI. 
+		The data must be in a format consumable by the Power BI service."
+		
+		So for PowerBI, data is usually stored in a data warehouse or is grabbed from online portal.
+		EX: 	Data is hosted on Azure server 
+			& we use azure connector to bring all the data from the cloud.
+
+		NOTE: The biggest concern is the data source but rather if the data is "clean" e.g.:
+			- Complete	No crucial missing info
+			- Structured	Columns are given suitable names, organized, uniform standardized format 
+			- Correct	No wrong values/errors/mistakes/typos
+
+
+	[Pricing](https://www.microsoft.com/en-us/power-platform/products/power-bi/pricing)
+
+	PowerBI Desktop Software/Free: Great for creating and viewing reports; can be used for solo work.
+        	- You can either download the app directly from 
+		[the official MS Store](https://go.microsoft.com/fwlink/?LinkId=2240819&clcid=0x409&culture=en-us&country=us)
+        	- Or you can download it from 
+		[the official website](https://www.microsoft.com/en-us/download/details.aspx?id=58494)
+
+		Additional Info:
+		- We don't need to sign into Desktop app.
+		- Import data from various sources to create reports, dashboards, and visualizations.
+		- Save and view your work locally on your PC as .PBIX files
+			- Your reports can be viewed locally. Others reports can be seen in Premium capacity.
+			- Premium Capacity -> A large server your company rents from Microsoft that lets Free license users view reports stored in it.
+
+		- The catch is, you can’t share it!
+
+
+	PowerBI "Pro license": (~$10 a month per user.) Adds sharing, collaboration, and cloud publishing so your team can use your reports.
+		- The Power BI Service (cloud) is available [here](app.powerbi.com) which allows reports to be published & shared with others.
+		- Free License can still have access, albeit limited.
+		- Collaborate in workspaces (Free users have access to 1 default workspace called 'MyWorkspace').
+		- As a user, you yourself can view anything shared in the Power BI Service i.e. the cloud, plus collaborate.
+		- Better suited with embedding & integrating reports in other Office 365 tools.
+
+	In Summary:
+	Power BI Desktop for creating semantic models and reports with visualizations.
+	Power BI service for creating dashboards from published reports and distributing content with apps
+		
+
+/* -------------------------------------------------------
+## <p id = "0"> Lesson 1: General Structure | [Back to ToC](#toc)</p> 
+---------------------------------------------------------- */
+
+
+### /* ------------ Lesson 1 - General Structure  ------------ */
+
+
+	Let's open up: Analyzing Data & Reporting with Power BI -> My Footprint Sports
+
+	NOTE: 	The entire power bi file is referred to as a "Report" & saved as a .PBIX file.
+		Note: Power BI file is considered a report, even if it doesn't contain any visuals.
+		The "semantic model" is tied into that report.	
+		
+	First enable the settings:
+		Files -> Settings -> Preview Features:
+			- Shape Map Visual
+			- Modern Visual Tips
+			- 'On Object Interaction' - handy feature
+				- Be careful: This changes the view and adds a 'pain' manager. 
+				- Instead of large sections, this option creates a condensed area to switch back and forth from.
+		
+		NOTE: To set up dark mode:
+			File → 'Options and Settings' → Options.	
+			On the left panel, select Report Settings -> Customize Appearance (preview)
+
+
+	Discuss Structure:
+		- Ribbon
+		- Backstage View
+		- Structure
+		
+		
+	The Left Nav Bar in Power BI Desktop shows the different views:
+	[More Info]
+	(https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-query-overview?utm_source=chatgpt.com)
+
+		- Report View - Where we turn data into visuals 
+			- Make reports & add visuals to our "report canvas" (center area)
+			- At the bottom status bar, multiple pages can be added. 
+				Each canvas portrays a different story! Reports can contain 1 or many visuals
+				- Note: On PowerBI Service, a dashboard is just 1 page.
+			- Three right panes (we can minimize or maximize the pane as needed):
+				- Filter Pane: By dragging a field, we can filter: 
+					- a single visual 
+					- the entire page, 
+					- or the whole report 
+				- Visualization Pane: 
+					- Lets us add new charts/graphs and modify existing visuals.
+				- Data pane: 
+					- We can view all the tables and columns that are built or set up
+						- Similar to the Pivot Table Fields pane in Excel.
+						- NOTE: Data Pane shows fields in A-Z ORDER
+					- We can create & work with different types of data.	
+			<b>Excercise:<b> 
+				Click on a chart to display several sections (in the pane) specifically related to that chart.
+				For the chart itself, we can allow focus mode:
+					- Takes the visual and expands it to take up the entirety of the canvas 
+
+		- Table View - Shows Raw Data Records
+			- Revisit the familiar Data Pane on the right that shows us tables and columns.
+			- Data is read-only; 	we edit in Power Query via Home → Transform data 
+						to change, replace, or create new values in your dataset.
+
+		- Model View - Properties & Relationships with Tables.
+			View the complete data model to design its structure.
+				
+			- "Semantic Model" includes:
+				- actual data
+				- Metadata is information that describes how data is organized, connected, and understood
+					- Tables and columns
+					- Relationships between tables
+					- Measures (calculations using DAX)
+					- Hierarchies (like Year → Month → Day)
+					- Metadata like names, data types, and descriptions
+
+		- Dax Query (relatively newer) - Here we can run DAX & see exactly what a measure will show.
+			EVALUATE
+    			TOPN(5, 'Products')
+
+
+		Q: What are the building blocks of PowerBI?
+		A: Semantic Models & Visualizations.
+		Without a semantic model, you can't create visualizations, and reports are made up of visualizations
+					
+		General Overview:
+		1. We create a report in Power BI Desktop 
+		2. Share it to the Power BI service
+		3. Interact with reports in the service and Power BI Mobile.
+
+
+/* -------------------------------------------------------
+## <p id = "2"> Lesson 2: Connecting to Data | [Back to ToC](#toc)</p> 
+---------------------------------------------------------- */
+
+
+### /* ------------ Lesson 2A - Connections  ------------ */
+
+
+	Task: Create a blank report & import the bonus text file "example-data.txt" (show them what/where it is)
+
+	Verify that data has been imported by going to Table View to see the table.
+		Data is imported, but note that Report View shows no visuals built yet from our data.
+
+	--
+	If the following error shows up: 
+		'MSOffice.PowerBi.OleDb' is not registered
+		https://www.reddit.com/r/PowerBI/comments/wkzmj8/error_connecting_to_sharepoint_online_list_the/
+	We recommend to uninstall & install PowerBI again.
+	--
+
+	Task: Delete the table & reimport it.
+		Under Table View, delete the table by right clicking table on Data Model pane -> Delete from Model.
+
+	Task: Update Data Source & Refresh data:
+		1. Confirm that the data is loaded in PowerBI. 
+		2. On the .txt file, make the following changes:
+			- Change the row 'Justine' to 'Justin'
+			- Add a row "Carl"
+		3. Make sure to save the changes on .txt file.
+		4. Reload the data again by going to 
+			Table View -> Home -> Queries -> Refresh
+	
+	Note:
+	Paid version does a Scheduled refresh Up to 8 times/day
+	You can use Live Connection for example with SQL Server that automatically updates the data in Power BI.
+		Every time you interact with a visual (filter, slice, drill down), Power BI queries the SQL Server in real time
+	
+
+	Q:	What if I move/delete the data set?
+	A: 	You’ll still have the report and your visuals.
+
+		Simple Summary: 
+
+		Think of it like embedding a file in Word or attaching a PDF to an Outlook email. 
+		It doesn't matter if the original file is deleted since a copy is already stored within the document or email.
+		
+		Importing data into Power BI captures a snapshot of the data at that time and stores it within the .pbix file. 
+		This means that even if the original .txt file is deleted later, 
+		the report and all its visuals will still work because the data is already embedded.
+
+		NOTE: 	We can't refresh or update the data without restoring the .txt file (or pointing to a new one).
+
+
+	NOTE: 
+	Excercise: Entering/changing data is rough. We'll need to use PowerQuery
+
+		1. In Power BI Desktop, go to Home → Enter Data.
+		Create a small table with the new row(s) you want 
+		NOTE: Make sure to update the header row correctly; otherwise, it won’t work as expected.
+			Example:
+			Name	Age	Location
+			Raza	25	LA
+			
+		2. 
+		We must now append our new table (the one with only 1 row) to the original table via Power Query 
+			2.1. Launch PowerQuery via Home -> Transform Data
+			2.2. 	[Confirm we're viewing data from example-data table] 
+				On PowerQuery Editor, go to Home → Combine (Group on far right) -> Append Queries
+				Table to Append -> Table with the row added.
+			2.3. In PowerQuery, we should see now that new row added. 
+			2.4. To load it into PowerBI, click Home -> Close & Apply
+
+
+	Real Life Example: A student mentioned they work with contractor information.
+	They append the data by month to build a yearly aggregate.
+
+
+	--
+	Power BI Pro:
+	Max dataset size: 1 GB (after compression).
+	Power BI Premium (P1 or higher):
+	Max dataset size: up to 400 GB (depending on SKU).
+	Handles much larger CSV files.
+
+	Q: You have a Power BI Premium per user workspace.
+	What is the maximum number of refreshes that can be scheduled each day?
+
+	Answer: In a Premium per user workspace the limit is 48 refreshes per day for a dataset.
+	https://learn.microsoft.com/en-us/training/modules/manage-datasets-power-bi/5-dataset-refresh
+	-- 
+
+
+	-- Excercise: Import a Folder of .txt files --
+	
+	We can import files from a folder since Power Query has a built-in folder connector. 
+
+	[Folder] Text Files
+  		├─ People1.txt
+  		├─ People2.txt
+  		└─ People3.txt
+
+	Click Home -> Get Data -> Folder 
+	Point to the 'Text-Files' folder (or point it to a folder (SharePoint/OneDrive/local))
+		C:\Users\student\Desktop\notes\powerBI\2025 PowerBI Courseware\PowerBI-Bonus\text-files
+		
+	NOTE: Don't press 'Load' because then it will load the metadata!
+	Click Combine Files -> Load. We want Power Query to automatically stacks (appends) all CSVs into a single table.
+	On the final pop up window, it's asking about the structure & settings of the resulting table. We can press 'OK'
+		- As a result, the data is imported as a table.
+
+	BEST PART is that this creates an efficient, automated solution:
+	Any new file dropped into this folder is then picked up at the next refresh.
+		If a new People4.txt is created, clicking Home -> Refresh will load its records into the table.
+		
+	Real life example of combining multiple files:
+		You receive monthly sales data as separate CSV files stored in the same SharePoint folder. 
+		Each file has the same schema.
+
+	
+	-- Excercise Activiy: Importing Excel Files --
+	
+	Task: Import 'Pivot your table like a champ.xlsx'
+	Verify that the data has been imported.
+	
+	Visuals are visualizations of semantic model data (e.g. charts, graphs). 
+	Power BI includes over 30 core visuals, which are built in and available to all reports. 
+	You can access the core visuals in the first section of the Visualizations pane.
+
+	Task: 	
+		- Make a very simple chart of sales person vs amount of sales.
+			Select the visual type "Clustered Column" in the Visualizations pane 
+			and then position and size it to 1/2 the canvas page.
+
+		- Add a Matrix visual if needed.
+			'Matrix' visual is similar to Excel Pivot Table; 
+				best when you need to show data with categories broken down into subcategories
+			'Table' visual is similar to Excel Table; 	
+				Best for showing raw, detailed data in a simple list, like a simple transaction log.
+				i.e. no hierarchy! Just raw data.
+				For your visual, make sure that when you place the field in the Fields pane → Columns area,
+				that the dropdown for the added field (e.g. Product/State field) shows "Don’t summarize"
+					- If the table doesn’t update, click outside the field or make a small change on the table.
+				
+	Task (Exporting):
+		- How to export as PDF?
+		- Export data from one chart? 
+			(Click on chart -> Elipses (on the Visual Header e.g. charts tools button) -> Export Data)
+		- Take a screenshot  either with snipping tool or Win + Shift + S
+	
+	
+	-- Review Q: --
+	Q: When importing data from an Excel workbook into Power BI, you receive the error message: 
+	“We couldn't find any data formatted as a table.”
+	What should you do to resolve the error?
+
+	A: In the Excel workbook, select the data you want to import, create a table, and save the change.
+	-- 
+
+	Optional Task: "Connecting with Data -> MyFootprintSports.xlsx" & import just Date & Orders table
+
+
+	
+	### /* ------------ Lesson 2B - Cardinality ------------ */
+
+	Useful Links:
+	[Module: Configure Semantic Model](https://learn.microsoft.com/en-us/training/modules/configure-semantic-model-power-bi/)
+	[Chapter: Configure relationships](https://learn.microsoft.com/en-us/training/modules/configure-semantic-model-power-bi/2-relationships)		
+
+
+	- Forming 1x1 cardiniality -
+	Task: Open or Import data from "Employees.xlsx" 
+	
+
+	Data imported into Power BI is organized as tables.
+	A table is a grid similar to a spreadsheet, where data attributes as columns and records as rows.
+	
+
+	Rarely is Data from different sources imported & combined into a single table.
+	For instance, we can import:
+		- a Sales Orders table which contains data about orders placed, 
+		- a Products table that lists out each product’s details, like name, price, and category.
+		- a Customers table that lists out their name.
+
+
+	Relationships show how data in one table connects to data in another.
+	Once a relationship is formed (usually it's done automatically),
+	we can reference data from seperate tables & create visuals from them.
+		For example, VLOOKUP can use/reference the Product table to find details for products in the Orders table.
+
+	2 purposes: 
+		- Data is seldom combined into one big table; usually data is spread out into various tables.
+		- Normalizing our data avoids redundancy 
+		- We can "Hide table from report view" by right clicking on table.
+			- The principle of least privilege (PoLP) is a security practice,
+				where only the minimum level of access necessary to perform tasks are granted & nothing more.
+
+
+	In this example, this relationship is called a 1:1 relationship with the key being on EID.
+	Each employee has a respective salary.
+	We can create a chart that shows average salary per region. 
+
+	
+	- Forming 1xMany Cardinality -
+	Task: Open Example-Star-Schema.pbix
+
+	Let's look at the following data:
+		
+	1. Fact-SalesOrders (Fact Table)
+	SaleID	CustomerID	ProductID	Quantity	SalesAmount
+	1	1001		101		2		40
+	2	1001		103		2		20
+	3	1002		102		1		15
+	4	1002		102		2		30
+	5	1002		103		1		10
+
+
+	2. Dim-Customer (Customer Dimension)
+	CustomerID	CustomerName	Region
+	1001		Alice		North
+	1002		Bob		South
+
+
+	3. Dim-Product (Product Dimension)
+	ProductID	ProductName	Category
+	101		T-shirt		Apparel
+	102		Mug		Accessories
+	103		Notebook	Stationery
+
+	
+	All in All,	
+	When your data model has multiple tables, make sure the tables are properly related so that we can use them in visualizations.
+	
+	
+	== STAR SCHEMA ==	
+	Useful Links:
+	[Star Schema Link #1](https://learn.microsoft.com/en-us/training/modules/choose-power-bi-model-framework/2-describe-power-bi-model-fundamentals#star-schema-design)
+	[Star Schema Link #2](https://learn.microsoft.com/en-us/power-bi/guidance/star-schema)
+	
+		A Star Schema is a schema design/data modeling approach. 
+		It is a way to organize your data in Power BI (or any data warehouse). 
+		Ultimately, its used to organize your data since it's a design for that structure.
+
+		It consists of:
+			One Central Fact table — contains RAW transactional data (e.g., sales, revenue, quantities).
+				The CENTER event that contains measurable quantitative data.
+				In Star Schema, we should only have one FACT table of ONE object
+				The fact table dimension key column stores duplicate values, so it is 'many' side of 1-Many.
+			Multiple Dimension tables — The Points of the Star; describe the "who, what, when, where" of the facts.
+				MAY SEEM RELEVANT OR NOT.
+				Can be thought of as lookup tables.
+				For instance, knowing someones salary may not be important. 
+	
+		Fact table rows relate to dimension table rows via keys, just like key relationships in a database.
+			A fact table dimension key column is expected to store duplicate values, so must be the 'many' side	
+			Dimension tables have a unique key column that forms the 'one' side. 
+
+		Remember: The overall layout looks like a star 🌟 — 
+			The Fact table is in the center and Dimensions are around it.		
+	
+		
+		In database lingo:
+			DimCustomer[CustomerID] is a Primary Key - No two identical rows!
+			All values in CustomerID are unique → Valid primary key.
+
+			The tables are basically =vlookup "keys" when thinking in terms of excel correct?
+
+				
+	
+
+	-- Q1: --
+	Q: You have designed a star schema to simplify your data.
+	You need to understand the relationship between the tables in the star schema.
+
+	What is the relationship from a fact table to a dimension table?
+	A: A fact table has a many-to-one relationship with a dimension table.
+
+
+	-- Q2 --
+	Your company uses Power BI to analyze sales data. 
+	The data model includes a fact table called 'Sales' and a dimension table called 'Regions' with unique region names.
+	You need to filter sales data by region. What should you do?
+	
+	A. Creating a one-to-many relationship from 'RegionName' in 'Regions' to 'Region' in 'Sales' enables effective filtering of sales data by region. 
+	B. Combining the 'Sales' and 'Regions' tables into a calculated table is inefficient and unnecessary for filtering by region. 
+	C. Enabling bidirectional cross-filtering for relationships is unnecessary and could lead to ambiguity. 
+	D. Setting the cross-filter direction of the existing relationship to single does not establish a relationship if one does not already exist.
+
+	Solution: A
+
+
+	-- Q3: --
+	Your organization has a Power BI model with multiple tables, 
+		including a 'Sales' table with transactional data and a 'Products' table with product details.
+
+	You need to aggregate sales data by product categories.
+	What should you do?
+
+	A. Creating a many-to-one relationship from 'Sales' to 'Products' 
+	ensures accurate aggregation by aligning transactional data with product details.
+	
+
+	-- Q4: --
+	Q. You are designing a data model in Power BI.
+	You need to avoid introducing ambiguity into your data model design.
+
+	Which type of cardinality should you avoid?
+	A: Many to Many
+	-- --
+
+
+	- (for more practice) -
+	Optional Excercise #1:
+		Import "MyFootprintSports.xlsx" to form 1xmany cardiniality.
+		- Discuss how Products & Employee tables connect to the Sales Orders
+
+
+	Optional Excercise #2:
+		Delete prev table & now import "Bonus Example 1 Sales Data"
+
+
+
+	- Final Excercise: Forming relationships across different sources -
+	Task: Import Leaps&Bounds spreadsheet & database.
+
+	We use Model View to form relations when importing different sources (In this case, database & spreadsheet).
+		Connect [AgentInfo].Agent# 		-> [Bookings].Agent#
+		Connect [Destinations1].Destination# 	-> [Bookings].Destination#
+
+	Once relations are created, we can create VISUALS:
+		Create a chart showing total sales made by agent.
+
+		Excercise: 	Add 2 CARDS,
+				one for NAME, the other for AMOUNT
+				- A card visualization displays a single data point. 
+
+			Note: 		Alphabetically Carol Cox is the first is the first name
+					Defaults to the "First" value in the list - 
+					If you want to know how many distinct agents there are, 
+					You can change that "First Agent_Name" to a "Count (Distinct)"
+
+			Note: 		ROUND # if needed.
+
+			Comment:	I love Cards! Favorite viz tool in PBI!
+			
+				
+
+/* -------------------------------------------------------
+## <p id = "3"> Lesson 3: PowerQuery| [Back to ToC](#toc)</p> 
+---------------------------------------------------------- */
+
+
+### /* ------------ Lesson 3A - PowerQuery ------------ */
+
+
+Chapter 3 - 
+Power Query Editor provides the ability to transform and analyze data
+Think: Data Transformation
+
+
+/* -------------------------------------------------------
+## <p id = "1"> DAY 2 [Back to ToC](#toc) </p>
+---------------------------------------------------------- */	
+
+Links:
+https://learn.microsoft.com/en-us/power-bi/visuals/power-bi-report-add-visualizations-i?tabs=powerbi-desktop
+https://learn.microsoft.com/en-us/training/modules/power-bi-effective-reports/1-introduction
+
+
+Online version allows for updating data.
+Top questions that were asked:
+		Button
+		Clear out filters	
+		Tooltips 
+			-> Hover mouse over chart
+
+Links:
+	Design effective reports in Power BI:
+	https://learn.microsoft.com/en-us/training/paths/power-bi-effective/
+
+
+/* -------------------------------------------------------
+## <p id = "4"> Lesson 4: Visuals & Analyzing such Visuals | [Back to ToC](#toc)</p> 
+---------------------------------------------------------- */
+
+
+### /* ------------ Lesson 4: Visuals & Analyzing such Visuals ------------ */
+
+
+If you’re familiar with PivotTables and PivotCharts, you’ll notice some similarities with Power BI’s charts.
+
+--- Simple Chart Creations ---
+		
+	Excercise: Create a blank report, import "Sales Data" & name the page "Sales per Rep"
+	- Note: Fields in Data Pane (on far right side) are sorted A-Z 
+	
+	NOTE: Fit to Page icon (bottom-right corner of PowerBI next to Zoom bar) resets zoom to standard fit if zoomed in/out.
+	Note: When we start adding Visuals, Visuals can be COPIED + PASTED		
+	
+	Quadrant 1 (1/4 of the page): 
+	Create a simple column chart showing sum of total sales per Salesperson
+	
+		Tasks:	
+			- For 'Total sales' field, change from SUM to AVERAGE. 
+			Note: When a chart is selected, the chart will show <b>Visual Headers</b>. Similar to Excel Chart Tools.
+				https://learn.microsoft.com/en-us/training/modules/power-bi-effective-user-experience/6-visual-headers
+			- Change interval of y-axis: 
+				Select the Visual -> "Format Your Visual" pane -> Visual -> Y-Axis -> "Maximum" (or similar).
+					Q: Can we set the interval in sets of 25000?
+			 		A: No. No direct setting to force specific intervals (like strictly every 1000 units) 
+			- Add Legend:
+				Drag the Salesperson field to Legend Area (observe color change).	
+				Then under Visual Pane -> Visuals -> Legend ->
+					Customize: Text: Bigger, Position: Center Right 
+				If we click on the legend, it forms a highlight
+
+	Quadrant 2 (1/4 of page):
+	- Create 2 cards: One showing the name of Salesperson & the other showing Total Amount.
+		Remember:  A card visualization displays a single data point.
+
+		Task: 
+			Add Title. One for "Sales" & other for "Salesperson":				
+			Change font size:			Visual Pane -> Visual -> Call Out Value -> Font -> 45
+			Change text color: 			Visual Pane -> Visual -> Call Out Value -> Color (Dark Yellow)
+			Change background color of a card: 	Visual Pane -> General -> Effects -> Background (Light Gray)
+			Set up a border: 			Visual Pane -> General -> Effects -> Visual Border (10px black)
+			Change/modify chart title:		Click on chart -> Visualizations Pane -> General -> Title	
+			All visuals have backgrounds: 		Visualizations -> General -> Effects -> Backgrounds
+				Note: Backgrounds change when the theme is changed too.
+	
+	- Add the Skillable Office image to your report (1/4 Quadrant)
+
+	Visuals - Visualizations of semantic model data.
+	Elements - Provide visual interest but don't use semantic model data. 
+		Elements include text boxes, buttons, shapes, and images.
+
+	How To create a textbox?
+		- (Not great but similar to PowerPoint)		Insert -> Textbox
+		- We can create a card & then:
+			1. Add a measure that says: 	msg = "Hello World!"
+`			2. Add the measure under the "Fields" section of a card.
+		- (Preferred): 	Insert -> Shapes -> Rectangle
+				(Result: a blue box has been added)
+
+		Task:
+		To change text/background styles:
+			Format Shape Pane -> Shape -> Style:
+				- Fill: Change Color
+					(If fill has been disabled here, 
+					then alternatively General -> Effects -> Background 
+					would work like what we've seen before w/ shapes)
+				- Text: (Under same style category) Make sure to turn "ON" 
+					Add your text, change font size to 30
+
+	Q: How to align our shapes, like in PowerPoint?
+	A: Select All > Format Tab > Align
+
+	Also similar to PowerPoint is the SELECTION PANE (Under View Tab)
+	which can change layer order & show/hide elements
+
+
+
+	--- Background FORMATTING ---
+	Create a new page called "Formats"
+	Click the background of your page, then go to Visualizations -> "Format your report page" on the sidebar
+
+		Q: "Can you make the canvas taller so you can scroll to more visuals rather than change pages"
+		A: Yes under Canvas Settings
+
+		Task: Apply a background color to only 1 report canvas				
+			Canvas Background will only change the main canvas page
+			Note: You MUST change the transparency color to not be 100%.
+	
+		Task: Change color wallpaper
+			Wallpaper -> Color
+			Wallpaper effects foreground & background, whereas page background effects only background
+
+		Task: Change the theme of our report!! (Note: Will affect all the pages)
+			Go to View -> Themes & then pick your fav theme! (E.g. Choose Accessible Orchid)
+			
+			To change the default Settings (e.g. change default Wallpaper Color)
+				View -> Themes-> Customize Theme -> Page -> Wallpaper -> Color 
+				(Feel free to change Page Background as well)
+							
+		Optional: Create a background in PowerPoint & then upload the theme into PowerBI.
+		Optional: EXPORT A THEME (Design your own filter, background, etc. in POWERBI & then export)
+			Once exported, try importing your theme into PowerBI. 	
+	
+	--- Bar Chart Formatting ---
+
+	Create a new page called 'Product/Quarterly Sales'
+	
+		Create a BAR chart (1/2 page) mapping Product vs Sales (check off 2 fields: Product & Total sales)
+		NOTICE: Bar charts do not have columns, rather they have bars as fields
+
+		OPTIONAL: Change your bar chart into a Funnel Chart!
+		A funnel visualization displays a linear process with sequentially connected stages, 
+		with one stage transitioning to the next.
+
+
+		Click on the chart & do the following:
+			- Make Gridlines More Noticeable:
+				Format Visuals -> Gridlines 
+					-> Change Color
+					-> Change Width
+			- Change bar colors on the chart: 
+				 Format Visuals -> Bars (Remember: We have a bar chart, not column chart!) -> Color
+
+	
+			- Change the color of a particular point 
+			(e.g. since Laptops sold the most, make that a vibrant color):
+				Select the category (from drop down) & then select the color.
+				[One of main links]
+				(https://learn.microsoft.com/en-us/power-bi/visuals/service-tips-and-tricks-for-color-formatting?tabs=powerbi-desktop)
+		
+			- Apply conditional formatting On Products
+				Task: Making any bar below 1M red. 
+				REMEMBER: DO IT ON SUM OF TOTAL SALES
+
+
+		Create a COLUMN chart (1/4 page) for Quarter Earnings by mapping Quarter & Total Sales 
+		(note: the chart doesn't look good when mapping regions)
+
+		OPTIONAL: Change your bar chart into a Waterfall Chart!
+		A waterfall visualization displays a running total as values are added or subtracted.
+
+		Click on visual & then:
+			- You MAY Need to sort by quarter by 
+				clicking on 3 dots of the chart (More Options) -> Sort Axis -> Quarter
+	
+			- Create data labels under: "Visualizations -> Visuals -> Data Labels" -
+					> VALUE > FONT -> 20
+					> OPTIONS > Position > Chose where you want the data label positioned.
+
+			- Apply a color gradient to the charts columns
+				Under "Visualizations -> Visuals -> Columns -> FX Button"
+				On the pop up:
+					Under Format Style -> Gradient
+					Choose what color you'd like then press OK
+
+				NOTE: Remember, if a chart maps sales, 
+				then the "what field should be base this on" should be SUM OF TOTAL SALES 
+					[Video](https://www.youtube.com/watch?v=Eop1HsBjWwo)
+
+			
+				RAZA: COLOR GRADIENT IS STILL SORTED?
+		
+		
+		Create a Line Chart (1/4 page) below prev. column chart
+			How to sort? Sort Q1->Q4 for Quarterly Sales
+
+			Instead of sorting the line chart by highest to lowest, 
+			let's sort it by Quarter so it goes Q1 → Q4.
+						
+			Sort Axis -> Sort https://learn.microsoft.com/en-us/power-bi/consumer/end-user-change-sort
+
+
+
+/* -------------------------------------------------------
+## <p id = "5"> Lesson 5: Creating Interactive Visualizations - Filtering, Controls & Navigation [Back to ToC](#toc)</p>
+---------------------------------------------------------- */
+
+In this chapter we will touch base on:
+	- Interactions/Filtering/Slicers/Buttons/Groups/Drill Downs 
+
+Helpful Links:
+	- https://www.youtube.com/watch?v=9eEk2ct2QCI
+	- https://learn.microsoft.com/en-us/power-bi/create-reports/service-reports-visual-interactions?tabs=powerbi-desktop
+
+	-- (Same Page) Discuss Highlights/Interactions --
+	Visuals in a report dynamically respond to user selections one at a time.	
+	
+		Highlighting = a visual emphasis WITHIN THE SAME visual.
+			EX: For example, on a single column chart if we click one column, 
+			then that column is highlighted (colored fully) while the other bars are dimmed.
+		Cross-highlighting = visual emphasis across DIFFERENT visuals
+			"Select a data point or a bar or a shape and watch the impact on the other visualizations."
+			EX: When you click/select data in one visual, it highlights related data in another visual while keeping the rest of the data faded.
+			Cross-highlighting means one visual affects another by highlighting portions of the data(subsets) but doesn't filter it completely.
+				e.g. Selecting a bar on a bar chart can affect a pie chart.
+			
+		We can make it so that clicking an Interaction forms a new table
+			Figured out my issue - click on the graph, then "Data/Drill" tab, then unclick "Data Point Table" - all good!
+
+		NOTICE:
+			Hover over a data point to see a report tooltip pop up with extra context/details about that data point.
+			Cross-highlighting a chart means that the tooltip now displays an added "Highlighted: field with extra info 		
+
+		To turn off interactions, go to: 
+			File>Options>Query Reduction 
+			& Select "Disabling cross highlighting/filtering by default".
+			[More Info](https://www.reddit.com/r/PowerBI/comments/tfjig4/default_to_no_interactions_with_other/)
+
+		
+		If a visual isn’t behaving as you want, you can adjust interactions behaviors.
+		To customize how the visuals interact with each other:
+			Select a visual to make it active (for e.g. Quarterly Sales Column Chart)
+			On the ribbon in Power BI Desktop, select Format > Edit interactions.
+			Pick how other visuals react by selecting one of these three interaction behaviours:
+				- Filter aka Cross Filter -> Only the filtered data remain
+				- Highlight aka Cross Highlight - Default
+				- None
+	
+	
+
+	-- Filtering Excercise --
+	https://youtu.be/EMfqGiFr6Y4?si=UGZle2pfMQKZmiJw
+
+		Create a new page called 'Product/Regional Sales'
+ 
+		Make a clustered column chart (1/4 page) of Product vs Sales (OR COPY/PASTE prev. bar chart)
+		Make a pie chart for Regional sales
+			Suggestion: 	Turn on border for each slice.
+					Make legend & labels bigger.
+			
+
+		[Link to set 'Add a filter' to a report](https://learn.microsoft.com/en-us/power-bi/create-reports/power-bi-report-add-filter?tabs=powerbi-desktop)
+		The Filters pane displays along the right side of the report canvas. 
+
+		We can set filters at three different levels for the report.
+			- The visual level.
+			- The page level.	
+			- The report level.
+		
+		Task: Try to filter by QUARTER (e.g. 1st Quarter)
+			Options: 	Filter By Visual, Page, All Pages  
+			Note: 		On the Filter Pane, when you apply a Filter you'll see # of rows returned on the right.
+	
+			NOTE: 
+				The end user may not immediately see that a filter is applied.	
+				To verify if there's a filter on a visual, 
+				hover over the filter icon on a specific charts <b>Visual Headers</b> to see active filters.
+
+			NOTE: 	
+				For the Product Sales visual, if you filter by one product (e.g., Laptops), 
+				the bar chart will show only one product as a single bar.
+
+				Similarly, if you filter the Regional Sales pie chart by one region, 
+				then the pie becomes a full circle displaying only 1 region since all other regions are filtered out.
+
+			One common use for filters: To exclude blank or empty values so they don’t clutter your report or distort results.
+			Example: Using the table visual to filter out blanks.
+		
+
+		Task: Additional Filters
+			- Filter Product Sales chart to show only products that generated over $1000000
+
+			- FILTER TOP N
+			Top 3 items By Value: (Field goes Here) Sum of Total Sales
+	
+
+	-- Slicers Excercise --
+
+	The slicer visualization can be used to filter the other visuals on the page. 
+	
+	On the same 'Product/Regional Sales' page, 
+	Task: Create a slicer for Region & make it a tile.
+
+		Change text of headers to make it big!:  				Visual -> Values -> Font Size
+		Enable - SELECT ALL option:						Visual -> Slicer Settings -> Selection -> Show "Select All" As an Option
+		To enable a search box in a slicer to search for values to filter 	Click the three dots on the slicer’s visual header, select Search, and the search box will appear in the slicer.
+			[Solution](https://community.fabric.microsoft.com/t5/Desktop/Slicer-Search-Bar/td-p/3010479)
+		Change Slicer Type style options from 'Vertical List' to 'Tile': 	Visual -> Slicer Settings -> Option -> Tile
+			Additionally we can make the font for "Values" to be bigger.
+		
+
+		Sync Slicers -> Slicers can be modified to affect other pages. To do so:
+			First select the slicer
+			Go to View -> Sync Slicers
+				Make sure it's syncing for the current page & the page you want to affect.
+	
+			Note:
+			It’s a good best practice to clear all filters first before deleting synced slicers.
+ 			Otherwise, it can be annoying/difficult to remove its effect from the other charts.
+
+
+
+	-- Bookmark --	
+
+		[Learn about Bookmarks](https://learn.microsoft.com/en-us/power-bi/create-reports/desktop-bookmarks)
+
+		Bookmarks work are similar to MS Word bookmarks; Think of them as snapshots of your report you can quickly revisit or share.
+
+		Bookmarks save the current state of a report(including filters, slicers, and visuals) so that you can:
+		- Return to that view anytime.
+		- Navigate between pages or sections.
+		- Make interactive reports with clickable buttons or images.
+				
+		Task: Make a simple bookmark for the 'Product/Regional Sales' page
+			
+			Note: First assure that we are on the 'Product/Regional Sales' page.
+			Enable bookmarks pane via View tab -> Bookmarks
+			From the Bookmarks pane, select 'Add' to add a bookmark.
+			Test: If we go to a different page and click that bookmark, it will take us to the saved page.
+		
+		Task: Create a bookmark that filters Quarter
+			Remember: Bookmarks saves other settings too like filters, etc.
+
+
+	-- BUTTONS -- 
+
+	Recall:
+	Visuals - Visualizations of semantic model data.
+	Elements - Provide visual interest but don't use semantic model data. 
+		Elements include text boxes, buttons, shapes, and images.
+
+
+	Task: On a new page, add the following buttons under Insert -> Buttons:
+		- Back Button (Once placed on canvas, Press Ctrl + Click to activate)
+		- Page navigation! (Just like in PowerPoint)
+			First create a page named "Home" or "Main Hub".
+			Create button (e.g. a Circle shape) 
+			Under the Shape tab in the Visual Pane, set Action -> Type -> Navigation, and link it to the previously created pages
+			'Products/Region' and 'Products/Quarter'."
+		- Bookmark Button
+			- Under Button (Visual Pane Tab) -> Action -> 
+				Type = "Bookmark" & BookMark = "Page 1" 
+		- Insert a PANDA pic & add a link to the LA ZOO via "lazoo.org"
+			Q: Does the 'panda' link work when you export to PDF?
+			A: NO!!
+		- Information Button
+			- Add a Tool Tip [Under Visual Pane -> Button -> Actions -> Tooltip]
+				Add text: "Please make sure to see the pages for the ENTIRE report"
+			- Set it so nothing happens if the user accidently clicks it by mistake:
+				Button (Visual Pane Tab) -> Actions -> Type = "Bookmark" & BookMark = "None" 
+			- Give your tooltip a background color so people see easily via 
+				Visual Pane -> Button -> Button -> Style -> Fill <OR> Style -> Glow 
+				OR 
+				General -> Effects -> Background
+		- Optional: Create a button that's clears all slicers
+			Remember: To activate the effect, we must Ctrl + Click the button.
+		- Optional: A button on the report page could have the text 'Reset slicers', and when invoked, it uses the bookmark.
+		Additional Info on Bookmark Buttons Settings:
+			https://www.youtube.com/watch?v=rgKtgQhPPrg
+			Data -> Reset data
+			Display -> Spotlight, Showing/Highlighting
+			Current Page -> Deselecting means we don't jump to that page, but that those settings are applied.
+		- Q&A
+		If a page contains data, 
+		we can have Q&A access that data by going to said page and without selecting anything, click
+		the Visual Pane -> "Format Your Page" -> Page Information -> Allow Q & A
+
+		Sample Q's to ask:
+			- count products
+			- what are all the salespeople?
+			- what are all the regions?
+			- what are total sales / Get overall sales
+
+		After we have our Q&A result, 	
+		click on the "Turn this Q&A result into a standard visual" at the top right of visual to turn it into a standard visual 
+
+		Q:	You added the Q&A feature to let users find answers on their own. 
+			Which two configurations can you add to improve the search capabilities for them[end users]?"
+		A:	- Add a linguistic relationship schema to the dataset.
+				A linguistic schema describes terms and phrases that Q&A should understand for objects within a dataset, 
+				including parts of speech, synonyms, and phrasings that relate to that dataset.
+			- Add synonyms to model fields will help users search for them. 
+				For example, you can give a synonym of (Actuals) for the (Sales) measure. 
+
+
+
+	-- GROUPS --
+	[Groups Link](https://learn.microsoft.com/en-us/power-bi/create-reports/desktop-grouping-and-binning)
+	
+	When Power BI Desktop creates visuals, it aggregates your data into chunks, or groups, 
+	based on values it finds in the underlying data. 
+
+	Usually it’s fine, but sometimes you may want to control how the data is grouped. 
+	Like Excel PivotTables, you can group columns in Power BI which helps with charts or histograms that have many columns.
+
+
+	Situation: 	Confirm there is a Quarterly Sales column chart showing 'Total sales' by 'Quarter'.
+	Task: 		Form 2 groups: 1st half of year vs 2nd half of year.
+	Action: 	
+			On the far right data pane, right click on the field "Quarter" -> New Group
+		
+			On the pop up, name the group "First Half / Second Half"
+			Now under 'Ungrouped Values' section -> 
+				Using Ctrl+Select, select the elements "Quarter 1" & "Quarter 2" & then press "Group". Double click to rename the group to "H1"
+				Using Ctrl+Select, select the elements "Quarter 3" & "Quarter 4" & then press "Group". Double click to rename the group to "H2"
+			Press "Ok"
+	Result: The group is created against a numerical column using bins.
+		Create a bar chart that maps out "Total Sales" vs. group "First Half / Second Half"
+		Note: The Bin group type is an auto grouping of items into bucketed bins (groups).
+
+
+	-- DRILL DOWN --
+
+	[Reference](https://learn.microsoft.com/en-us/training/modules/configure-semantic-model-power-bi/5-hierarchies)
+	
+	We've covered interactions and highlights but to recap:
+	Up to this point, when we create a chart and we click on it, it creates a highlight. 
+	That highlight stands out from other elements within the chart or a cross-highlight/affect other charts as an interaction.
+		
+	With most datasets however, there are usually complex groups or subsets of data. 
+	To manage this, we can create a hierarchy that by default gives the user a high-level overview of your data, 
+		and it can drill down into more detailed levels as needed.
+
+	NOTES: Microsoft: Levels of a hierarchy are always based on columns from the same model table
+	In short: we're grouping a set of related fields together under a hierarchy.
+		i.e. Hierarchy = GROUPING/AGGREGATE
+		Whole Point: Improves organization & no need to make potential duplicate charts thereby saving space.
+		
+
+	EXCERCISE: Create a Regional Sales Clustered Column Chart.
+	
+	Objective: We'll create a hierarchy of Region -> State sales
+	Goal/Main idea: User can drill down and break the sales down by region and state.
+		Effectively we're making TWO VIEWS for the chart: 
+		Default/Parent vs Detailed/Child View (I'll be referring to it as parent and child level.)
+			NOTE: If we had a ZIP field, we could break it down further to Region -> state -> Zip (if provided)
+		
+		First we'll create a hierarchy on our Visual.
+			In the X-Axis, we see the field "Region" 
+			Add "State" field underneath Region
+
+		Under Visual Headers (Similar to Excel Chart Tools), we now see the drill down tools to the left of the filter 
+			Clicking "Drill Up" shows the parent level.
+			Clicking "Go to Next Level in the hierarchy" will show every states sales
+			
+		The point is to save canvas space by using one chart that can switch back and forth between all the regions and states, 
+		instead of creating two separate charts.
+
+		
+		NOTE: By default, clicking a region bar displays the table data for that region.
+		To turn this drilldown feature off, go to Data/Drill contextual tab, & deselect the option 'Data point table'
+
+
+	Drillthrough is a page navigation experience that takes you from one page to another plus applies a set of filters to page navigated to. 
+	Expand is a way to navigate down a level using the hierarchy controls.
+
+
+	Task: Enable Drill Down Mode to explore sales by state within regions:
+	
+		Click "Enable drill down" in the Chart tools
+		(Another way of doing it: Select Chart -> Data/Drill Tab -> Drill Actions Group -> Drill Down Button)
+
+	Result: We've enabled drill down mode & no longer does clicking on a bar leads to a data point table or a standard highlight.
+			
+			
+	NOTE:	WHAT IF USER DONT KNOW THERES A DRILL DOWN???
+	EX:	Add an INFORMATION SHAPE via Insert -> Buttons -> Information.
+
+
+
+	Optional Task:	Create Quarter Sales chart. 
+			Have the X axis expand Quarter thereby making it Quarter -> Month -> Day 
+			(This can be done by including order date field) 
+		
+		Solution: Quarter -> Month -> Day 
+			- x axis -
+			Quarter
+			Order Date
+			  Month
+			  Day
+	
+				Top level: Sales by Year
+				Drill down: Sales by Month (within that year)
+				Drill down again: Sales by Day (within that month)
+	
+	Last Optional Excercise:
+		Used the Group we created and place it at the highest level above Quarter.
+ 
+
+	Q: https://learn.microsoft.com/en-us/training/modules/configure-semantic-model-power-bi/9-check
+
+	-- Lunch --
+
+
+
+/* -------------------------------------------------------
+## <p id = "6"> Lesson 6: Enhancing Data Analysis [Back to ToC](#toc)</p> 
+---------------------------------------------------------- */
+
+[Reference Link](https://learn.microsoft.com/en-us/training/modules/power-bi-effective-reports/)
+
+In this chapter, we will discuss more about charts & chart options.
+
+As you know, Tooltips are pop ups that display extra details about a data point in a visual when you hover over it. 
+	-- ?? --
+		Under Sales Data, date categories are best mapped out via 
+			Line Charts, Area Charts, Column Charts
+
+		When we hover over the chart, we will see tooltip.
+
+ 		Let's say we want to compare quantity with total sales
+		Sales is in millions, quantity is in thousands.
+		We can do a compbo chart but make sure quantity is mapped in column legend
+	-- ?? --
+
+	
+	Activity: Custom Tooltip Based on Report Pages  - fun example - 
+	[Example of creating a chart as a tooltip](https://www.youtube.com/watch?v=cGpBUJpFWrM)
+
+	
+	By default, Tooltips show the value and category, but they can be customized to include more information.
+		We can enhance tooltips by embedding full visuals from a separate report page. 
+		These visuals, such as cards, gauges, or charts, are filtered based on the data point being hovered over, adding context to the main visual.
+
+	Q:
+		WHY ADD A TOOLTIP WHEN YOU CAN JUST ADD DIRECTLY TO THE CHART
+		A: Save space & change the default tooltip!
+
+		
+	Task: Use the 'Shape Maps' visual to map out State (Location) vs Total sales (Color Saturation)
+		
+		Why we only see the Map Tooltip page under the Page dropdown? Why we can't see other pages?
+		
+		? MUST FIRST BE ENABLED TO MIGHT NEED TO MAP TOOLTIP
+		FYI: You might need to enable:
+		https://community.fabric.microsoft.com/t5/Desktop/Map-and-filled-map-visuals-are-disabled/td-p/3116218
+
+
+		Steps:			
+		1. Create a new page & name it "Map-Tooltip". This will be our tooltip page.
+		2. Under Visualizations side bar -> Format your report page -> 
+			- Page Information -> Check off "Allow Use as tooltip"
+			- Canvas Settings -> Type should be set to "Tooltip"
+		3. 	We need to add the visuals to include in our tooltip.
+			On a new page, let's create a simple clustered column chart
+			(Optional) Add a pie chart of quarterly sales (or a card)
+			(Optional) WE CAN ADD A CARD FOR STATE NAME
+		
+		Let's now assign a report page tooltip to a field in a visual:
+		4. Go back to map, click on the map chart, and then go to Format Visualizations -> General Turn on tooltips -> 
+				Type -> Report Page
+				Page -> "Razatooltips"
+
+
+	Real Life Example:
+	Healthcare by state, showing regions that are most developed vs. those needing improvement
+
+	ANOTHER EXAMPLE:
+		Add a bar chart for product sales 
+			Create a tooltip for quarterly sales so when we hover over a bar (e.g. laptops)
+			we see just Laptops sales for each quarter.		
+
+
+	
+	-- Extra time --
+
+	[Analyze Visuals](https://learn.microsoft.com/en-us/power-bi/consumer/end-user-analyze-visuals)
+	Create a a line graph that maps Monthly total sales.
+
+		Do a filter for Q2
+			let's analyze the top point by right clicking on the point -> Analyze !!!!
+
+
+
+
+	Key Influencers		
+		identifies biggest factors influencing a metric
+		factors that drive a particular metric (like sales).
+
+		Analyze: Total Sales
+		Explain By: Products
+
+		“High sales are strongly influenced by the Laptops, Video Game & Camera category.”
+		i.e. Key Products that affect sales are: Laptops, Video Games & Cameras
+
+		Analyze: Salesperson
+		Explain By: Region	
+
+		Q? Which native AI visual helps explain correlations for a metric within the dataset?
+		A: The Key influencers visual helps you understand correlated factors impacting a particular metric.
+
+
+	Tree map	- Do 2 fields for PRODUCT & FOR QUARTER!
+		A treemap visualization displays data as a set of nested rectangles.
+
+
+	ARCGIS in POWERBI????
+
+
+	Create a new page.
+	Create a gage chart showing Total Sales & STATE for POWERBI!	
+		 A gauge visual displays a circular arc including a single value that measures progress toward a goal or target.
+
+		By default it shows a number, let's change this to State abbreviation
+			Format Visual -> Visual -> Custom Label (ON) -> and then click on "+Add Data" to add the state.
+		When we create a gauge, it is always at the half-way mark. How do we change that?
+			
+		Talk about targets & how a calculated column can be just that!
+	
+	Create a multirow card.
+		We can increase the text size if we'd like..
+
+	Decomposition Tree
+		This visual lets you visualize data between multiple dimensions and drill down in any order.
+		Analyze Total Sales
+		Explain By:	
+			Quarter
+			Then by Region
+		Visual Pane -> Under Category Labels -> Change Font Size.
+	
+
+	The Smart Narrative visual lets you combine natural language text with metrics from your model in sentence forms.
+
+
+	You need to create a custom Python visual by using Power BI Desktop.
+	What do you need to do first?
+		To create a Python visual by using Power BI Desktop, you first need to install Python on your computer. 
+		Once Python is installed, you may need configure the global Python scripting options in Power BI Desktop. 
+		Enabling the script visuals option in the Visualization pane of Power BI Desktop is done once Python is installed. 
+		Creating a custom Python visual by using Power BI Desktop has no dependency on enabling preview features.
+
+	----
+	Read more about [Performance Analyzer](https://learn.microsoft.com/en-us/training/modules/optimize-model-power-bi/2-performance)
+
+
+=== Break ==
+
+/* -------------------------------------------------------
+## <p id = "7"> Lesson 7: Data Modeling w/Calculated Columns & Measures [Back to ToC](#toc)</p> 
+---------------------------------------------------------- */
+
+
+
+	You decide to remove unnecessary columns from your data model.
+
+	What are two potential performance benefits of doing this? Each correct answer presents a complete solution.
+	
+
+
+
+	Using calculated columns
+		In Power BI, a calculated column is a new column that you create using a formula.
+		It doesn’t come from your original data 
+			— instead, you make it by combining or changing existing data in your table.
+
+		newColumn = "Hello World"
+		= ROUND(SalesData[Total Sales],0)
+
+
+
+	Adding a calculated column
+		introduces redundancy and inefficiency
+
+		Under Table View -> Tables Tools -> New Column
+		Created "Duration" column for "Ship Date" - "Order Date".
+			Go to Column Tools & Change it to a WHOLE NUMBER
+		Create "Duration-Status-Message" that is an IF Statement for "acceptable" & "late"
+			COLUMN = IF()
+			
+			Solution: 
+			Duration-Status-Message = IF(SalesData[Duration] < 3, "Acceptable", "Late")
+		
+		Create a card where the fields contain the Message measure.
+		
+	Create a bar chart for "acceptable" & "late" 
+		by simply using the Status column for BOTH X & Y Axis 
+		(Note: Usually we want to use a non-empty field like ID but in this case it's fine).
+
+
+	In Power BI, a Display Folder is a way to organize fields (columns, measures, hierarchies) in the Fields pane 
+	without changing the underlying data model. It’s purely for presentation and usability, especially in large models.
+	
+	Purpose: makes the Fields pane cleaner and easier to navigate.
+
+	Task: Create a display folder for SUM measure, Average measure, etc.
+		Sales Metrics
+  		├─ Total Sales
+  		├─ Average Sales
+  		└─ Sales Growth
+
+	COPYPASTA
+		Measures are similar to formulas
+		Unlike a measure, a calculated column can be used in a slicer to place filter options on the report page.
+
+
+			measures can be created and stored but no calculations happen 
+				UNTIL we add it into a visual
+			we can name measures just like how we name calculated columns
+
+
+			measure doesn't give you a calculation for each row!
+			measure is for entire field (only shows on side pane)
+
+			in short:
+			Measures:
+				Calculated only when needed (like when you use them in a visual or report).
+				Don't take up extra space in your data model.
+
+			Calculated Columns:
+				Stored in memory for every row in your table, increasing the size of your model.
+				Always calculated, even if not used in your report.
+					link two tables based on a calculated value,
+
+
+			Comission = SUM( SalesData[Total Sales]) * 0.02
+
+			Use a measure when you need a summary value (like average, comission)
+			But for instance, Power BI can’t create relationships using measures — only columns.
+
+			Correct — measures cannot be used directly as filters or slicers in Power BI.
+				ROUNDABOUT WAY
+
+
+How to make a formula in PowerBI
+	calculated column
+		1st way: YES WE CAN MAKE IT THROUGH POWER QUERY USING = custom column or IN POWERBI sNEW COLUMN [very similar to powerpivot}
+
+		2nd way: Via TABLE VIEW in POWERBI, click new COLUMN to add a new column on TABULAR VIEW!
+			NOTE!!!!
+			When we create a calculated column via table view, then it will NOT show up on powerquery editor
+				powerquery editor is useful when doing INITIAL transformations.
+
+
+			TASK: MAKE A FORMULA THAT ROUNDS TOTAL SALES
+			= ROUND(SalesData[Total Sales],0)
+
+
+
+		Task:
+		Create a column 
+			myColumn = "Hello World!"
+			NOTICE: With Calculated Columns, we can't change the value for any specific row 
+				i.e. ALL columns will then have "Hello World!". None can't be "Bye World"
+		Create a column sampleColumn = "I love PowerBI"
+		Create a calculated column where
+			ConcatColumn =  "I love " & SalesData[Total] & "-" & SalesData[Total]
+
+		FOR POWERQUERY, THIS WOULD BE A GREAT EXAMPLE TO USE!!!!
+		
+		Create a calculated column with if statement
+			If duration > 5 output "too long"
+					else output "just fine"
+
+			Column = IF(SalesData[Total Sales] > 1000, "Great","Uh-Oh")
+
+
+
+
+
+
+	GOOD, BUT VERY SLOW!!!!
+	ESPECIALLY IN LONG TERM
+
+		3rd Way: MEASURE!!
+
+		doesn't show up for every row; only shows up when you make a visual
+
+			REMEMBER: When we make a measure, we can do it on table view BUT 
+			we will not see a column get created. 
+
+			measures are just like formulas
+
+			measures can be created and stored but no calculations happen 
+				UNTIL we add it into a visual
+			we can name measures just like how we name calculated columns
+
+
+			measure doesn't give you a calculation for each row!
+			measure is for entire field (only shows on side pane)
+
+
+			TASK: MAKE A MEASURE OUT OF THE SAME CALCULATED COLUMN THAT GOT GENERATED!
+				Measure = SUM(SalesData[Total Sales])
+
+	
+
+			TASK: Create a GAGE CHART out of TOTAL SALES, make a MEASURE for maximum value			
+
+			TASK: CREATE A CARD
+				Ex: Card showing average hours worked by all employees
+		when it comes to visuals, remember what we click on will allow us to change what is needed!
+
+
+			
+			with measure, it's explicit. If I do average of sales, 
+			then I can't change it to a sum via the pane field! 
+			I'll have to change the formula.
+		calculated columns is for rows
+			
+		Task: Add a table that shows quarterly sales with the calculations & measurees
+			Measures are most efficient for larger ros
+		Measures are for when we need to look at visuals
+
+		task: Add interactivity
+
+			understand hierarchys & drill down.	
+
+
+
+
+			simple filter - click on the bar item to filter all charts
+				click outside the bar (but not outside the entire chart) to undo all.
+
+			moving to filters area will allow you to filter like how you learned in PivotCharts
+
+
+			add slicers - just like how it's done in PivotCharts!
+
+				REMEMBER: WE can add style visualizations
+					TASK: MAKE THE CHARTS TO HAVE RED BARS INSTEAD OF TRADITIONAL BLUE!
+
+			Unlike a measure, a calculated column can be used in a slicer to place filter options on the report page.
+
+	-- 
+	Correct. A measure is a named DAX formula that summarizes model data.
+
+
+Parameter
+Incorrect. A parameter allows what-if scenarios or field selection
+
+	-- 
+
+
+	OPTIONAL EXCERCISE:
+	From Power BI Desktop, you open a Power BI report that contains three pages named Main, Error Rate, and On-time Rate.
+	You add a button to the Main page for navigation.
+	
+	You need to implement a solution that meets the following requirements:
+
+	- The navigation destination must change based on the output of a DAX measure named [Error Rate].
+	- If [Error Rate] is greater than 5%, the button must display the text “Error Rate” and navigate to the Error Rate page.
+	- Otherwise, the button must display the text “On-time Rate” and navigate to the On-Time Rate page.
+
+	What three actions should you perform? Each correct answer presents part of the solution.
+	
+	To configure a button for conditional page navigation, 
+	- you need to create a DAX measure that outputs the correct destination page name. 
+	- Then configure the button to use page navigation and use the newly created DAX measure to specify the navigation destination. 
+	- To change the button text to match the page name, conditional formatting must be used to set the text to equal the newly created DAX measure.
+	Wrong: No bookmarks are necessary.
+	It is not necessary to set the destination to a specific page since conditional formatting is used to specify the destination.
+
+
+
+/* -------------------------------------------------------
+## <p id = "7"> Lesson 8: Sharing & POWERBI SERVICE (PowerBI Online) | [Back to ToC](#toc)</p> 
+---------------------------------------------------------- */
+
+Links:
+	[Power BI Service Link #1](https://learn.microsoft.com/en-us/power-bi/consumer/end-user-experience)
+	[Power BI service Link #2](https://learn.microsoft.com/en-us/training/modules/manage-workspaces-power-bi-service/)
+
+
+In a standard Power BI workflow, usually you first create a report in Power BI Desktop and then publish it to the Power BI service.
+Power BI Service (a.k.a. PowerBI Online/For the Web) is a cloud based platform that can be accessed through a web browser by typing in the following [link](https://app.powerbi.com).
+From there, you can view, interact with & share your reports and visuals directly through your web browser.
+
+(Note : 
+	The Cloud = 			a bunch of remote servers (computers) that you can access over the internet and use, even though they’re owned by someone else.
+	SaaS (Software as a Service) = 	renting software that runs on someone else’s cloud servers. 
+						You don’t install or maintain it yourself; you access it over the internet and pay for what you use, usually via a subscription.
+)
+
+Task: Go to app.powerbi.com (Make sure you are signed in).
+	Notice: We can still use PB Service on a free tier account, albeit limited. 
+
+Upon signing in, there will be a navigation pane on the left hand side.
+Click on the Icon "My Workspace"
+	Workspaces are the foundation of the Power BI service. 	
+	- If you have the free version of Power BI, My Workspace is the only workspace you have access to in the Power BI Service.
+
+	"My workspace" is your personal area in Power BI where all the content you create or own is stored. 
+	Think of it like your own folder or sandbox. 
+	For instance, any sample data you download from the Power BI Learning Center is saved here.
+	
+
+	When publishing any report, you must choose a workspace. 
+	By default, every user has access to My workspace, which is ideal only for testing. 
+	When you want to share content with others, always create and use a shared workspace.
+		We can assign roles (Admin, Member, Contributor, Viewer) to control access and editing.
+		[Video discussing Workspace Roles](https://www.youtube.com/watch?v=L6urbTbrToo)
+	
+
+Now that we know workspaces are like folders, itt can organize: 
+	semantic models, reports, and dashboards
+
+
+From a workspace, we can open a dashboard or report by selecting it from the list. 
+
+
+The Power BI service is composed of many building blocks, including workspaces, reports, semantic models, dashboards, and apps. 
+Each of these components play a unique role in the Power BI ecosystem.
+
+
+
+-- Dashboards --
+
+Links:  
+- [Create dashboards in Power BI](https://learn.microsoft.com/en-us/training/modules/create-dashboards-power-bi/)
+- [Dashboards]https://learn.microsoft.com/en-us/power-bi/consumer/end-user-dashboards
+
+
+	- Reports are built on a single dataset (semantic model) and can have multiple pages 
+	- A Dashboard is a single-page canvas designed for at-a-glance insights.
+		- Dashboards can pin visuals from multiple reports/datasets, even from different semantic models onto 1 page.
+			- You can only pin visuals to a dashboard; users can’t modify or create additional pages.
+		- These pinned visuals that make up Dashboards are called Tiles.
+			- Tiles highlight key metrics but they aren’t interactive like visuals; clicking a tile opens the underlying report.
+	A dashboard is read-only — people can interact with tiles (like drilling through if enabled) but can’t edit visuals or add new visuals.
+	Note: In the Power BI service, we create dashboards after we've published a report
+	
+
+	NOTE: Individual filters and slicers cannot be pinned to a dashboard. 
+	The Pin visual option only allows you to pin the visual to an existing dashboard or create a new one. 
+			
+
+	Managers can share dashboards for users to view KPIs, 
+	but creating custom reports requires build permission access to the underlying dataset. 
+	In short, most users are viewers/consumers, not producers, unless granted dataset permissions.
+		EX: 	If your manager shares a Sales Dashboard, you can view KPIs. 
+			To build your own Sales report, you’ll need access to the underlying Sales Dataset.
+
+
+
+	Q:
+	You upload reports to the Power BI service and pin several visuals to a dashboard. You plan to create alerts rules for several visuals.
+	What are two locations you can view the alerts? Each correct answer presents a complete solution. Select all answers that apply.
+
+	- a report
+	[x] - an email
+	- Microsoft Teams
+	[x] the Notification Center
+	
+	Explanation: By default, notifications are available in the notification center. You also have the option of sending notifications via email. 
+	A dashboard, Microsoft Teams channel, and a report are not available as the locations of alerts.
+
+	Q: You need to create a Power BI dashboard.
+	Which tool should you use? Select only one answer.
+
+	- Power BI Desktop
+	- Power Query Editor
+	- the Power BI mobile app
+	[x] the Power BI service
+
+	Explanation: 	The Power BI service provides support for creating Power BI dashboards. 	
+			The Power BI mobile app can be used to view dashboards, but not to create them. 
+			Power BI Desktop does not provide support for creating Power BI dashboards. 
+			Power Query is a Microsoft Excel tool that is used for importing data, but not for creating dashboards.
+	
+	Q:You need to add a new visual to a Power BI Dashboard. This visual does NOT exist on a report in the workspace.
+	What should you do first? Select only one answer.
+
+	- Open See Related Content.
+	- Open the File menu.
+	- Select Add a tile.
+	- Select Ask a question about your data.
+
+	The Q&A feature lets you create a visual by typing in a question about your data. 
+	This new visual can then be pinned to the dashboard, without adding it to a report.
+	The Q&A visual allows end-users to ask natural language questions to create AI generated charts based on the questions.
+
+
+
+- SECURITY -
+
+ROLES
+a row level security (RLS) role for a semantic model.
+Open -> Manage Roles
+
+
+
+https://learn.microsoft.com/en-us/training/modules/row-level-security-power-bi/2-static-method
+You need to ensure only Sales team members have access to the sales performance report.
+
+
+Q. You need to assign a workspace role for users who consume reports. Users should only have permissions to examine the report.
+Which role should you assign to users?
+
+The Viewer role only has reader access to view reports and dashboards. 
+The Contributor role can create, update, or publish content. 
+The Member role has many edit permissions in a workspace, similar to an admin. 
+The Admin role has all the edit permission in a workspace
+
+Very Clever Minds Amaze
+https://learn.microsoft.com/en-us/power-bi/collaborate-share/service-roles-new-workspaces
+
+
+
+===
+Bonus Links:
+	https://github.com/MicrosoftLearning/PL-300-Microsoft-Power-BI-Data-Analyst
+	https://microsoftlearning.github.io/PL-300-Microsoft-Power-BI-Data-Analyst/
+	https://www.reddit.com/r/PowerBI/comments/15js89a/guide_i_passed_the_two_official_power_bi/
+	
+	Bonus: Models:
+	https://learn.microsoft.com/en-us/power-bi/transform-model/model-explorer
