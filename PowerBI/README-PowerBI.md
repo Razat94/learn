@@ -116,7 +116,7 @@ E.g. Not good for adding/deleting/updating rows/records.
 		
 
 /* -------------------------------------------------------
-## <p id = "0"> Lesson 1: General Structure | [Back to ToC](#toc)</p> 
+## <p id = "1"> Lesson 1: General Structure | [Back to ToC](#toc)</p> 
 ---------------------------------------------------------- */
 
 
