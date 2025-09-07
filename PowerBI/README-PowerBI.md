@@ -1,6 +1,6 @@
 # Data Visualization with Microsoft Power BI
 
-[Click to Download Files](https://files.educate360.com/temp/2025%20PowerBI%20Courseware.zip)
+[Link to Download Files](https://files.educate360.com/temp/2025%20PowerBI%20Courseware.zip)
 > Make sure .ZIP file is unzipped before using files.
 
 
@@ -21,7 +21,7 @@ This document outlines the two-day Power BI workshop curriculum, focusing on dat
 This course is designed to guide you through the essential components of Power BI, from importing raw data to building insightful and interactive dashboards.
 
 ### Day 1: Data Fundamentals & Transformation
-The first day is focused on the foundations:
+Day One focuses on the foundations:
 - Learn the basics of Power BI and its overall structure
 - Import data from various sources
 - Transform, clean, and model data using the Power Query Editor
@@ -120,13 +120,10 @@ E.g. Not good for adding/deleting/updating rows/records.
 ---------------------------------------------------------- */
 
 
-### /* ------------ Lesson 1 - General Structure  ------------ */
-
-
-	Let's open up: Analyzing Data & Reporting with Power BI -> My Footprint Sports
+Let's open the folder 'Analyzing Data & Reporting with Power BI' -> "MyFootprintSports_1.pbix"
 
 	NOTE: 	The entire power bi file is referred to as a "Report" & saved as a .PBIX file.
-		Note: Power BI file is considered a report, even if it doesn't contain any visuals.
+		Note: Power BI files are considered reports, even if they don’t contain any visuals.
 		The "semantic model" is tied into that report.	
 		
 	First enable the settings:
@@ -148,15 +145,15 @@ E.g. Not good for adding/deleting/updating rows/records.
 		- Structure
 		
 		
+-- Subsection : Left Nav Bar --
 	The Left Nav Bar in Power BI Desktop shows the different views:
-	[More Info]
-	(https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-query-overview?utm_source=chatgpt.com)
+	[More Info](https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-query-overview?utm_source=chatgpt.com)
 
-		- Report View - Where we turn data into visuals 
-			- Make reports & add visuals to our "report canvas" (center area)
-			- At the bottom status bar, multiple pages can be added. 
-				Each canvas portrays a different story! Reports can contain 1 or many visuals
-				- Note: On PowerBI Service, a dashboard is just 1 page.
+		~ Report View - Where data turns into visuals reports
+			- Our "report canvas" (center area) is where we add visuals 
+			- At the bottom status bar, we can add multiple pages
+				Each canvas portrays a different story!
+				Note: On PowerBI Service, a dashboard is just 1 page.
 			- Three right panes (we can minimize or maximize the pane as needed):
 				- Filter Pane: By dragging a field, we can filter: 
 					- a single visual 
@@ -165,7 +162,7 @@ E.g. Not good for adding/deleting/updating rows/records.
 				- Visualization Pane: 
 					- Lets us add new charts/graphs and modify existing visuals.
 				- Data pane: 
-					- We can view all the tables and columns that are built or set up
+					- Lets us view all the tables and columns that are imported or set up
 						- Similar to the Pivot Table Fields pane in Excel.
 						- NOTE: Data Pane shows fields in A-Z ORDER
 					- We can create & work with different types of data.	
@@ -174,12 +171,12 @@ E.g. Not good for adding/deleting/updating rows/records.
 				For the chart itself, we can allow focus mode:
 					- Takes the visual and expands it to take up the entirety of the canvas 
 
-		- Table View - Shows Raw Data Records
+		~ Table View - Shows Raw Data Records
 			- Revisit the familiar Data Pane on the right that shows us tables and columns.
 			- Data is read-only; 	we edit in Power Query via Home → Transform data 
 						to change, replace, or create new values in your dataset.
 
-		- Model View - Properties & Relationships with Tables.
+		~ Model View - Properties & Relationships with Tables.
 			View the complete data model to design its structure.
 				
 			- "Semantic Model" includes:
@@ -191,16 +188,16 @@ E.g. Not good for adding/deleting/updating rows/records.
 					- Hierarchies (like Year → Month → Day)
 					- Metadata like names, data types, and descriptions
 
-		- Dax Query (relatively newer) - Here we can run DAX & see exactly what a measure will show.
+		~ Dax Query (relatively newer) - Here we can run DAX & see exactly what a measure will show.
 			EVALUATE
     			TOPN(5, 'Products')
 
 
-		Q: What are the building blocks of PowerBI?
-		A: Semantic Models & Visualizations.
+	Q: What are the building blocks of PowerBI?
+	A: Semantic Models & Visualizations.
 		Without a semantic model, you can't create visualizations, and reports are made up of visualizations
 					
-		General Overview:
+	General Overview:
 		1. We create a report in Power BI Desktop 
 		2. Share it to the Power BI service
 		3. Interact with reports in the service and Power BI Mobile.
@@ -211,13 +208,17 @@ E.g. Not good for adding/deleting/updating rows/records.
 ---------------------------------------------------------- */
 
 
-### /* ------------ Lesson 2A - Connections  ------------ */
+-- Subsection : Importing .txt file --
+	Task: Create a blank report & import the bonus text file "People1.txt" (show them what/where it is)
 
+	Verify that data has been imported by going to Table View to see the table.\
 
-	Task: Create a blank report & import the bonus text file "example-data.txt" (show them what/where it is)
+	Data imported into Power BI is organized as tables.
+	A table is a grid similar to a spreadsheet, where data attributes as columns and records as rows.
 
-	Verify that data has been imported by going to Table View to see the table.
-		Data is imported, but note that Report View shows no visuals built yet from our data.
+		NOTE: Data is imported, but Report View shows no visuals built yet from our data.
+		Recall: A .pbix file is still considered a report file, even if you haven’t built any visuals yet. 
+		
 
 	--
 	If the following error shows up: 
@@ -226,7 +227,7 @@ E.g. Not good for adding/deleting/updating rows/records.
 	We recommend to uninstall & install PowerBI again.
 	--
 
-	Task: Delete the table & reimport it.
+	Optional Task: Delete the table & reimport it.
 		Under Table View, delete the table by right clicking table on Data Model pane -> Delete from Model.
 
 	Task: Update Data Source & Refresh data:
@@ -239,30 +240,28 @@ E.g. Not good for adding/deleting/updating rows/records.
 			Table View -> Home -> Queries -> Refresh
 	
 	Note:
-	Paid version does a Scheduled refresh Up to 8 times/day
+	Paid version does a Scheduled refresh up to 8 times/day
 	You can use Live Connection for example with SQL Server that automatically updates the data in Power BI.
 		Every time you interact with a visual (filter, slice, drill down), Power BI queries the SQL Server in real time
 	
 
-	Q:	What if I move/delete the data set?
+	Q:	What if I move/delete the data file?
 	A: 	You’ll still have the report and your visuals.
 
-		Simple Summary: 
+		Summary: 
+		Importing data into Power BI stores a snapshot of the data in the .pbix file.
+		This means that even if the original .txt file is deleted later, 
+		the report and all its visuals will still work because the data is already embedded.
 
 		Think of it like embedding a file in Word or attaching a PDF to an Outlook email. 
 		It doesn't matter if the original file is deleted since a copy is already stored within the document or email.
-		
-		Importing data into Power BI captures a snapshot of the data at that time and stores it within the .pbix file. 
-		This means that even if the original .txt file is deleted later, 
-		the report and all its visuals will still work because the data is already embedded.
 
 		NOTE: 	We can't refresh or update the data without restoring the .txt file (or pointing to a new one).
 
 
-	NOTE: 
 	Excercise: Entering/changing data is rough. We'll need to use PowerQuery
 
-		1. In Power BI Desktop, go to Home → Enter Data.
+		1. In Power BI Desktop, go to Home (Tab) -> Data (Group) -> Enter Data.
 		Create a small table with the new row(s) you want 
 		NOTE: Make sure to update the header row correctly; otherwise, it won’t work as expected.
 			Example:
@@ -272,33 +271,18 @@ E.g. Not good for adding/deleting/updating rows/records.
 		2. 
 		We must now append our new table (the one with only 1 row) to the original table via Power Query 
 			2.1. Launch PowerQuery via Home -> Transform Data
-			2.2. 	[Confirm we're viewing data from example-data table] 
+			2.2. 	[Confirm we're viewing data from People table] 
 				On PowerQuery Editor, go to Home → Combine (Group on far right) -> Append Queries
 				Table to Append -> Table with the row added.
 			2.3. In PowerQuery, we should see now that new row added. 
-			2.4. To load it into PowerBI, click Home -> Close & Apply
+			2.4. Finally to load it into PowerBI, click Home -> Close & Apply
 
 
 	Real Life Example: A student mentioned they work with contractor information.
 	They append the data by month to build a yearly aggregate.
 
 
-	--
-	Power BI Pro:
-	Max dataset size: 1 GB (after compression).
-	Power BI Premium (P1 or higher):
-	Max dataset size: up to 400 GB (depending on SKU).
-	Handles much larger CSV files.
-
-	Q: You have a Power BI Premium per user workspace.
-	What is the maximum number of refreshes that can be scheduled each day?
-
-	Answer: In a Premium per user workspace the limit is 48 refreshes per day for a dataset.
-	https://learn.microsoft.com/en-us/training/modules/manage-datasets-power-bi/5-dataset-refresh
-	-- 
-
-
-	-- Excercise: Import a Folder of .txt files --
+-- Subsection: Importing a folder of .txt files --
 	
 	We can import files from a folder since Power Query has a built-in folder connector. 
 
@@ -307,55 +291,54 @@ E.g. Not good for adding/deleting/updating rows/records.
   		├─ People2.txt
   		└─ People3.txt
 
+	Excercise: We want Power Query to automatically combine all files into one table.
+
 	Click Home -> Get Data -> Folder 
 	Point to the 'Text-Files' folder (or point it to a folder (SharePoint/OneDrive/local))
-		C:\Users\student\Desktop\notes\powerBI\2025 PowerBI Courseware\PowerBI-Bonus\text-files
+		C:\Users\student\Desktop\notes\powerBI\2025 PowerBI Courseware\1- Connecting to Data\Custom-Connections\text-files
 		
-	NOTE: Don't press 'Load' because then it will load the metadata!
-	Click Combine Files -> Load. We want Power Query to automatically stacks (appends) all CSVs into a single table.
-	On the final pop up window, it's asking about the structure & settings of the resulting table. We can press 'OK'
-		- As a result, the data is imported as a table.
+	On the pop up, 
+		Don't press 'Load' because then it will load the metadata!
+		Click 'Combine' -> 'Combine & Load'.
+		On the final "Combine Files" pop up window, we're asked about the structure & settings of the resulting table. 
+			Press 'OK' & as a result, the data is then imported as a table.
 
-	BEST PART is that this creates an efficient, automated solution:
+	BEST PART: This creates an efficient, automated solution.
 	Any new file dropped into this folder is then picked up at the next refresh.
-		If a new People4.txt is created, clicking Home -> Refresh will load its records into the table.
+		EX: If a new People4.txt is created, clicking Home -> Refresh will load its records into the table.
 		
 	Real life example of combining multiple files:
 		You receive monthly sales data as separate CSV files stored in the same SharePoint folder. 
 		Each file has the same schema.
 
 	
-	-- Excercise Activiy: Importing Excel Files --
-	
-	Task: Import 'Pivot your table like a champ.xlsx'
+-- Subsection: Importing Excel Files  --
+
+	Task: On the same report, Import 'Pivot your table like a champ.xlsx'
 	Verify that the data has been imported.
 	
 	Visuals are visualizations of semantic model data (e.g. charts, graphs). 
 	Power BI includes over 30 core visuals, which are built in and available to all reports. 
 	You can access the core visuals in the first section of the Visualizations pane.
 
-	Task: 	
+	Task: Create a page & name it "Performance Highlights"
 		- Make a very simple chart of sales person vs amount of sales.
 			Select the visual type "Clustered Column" in the Visualizations pane 
 			and then position and size it to 1/2 the canvas page.
+		- Create 2 cards: One showing the name of Salesperson & the other showing Total Amount.
+			Remember:  A card visualization displays a single data point.
+		Note: After selecting a visual, changing the chart type will modify the existing chart rather than creating a new one.
+		
+	
+	Task: Exporting How-Tos
+		- Export report as PDF
+		- Export data from a chart
+			- Take a screenshot  either with snipping tool or Win + Shift + S
+			(Click on chart  -> Elipses (on the Visual Header e.g. charts tools button) -> Export Data)
+			
+	
+	Optional Task: Try importing the Date & Orders table from "Connecting with Data" -> "MyFootprintSports.xlsx"
 
-		- Add a Matrix visual if needed.
-			'Matrix' visual is similar to Excel Pivot Table; 
-				best when you need to show data with categories broken down into subcategories
-			'Table' visual is similar to Excel Table; 	
-				Best for showing raw, detailed data in a simple list, like a simple transaction log.
-				i.e. no hierarchy! Just raw data.
-				For your visual, make sure that when you place the field in the Fields pane → Columns area,
-				that the dropdown for the added field (e.g. Product/State field) shows "Don’t summarize"
-					- If the table doesn’t update, click outside the field or make a small change on the table.
-				
-	Task (Exporting):
-		- How to export as PDF?
-		- Export data from one chart? 
-			(Click on chart -> Elipses (on the Visual Header e.g. charts tools button) -> Export Data)
-		- Take a screenshot  either with snipping tool or Win + Shift + S
-	
-	
 	-- Review Q: --
 	Q: When importing data from an Excel workbook into Power BI, you receive the error message: 
 	“We couldn't find any data formatted as a table.”
@@ -364,26 +347,24 @@ E.g. Not good for adding/deleting/updating rows/records.
 	A: In the Excel workbook, select the data you want to import, create a table, and save the change.
 	-- 
 
-	Optional Task: "Connecting with Data -> MyFootprintSports.xlsx" & import just Date & Orders table
-
 
 	
-	### /* ------------ Lesson 2B - Cardinality ------------ */
+### /* ------------ Lesson 2B - Cardinality ------------ */
 
-	Useful Links:
+Useful Links:
 	[Module: Configure Semantic Model](https://learn.microsoft.com/en-us/training/modules/configure-semantic-model-power-bi/)
 	[Chapter: Configure relationships](https://learn.microsoft.com/en-us/training/modules/configure-semantic-model-power-bi/2-relationships)		
 
 
-	- Forming 1x1 cardiniality -
-	Task: Open or Import data from "Employees.xlsx" 
+-- Subsection: Forming 1x1 cardiniality --
+	Task: Open "Employees.pbix" or Import data from "Employees.xlsx" 
 	
-
+	Recap:
 	Data imported into Power BI is organized as tables.
 	A table is a grid similar to a spreadsheet, where data attributes as columns and records as rows.
 	
 
-	Rarely is Data from different sources imported & combined into a single table.
+	Data is often divided across multiple sources or tables.
 	For instance, we can import:
 		- a Sales Orders table which contains data about orders placed, 
 		- a Products table that lists out each product’s details, like name, price, and category.
@@ -395,21 +376,35 @@ E.g. Not good for adding/deleting/updating rows/records.
 	we can reference data from seperate tables & create visuals from them.
 		For example, VLOOKUP can use/reference the Product table to find details for products in the Orders table.
 
-	2 purposes: 
-		- Data is seldom combined into one big table; usually data is spread out into various tables.
-		- Normalizing our data avoids redundancy 
-		- We can "Hide table from report view" by right clicking on table.
-			- The principle of least privilege (PoLP) is a security practice,
-				where only the minimum level of access necessary to perform tasks are granted & nothing more.
 
-
-	In this example, this relationship is called a 1:1 relationship with the key being on EID.
+	In this example, this relationship we have is a 1:1 relationship with the key being on EID.
 	Each employee has a respective salary.
 	We can create a chart that shows average salary per region. 
 
 	
-	- Forming 1xMany Cardinality -
-	Task: Open Example-Star-Schema.pbix
+	Q: 	The tables are basically =vlookup "keys" when thinking in terms of excel correct?
+	
+	A.	In Excel, a VLOOKUP uses a key to pull matching data from another table.
+		In Power BI or relational databases:
+			Dimension tables have the key you “look up” (like the first column in a VLOOKUP table).
+			Fact tables have the foreign key that points to the dimension table (like the value you pass into VLOOKUP).
+
+		Relationships in Power BI are basically automatic VLOOKUPs behind the scenes, 
+		connecting the keys so you can pull related attributes or measures.
+
+
+	3 purposes: 
+		- Usually data is spread out into various tables; Data is seldom combined into one big table.
+		- Normalizing our data avoids redundancy 
+		- We can "Hide table from report view" by right clicking on table.
+			- The principle of least privilege (PoLP) is a security practice,
+				where only the minimum level of access necessary to perform tasks are granted & nothing more.
+				i.e. Not every user needs to know about everything. 
+
+	
+	
+-- - Subsection: Forming 1xMany Cardinality - --
+	Task: Open 'Example-Star-Schema.pbix'
 
 	Let's look at the following data:
 		
@@ -435,7 +430,7 @@ E.g. Not good for adding/deleting/updating rows/records.
 	103		Notebook	Stationery
 
 	
-	All in All,	
+
 	When your data model has multiple tables, make sure the tables are properly related so that we can use them in visualizations.
 	
 	
@@ -449,31 +444,64 @@ E.g. Not good for adding/deleting/updating rows/records.
 		Ultimately, its used to organize your data since it's a design for that structure.
 
 		It consists of:
-			One Central Fact table — contains RAW transactional data (e.g., sales, revenue, quantities).
-				The CENTER event that contains measurable quantitative data.
+			One Central Fact table — contains measurable RAW transactional data (e.g., sales, revenue, quantities).
+				The CENTER event that contains quantitative data.
 				In Star Schema, we should only have one FACT table of ONE object
+					Note: This is not a hard rule; we can have multiple tables e.g. Fact Tables of in-person vs online Sales.
 				The fact table dimension key column stores duplicate values, so it is 'many' side of 1-Many.
 			Multiple Dimension tables — The Points of the Star; describe the "who, what, when, where" of the facts.
 				MAY SEEM RELEVANT OR NOT.
 				Can be thought of as lookup tables.
 				For instance, knowing someones salary may not be important. 
 	
-		Fact table rows relate to dimension table rows via keys, just like key relationships in a database.
-			A fact table dimension key column is expected to store duplicate values, so must be the 'many' side	
-			Dimension tables have a unique key column that forms the 'one' side. 
-
 		Remember: The overall layout looks like a star 🌟 — 
 			The Fact table is in the center and Dimensions are around it.		
 	
+
+		Fact table relate to dimension table via keys, just like key relationships in a database.
+			A fact table dimension key column is expected to store duplicate values, so must be the 'many' side	
+			Dimension tables have a unique key column that forms the 'one' side. 
+
 		
 		In database lingo:
 			DimCustomer[CustomerID] is a Primary Key - No two identical rows!
 			All values in CustomerID are unique → Valid primary key.
 
-			The tables are basically =vlookup "keys" when thinking in terms of excel correct?
+ 	
 
-				
+	- (Optional More practice) -
+	Optional Excercise #1:
+	Import "MyFootprintSports.xlsx" to form 1xmany cardiniality.
+			- Discuss how Products & Employee tables connect to the Sales Orders
+
+
+	Optional Excercise #2:
+	Delete prev table & now import "Bonus Example 1 Sales Data"
+
+
+-- Final Subsection: Forming relationships across different sources --
+
+	Task: Import Leaps&Bounds spreadsheet & database.
+
+	1. Form Relationships in Model View
+	When importing data from different sources (in this case, a spreadsheet and a database), 
+	use Model View to create relationships. In this example, we will relate:
+
+		[AgentInfo].Agent# 		-> [Bookings].Agent#
+		[Destinations1].Destination# 	-> [Bookings].Destination#
+
+	2. Once relations are created, we can create visuals:
+		- Build a chart showing total sales by agent.
+		- Add two card visualizations: one for NAME and one for AMOUNT.
+
+		Remember: A card visualization shows a single data point. 
+		By default, the card displays the first value alphabetically (e.g., Carol Cox will appear first),
+		but you can change it to “Count (Distinct)” to see the total number of unique agents.
 	
+		Student Comment:	I love Cards! Favorite viz tool in PBI!
+
+		
+	- (Optional Q's) -
 
 	-- Q1: --
 	Q: You have designed a star schema to simplify your data.
@@ -488,17 +516,15 @@ E.g. Not good for adding/deleting/updating rows/records.
 	The data model includes a fact table called 'Sales' and a dimension table called 'Regions' with unique region names.
 	You need to filter sales data by region. What should you do?
 	
-	A. Creating a one-to-many relationship from 'RegionName' in 'Regions' to 'Region' in 'Sales' enables effective filtering of sales data by region. 
+	[x] A. Creating a one-to-many relationship from 'RegionName' in 'Regions' to 'Region' in 'Sales' enables effective filtering of sales data by region. 
 	B. Combining the 'Sales' and 'Regions' tables into a calculated table is inefficient and unnecessary for filtering by region. 
 	C. Enabling bidirectional cross-filtering for relationships is unnecessary and could lead to ambiguity. 
 	D. Setting the cross-filter direction of the existing relationship to single does not establish a relationship if one does not already exist.
 
-	Solution: A
-
 
 	-- Q3: --
 	Your organization has a Power BI model with multiple tables, 
-		including a 'Sales' table with transactional data and a 'Products' table with product details.
+		including a  'Sales' table with transactional data and a 'Products' table with product details.
 
 	You need to aggregate sales data by product categories.
 	What should you do?
@@ -515,49 +541,11 @@ E.g. Not good for adding/deleting/updating rows/records.
 	A: Many to Many
 	-- --
 
-
-	- (for more practice) -
-	Optional Excercise #1:
-		Import "MyFootprintSports.xlsx" to form 1xmany cardiniality.
-		- Discuss how Products & Employee tables connect to the Sales Orders
-
-
-	Optional Excercise #2:
-		Delete prev table & now import "Bonus Example 1 Sales Data"
-
-
-
-	- Final Excercise: Forming relationships across different sources -
-	Task: Import Leaps&Bounds spreadsheet & database.
-
-	We use Model View to form relations when importing different sources (In this case, database & spreadsheet).
-		Connect [AgentInfo].Agent# 		-> [Bookings].Agent#
-		Connect [Destinations1].Destination# 	-> [Bookings].Destination#
-
-	Once relations are created, we can create VISUALS:
-		Create a chart showing total sales made by agent.
-
-		Excercise: 	Add 2 CARDS,
-				one for NAME, the other for AMOUNT
-				- A card visualization displays a single data point. 
-
-			Note: 		Alphabetically Carol Cox is the first is the first name
-					Defaults to the "First" value in the list - 
-					If you want to know how many distinct agents there are, 
-					You can change that "First Agent_Name" to a "Count (Distinct)"
-
-			Note: 		ROUND # if needed.
-
-			Comment:	I love Cards! Favorite viz tool in PBI!
-			
-				
+	
 
 /* -------------------------------------------------------
 ## <p id = "3"> Lesson 3: PowerQuery| [Back to ToC](#toc)</p> 
 ---------------------------------------------------------- */
-
-
-### /* ------------ Lesson 3A - PowerQuery ------------ */
 
 
 Chapter 3 - 
@@ -566,32 +554,25 @@ Think: Data Transformation
 
 
 /* -------------------------------------------------------
-## <p id = "1"> DAY 2 [Back to ToC](#toc) </p>
+## <p id = "1"> DAY 2 | [Back to ToC](#toc) </p>
 ---------------------------------------------------------- */	
 
-Links:
-https://learn.microsoft.com/en-us/power-bi/visuals/power-bi-report-add-visualizations-i?tabs=powerbi-desktop
-https://learn.microsoft.com/en-us/training/modules/power-bi-effective-reports/1-introduction
 
+Links:  
+	- https://learn.microsoft.com/en-us/power-bi/visuals/power-bi-report-add-visualizations-i?tabs=powerbi-desktop  
+	- https://learn.microsoft.com/en-us/training/modules/power-bi-effective-reports/1-introduction  
+	- [Design effective reports in Power BI](https://learn.microsoft.com/en-us/training/paths/power-bi-effective/)
 
-Online version allows for updating data.
-Top questions that were asked:
-		Button
-		Clear out filters	
-		Tooltips 
-			-> Hover mouse over chart
-
-Links:
-	Design effective reports in Power BI:
-	https://learn.microsoft.com/en-us/training/paths/power-bi-effective/
+FAQ: How to:  
+	- Add Button  
+	- Clear out filters  
+	- Create Tooltips  
+	  -> Hover mouse over chart
 
 
 /* -------------------------------------------------------
 ## <p id = "4"> Lesson 4: Visuals & Analyzing such Visuals | [Back to ToC](#toc)</p> 
 ---------------------------------------------------------- */
-
-
-### /* ------------ Lesson 4: Visuals & Analyzing such Visuals ------------ */
 
 
 If you’re familiar with PivotTables and PivotCharts, you’ll notice some similarities with Power BI’s charts.
@@ -628,6 +609,7 @@ If you’re familiar with PivotTables and PivotCharts, you’ll notice some simi
 		Task: 
 			Add Title. One for "Sales" & other for "Salesperson":				
 			Change font size:			Visual Pane -> Visual -> Call Out Value -> Font -> 45
+			ROUND Decimal Places:			Visual Pane -> Visual -> Call Out Value -> Value Decimal Places
 			Change text color: 			Visual Pane -> Visual -> Call Out Value -> Color (Dark Yellow)
 			Change background color of a card: 	Visual Pane -> General -> Effects -> Background (Light Gray)
 			Set up a border: 			Visual Pane -> General -> Effects -> Visual Border (10px black)
@@ -665,6 +647,15 @@ If you’re familiar with PivotTables and PivotCharts, you’ll notice some simi
 	Also similar to PowerPoint is the SELECTION PANE (Under View Tab)
 	which can change layer order & show/hide elements
 
+	- Add a Matrix visual if needed.
+			'Matrix' visual is similar to Excel Pivot Table; 
+				best when you need to show data with categories broken down into subcategories
+			'Table' visual is similar to Excel Table; 	
+				Best for showing raw, detailed data in a simple list, like a simple transaction log.
+				i.e. no hierarchy! Just raw data.
+				For your visual, make sure that when you place the field in the Fields pane → Columns area,
+				that the dropdown for the added field (e.g. Product/State field) shows "Don’t summarize"
+					- If the table doesn’t update, click outside the field or make a small change on the table.
 
 
 	--- Background FORMATTING ---
@@ -765,17 +756,17 @@ If you’re familiar with PivotTables and PivotCharts, you’ll notice some simi
 
 
 /* -------------------------------------------------------
-## <p id = "5"> Lesson 5: Creating Interactive Visualizations - Filtering, Controls & Navigation [Back to ToC](#toc)</p>
+## <p id = "5"> Lesson 5: Creating Interactive Visualizations - Filtering, Controls & Navigation | [Back to ToC](#toc)</p>
 ---------------------------------------------------------- */
 
 In this chapter we will touch base on:
 	- Interactions/Filtering/Slicers/Buttons/Groups/Drill Downs 
 
 Helpful Links:
-	- https://www.youtube.com/watch?v=9eEk2ct2QCI
+	- https://www.youtube.com/watch?v=9eEk2ct2QCI  
 	- https://learn.microsoft.com/en-us/power-bi/create-reports/service-reports-visual-interactions?tabs=powerbi-desktop
 
-	-- (Same Page) Discuss Highlights/Interactions --
+	-- Discuss Highlights/Interactions (Be on the Same Page) --
 	Visuals in a report dynamically respond to user selections one at a time.	
 	
 		Highlighting = a visual emphasis WITHIN THE SAME visual.
@@ -995,6 +986,9 @@ Helpful Links:
 	-- DRILL DOWN --
 
 	[Reference](https://learn.microsoft.com/en-us/training/modules/configure-semantic-model-power-bi/5-hierarchies)
+	https://learn.microsoft.com/en-us/training/modules/configure-semantic-model-power-bi/9-check
+
+		
 	
 	We've covered interactions and highlights but to recap:
 	Up to this point, when we create a chart and we click on it, it creates a highlight. 
@@ -1051,28 +1045,34 @@ Helpful Links:
 
 
 
-	Optional Task:	Create Quarter Sales chart. 
-			Have the X axis expand Quarter thereby making it Quarter -> Month -> Day 
-			(This can be done by including order date field) 
+			
+	Q: You need to create a new hierarchy in Power BI Desktop.
+	What should you do first?
+
+	A: To create a new hierarchy in Power BI Desktop, you must select Create hierarchy from the Model view or Report view. 
+	NO DRAG/DROP!
+
+
+	- (Optional More practice) -
+	Optional Excercise #1:
+	Create a Quarter Sales chart and enable drill-down on the X-axis to go from Quarter -> Month -> Day.
+		(This can be done by including order date field) 
 		
-		Solution: Quarter -> Month -> Day 
-			- x axis -
-			Quarter
-			Order Date
-			  Month
-			  Day
+	Solution: 	
+		- x axis -
+		Quarter
+		Order Date
+		  Month
+		  Day
 	
-				Top level: Sales by Year
-				Drill down: Sales by Month (within that year)
-				Drill down again: Sales by Day (within that month)
+			Top level: Sales by Year
+			Drill down: Sales by Month (within that year)
+			Drill down again: Sales by Day (within that month)
 	
-	Last Optional Excercise:
+	Optional Excercise #2:
 		Used the Group we created and place it at the highest level above Quarter.
  
 
-	Q: https://learn.microsoft.com/en-us/training/modules/configure-semantic-model-power-bi/9-check
-
-		
 
 	Recap: Understand:
 		- interactivity
@@ -1089,7 +1089,7 @@ Helpful Links:
 
 
 /* -------------------------------------------------------
-## <p id = "6"> Lesson 6: Enhancing Data Analysis [Back to ToC](#toc)</p> 
+## <p id = "6"> Lesson 6: Enhancing Data Analysis | [Back to ToC](#toc)</p> 
 ---------------------------------------------------------- */
 
 [Reference Link](https://learn.microsoft.com/en-us/training/modules/power-bi-effective-reports/)
@@ -1231,7 +1231,7 @@ As you know, Tooltips are pop ups that display extra details about a data point 
 === Break ==
 
 /* -------------------------------------------------------
-## <p id = "7"> Lesson 7: Data Modeling w/Calculated Columns & Measures [Back to ToC](#toc)</p> 
+## <p id = "7"> Lesson 7: Data Modeling w/Calculated Columns & Measures | [Back to ToC](#toc)</p> 
 ---------------------------------------------------------- */
 
 
@@ -1519,30 +1519,6 @@ Links:
 	This new visual can then be pinned to the dashboard, without adding it to a report.
 	The Q&A visual allows end-users to ask natural language questions to create AI generated charts based on the questions.
 
-
-
-- SECURITY -
-
-ROLES
-a row level security (RLS) role for a semantic model.
-Open -> Manage Roles
-
-
-
-https://learn.microsoft.com/en-us/training/modules/row-level-security-power-bi/2-static-method
-You need to ensure only Sales team members have access to the sales performance report.
-
-
-Q. You need to assign a workspace role for users who consume reports. Users should only have permissions to examine the report.
-Which role should you assign to users?
-
-The Viewer role only has reader access to view reports and dashboards. 
-The Contributor role can create, update, or publish content. 
-The Member role has many edit permissions in a workspace, similar to an admin. 
-The Admin role has all the edit permission in a workspace
-
-Very Clever Minds Amaze
-https://learn.microsoft.com/en-us/power-bi/collaborate-share/service-roles-new-workspaces
 
 
 
