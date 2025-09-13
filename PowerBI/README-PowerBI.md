@@ -45,82 +45,13 @@ Day Two centers more heavily on analyzing & visualizing data through:
 ---------------------------------------------------------- */
 
 ### /* ------------ Lesson 0 - What is PowerBI?  ------------ */
-
-
-Useful Links:  
-- [Module: Get started building with Power BI](https://learn.microsoft.com/en-us/training/modules/get-started-with-power-bi/)
-
-PowerBI
-"At its heart, PowerBI is a data visualization tool".  
-
-It's a tool to:
-- Analyze business data  
-- Combine various sources of data
-- Create reports
-- Visualize and share insights across the company
-			
-Note: PowerBI is NOT meant for manual data entry.
-E.g. Not good for adding/deleting/updating rows/records. 
-		We can modify columns if need be.
-	
-	Excel is better for data entry and quick analysis, 
-	while Power BI excels at building interactive, scalable, and shareable visual reports.
-		- Overall yes excel can create 1 off reports, but PowerBI does it a lot better.
-
-	Note: 	It doesn't support SAS
-		We might need to export to an excel spreadsheet but it can be problem with large data sets.
-	
-	How many data sources can PowerBI have?
-		According to [https://learn.microsoft.com/en-us/power-bi//connect-data/service-get-data](Link),
-		"You can use hundreds of different data sources with Power BI. 
-		The data must be in a format consumable by the Power BI service."
-		
-		So for PowerBI, data is usually stored in a data warehouse or is grabbed from online portal.
-		EX: 	Data is hosted on Azure server 
-			& we use azure connector to bring all the data from the cloud.
-
-		NOTE: The biggest concern is the data source but rather if the data is "clean" e.g.:
-			- Complete	No crucial missing info
-			- Structured	Columns are given suitable names, organized, uniform standardized format 
-			- Correct	No wrong values/errors/mistakes/typos
-
-
-	[Pricing](https://www.microsoft.com/en-us/power-platform/products/power-bi/pricing)
-
-	PowerBI Desktop Software/Free: Great for creating and viewing reports; can be used for solo work.
-        	- You can either download the app directly from 
-		[the official MS Store](https://go.microsoft.com/fwlink/?LinkId=2240819&clcid=0x409&culture=en-us&country=us)
-        	- Or you can download it from 
-		[the official website](https://www.microsoft.com/en-us/download/details.aspx?id=58494)
-
-		Additional Info:
-		- We don't need to sign into Desktop app.
-		- Import data from various sources to create reports, dashboards, and visualizations.
-		- Save and view your work locally on your PC as .PBIX files
-			- Your reports can be viewed locally. Others reports can be seen in Premium capacity.
-			- Premium Capacity -> A large server your company rents from Microsoft that lets Free license users view reports stored in it.
-
-		- The catch is, you can’t share it!
-
-
-	PowerBI "Pro license": (~$10 a month per user.) Adds sharing, collaboration, and cloud publishing so your team can use your reports.
-		- The Power BI Service (cloud) is available [here](app.powerbi.com) which allows reports to be published & shared with others.
-		- Free License can still have access, albeit limited.
-		- Collaborate in workspaces (Free users have access to 1 default workspace called 'MyWorkspace').
-		- As a user, you yourself can view anything shared in the Power BI Service i.e. the cloud, plus collaborate.
-		- Better suited with embedding & integrating reports in other Office 365 tools.
-
-	In Summary:
-	Power BI Desktop for creating semantic models and reports with visualizations.
-	Power BI service for creating dashboards from published reports and distributing content with apps
-		
+Please refer to the [PowerPoint](https://docs.google.com/presentation/d/1TMuIKi4io8k934CNKO5ztxjMmNs5yGqu/edit?usp=sharing&ouid=113396737692127154003&rtpof=true&sd=true)
 
 /* -------------------------------------------------------
 ## <p id = "1"> Lesson 1: General Structure | [Back to ToC](#toc)</p> 
 ---------------------------------------------------------- */
 
-
-Let's open the folder 'Analyzing Data & Reporting with Power BI' -> "MyFootprintSports_1.pbix"
+Task: Let's open "MyFootprintSports_1.pbix"
 
 	NOTE: 	The entire power bi file is referred to as a "Report" & saved as a .PBIX file.
 		Note: Power BI files are considered reports, even if they don’t contain any visuals.
@@ -627,7 +558,7 @@ If you’re familiar with PivotTables and PivotCharts, you’ll notice some simi
 		- (Not great but similar to PowerPoint)		Insert -> Textbox
 		- We can create a card & then:
 			1. Add a measure that says: 	msg = "Hello World!"
-`			2. Add the measure under the "Fields" section of a card.
+			2. Add the measure under the "Fields" section of a card.
 		- (Preferred): 	Insert -> Shapes -> Rectangle
 				(Result: a blue box has been added)
 
@@ -1411,6 +1342,16 @@ Links:
 	[Power BI service Link #2](https://learn.microsoft.com/en-us/training/modules/manage-workspaces-power-bi-service/)
 
 
+Recall:
+
+In Summary:
+	Power BI Desktop for creating semantic models and reports with visualizations.
+	Power BI service for creating dashboards from published reports and distributing content with apps
+		
+
+
+Reports are more like an online object rather than a traditional file.
+
 In a standard Power BI workflow, usually you first create a report in Power BI Desktop and then publish it to the Power BI service.
 Power BI Service (a.k.a. PowerBI Online/For the Web) is a cloud based platform that can be accessed through a web browser by typing in the following [link](https://app.powerbi.com).
 From there, you can view, interact with & share your reports and visuals directly through your web browser.
@@ -1420,6 +1361,10 @@ From there, you can view, interact with & share your reports and visuals directl
 	SaaS (Software as a Service) = 	renting software that runs on someone else’s cloud servers. 
 						You don’t install or maintain it yourself; you access it over the internet and pay for what you use, usually via a subscription.
 )
+
+
+Note: When we upload work from Desktop -> Online, the Desktop changes won’t change the online version unless you re-publish.
+
 
 Task: Go to app.powerbi.com (Make sure you are signed in).
 	Notice: We can still use PB Service on a free tier account, albeit limited. 
@@ -1450,6 +1395,66 @@ From a workspace, we can open a dashboard or report by selecting it from the lis
 
 The Power BI service is composed of many building blocks, including workspaces, reports, semantic models, dashboards, and apps. 
 Each of these components play a unique role in the Power BI ecosystem.
+
+-----------------
+
+
+Subscriptions are scheduled email snapshots of reports/dashboards
+
+
+-----------------
+
+Reports (unlike dashboards) can be embedded into a webpage
+
+
+Reports, unlike dashboards, can be embedded into websites or applications using Publish to Web (for public access) 
+or Power BI Embedded / Secure Embed (for authenticated users).
+
+
+Here’s a clear step-by-step on how to publish a Power BI report to the web using Power BI Service:
+
+Step 1: Open Your Report in Power BI Service
+
+Go to Power BI Service
+ and sign in.
+
+Open the workspace that contains your report.
+
+Click on the report you want to publish.
+
+Step 2: Use “Publish to Web”
+
+In the report view, click File → Publish to web.
+
+Sometimes it’s under the Share menu → Publish to web.
+
+A dialog box will appear explaining that the report will be publicly accessible on the internet.
+⚠️ Important: Anyone with the link can view it. Do not use this for sensitive or private data.
+
+Step 3: Get the Embed Code or Link
+
+Click Create embed code.
+
+You’ll get:
+
+Link: Shareable URL to the report.
+
+Embed code: HTML iframe code you can paste into a webpage.
+
+Step 4: Add to Your Webpage
+
+Copy the iframe code.
+
+Paste it into your website’s HTML where you want the report to appear.
+
+Notes / Limitations
+
+Only works with reports, not dashboards.
+
+The report will be public, no authentication required.
+
+Some organizations disable this feature for security reasons. If you don’t see “Publish to web,” check with your Power BI admin.
+
 
 
 
