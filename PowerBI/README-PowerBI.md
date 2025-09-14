@@ -45,7 +45,7 @@ Day Two centers more heavily on analyzing & visualizing data through:
 ---------------------------------------------------------- */
 
 ### /* ------------ Lesson 0 - What is PowerBI?  ------------ */
-Please refer to the [PowerPoint](https://docs.google.com/presentation/d/1TMuIKi4io8k934CNKO5ztxjMmNs5yGqu/edit?usp=sharing&ouid=113396737692127154003&rtpof=true&sd=true)
+Please refer to the [PowerPoint](https://docs.google.com/presentation/d/1q2-8hYULWp8ouBpQMGMV_SMCWjE6Rphl/edit?usp=sharing&ouid=113396737692127154003&rtpof=true&sd=true)
 
 /* -------------------------------------------------------
 ## <p id = "1"> Lesson 1: General Structure | [Back to ToC](#toc)</p> 
@@ -788,7 +788,7 @@ Helpful Links:
 
 		Change text of headers to make it big!:  				Visual -> Values -> Font Size
 		Enable - SELECT ALL option:						Visual -> Slicer Settings -> Selection -> Show "Select All" As an Option
-		To enable a search box in a slicer to search for values to filter 	Click the three dots on the slicer’s visual header, select Search, and the search box will appear in the slicer.
+		Enable a search box in a slicer to search for values to filter 		Click the three dots on the slicer’s visual header, select Search, and the search box will appear in the slicer.
 			[Solution](https://community.fabric.microsoft.com/t5/Desktop/Slicer-Search-Bar/td-p/3010479)
 		Change Slicer Type style options from 'Vertical List' to 'Tile': 	Visual -> Slicer Settings -> Option -> Tile
 			Additionally we can make the font for "Values" to be bigger.
@@ -1343,119 +1343,47 @@ Links:
 
 
 Recall:
-
-In Summary:
 	Power BI Desktop for creating semantic models and reports with visualizations.
 	Power BI service for creating dashboards from published reports and distributing content with apps
 		
 
-
-Reports are more like an online object rather than a traditional file.
-
-In a standard Power BI workflow, usually you first create a report in Power BI Desktop and then publish it to the Power BI service.
-Power BI Service (a.k.a. PowerBI Online/For the Web) is a cloud based platform that can be accessed through a web browser by typing in the following [link](https://app.powerbi.com).
-From there, you can view, interact with & share your reports and visuals directly through your web browser.
-
-(Note : 
-	The Cloud = 			a bunch of remote servers (computers) that you can access over the internet and use, even though they’re owned by someone else.
-	SaaS (Software as a Service) = 	renting software that runs on someone else’s cloud servers. 
-						You don’t install or maintain it yourself; you access it over the internet and pay for what you use, usually via a subscription.
-)
+In a standard Power BI workflow, usually we:
+	1. Create a report in Power BI Desktop 
+	2. Publish it to the Power BI service.
+Note: When we upload work from Desktop -> Online, the Desktop changes won’t change the online version unless you re-publish via Home -> Publish (Power BI Desktop)
+For the web version, Reports are more like an online object rather than a traditional file.
 
 
-Note: When we upload work from Desktop -> Online, the Desktop changes won’t change the online version unless you re-publish.
+	Task: 
+		Go to app.powerbi.com (Make sure you are signed in).
+		Notice: We can still use PB Service on a free tier account, albeit limited. 
+		
+	The Power BI service is composed of many building blocks, including workspaces, reports, semantic models, dashboards, and apps. 
+	Each of these components play a unique role in the Power BI ecosystem.
 
+-- Workspaces -- 
 
-Task: Go to app.powerbi.com (Make sure you are signed in).
-	Notice: We can still use PB Service on a free tier account, albeit limited. 
-
-Upon signing in, there will be a navigation pane on the left hand side.
-Click on the Icon "My Workspace"
 	Workspaces are the foundation of the Power BI service. 	
-	- If you have the free version of Power BI, My Workspace is the only workspace you have access to in the Power BI Service.
 
-	"My workspace" is your personal area in Power BI where all the content you create or own is stored. 
-	Think of it like your own folder or sandbox. 
-	For instance, any sample data you download from the Power BI Learning Center is saved here.
-	
+	Workspaces act like folders since it can organize: 
+		semantic models, reports, and dashboards
 
-	When publishing any report, you must choose a workspace. 
-	By default, every user has access to My workspace, which is ideal only for testing. 
-	When you want to share content with others, always create and use a shared workspace.
-		We can assign roles (Admin, Member, Contributor, Viewer) to control access and editing.
-		[Video discussing Workspace Roles](https://www.youtube.com/watch?v=L6urbTbrToo)
-	
+	When publishing any report, you must choose a workspace:
 
-Now that we know workspaces are like folders, itt can organize: 
-	semantic models, reports, and dashboards
+		- Shared Workspaces are used to share content with others
+		Shared Workspaces = team folders + permission system.
+			We can assign roles (Admin, Member, Contributor, Viewer) to control access and editing.
+			[Video discussing Workspace Roles](https://www.youtube.com/watch?v=L6urbTbrToo)		
+		- By Default, "My Workspace" is a workspace every user has access to which is ideal only for testing. 
 
+	Task: 	Once signed in, click on the icon "My Workspace" from the Navigation pane on the left hand side.
 
-From a workspace, we can open a dashboard or report by selecting it from the list. 
-
-
-The Power BI service is composed of many building blocks, including workspaces, reports, semantic models, dashboards, and apps. 
-Each of these components play a unique role in the Power BI ecosystem.
-
------------------
-
-
-Subscriptions are scheduled email snapshots of reports/dashboards
-
-
------------------
-
-Reports (unlike dashboards) can be embedded into a webpage
-
-
-Reports, unlike dashboards, can be embedded into websites or applications using Publish to Web (for public access) 
-or Power BI Embedded / Secure Embed (for authenticated users).
-
-
-Here’s a clear step-by-step on how to publish a Power BI report to the web using Power BI Service:
-
-Step 1: Open Your Report in Power BI Service
-
-Go to Power BI Service
- and sign in.
-
-Open the workspace that contains your report.
-
-Click on the report you want to publish.
-
-Step 2: Use “Publish to Web”
-
-In the report view, click File → Publish to web.
-
-Sometimes it’s under the Share menu → Publish to web.
-
-A dialog box will appear explaining that the report will be publicly accessible on the internet.
-⚠️ Important: Anyone with the link can view it. Do not use this for sensitive or private data.
-
-Step 3: Get the Embed Code or Link
-
-Click Create embed code.
-
-You’ll get:
-
-Link: Shareable URL to the report.
-
-Embed code: HTML iframe code you can paste into a webpage.
-
-Step 4: Add to Your Webpage
-
-Copy the iframe code.
-
-Paste it into your website’s HTML where you want the report to appear.
-
-Notes / Limitations
-
-Only works with reports, not dashboards.
-
-The report will be public, no authentication required.
-
-Some organizations disable this feature for security reasons. If you don’t see “Publish to web,” check with your Power BI admin.
-
-
+		"My workspace" is your personal folder/sandbox/area in Power BI for all your content and sample data.
+			For instance, any sample data you download from the Power BI Learning Center is saved here.
+			NOTE: With the free version of Power BI, "My Workspace" is the - ONLY! - workspace you can use in Power BI Service.
+				
+	From a workspace, we can open a dashboard or report by selecting it from the list. 
+	Task: Upload a report to PowerBI Service 	
 
 
 -- Dashboards --
@@ -1465,8 +1393,8 @@ Links:
 - [Dashboards]https://learn.microsoft.com/en-us/power-bi/consumer/end-user-dashboards
 
 
-	- Reports are built on a single dataset (semantic model) and can have multiple pages 
-	- A Dashboard is a single-page canvas designed for at-a-glance insights.
+	Reports are built on a single dataset (semantic model) and can have multiple pages 
+	A Dashboard is a single-page canvas designed for at-a-glance insights.
 		- Dashboards can pin visuals from multiple reports/datasets, even from different semantic models onto 1 page.
 			- You can only pin visuals to a dashboard; users can’t modify or create additional pages.
 		- These pinned visuals that make up Dashboards are called Tiles.
@@ -1484,6 +1412,51 @@ Links:
 	In short, most users are viewers/consumers, not producers, unless granted dataset permissions.
 		EX: 	If your manager shares a Sales Dashboard, you can view KPIs. 
 			To build your own Sales report, you’ll need access to the underlying Sales Dataset.
+
+
+
+-----------------
+Subscriptions are scheduled email snapshots of reports/dashboards
+Bonus Task: Make a subscription
+-----------------
+
+
+-----------------
+Reports (unlike dashboards) can be embedded into a webpage
+
+Reports, unlike dashboards, can be embedded into websites or applications using Publish to Web (for public access) 
+or Power BI Embedded / Secure Embed (for authenticated users).
+
+Bonus Task: Publish a Power BI report to the web using Power BI Service:
+
+Step 1: Open Your Report in Power BI Service
+
+	Sign in to Power BI Service
+	Open the workspace that contains your report.
+	Click on the report you want to publish.
+
+Step 2: Use “Publish to Web”
+	
+	In the report view, click File -> Embed Report -> Publish to web.
+	A dialog box will appear explaining that the report will be publicly accessible on the internet.
+	⚠️ Important: Anyone with the link can view it. Do not use this for sensitive or private data.
+
+Step 3: Get the Embed Code or Link
+	Click Create embed code.
+	You’ll get:
+		Link: Shareable URL to the report.
+		Embed code: HTML iframe code you can paste into a webpage.
+
+Step 4: Add to Your Webpage
+	Copy the iframe code.
+	Paste it into your website’s HTML where you want the report to appear.
+
+Notes / Limitations
+- Only works with reports, not dashboards.
+- The report will be public, no authentication required.
+- Some organizations disable this feature for security reasons. If you don’t see “Publish to web,” check with your Power BI admin.
+-----------------
+
 
 
 
