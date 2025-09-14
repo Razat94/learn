@@ -1173,103 +1173,95 @@ As you know, Tooltips are pop ups that display extra details about a data point 
 		- calculates a value for every row in that table.
 		- this custom field doesn't come from the raw data source & we can use it in visuals, filters, or slicers just like any other field.
 
-
 	Note: How to create a formula in Power BI (Calculated Column):
 		Option 1: In Power Query, use Custom Column
 		Option 2: In Table View within Power BI, click New Column to add it directly in the data model.
 		⚠️ Note: Columns created in Table View will not appear in Power Query. 
-			Power Query is mainly for initial data transformations i.e. before the data is loaded into the model.
+			Power Query is mainly for initial data transformations i.e. Power Query runs before the data is loaded into the model.
 	
-
-	Task: Create a simple text calculated columns
-		Go to Table View (You can also create a calculated column in Report View, but Table View is helpful for instantly seeing the results.)
-		
-		We can start to create a new column via:
-			Tables Tools (Contextual Tab) -> New Column 
-			OR
-			Home Tab -> New Column 
-			OR
-			In the data pane, right clicking the table name -> New Column
+	Task: Create simple text calculated columns.
+	Go to Table View (You can also make a calculated column in Report View, but Table View shows results)
+	3 ways to create a new column:
+		Tables Tools (Contextual Tab) -> New Column 
+		OR
+		Home Tab -> New Column 
+		OR
+		In the data pane, right clicking the table name -> New Column
  
 
-		In the formula bar, type:
-			Solution: firstNewColumn = "Hello World"
-			NOTICE: With Calculated Columns, we can't change the value for any specific row 
-				i.e. ALL columns will then have "Hello World!"
-	
-		Try chaning the value of the sampleColumn to "I love PowerBI"
+		- Task: Create a static calculated column w/ the same value (“Hello World!”) for every row.
+			firstNewColumn = "Hello World"
+			NOTICE: Calculated columns generate row-level values to all rows, so every row will show “Hello World!”
+					
+		Optional Task: Try changing the value of 'firstNewColumn' to "I love PowerBI"
 		
 
-	Task: Use ROUND() function to create Rounded Total Sales Column
-		Under the same Table View, click New Column & enter the formula:
-		Solution: Rounded Total Sales = ROUND(SalesData[Total Sales], 0)
+		- Task: Use ROUND() function to create 'Rounded Total Sales' Column
+			Under the same Table View, click New Column & enter the formula:
+ 				Rounded Total Sales = ROUND(SalesData[Total Sales], 0)
 	
-	Optional Task:
-		- ConcatColumn = SalesData[Region] & "-" & SalesData[State]
-		- Create a tax related column.
+		Optional Task:
+			- Create a column joining the region & state. Solution:  
+				ConcatColumn = SalesData[Region] & "-" & SalesData[State]
+			- Create a tax related column.
 
-	Task: 
-		Create a Duration column to calculate the difference between Ship Date and Order Date 
-		Solution: 
-			Duration = SalesData[Shipped Date] - SalesData[Order Date]
-			Afterwards, go to Column Tools & Change column data type to a WHOLE NUMBER	
+
+		- Task: 
+			Create a 'Duration' column to calculate the difference between Ship Date and Order Date. Solution: 
+				Duration = SalesData[Shipped Date] - SalesData[Order Date]
+				Afterwards, go to Column Tools (Tab) and change column data type to WHOLE NUMBER	
 			
 
-	Task:
-		Create a "Duration-Status-Message" column. Using the IF Statement, if the duration is <3 then the value is "acceptable" else it's "late"
-		Solution: 
-			Duration-Status-Message = IF(SalesData[Duration] < 3, "Acceptable", "Late")
+		- Task:
+			Create a "Duration-Status-Message" column. 
+			Using an IF Statement, if the duration is <3 then the value is "acceptable" else it's "late". Solution: 
+				Duration-Status-Message = IF(SalesData[Duration] < 3, "Acceptable", "Late")
 				
 		
-		Subtask: Let's create a visual:		
-			Create a bar chart for "Acceptable" & "late" 
-			by simply using the column chart and use this same field for BOTH X & Y Axis 
-			Optional: Create 1 card that outputs the earlier Message measure, & another with the Count.
+			Subtask: Let's create a visual.		
+			Create a bar chart that counts "Acceptable" & "late" 
+				Drag the "Duration-Status-Message" field for BOTH X & Y Axis 
+				Optional: Create 1 card that outputs the earlier Message measure, & another with the Count.
 
 
-
-	Optional IF Task: 		NewColumn = IF(SalesData[Total Sales] > 1000, "Big Sale","Not Big Sale")		
+		Optional IF Task: 	NewColumn = IF(SalesData[Total Sales] > 1000, "Big Sale","Not Big Sale")		
 	
 
 	NOTE:
 		Calculated columns are computed row by row
-		Values are stored in the data model => taking up memory => increase file size and slow refreshes for large tables
+		Values are stored in the data model => memory being taken up => increase file size and slow refreshes for large tables
 		Overall: Good but inefficient.
-
 	 
 
 - Measures -
 
 	Measures are similar to formulas.
 	
-	- Measures are calculated on the fly only when used in a visual, so they don’t consume extra storage.
-	- Measures do not create new columns of values but rather show calculations only when used in visuals.
-		- For instance, Power BI can’t create relationships using measures - only columns. 
+	- When used in a visual, Measures are calculated on the fly so they don’t consume extra storage.
+	- Measures don't create new columns of values for each row (i.e. No per-row calculation) 
+	- They operate on entire fields and only appear in the Fields pane; they show calculations only when used in visuals.
+	Recap: You can create and name measures just like calculated columns, BUT no calculation occur UNTIL the measure is added to a visual.
+		- For instance, Power BI can’t create relationships using measures - can only use columns. 
 			- Although they exist in the semantic model, bogus results are returned when we attempt something.
-	- You can create and name measures just like calculated columns, BUT no calculation occurs UNTIL the measure is added to a visual.
-	- Measures don’t calculate values for each row (i.e. No per-row calculation); they operate on entire fields and only appear in the Fields pane and used in visuals.
 
 
 	Situation: We use a measure when we need a summary value (like average, comission)				
-	Task: Create a commission based measure
-		Type in Formula Bar: Comission = SUM(SalesData[Total Sales]) * 0.02
+	Task: Create a measure named "Commission". Solution:
+ 		Commission = SUM(SalesData[Total Sales]) * 0.02
 			
-		- Once we've created our measure, no new column is added to the table so thus no new value is added for each row.
-		- The measure is for the entire field (only shows on side pane) which can next display values when used in visuals
-		TASK: 
-			Create a new page for Salespeople.
+		- After creating a measure, no new column is added so thus there's no new value added for each row.
+		- The measure applies to the whole field and appears in the side pane, showing values only when used in visuals.
+		
+		TASK: Create a new page for Salespeople.
 			Create a bar chart that maps out SalesPeople Total Sales
 			Create a GAGE CHART out of Measure Commission
 			(Optional) Create a card showing sales person name/sales
 					
 
-			
 			Note: Measures are explicit. 
-			If I do average of sales, then I can't change it to a sum via the pane field! 
-			I'll have to change the formula.
+			If an axis is displaying "average" of sales, then we can't change the field to display "sum" in the pane field! 
+			We'll have to change the formula.
 			
-
-
 	Recap:
 		Measures:
 			Calculated only when needed (mainly when you use them in a visual or report).
@@ -1280,31 +1272,34 @@ As you know, Tooltips are pop ups that display extra details about a data point 
 			Stored in memory for every row in your table, increasing the size of your model.
 			Always calculated, even if not used in your report.
 				link two tables based on a calculated value,
-			- Unlike a measure, a calculated column can be used in a slicer to place filter options on the report page.
+			- Unlike a measure, a calculated column can be used in a slicer to filter on the report page.
 
 
-
-	
 - Display Folder -
 	In Power BI, a Display Folder is a way to organize fields (columns, measures, hierarchies) in the Fields pane 
-	without changing the underlying data model. It’s purely for presentation and usability, especially in large models.
+	without changing the underlying data model. 
+		
+		Purpose: Makes the Fields pane cleaner and easier to navigate.
+		- It’s purely for presentation and usability, especially in large models.
+		
+	Task: Create a display folder named 'Calculated Columns' for each of the columns we made.
+		Calcualted Columns
+  		├─ 'firstNewColumn'
+  		├─ 'Rounded Total Sales'
+  		└─ 'Duration-Status-Message'
+
+	Step 1: Go to the Model view
+	Step 2: Select the desired measures or columns
+	Step 3: In the Properties pane, in the 'Display folder' field, type the folder name & then press Enter. 
 	
-	Purpose: makes the Fields pane cleaner and easier to navigate.
-
-	Task: Create a display folder for SUM measure, Average measure, etc.
-		Sales Metrics
-  		├─ Total Sales
-  		├─ Average Sales
-  		└─ Sales Growth
-
-
+	
+	-- 
+	Additional Q's & Notes:
 
 	-- 
-	Correct. A measure is a named DAX formula that summarizes model data.
-	
-	Parameter
-	Incorrect. A parameter allows what-if scenarios or field selection
-
+	A measure is a named DAX formula that summarizes model data.
+	whereas
+	A parameter allows what-if scenarios or field selection	
 	-- 
 
 	You decide to remove unnecessary columns from your data model.
@@ -1330,8 +1325,7 @@ As you know, Tooltips are pop ups that display extra details about a data point 
 	- To change the button text to match the page name, conditional formatting must be used to set the text to equal the newly created DAX measure.
 	Wrong: No bookmarks are necessary.
 	It is not necessary to set the destination to a specific page since conditional formatting is used to specify the destination.
-
-
+	
 
 /* -------------------------------------------------------
 ## <p id = "7"> Lesson 8: Sharing & POWERBI SERVICE (PowerBI Online) | [Back to ToC](#toc)</p> 
