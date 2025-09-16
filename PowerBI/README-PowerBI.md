@@ -100,7 +100,13 @@ Task: Let's open "MyFootprintSports_1.pbix"
 			<b>Excercise:<b> 
 				Click on a chart to display several sections (in the pane) specifically related to that chart.
 				For the chart itself, we can allow focus mode:
-					- Takes the visual and expands it to take up the entirety of the canvas 
+					- Focus Mode lets you expand a single visual (like a chart, table, or map) 
+					so it takes up the full page (the entirety of the canvas).
+
+				We can resize  v
+				
+				Note: When a chart is selected, the chart will show <b>Visual Headers</b>. Similar to Excel Chart Tools.
+				https://learn.microsoft.com/en-us/training/modules/power-bi-effective-user-experience/6-visual-headers
 
 		~ Table View - Shows Raw Data Records
 			- Revisit the familiar Data Pane on the right that shows us tables and columns.
@@ -490,15 +496,9 @@ Think: Data Transformation
 
 
 Links:  
-	- https://learn.microsoft.com/en-us/power-bi/visuals/power-bi-report-add-visualizations-i?tabs=powerbi-desktop  
-	- https://learn.microsoft.com/en-us/training/modules/power-bi-effective-reports/1-introduction  
+	- [Add visuals](https://learn.microsoft.com/en-us/power-bi/visuals/power-bi-report-add-visualizations-i?tabs=powerbi-desktop)  
+	- [Design Power BI reports](https://learn.microsoft.com/en-us/training/modules/power-bi-effective-reports/1-introduction)  
 	- [Design effective reports in Power BI](https://learn.microsoft.com/en-us/training/paths/power-bi-effective/)
-
-FAQ: How to:  
-	- Add Button  
-	- Clear out filters  
-	- Create Tooltips  
-	  -> Hover mouse over chart
 
 
 /* -------------------------------------------------------
@@ -506,108 +506,113 @@ FAQ: How to:
 ---------------------------------------------------------- */
 
 
+With your data prepped & ready, we can now build visuals in Power BI Desktop to explore trends, patterns, and connections.
 If you’re familiar with PivotTables and PivotCharts, you’ll notice some similarities with Power BI’s charts.
 
---- Simple Chart Creations ---
+--- Subsection: Simple Chart/Element Creations ---
 		
 	Excercise: Create a blank report, import "Sales Data" & name the page "Sales per Rep"
 	- Note: Fields in Data Pane (on far right side) are sorted A-Z 
-	
-	NOTE: Fit to Page icon (bottom-right corner of PowerBI next to Zoom bar) resets zoom to standard fit if zoomed in/out.
-	Note: When we start adding Visuals, Visuals can be COPIED + PASTED		
-	
-	Quadrant 1 (1/4 of the page): 
+	- Note: Fit to Page icon (bottom-right corner of PowerBI next to Zoom bar) resets zoom to standard fit if zoomed in/out.
+		
+	Quadrant 1 (1/4 page): 
 	Create a simple column chart showing sum of total sales per Salesperson
-	
+	Recall: Focus Mode lets you expand a single visual (like a chart, table, or map) so it takes up the full page (the entirety of the canvas).
+
 		Tasks:	
 			- For 'Total sales' field, change from SUM to AVERAGE. 
-			Note: When a chart is selected, the chart will show <b>Visual Headers</b>. Similar to Excel Chart Tools.
-				https://learn.microsoft.com/en-us/training/modules/power-bi-effective-user-experience/6-visual-headers
+			
+			- Sort axis by 'Salesperson', not by 'Sum of Total Sales':
+				clicking on 3 dots of the chart (More Options) -> Sort Axis -> Quarter
+				[Learn more about sorting](https://learn.microsoft.com/en-us/power-bi/consumer/end-user-change-sort)
+
 			- Change interval of y-axis: 
-				Select the Visual -> "Format Your Visual" pane -> Visual -> Y-Axis -> "Maximum" (or similar).
+				Select the Visual -> "Format Your Visual" pane -> Visual -> Y-Axis -> "Maximum" to 5000 (or similar).
 					Q: Can we set the interval in sets of 25000?
 			 		A: No. No direct setting to force specific intervals (like strictly every 1000 units) 
+			- Make Gridlines more noticeable:
+				Format Visuals -> Gridlines 
+					-> Change Color
+					-> Change Width
 			- Add Legend:
-				Drag the Salesperson field to Legend Area (observe color change).	
+				Drag the 'Salesperson' field to Legend Area (observe color change).	
 				Then under Visual Pane -> Visuals -> Legend ->
 					Customize: Text: Bigger, Position: Center Right 
 				If we click on the legend, it forms a highlight
+	
+		
 
-	Quadrant 2 (1/4 of page):
+	Quadrant 2 (1/4 page):
+	Note: When we start adding Visuals, visuals can be COPIED + PASTED	
 	- Create 2 cards: One showing the name of Salesperson & the other showing Total Amount.
 		Remember:  A card visualization displays a single data point.
 
 		Task: 
-			Add Title. One for "Sales" & other for "Salesperson":				
-			Change font size:			Visual Pane -> Visual -> Call Out Value -> Font -> 45
-			ROUND Decimal Places:			Visual Pane -> Visual -> Call Out Value -> Value Decimal Places
+			Add Title. One for "Sales" & other for "Salesperson".
+				Optional: Turn on "Divider" 	
+			Change/modify chart title:		Click on chart -> Visualizations Pane -> General -> Title				
+			Change font size:			Visual Pane -> Visual -> Call Out Value -> Font = 45
+			ROUND Decimal Places:			Visual Pane -> Visual -> Call Out Value -> 'Value Decimal Places' = 2
+			Set up a border: 			Visual Pane -> General -> Effects -> Visual Border (10px black)
 			Change text color: 			Visual Pane -> Visual -> Call Out Value -> Color (Dark Yellow)
 			Change background color of a card: 	Visual Pane -> General -> Effects -> Background (Light Gray)
-			Set up a border: 			Visual Pane -> General -> Effects -> Visual Border (10px black)
-			Change/modify chart title:		Click on chart -> Visualizations Pane -> General -> Title	
-			All visuals have backgrounds: 		Visualizations -> General -> Effects -> Backgrounds
+				Color Options: Black background with White text color.
 				Note: Backgrounds change when the theme is changed too.
 	
-	- Add the Skillable Office image to your report (1/4 Quadrant)
+	Quadrant 3 (1/4 page)
+	- Add the Skillable Office image to your report (Insert tab -> Image)
 
 	Visuals - Visualizations of semantic model data.
 	Elements - Provide visual interest but don't use semantic model data. 
 		Elements include text boxes, buttons, shapes, and images.
 
-	How To create a textbox?
-		- (Not great but similar to PowerPoint)		Insert -> Textbox
-		- We can create a card & then:
+	Task: Different ways to add text to a canvas page:
+		1. (Not recommended) Create a textbox:
+			- (Similar to PowerPoint)	Insert -> Textbox
+		2. Create a card & then:
 			1. Add a measure that says: 	msg = "Hello World!"
 			2. Add the measure under the "Fields" section of a card.
-		- (Preferred): 	Insert -> Shapes -> Rectangle
-				(Result: a blue box has been added)
+		3. (Preferred) Insert Shape: 	Insert -> Shapes -> Rectangle
+			(Result: A blue box has been added)
 
-		Task:
-		To change text/background styles:
-			Format Shape Pane -> Shape -> Style:
-				- Fill: Change Color
-					(If fill has been disabled here, 
-					then alternatively General -> Effects -> Background 
-					would work like what we've seen before w/ shapes)
-				- Text: (Under same style category) Make sure to turn "ON" 
-					Add your text, change font size to 30
+		Task: Add text/background styles:
+		Format Shape Pane -> Shape -> Style:
+			- Text: (Under same style category) Make sure to turn "ON" 
+				Add your text, change font size to 30
+
+			- Fill: Change Color
+				(If fill has been disabled here, 
+				then alternatively General -> Effects -> Background 
+			 	would work like what we've seen before w/ shapes)
+
+
+	The Selection Pane (under the View tab) works like in PowerPoint, 
+	which lets us reorder layers and toggle (show/hide) element visibility.
 
 	Q: How to align our shapes, like in PowerPoint?
 	A: Select All > Format Tab > Align
 
-	Also similar to PowerPoint is the SELECTION PANE (Under View Tab)
-	which can change layer order & show/hide elements
+	
 
-	- Add a Matrix visual if needed.
-			'Matrix' visual is similar to Excel Pivot Table; 
-				best when you need to show data with categories broken down into subcategories
-			'Table' visual is similar to Excel Table; 	
-				Best for showing raw, detailed data in a simple list, like a simple transaction log.
-				i.e. no hierarchy! Just raw data.
-				For your visual, make sure that when you place the field in the Fields pane → Columns area,
-				that the dropdown for the added field (e.g. Product/State field) shows "Don’t summarize"
-					- If the table doesn’t update, click outside the field or make a small change on the table.
-
-
-	--- Background FORMATTING ---
+--- Subsection: Background Formatting ---
 	Create a new page called "Formats"
 	Click the background of your page, then go to Visualizations -> "Format your report page" on the sidebar
 
 		Q: "Can you make the canvas taller so you can scroll to more visuals rather than change pages"
-		A: Yes under Canvas Settings
+		A: Yes, under 'Canvas Settings' -> 'Type' = Custom
 
-		Task: Apply a background color to only 1 report canvas				
-			Canvas Background will only change the main canvas page
-			Note: You MUST change the transparency color to not be 100%.
+		Task: Change background color of Canvas 
+			'Canvas Background' applies color only to the main page canvas
+			Note: We MUST change the transparency color to not be 100%.
 	
-		Task: Change color wallpaper
+		Task: Change color of Wallpaper
 			Wallpaper -> Color
-			Wallpaper effects foreground & background, whereas page background effects only background
+			Observe: Wallpaper effects foreground & background, whereas page background effects only background
 
-		Task: Change the theme of our report!! (Note: Will affect all the pages)
-			Go to View -> Themes & then pick your fav theme! (E.g. Choose Accessible Orchid)
+		Task: Choose a report theme, which applies across the entire report (similar to themes in MS Excel & MS Word)
+			View -> Themes & then pick your fav theme! (E.g. Choose Accessible Orchid)
 			
-			To change the default Settings (e.g. change default Wallpaper Color)
+			To change the default Settings (e.g. set a default wallpaper color for all pages)
 				View -> Themes-> Customize Theme -> Page -> Wallpaper -> Color 
 				(Feel free to change Page Background as well)
 							
@@ -615,76 +620,100 @@ If you’re familiar with PivotTables and PivotCharts, you’ll notice some simi
 		Optional: EXPORT A THEME (Design your own filter, background, etc. in POWERBI & then export)
 			Once exported, try importing your theme into PowerBI. 	
 	
-	--- Bar Chart Formatting ---
+
+--- Subsection: Bar Chart Formatting ---
 
 	Create a new page called 'Product/Quarterly Sales'
 	
-		Create a BAR chart (1/2 page) mapping Product vs Sales (check off 2 fields: Product & Total sales)
-		NOTICE: Bar charts do not have columns, rather they have bars as fields
+	Quadrant 1 (1/2 page): 
+		Create a 'BAR' chart mapping Product vs Sales (check off 2 fields: Product & Total Sales)
+		Recommend: Turn Focus Mode On.
 
-		OPTIONAL: Change your bar chart into a Funnel Chart!
-		A funnel visualization displays a linear process with sequentially connected stages, 
-		with one stage transitioning to the next.
+		NOTICE: 
+			When we select a visual & open the Format Visual pane, 
+			the pane shows formatting sections/options SPECIFIC to that visual
+			e.g. 	For a bar chart, you won’t see a 'Columns' section because it doesn’t use columns; 
+				instead, you’ll see a 'Bars' section to format the bars.
 
 
-		Click on the chart & do the following:
-			- Make Gridlines More Noticeable:
-				Format Visuals -> Gridlines 
-					-> Change Color
-					-> Change Width
+		Optional Task: Change your bar chart into a Funnel Chart!
+			A funnel visualization displays a linear process with sequentially connected stages, 
+			with one stage transitioning to the next.
+
+
+		Click on the chart & go to Format Visuals -> Bars (Remember: We have a bar chart, not column chart!)
+
 			- Change bar colors on the chart: 
-				 Format Visuals -> Bars (Remember: We have a bar chart, not column chart!) -> Color
-				TASK: MAKE THE CHARTS TO HAVE RED BARS INSTEAD OF TRADITIONAL BLUE!
+				Bars (Section) -> Color
+				TASK: Make the bars to be RED instead of TRADITIONAL BLUE.
 
-	
-			- Change the color of a particular point 
-			(e.g. since Laptops sold the most, make that a vibrant color):
-				Select the category (from drop down) & then select the color.
+			- Change the color of a particular point (e.g. Make Laptops category a vibrant color since it sold the most):
+				Bars (Section) -> Select 'Categories' (from drop down) & then select the right category.
 				[One of main links]
 				(https://learn.microsoft.com/en-us/power-bi/visuals/service-tips-and-tricks-for-color-formatting?tabs=powerbi-desktop)
 		
-			- Apply conditional formatting On Products
-				Task: Making any bar below 1M red. 
-				REMEMBER: DO IT ON SUM OF TOTAL SALES
+			Task: Making any bar below 1M red via Conditional formatting (on Products)  
+				Bars (Section) -> Select 'Categories' back to "All"
+				Under color, select "FX" 
+				REMEMBER: For the option "What field should we base it on?", set to "SUM OF TOTAL SALES"
+				[Learn more about conditional formatting](https://learn.microsoft.com/en-us/power-bi/create-reports/desktop-conditional-table-formatting)
+				
 
-
-		Create a COLUMN chart (1/4 page) for Quarter Earnings by mapping Quarter & Total Sales 
-		(note: the chart doesn't look good when mapping regions)
-
-		OPTIONAL: Change your bar chart into a Waterfall Chart!
+	Quadrant 2 (1/4 page): 
+		Create a 'WATERFALL' chart mapping Quarter Earnings (Map Quarter & Total Sales) 
 		A waterfall visualization displays a running total as values are added or subtracted.
+			(Note: the chart doesn't look good when mapping regions)
+
 
 		Click on visual & then:
-			- You MAY Need to sort by quarter by 
-				clicking on 3 dots of the chart (More Options) -> Sort Axis -> Quarter
-	
-			- Create data labels under: "Visualizations -> Visuals -> Data Labels" -
-					> VALUE > FONT -> 20
-					> OPTIONS > Position > Chose where you want the data label positioned.
-
-			- Apply a color gradient to the charts columns
-				Under "Visualizations -> Visuals -> Columns -> FX Button"
+			- Sort X-Axis by "Quarter" (Q1->Q4).
+				
+			- Create data labels under Visualizations -> Visuals -> Data Labels 
+					Chose where data label is positioned: 	-> Options -> Position > Inside End
+					Choose the font size			-> Values  -> Font = 20
+			
+			IMPORTANT TASK: Change your column chart into a Waterfall Chart!
+			- Apply a color gradient to the charts columns	
+				
+				Under Visualizations -> Visuals -> Bars -> Under color, select "FX"
 				On the pop up:
-					Under Format Style -> Gradient
-					Choose what color you'd like then press OK
+					Format Style -> Gradient
+					Choose whatever color you'd like then press OK
 
-				NOTE: Remember, if a chart maps sales, 
-				then the "what field should be base this on" should be SUM OF TOTAL SALES 
-					[Video](https://www.youtube.com/watch?v=Eop1HsBjWwo)
+
+				Note:
+				Formatting applies to the value of data points (bars/lines) themselves, not the X-axis labels or categories directly.
+
+				What if we wanted to apply a gradient across categories?
+				i.e.  Have Q1 be light blue, Q4 be dark blue?		
+
+				Work-Around: Category-based gradient formatting 
+					1. Create a dummy measure that assigns a number per category
+
+					CategoryRank = SWITCH(
+						SELECTEDVALUE('SalesData'[Quarter]),
+						"Quarter 1", 1,
+						"Quarter 2", 2,
+						"Quarter 3", 3,
+						"Quarter 4", 4
+					)
+
+					Note: This assigns a numeric value to each category.
+				
+					2. Select our chart & go to Bars -> Color -> "FX"
+						Format Style = Gradient
+						What field to rank this on? = Category Rank
 
 			
-				RAZA: COLOR GRADIENT IS STILL SORTED?
+				[Learn More via this video](https://www.youtube.com/watch?v=Eop1HsBjWwo)
+				
+
+	Quadrant 3 (1/4 page):
+		Add a 'LINE CHART' below the previous column chart to display quarterly earnings.
+			Instead of sorting x-axis of the line chart by highest to lowest, 
+			- Sort X-Axis by "Quarter" so it goes (Q1->Q4)
+					
 		
-		
-		Create a Line Chart (1/4 page) below prev. column chart
-			How to sort? Sort Q1->Q4 for Quarterly Sales
-
-			Instead of sorting the line chart by highest to lowest, 
-			let's sort it by Quarter so it goes Q1 → Q4.
-						
-			Sort Axis -> Sort https://learn.microsoft.com/en-us/power-bi/consumer/end-user-change-sort
-
-
 
 /* -------------------------------------------------------
 ## <p id = "5"> Lesson 5: Creating Interactive Visualizations - Filtering, Controls & Navigation | [Back to ToC](#toc)</p>
@@ -692,6 +721,11 @@ If you’re familiar with PivotTables and PivotCharts, you’ll notice some simi
 
 In this chapter we will touch base on:
 	- Interactions/Filtering/Slicers/Buttons/Groups/Drill Downs 
+
+How to:  
+	- Add Button  
+	- Clear out filters  
+	- Create Tooltips -> Hover mouse over chart
 
 Helpful Links:
 	- https://www.youtube.com/watch?v=9eEk2ct2QCI  
@@ -1088,7 +1122,7 @@ As you know, Tooltips are pop ups that display extra details about a data point 
 
 
 	
-	-- Extra time --
+	-- Extra Visuals / Extra time --
 
 	[Analyze Visuals](https://learn.microsoft.com/en-us/power-bi/consumer/end-user-analyze-visuals)
 	Create a a line graph that maps Monthly total sales.
@@ -1096,6 +1130,16 @@ As you know, Tooltips are pop ups that display extra details about a data point 
 		Do a filter for Q2
 			let's analyze the top point by right clicking on the point -> Analyze !!!!
 
+
+	- Add a Matrix visual if needed.
+			'Matrix' visual is similar to Excel Pivot Table; 
+				best when you need to show data with categories broken down into subcategories
+			'Table' visual is similar to Excel Table; 	
+				Best for showing raw, detailed data in a simple list, like a simple transaction log.
+				i.e. no hierarchy! Just raw data.
+				For your visual, make sure that when you place the field in the Fields pane → Columns area,
+				that the dropdown for the added field (e.g. Product/State field) shows "Don’t summarize"
+					- If the table doesn’t update, click outside the field or make a small change on the table.
 
 
 
