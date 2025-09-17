@@ -595,7 +595,8 @@ If you’re familiar with PivotTables and PivotCharts, you’ll notice some simi
 	
 
 --- Subsection: Background Formatting ---
-	Create a new page called "Formats"
+
+	Create a new page called "Formats". 
 	Click the background of your page, then go to Visualizations -> "Format your report page" on the sidebar
 
 		Q: "Can you make the canvas taller so you can scroll to more visuals rather than change pages"
@@ -719,45 +720,46 @@ If you’re familiar with PivotTables and PivotCharts, you’ll notice some simi
 ## <p id = "5"> Lesson 5: Creating Interactive Visualizations - Filtering, Controls & Navigation | [Back to ToC](#toc)</p>
 ---------------------------------------------------------- */
 
-In this chapter we will touch base on:
-	- Interactions/Filtering/Slicers/Buttons/Groups/Drill Downs 
-
-How to:  
+To customize & filter reports, in this chapter we will touch base on:
+	- Interactions/Filtering/Slicers 
 	- Add Button  
-	- Clear out filters  
+	- Groups/Drill Downs  
 	- Create Tooltips -> Hover mouse over chart
 
 Helpful Links:
-	- https://www.youtube.com/watch?v=9eEk2ct2QCI  
-	- https://learn.microsoft.com/en-us/power-bi/create-reports/service-reports-visual-interactions?tabs=powerbi-desktop
+	- [Visual Interactions](https://learn.microsoft.com/en-us/power-bi/create-reports/service-reports-visual-interactions?tabs=powerbi-desktop)  
+	- [TURN OFF all the Visual INTERACTIONS](https://www.youtube.com/watch?v=9eEk2ct2QCI)  
 
-	-- Discuss Highlights/Interactions (Be on the Same Page) --
-	Visuals in a report dynamically respond to user selections one at a time.	
-	
-		Highlighting = a visual emphasis WITHIN THE SAME visual.
-			EX: For example, on a single column chart if we click one column, 
-			then that column is highlighted (colored fully) while the other bars are dimmed.
-		Cross-highlighting = visual emphasis across DIFFERENT visuals
-			"Select a data point or a bar or a shape and watch the impact on the other visualizations."
-			EX: When you click/select data in one visual, it highlights related data in another visual while keeping the rest of the data faded.
-			Cross-highlighting means one visual affects another by highlighting portions of the data(subsets) but doesn't filter it completely.
+
+
+-- Subsection: Highlights/Interactions (Be on the Same Page) --
+	Visuals in a report update dynamically based on user selections.	
+
+		- Highlighting = Visual emphasis WITHIN THE SAME visual.
+			EX: For example, on a page with a single column chart, 
+			clicking one bar highlights (colored fully) that bar while dimming the other bars.
+		
+		- Cross-highlighting = Visual emphasis ACROSS DIFFERENT visuals
+			"Select a data point or a bar or a shape and watch the impact on the other visualizations." 
+				[Source](https://learn.microsoft.com/en-us/power-bi/create-reports/service-reports-visual-interactions?tabs=powerbi-desktop#change-the-interaction-behavior)
+			EX: Clicking/Selecting data in one visual highlights related data segments in another and fades the rest.
+			Cross-highlighting is when one visual affects another by highlighting portions of the data(subsets) but doesn't filter it completely.
 				e.g. Selecting a bar on a bar chart can affect a pie chart.
 			
-		We can make it so that clicking an Interaction forms a new table
+		When selecting an Interaction forms a new table, one student said: 
 			Figured out my issue - click on the graph, then "Data/Drill" tab, then unclick "Data Point Table" - all good!
 
 		NOTICE:
-			Hover over a data point to see a report tooltip pop up with extra context/details about that data point.
+			Hover over a data point to see a tooltip with extra details about that data point pop up.
 			Cross-highlighting a chart means that the tooltip now displays an added "Highlighted: field with extra info 		
 
 		To turn off interactions, go to: 
 			File>Options>Query Reduction 
 			& Select "Disabling cross highlighting/filtering by default".
 			[More Info](https://www.reddit.com/r/PowerBI/comments/tfjig4/default_to_no_interactions_with_other/)
-
 		
-		If a visual isn’t behaving as you want, you can adjust interactions behaviors.
-		To customize how the visuals interact with each other:
+		If a visual isn’t behaving as you want, we can adjust interactions behaviors.
+		Task: Edit how the visuals interact with each other:
 			Select a visual to make it active (for e.g. Quarterly Sales Column Chart)
 			On the ribbon in Power BI Desktop, select Format > Edit interactions.
 			Pick how other visuals react by selecting one of these three interaction behaviours:
@@ -766,63 +768,63 @@ Helpful Links:
 				- None
 	
 	
+-- Subsection: Filtering Excercise --
 
-	-- Filtering Excercise --
-	https://youtu.be/EMfqGiFr6Y4?si=UGZle2pfMQKZmiJw
+	[Link to set 'Add a filter' to a report](https://learn.microsoft.com/en-us/power-bi/create-reports/power-bi-report-add-filter?tabs=powerbi-desktop)
 
-		Create a new page called 'Product/Regional Sales'
- 
-		Make a clustered column chart (1/4 page) of Product vs Sales (OR COPY/PASTE prev. bar chart)
-		Make a pie chart for Regional sales
-			Suggestion: 	Turn on border for each slice.
-					Make legend & labels bigger.
-			
-
-		[Link to set 'Add a filter' to a report](https://learn.microsoft.com/en-us/power-bi/create-reports/power-bi-report-add-filter?tabs=powerbi-desktop)
-		The Filters pane displays along the right side of the report canvas. 
-
-		We can set filters at three different levels for the report.
-			- The visual level.
-			- The page level.	
-			- The report level.
-		
-		Task: Try to filter by QUARTER (e.g. 1st Quarter)
-			Options: 	Filter By Visual, Page, All Pages  
-			Note: 		On the Filter Pane, when you apply a Filter you'll see # of rows returned on the right.
+	We can filter our data to see only what we're interested in.
 	
+	The Filters pane displays along the right side of the report canvas. 	
+	We can set filters at three different levels for the report.
+		- The visual level.
+		- The page level.	
+		- The report level.
+
+	Task: Create a new page called 'Product/Regional Sales'
+		Quadrant 1 (1/4 page): 
+			Make a clustered column chart of Product vs Sales (OR COPY/PASTE prev. bar chart)
+		
+		Quadrant 2 (1/4 page):
+			Make a pie chart for Regional sales
+			Suggestion: 	Turn on border for each slice.
+				Make legend & labels bigger.
+			
+		Task: Filter by QUARTER (e.g. 1st Quarter)
+			Options: 	Filter By Visual, Page, All Pages  
+			Note: 	On the Filter Pane, when you apply a Filter you'll see # of rows returned on the right.
+		
 			NOTE: 
 				The end user may not immediately see that a filter is applied.	
 				To verify if there's a filter on a visual, 
 				hover over the filter icon on a specific charts <b>Visual Headers</b> to see active filters.
+				- We can create a "Clear All" Filters button, which we'll touch base on later. 
 
-			NOTE: 	
-				For the Product Sales visual, if you filter by one product (e.g., Laptops), 
-				the bar chart will show only one product as a single bar.
+				
+		For the Product Sales visual, filtering by one product (e.g., Laptops) show the bar chart containing only one product as a single bar.
+		Similarly, if you filter the Regional Sales pie chart by one region, 
+		then the pie becomes a full circle displaying only 1 region since all other regions are filtered out.
 
-				Similarly, if you filter the Regional Sales pie chart by one region, 
-				then the pie becomes a full circle displaying only 1 region since all other regions are filtered out.
-
-			One common use for filters: To exclude blank or empty values so they don’t clutter your report or distort results.
-			Example: Using the table visual to filter out blanks.
+		One common use for filters: To exclude blank or empty values so they don’t clutter your report or distort results.
+		Example: Using the table visual to filter out blanks.
 		
 
-		Task: Additional Filters
-			- Filter Product Sales chart to show only products that generated over $1000000
+	Task: Additional Filters
+		- Filter Product Sales chart to show only products that generated over $1000000
 
-			- FILTER TOP N
+		- FILTER TOP N
 			Top 3 items By Value: (Field goes Here) Sum of Total Sales
 	
 
-	-- Slicers Excercise --
+-- Subsection: Slicers Excercise --
 
 	The slicer visualization can be used to filter the other visuals on the page. 
 	
-	On the same 'Product/Regional Sales' page, 
+	Quadrant 3 (1/4 page) On the same 'Product/Regional Sales' page: 
 	Task: Create a slicer for Region & make it a tile.
 
-		Change text of headers to make it big!:  				Visual -> Values -> Font Size
-		Enable - SELECT ALL option:						Visual -> Slicer Settings -> Selection -> Show "Select All" As an Option
-		Enable a search box in a slicer to search for values to filter 		Click the three dots on the slicer’s visual header, select Search, and the search box will appear in the slicer.
+		Change text of headers to make it big!:  			Visual -> Values -> Font Size
+		Enable - SELECT ALL option:					Visual -> Slicer Settings -> Selection -> Show "Select All" As an Option
+		Add a search box to the slicer to filter values by searching:	Click the three dots on the slicer’s visual header, select Search, and the search box will appear in the slicer.
 			[Solution](https://community.fabric.microsoft.com/t5/Desktop/Slicer-Search-Bar/td-p/3010479)
 		Change Slicer Type style options from 'Vertical List' to 'Tile': 	Visual -> Slicer Settings -> Option -> Tile
 			Additionally we can make the font for "Values" to be bigger.
@@ -838,14 +840,14 @@ Helpful Links:
  			Otherwise, it can be annoying/difficult to remove its effect from the other charts.
 
 
+-- Subsection: Bookmarks --
 
-	-- Bookmark --	
+	[Learn about Bookmarks](https://learn.microsoft.com/en-us/power-bi/create-reports/desktop-bookmarks)
+	[Use bookmarks to change chart or visual with Button Click](https://youtu.be/EMfqGiFr6Y4?si=UGZle2pfMQKZmiJw)
 
-		[Learn about Bookmarks](https://learn.microsoft.com/en-us/power-bi/create-reports/desktop-bookmarks)
+	Bookmarks work are similar to MS Word bookmarks; Think of them as snapshots of your report you can quickly revisit or share.
 
-		Bookmarks work are similar to MS Word bookmarks; Think of them as snapshots of your report you can quickly revisit or share.
-
-		Bookmarks save the current state of a report(including filters, slicers, and visuals) so that you can:
+	Bookmarks save the current state of a report(including filters, slicers, and visuals) so that you can:
 		- Return to that view anytime.
 		- Navigate between pages or sections.
 		- Make interactive reports with clickable buttons or images.
@@ -861,7 +863,7 @@ Helpful Links:
 			Remember: Bookmarks saves other settings too like filters, etc.
 
 
-	-- BUTTONS -- 
+-- Subsection: Buttons --
 
 	Recall:
 	Visuals - Visualizations of semantic model data.
@@ -922,15 +924,14 @@ Helpful Links:
 				For example, you can give a synonym of (Actuals) for the (Sales) measure. 
 
 
+-- Subsection: Groups --
 
-	-- GROUPS --
 	[Groups Link](https://learn.microsoft.com/en-us/power-bi/create-reports/desktop-grouping-and-binning)
 	
-	When Power BI Desktop creates visuals, it aggregates your data into chunks, or groups, 
-	based on values it finds in the underlying data. 
-
-	Usually it’s fine, but sometimes you may want to control how the data is grouped. 
-	Like Excel PivotTables, you can group columns in Power BI which helps with charts or histograms that have many columns.
+	When Power BI Desktop creates visuals, 
+	it aggregates or groups your data into chunks based on the values it finds.
+	Usually this is fine, but sometimes you may want to control how the data is grouped. 
+	Like Excel PivotTables, you can group columns in Power BI which makes large charts or histograms that have many columns easier to read.
 
 
 	Situation: 	Confirm there is a Quarterly Sales column chart showing 'Total sales' by 'Quarter'.
@@ -948,13 +949,12 @@ Helpful Links:
 		Note: The Bin group type is an auto grouping of items into bucketed bins (groups).
 
 
-	-- DRILL DOWN --
+-- Subsection: Drill Down --
 
 	[Reference](https://learn.microsoft.com/en-us/training/modules/configure-semantic-model-power-bi/5-hierarchies)
-	https://learn.microsoft.com/en-us/training/modules/configure-semantic-model-power-bi/9-check
+	[Test Your Knowledge](https://learn.microsoft.com/en-us/training/modules/configure-semantic-model-power-bi/9-check)
 
-		
-	
+
 	We've covered interactions and highlights but to recap:
 	Up to this point, when we create a chart and we click on it, it creates a highlight. 
 	That highlight stands out from other elements within the chart or a cross-highlight/affect other charts as an interaction.
@@ -962,82 +962,73 @@ Helpful Links:
 	With most datasets however, there are usually complex groups or subsets of data. 
 	To manage this, we can create a hierarchy that by default gives the user a high-level overview of your data, 
 		and it can drill down into more detailed levels as needed.
+	i.e. Hierarchy = GROUPING/AGGREGATE
 
-	NOTES: Microsoft: Levels of a hierarchy are always based on columns from the same model table
+	Microsoft article: "Levels of a hierarchy are always based on columns from the same model table"
 	In short: we're grouping a set of related fields together under a hierarchy.
-		i.e. Hierarchy = GROUPING/AGGREGATE
 		Whole Point: Improves organization & no need to make potential duplicate charts thereby saving space.
 		
 
-	EXCERCISE: Create a Regional Sales Clustered Column Chart.
 	
-	Objective: We'll create a hierarchy of Region -> State sales
-	Goal/Main idea: User can drill down and break the sales down by region and state.
-		Effectively we're making TWO VIEWS for the chart: 
-		Default/Parent vs Detailed/Child View (I'll be referring to it as parent and child level.)
+		
+	Quadrant 1 (Use Focus Mode so that size of the chart doesn't matter):
+	Scenario: We'll create a hierarchy of sales for 'Region' -> 'State' 
+
+	Task: Create a Regional Sales Clustered Column Chart.
+		Goal/Main idea: 
+		Effectively we're creating two chart views; users can drill down and break the sales down by region and state. 
+		Think: Default/Parent vs Detailed/Child View (I'll refer to it as parent and child level.)
 			NOTE: If we had a ZIP field, we could break it down further to Region -> state -> Zip (if provided)
 		
-		First we'll create a hierarchy on our Visual.
-			In the X-Axis, we see the field "Region" 
-			Add "State" field underneath Region
+	Action:
+		Step 1: Create a hierarchy on our Visual.
+			In the X-Axis, add "State" field from Data Pane by dragging it underneath "Region" field.
 
-		Under Visual Headers (Similar to Excel Chart Tools), we now see the drill down tools to the left of the filter 
+		Result: Visual Headers (Similar to Excel Chart Tools) shows the drill down tools (to the left of the filter). 
 			Clicking "Drill Up" shows the parent level.
 			Clicking "Go to Next Level in the hierarchy" will show every states sales
 			
-		The point is to save canvas space by using one chart that can switch back and forth between all the regions and states, 
-		instead of creating two separate charts.
-
+	As a result, we've created a hierarchy with the point to save canvas space; 
+	we use one chart to switch back and forth between all the regions and states, 
+	instead of creating two separate charts.
 		
-		NOTE: By default, clicking a region bar displays the table data for that region.
-		To turn this drilldown feature off, go to Data/Drill contextual tab, & deselect the option 'Data point table'
-
-
-	Drillthrough is a page navigation experience that takes you from one page to another plus applies a set of filters to page navigated to. 
-	Expand is a way to navigate down a level using the hierarchy controls.
-
-
-	Task: Enable Drill Down Mode to explore sales by state within regions:
 	
-		Click "Enable drill down" in the Chart tools
-		(Another way of doing it: Select Chart -> Data/Drill Tab -> Drill Actions Group -> Drill Down Button)
-
-	Result: We've enabled drill down mode & no longer does clicking on a bar leads to a data point table or a standard highlight.
+	By default, clicking a region bar displays the table data for that region.
+	
+	Task: 	Turn this drilldown feature off by going to Data/Drill contextual tab, & deselect the option 'Data point table'
+	Result: We've enabled drill-down mode so that clicking a bar no longer shows a table or standard highlight.
+	
+	Task: 	Enable Drill Down Mode to expand regional sales:
+		2 ways:
+			1st way: Click "Enable drill down" in the Chart tools
+			2nd way: Select Chart -> Data/Drill Tab -> Drill Actions Group -> Drill Down Button
+	
 			
-			
-	NOTE:	WHAT IF USER DONT KNOW THERES A DRILL DOWN???
-	EX:	Add an INFORMATION SHAPE via Insert -> Buttons -> Information.
-
-
-
-			
-	Q: You need to create a new hierarchy in Power BI Desktop.
-	What should you do first?
-
-	A: To create a new hierarchy in Power BI Desktop, you must select Create hierarchy from the Model view or Report view. 
-	NO DRAG/DROP!
+	Student Q: 	What if a user doesn't know that there's a DRILL DOWN??
+	Answer:		We can add an INFORMATION SHAPE via Insert -> Buttons -> Information to notify them.
 
 
 	- (Optional More practice) -
 	Optional Excercise #1:
-	Create a Quarter Sales chart and enable drill-down on the X-axis to go from Quarter -> Month -> Day.
-		(This can be done by including order date field) 
+		Create a Quarter Sales chart.
+		Enable drill-down on the X-axis to go from Quarter -> Order Date[Month] -> Order Date[Day].
+		(This can be done by expanding Order date field) 
 		
-	Solution: 	
-		- x axis -
-		Quarter
-		Order Date
-		  Month
-		  Day
-	
+		Solution: 	
 			Top level: Sales by Year
-			Drill down: Sales by Month (within that year)
-			Drill down again: Sales by Day (within that month)
+			Drill down: Sales by Order Month (within that year)
+			Drill down again: Sales by Order Day (within that month)
+
+			- x axis -
+			Quarter
+			Order Date
+			  Month
+			  Day
 	
 	Optional Excercise #2:
-		Used the Group we created and place it at the highest level above Quarter.
+		In the last example with the 2 groups we created (1st half of year & 2nd half of year),
+		place it at the highest level above Quarter.
  
-
 
 	Recap: Understand:
 		- interactivity
@@ -1048,9 +1039,12 @@ Helpful Links:
 		- add slicers - just like how it's done in PivotCharts.
 		- understand hierarchys & drill down.	
 
-	
-	
-	-- Lunch --
+
+	Q: You need to create a new hierarchy in Power BI Desktop.
+	What should you do first?
+
+	A: To create a new hierarchy in Power BI Desktop, you must select Create hierarchy from the Model view or Report view. 
+	NO DRAG/DROP!
 
 
 /* -------------------------------------------------------
