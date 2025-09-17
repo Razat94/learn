@@ -145,7 +145,7 @@ Task: Let's open "MyFootprintSports_1.pbix"
 ---------------------------------------------------------- */
 
 
--- Subsection : Importing .txt file --
+-- Subsection : Importing .txt file --  
 	Task: Create a blank report & import the bonus text file "People1.txt" (show them what/where it is)
 
 	Verify that data has been imported by going to Table View to see the table.\
@@ -288,12 +288,12 @@ Task: Let's open "MyFootprintSports_1.pbix"
 	
 ### /* ------------ Lesson 2B - Cardinality ------------ */
 
-Useful Links:
-	[Module: Configure Semantic Model](https://learn.microsoft.com/en-us/training/modules/configure-semantic-model-power-bi/)
+Useful Links:  
+	[Module: Configure Semantic Model](https://learn.microsoft.com/en-us/training/modules/configure-semantic-model-power-bi/)  
 	[Chapter: Configure relationships](https://learn.microsoft.com/en-us/training/modules/configure-semantic-model-power-bi/2-relationships)		
 
 
--- Subsection: Forming 1x1 cardiniality --
+-- Subsection: Forming 1x1 cardiniality --  
 	Task: Open "Employees.pbix" or Import data from "Employees.xlsx" 
 	
 	Recap:
@@ -340,7 +340,7 @@ Useful Links:
 
 	
 	
--- - Subsection: Forming 1xMany Cardinality - --
+-- Subsection: Forming 1xMany Cardinality --  
 	Task: Open 'Example-Star-Schema.pbix'
 
 	Let's look at the following data:
@@ -416,7 +416,7 @@ Useful Links:
 	Delete prev table & now import "Bonus Example 1 Sales Data"
 
 
--- Final Subsection: Forming relationships across different sources --
+-- Final Subsection: Forming relationships across different sources --  
 
 	Task: Import Leaps&Bounds spreadsheet & database.
 
@@ -485,9 +485,9 @@ Useful Links:
 ---------------------------------------------------------- */
 
 
-Chapter 3 - 
-Power Query Editor provides the ability to transform and analyze data
-Think: Data Transformation
+Chapter 3 -  
+Power Query Editor provides the ability to transform and analyze data.  
+Remember: Power Query = Data Transformation
 
 
 /* -------------------------------------------------------
@@ -720,19 +720,18 @@ If you’re familiar with PivotTables and PivotCharts, you’ll notice some simi
 ## <p id = "5"> Lesson 5: Creating Interactive Visualizations - Filtering, Controls & Navigation | [Back to ToC](#toc)</p>
 ---------------------------------------------------------- */
 
-To customize & filter reports, in this chapter we will touch base on:
-	- Interactions/Filtering/Slicers 
+To customize & filter reports, in this chapter we will touch base on:  
+	- Interactions/Filtering/Slicers  
 	- Add Button  
 	- Groups/Drill Downs  
 	- Create Tooltips -> Hover mouse over chart
 
-Helpful Links:
+Helpful Links:  
 	- [Visual Interactions](https://learn.microsoft.com/en-us/power-bi/create-reports/service-reports-visual-interactions?tabs=powerbi-desktop)  
-	- [TURN OFF all the Visual INTERACTIONS](https://www.youtube.com/watch?v=9eEk2ct2QCI)  
+	- [Turn OFF all the Visual INTERACTIONS](https://www.youtube.com/watch?v=9eEk2ct2QCI)  
 
 
-
--- Subsection: Highlights/Interactions (Be on the Same Page) --
+-- Subsection: Highlights/Interactions (On the Same Page) --  
 	Visuals in a report update dynamically based on user selections.	
 
 		- Highlighting = Visual emphasis WITHIN THE SAME visual.
@@ -925,7 +924,6 @@ Helpful Links:
 
 
 -- Subsection: Groups --
-
 	[Groups Link](https://learn.microsoft.com/en-us/power-bi/create-reports/desktop-grouping-and-binning)
 	
 	When Power BI Desktop creates visuals, 
