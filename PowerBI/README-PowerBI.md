@@ -78,8 +78,8 @@ Task: Let's open "MyFootprintSports_1.pbix"
 		- Structure
 		
 		
--- Subsection : Left Nav Bar --
-	The Left Nav Bar in Power BI Desktop shows the different views:
+-- Subsection : Left Nav Bar --  
+	The Left Nav Bar in Power BI Desktop shows the different views:  
 	[More Info](https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-query-overview?utm_source=chatgpt.com)
 
 		~ Report View - Where data turns into visuals reports
@@ -148,6 +148,7 @@ Task: Let's open "MyFootprintSports_1.pbix"
 
 
 -- Subsection : Importing .txt file --  
+
 	Task: Create a blank report & import the bonus text file "People1.txt" (show them what/where it is)
 
 	Verify that data has been imported by going to Table View to see the table.\
@@ -286,7 +287,6 @@ Task: Let's open "MyFootprintSports_1.pbix"
 	A: In the Excel workbook, select the data you want to import, create a table, and save the change.
 	-- 
 
-
 	
 ### /* ------------ Lesson 2B - Cardinality ------------ */
 
@@ -296,6 +296,7 @@ Useful Links:
 
 
 -- Subsection: Forming 1x1 cardiniality --  
+
 	Task: Open "Employees.pbix" or Import data from "Employees.xlsx" 
 	
 	Recap:
@@ -343,6 +344,7 @@ Useful Links:
 	
 	
 -- Subsection: Forming 1xMany Cardinality --  
+
 	Task: Open 'Example-Star-Schema.pbix'
 
 	Let's look at the following data:
@@ -734,7 +736,8 @@ Helpful Links:
 
 
 -- Subsection: Highlights/Interactions (On the Same Page) --  
-	Visuals in a report update dynamically based on user selections.	
+	
+	Visuals in a report update dynamically based on user selections.  
 
 		- Highlighting = Visual emphasis WITHIN THE SAME visual.
 			EX: For example, on a page with a single column chart, 
@@ -769,9 +772,8 @@ Helpful Links:
 				- None
 	
 	
--- Subsection: Filtering Excercise --
-
-	[Link to set 'Add a filter' to a report](https://learn.microsoft.com/en-us/power-bi/create-reports/power-bi-report-add-filter?tabs=powerbi-desktop)
+-- Subsection: Filtering Excercise --  
+	[MS Learn Article: Adding Filters to Reports](https://learn.microsoft.com/en-us/power-bi/create-reports/power-bi-report-add-filter?tabs=powerbi-desktop)
 
 	We can filter our data to see only what we're interested in.
 	
