@@ -1,5 +1,7 @@
 # Data Visualization with Microsoft Power BI
 
+[Link to Return to Learn Website](https://razat94.github.io/learn/)
+
 [Link to Download Files](https://files.educate360.com/temp/2025%20PowerBI%20Courseware.zip)
 > Make sure .ZIP file is unzipped before using files.
 
@@ -839,10 +841,9 @@ Helpful Links:
  			Otherwise, it can be annoying/difficult to remove its effect from the other charts.
 
 
--- Subsection: Bookmarks --
-
-	[Learn about Bookmarks](https://learn.microsoft.com/en-us/power-bi/create-reports/desktop-bookmarks)
-	[Use bookmarks to change chart or visual with Button Click](https://youtu.be/EMfqGiFr6Y4?si=UGZle2pfMQKZmiJw)
+-- Subsection: Bookmarks --  
+	[MS Article about Bookmarks](https://learn.microsoft.com/en-us/power-bi/create-reports/desktop-bookmarks)  
+	[Video: Use bookmarks to change chart or visual with Button Click](https://youtu.be/EMfqGiFr6Y4?si=UGZle2pfMQKZmiJw)
 
 	Bookmarks work are similar to MS Word bookmarks; Think of them as snapshots of your report you can quickly revisit or share.
 
@@ -923,8 +924,8 @@ Helpful Links:
 				For example, you can give a synonym of (Actuals) for the (Sales) measure. 
 
 
--- Subsection: Groups --
-	[Groups Link](https://learn.microsoft.com/en-us/power-bi/create-reports/desktop-grouping-and-binning)
+-- Subsection: Groups --  
+	[MS Article explaining Groups](https://learn.microsoft.com/en-us/power-bi/create-reports/desktop-grouping-and-binning)
 	
 	When Power BI Desktop creates visuals, 
 	it aggregates or groups your data into chunks based on the values it finds.
@@ -947,9 +948,8 @@ Helpful Links:
 		Note: The Bin group type is an auto grouping of items into bucketed bins (groups).
 
 
--- Subsection: Drill Down --
-
-	[Reference](https://learn.microsoft.com/en-us/training/modules/configure-semantic-model-power-bi/5-hierarchies)
+-- Subsection: Drill Down --  
+	[MS Article Reference](https://learn.microsoft.com/en-us/training/modules/configure-semantic-model-power-bi/5-hierarchies)  
 	[Test Your Knowledge](https://learn.microsoft.com/en-us/training/modules/configure-semantic-model-power-bi/9-check)
 
 
@@ -1054,8 +1054,9 @@ Helpful Links:
 In this chapter, we will discuss more about charts & chart options.
 
 As you know, Tooltips are pop ups that display extra details about a data point in a visual when you hover over it. 
-	-- ?? --
-		Under Sales Data, date categories are best mapped out via 
+
+
+		Under Sales Data, date categories are commonly mapped out via 
 			Line Charts, Area Charts, Column Charts
 
 		When we hover over the chart, we will see tooltip.
@@ -1063,23 +1064,21 @@ As you know, Tooltips are pop ups that display extra details about a data point 
  		Let's say we want to compare quantity with total sales
 		Sales is in millions, quantity is in thousands.
 		We can do a compbo chart but make sure quantity is mapped in column legend
-	-- ?? --
+
 
 	
-	Activity: Custom Tooltip Based on Report Pages  - fun example - 
-	[Example of creating a chart as a tooltip](https://www.youtube.com/watch?v=cGpBUJpFWrM)
+-- Fun Activity: Custom Tooltip Based on Report Pages --  
+[Example of creating a chart as a tooltip](https://www.youtube.com/watch?v=cGpBUJpFWrM)
 
-	
 	By default, Tooltips show the value and category, but they can be customized to include more information.
 		We can enhance tooltips by embedding full visuals from a separate report page. 
 		These visuals, such as cards, gauges, or charts, are filtered based on the data point being hovered over, adding context to the main visual.
 
-	Q:
-		WHY ADD A TOOLTIP WHEN YOU CAN JUST ADD DIRECTLY TO THE CHART
+	Q: WHY ADD A CUSTOM TOOLTIP WHEN A DEFAULT ONE IS AlREADY ON THE CHART?
 		A: Save space & change the default tooltip!
 
 		
-	Task: Use the 'Shape Maps' visual to map out State (Location) vs Total sales (Color Saturation)
+		Task: Use the 'Shape Maps' visual to map out State (Location) vs Total sales (Color Saturation)
 		
 		Why we only see the Map Tooltip page under the Page dropdown? Why we can't see other pages?
 		
@@ -1114,9 +1113,9 @@ As you know, Tooltips are pop ups that display extra details about a data point 
 
 
 	
-	-- Extra Visuals / Extra time --
-
+-- Extra Visuals / Extra time --  
 	[Analyze Visuals](https://learn.microsoft.com/en-us/power-bi/consumer/end-user-analyze-visuals)
+
 	Create a a line graph that maps Monthly total sales.
 
 		Do a filter for Q2
@@ -1202,17 +1201,16 @@ As you know, Tooltips are pop ups that display extra details about a data point 
 ---------------------------------------------------------- */
 
 
-- Calculated Columns -
-	In Power BI, a calculated column is a new column that you create using a formula.
-	This new column:
-		- is a custom field that was created by using DAX
-		- calculates a value for every row in that table.
-		- this custom field doesn't come from the raw data source & we can use it in visuals, filters, or slicers just like any other field.
-
-	Note: How to create a formula in Power BI (Calculated Column):
-		Option 1: In Power Query, use Custom Column
-		Option 2: In Table View within Power BI, click New Column to add it directly in the data model.
-		⚠️ Note: Columns created in Table View will not appear in Power Query. 
+-- Subsection: Calculated Columns --  
+	In Power BI, a calculated column is a new column that you create using a formula.  
+	This new column:  
+		- is a custom field that was created by using DAX  
+		- calculates a value for every row in that table.  
+		- this custom field doesn't come from the raw data source & we can use it in visuals, filters, or slicers just like any other field.  
+	Note: To create a formula in Power BI (Calculated Column):  
+		Option 1: In Power Query, use Custom Column  
+		Option 2: In Table View within Power BI, click New Column to add it directly in the data model.  
+		⚠️ Note: Columns created in Table View will not appear in Power Query.  
 			Power Query is mainly for initial data transformations i.e. Power Query runs before the data is loaded into the model.
 	
 	Task: Create simple text calculated columns.
@@ -1269,7 +1267,7 @@ As you know, Tooltips are pop ups that display extra details about a data point 
 		Overall: Good but inefficient.
 	 
 
-- Measures -
+-- Subsection: Measures --
 
 	Measures are similar to formulas.
 	
@@ -1311,11 +1309,10 @@ As you know, Tooltips are pop ups that display extra details about a data point 
 			- Unlike a measure, a calculated column can be used in a slicer to filter on the report page.
 
 
-- Display Folder -
+-- Subsection: Display Folder --  
 	In Power BI, a Display Folder is a way to organize fields (columns, measures, hierarchies) in the Fields pane 
-	without changing the underlying data model. 
-		
-		Purpose: Makes the Fields pane cleaner and easier to navigate.
+	without changing the underlying data model.  
+		Purpose: Makes the Fields pane cleaner and easier to navigate.  
 		- It’s purely for presentation and usability, especially in large models.
 		
 	Task: Create a display folder named 'Calculated Columns' for each of the columns we made.
@@ -1329,8 +1326,7 @@ As you know, Tooltips are pop ups that display extra details about a data point 
 	Step 3: In the Properties pane, in the 'Display folder' field, type the folder name & then press Enter. 
 	
 	
-	-- 
-	Additional Q's & Notes:
+-- Additional Q's & Notes: --  
 
 	-- 
 	A measure is a named DAX formula that summarizes model data.
@@ -1367,8 +1363,8 @@ As you know, Tooltips are pop ups that display extra details about a data point 
 ## <p id = "7"> Lesson 8: Sharing & POWERBI SERVICE (PowerBI Online) | [Back to ToC](#toc)</p> 
 ---------------------------------------------------------- */
 
-Links:
-	[Power BI Service Link #1](https://learn.microsoft.com/en-us/power-bi/consumer/end-user-experience)
+Links:  
+	[Power BI Service Link #1](https://learn.microsoft.com/en-us/power-bi/consumer/end-user-experience)  
 	[Power BI service Link #2](https://learn.microsoft.com/en-us/training/modules/manage-workspaces-power-bi-service/)
 
 
@@ -1416,12 +1412,10 @@ For the web version, Reports are more like an online object rather than a tradit
 	Task: Upload a report to PowerBI Service 	
 
 
--- Dashboards --
-
-Links:  
-- [Create dashboards in Power BI](https://learn.microsoft.com/en-us/training/modules/create-dashboards-power-bi/)
-- [Dashboards]https://learn.microsoft.com/en-us/power-bi/consumer/end-user-dashboards
-
+-- Dashboards --  
+	Links:  
+	- [Create dashboards in Power BI](https://learn.microsoft.com/en-us/training/modules/create-dashboards-power-bi/)  
+	- [MS Article on Dashboards](https://learn.microsoft.com/en-us/power-bi/consumer/end-user-dashboards)
 
 	Reports are built on a single dataset (semantic model) and can have multiple pages 
 	A Dashboard is a single-page canvas designed for at-a-glance insights.
@@ -1446,7 +1440,7 @@ Links:
 
 
 -----------------
-Subscriptions are scheduled email snapshots of reports/dashboards
+Subscriptions are scheduled email snapshots of reports/dashboards.  
 Bonus Task: Make a subscription
 -----------------
 
