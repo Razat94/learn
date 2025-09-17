@@ -80,7 +80,7 @@ Task: Let's open "MyFootprintSports_1.pbix"
 		
 -- Subsection : Left Nav Bar --  
 	The Left Nav Bar in Power BI Desktop shows the different views:  
-	[More Info](https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-query-overview?utm_source=chatgpt.com)
+	[MS Learn Article: Power BI Desktop Overview](https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-query-overview?utm_source=chatgpt.com)
 
 		~ Report View - Where data turns into visuals reports
 			- Our "report canvas" (center area) is where we add visuals 
@@ -1116,7 +1116,7 @@ As you know, Tooltips are pop ups that display extra details about a data point 
 
 	
 -- Extra Visuals / Extra time --  
-	[Analyze Visuals](https://learn.microsoft.com/en-us/power-bi/consumer/end-user-analyze-visuals)
+	[MS Learn Article: Analyze Visuals](https://learn.microsoft.com/en-us/power-bi/consumer/end-user-analyze-visuals)
 
 	Create a a line graph that maps Monthly total sales.
 
@@ -1526,11 +1526,8 @@ Notes / Limitations
 
 
 
-===
-Bonus Links:
-	https://github.com/MicrosoftLearning/PL-300-Microsoft-Power-BI-Data-Analyst
-	https://microsoftlearning.github.io/PL-300-Microsoft-Power-BI-Data-Analyst/
-	https://www.reddit.com/r/PowerBI/comments/15js89a/guide_i_passed_the_two_official_power_bi/
-	
-	Bonus: Models:
-	https://learn.microsoft.com/en-us/power-bi/transform-model/model-explorer
+=== Bonus Links: ===  
+	- https://github.com/MicrosoftLearning/PL-300-Microsoft-Power-BI-Data-Analyst  
+	- https://microsoftlearning.github.io/PL-300-Microsoft-Power-BI-Data-Analyst/  
+	- https://www.reddit.com/r/PowerBI/comments/15js89a/guide_i_passed_the_two_official_power_bi/     
+	- [Bonus: Models](https://learn.microsoft.com/en-us/power-bi/transform-model/model-explorer)
