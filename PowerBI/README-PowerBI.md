@@ -7,7 +7,7 @@
 
 
 ## <p id = "toc"> Table of Contents </p>
-0. [Lesson 0: What is PowerBI?](#0)
+0. [Lesson 0: What is Power BI?](#0)
 1. [Lesson 1: General Structure](#1)
 2. [Lesson 2: Connecting to Data](#2)
 3. [Lesson 3: PowerQuery = Data Transformation](#3)
@@ -43,10 +43,10 @@ Day Two centers more heavily on analyzing & visualizing data through:
 
 
 /* -------------------------------------------------------
-## <p id = "0"> Lesson 0: What is PowerBI? | [Back to ToC](#toc)</p> 
+## <p id = "0"> Lesson 0: What is Power BI? | [Back to ToC](#toc)</p> 
 ---------------------------------------------------------- */
 
-### /* ------------ Lesson 0 - What is PowerBI?  ------------ */
+### /* ------------ Lesson 0 - What is Power BI?  ------------ */
 Please refer to the [PowerPoint](https://docs.google.com/presentation/d/1q2-8hYULWp8ouBpQMGMV_SMCWjE6Rphl/edit?usp=sharing&ouid=113396737692127154003&rtpof=true&sd=true)
 
 /* -------------------------------------------------------
@@ -86,7 +86,7 @@ Task: Let's open "MyFootprintSports_1.pbix"
 			- Our "report canvas" (center area) is where we add visuals 
 			- At the bottom status bar, we can add multiple pages
 				Each canvas portrays a different story!
-				Note: On PowerBI Service, a dashboard is just 1 page.
+				Note: On Power BI Service, a dashboard is just 1 page.
 			- Three right panes (we can minimize or maximize the pane as needed):
 				- Filter Pane: By dragging a field, we can filter: 
 					- a single visual 
@@ -99,7 +99,7 @@ Task: Let's open "MyFootprintSports_1.pbix"
 						- Similar to the Pivot Table Fields pane in Excel.
 						- NOTE: Data Pane shows fields in A-Z ORDER
 					- We can create & work with different types of data.	
-			<b>Excercise:<b> 
+			<b>Exercise:<b> 
 				Click on a chart to display several sections (in the pane) specifically related to that chart.
 				For the chart itself, we can allow focus mode:
 					- Focus Mode lets you expand a single visual (like a chart, table, or map) 
@@ -132,7 +132,7 @@ Task: Let's open "MyFootprintSports_1.pbix"
     			TOPN(5, 'Products')
 
 
-	Q: What are the building blocks of PowerBI?
+	Q: What are the building blocks of Power BI?
 	A: Semantic Models & Visualizations.
 		Without a semantic model, you can't create visualizations, and reports are made up of visualizations
 					
@@ -151,7 +151,7 @@ Task: Let's open "MyFootprintSports_1.pbix"
 
 	Task: Create a blank report & import the bonus text file "People1.txt" (show them what/where it is)
 
-	Verify that data has been imported by going to Table View to see the table.\
+	Verify that data has been imported by going to Table View to see the table.
 
 	Data imported into Power BI is organized as tables.
 	A table is a grid similar to a spreadsheet, where data attributes as columns and records as rows.
@@ -164,14 +164,14 @@ Task: Let's open "MyFootprintSports_1.pbix"
 	If the following error shows up: 
 		'MSOffice.PowerBi.OleDb' is not registered
 		https://www.reddit.com/r/PowerBI/comments/wkzmj8/error_connecting_to_sharepoint_online_list_the/
-	We recommend to uninstall & install PowerBI again.
+	We recommend to uninstall & install Power BI again.
 	--
 
 	Optional Task: Delete the table & reimport it.
 		Under Table View, delete the table by right clicking table on Data Model pane -> Delete from Model.
 
 	Task: Update Data Source & Refresh data:
-		1. Confirm that the data is loaded in PowerBI. 
+		1. Confirm that the data is loaded in Power BI. 
 		2. On the .txt file, make the following changes:
 			- Change the row 'Justine' to 'Justin'
 			- Add a row "Carl"
@@ -199,7 +199,7 @@ Task: Let's open "MyFootprintSports_1.pbix"
 		NOTE: 	We can't refresh or update the data without restoring the .txt file (or pointing to a new one).
 
 
-	Excercise: Entering/changing data is rough. We'll need to use PowerQuery
+	Exercise: Entering/changing data is rough. We'll need to use PowerQuery
 
 		1. In Power BI Desktop, go to Home (Tab) -> Data (Group) -> Enter Data.
 		Create a small table with the new row(s) you want 
@@ -231,7 +231,7 @@ Task: Let's open "MyFootprintSports_1.pbix"
   		├─ People2.txt
   		└─ People3.txt
 
-	Excercise: We want Power Query to automatically combine all files into one table.
+	Exercise: We want Power Query to automatically combine all files into one table.
 
 	Click Home -> Get Data -> Folder 
 	Point to the 'Text-Files' folder (or point it to a folder (SharePoint/OneDrive/local))
@@ -274,20 +274,76 @@ Task: Let's open "MyFootprintSports_1.pbix"
 		- Export report as PDF
 		- Export data from a chart
 			- Take a screenshot  either with snipping tool or Win + Shift + S
-			(Click on chart  -> Elipses (on the Visual Header e.g. charts tools button) -> Export Data)
+			(Click on chart  -> Ellipses (on the Visual Header e.g. charts tools button) -> Export Data)
 			
 	
-	Optional Task: Try importing the Date & Orders table from "Connecting with Data" -> "MyFootprintSports.xlsx"
+	Optional Task: Try importing the table from "Data-Pub1.xlsx" 
+
 
 	-- Review Q: --
 	Q: When importing data from an Excel workbook into Power BI, you receive the error message: 
 	“We couldn't find any data formatted as a table.”
 	What should you do to resolve the error?
 
-	A: In the Excel workbook, select the data you want to import, create a table, and save the change.
+	A: In the Excel workbook, select the data you will import, create a table, and save the change.
 	-- 
 
+
+-- Optional Subsection: Importing Excel File located on a OneDrive/SharePoint --
+https://learn.microsoft.com/en-us/power-bi/connect-data/desktop-use-onedrive-business-links
+
+1. 	Using a browser, navigate to your OneDrive for work or school location 
+	Select the ellipses (...) to open the More menu, then select Details.
+
+2. 	In the More details pane that appears, select the copy icon next to Path.
+
+3. 	In Power BI Desktop, select Get data > Web
+
+4. 	With the Basic option selected, paste the link into the From Web dialog.
+
+5. 	If Power BI Desktop prompts you for credentials, 
+	choose either Windows for on-premises SharePoint sites or Organizational Account for Microsoft 365 or OneDrive for work or school sites.
+
+6. 	RESULT:
+	A Navigator dialog appears. 
+	It allows you to select from the list of tables, sheets, and ranges found in the Excel workbook.
+	From there, you can use the OneDrive for work or school file just like any other Excel file.
+
+
+-- Optional Subsection: Importing SharePoint list data into OneDrive --
+[Youtube Tutorial](https://www.youtube.com/watch?v=eyUwG2tlWn4)
+
+Step 1: On Power BI Desktop, click on Get Data in the top-left corner. Since SharePoint might not appear in the initial list, click on More.
+
+	In the Get Data window, search for “SharePoint”.
+	You’ll see a few options: SharePoint Folder, SharePoint Online List, and SharePoint List.
+
+	I usually go with SharePoint List since:
+		The SharePoint List connector works with both SharePoint On-Premises and SharePoint Online. 
+		The SharePoint Online List connector only works with SharePoint Online.
+
+
+Step 2: Enter the SharePoint Site URL and copy the root site URL (not a link to the SharePoint start page, or a specific file/folder).
+
+Example: 	https://yourdomain/sites/yourSharePointName
+		https://viltclasses.sharepoint.com/sites/MS-Power-BI
+
+Paste the URL into Power BI and click OK.
+
+Step 3: Sign In to SharePoint
+	You'll need to connect your Microsoft account.
+	Avoid using "Anonymous" or "Windows" authentication—those typically won't work unless you're on a corporate domain setup.
+	Choose Microsoft Account, and sign in with the account that has access to your SharePoint site.
+
+Step 4: Select Your Lists
+	Once connected, you'll see a list of all available SharePoint lists.
+	Select the ones you want but note: You'll notice some extra columns that are metadata fields automatically added by SharePoint.
+	You can reshape it before loading if you'd like via PowerQuery otherwise press "Load"
 	
+Result: Once loaded, you'll see your SharePoint data available in Power BI.
+
+
+
 ### /* ------------ Lesson 2B - Cardinality ------------ */
 
 Useful Links:  
@@ -295,7 +351,7 @@ Useful Links:
 	[Chapter: Configure relationships](https://learn.microsoft.com/en-us/training/modules/configure-semantic-model-power-bi/2-relationships)		
 
 
--- Subsection: Forming 1x1 cardiniality --  
+-- Subsection: Forming 1x1 cardinality --  
 
 	Task: Open "Employees.pbix" or Import data from "Employees.xlsx" 
 	
@@ -313,7 +369,7 @@ Useful Links:
 
 	Relationships show how data in one table connects to data in another.
 	Once a relationship is formed (usually it's done automatically),
-	we can reference data from seperate tables & create visuals from them.
+	we can reference data from separate tables & create visuals from them.
 		For example, VLOOKUP can use/reference the Product table to find details for products in the Orders table.
 
 
@@ -382,6 +438,8 @@ Useful Links:
 	
 		A Star Schema is a schema design/data modeling approach. 
 		It is a way to organize your data in Power BI (or any data warehouse). 
+		Encourages Data Normalization, which "is used to describe data that's stored in a way that reduces repetitious data."	
+	
 		Ultimately, its used to organize your data since it's a design for that structure.
 
 		It consists of:
@@ -492,7 +550,6 @@ Useful Links:
 Chapter 3 -  
 Power Query Editor provides the ability to transform and analyze data.  
 Remember: Power Query = Data Transformation
-
 
 /* -------------------------------------------------------
 ## <p id = "1"> DAY 2 | [Back to ToC](#toc) </p>
@@ -624,7 +681,6 @@ If you’re familiar with PivotTables and PivotCharts, you’ll notice some simi
 		Optional: Create a background in PowerPoint & then upload the theme into PowerBI.
 		Optional: EXPORT A THEME (Design your own filter, background, etc. in POWERBI & then export)
 			Once exported, try importing your theme into PowerBI. 	
-	
 
 --- Subsection: Bar Chart Formatting ---
 
