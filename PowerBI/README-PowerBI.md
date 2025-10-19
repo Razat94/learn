@@ -344,6 +344,10 @@ Result: Once loaded, you'll see your SharePoint data available in Power BI.
 
 
 
+-- Optional Subsection: Importing a table from SQL Server to Power BI --
+Feel free to read the guide (here)[https://github.com/Razat94/learn/blob/master/PowerBI/Guide%20-%20Conenct%20SQL%20Server%20to%20MS%20Power%20BI_compressed.pdf]
+
+
 ### /* ------------ Lesson 2B - Cardinality ------------ */
 
 Useful Links:  
