@@ -58,14 +58,14 @@ All cloud providers provide compute and storage services.
 
 <p>
 
-- High Availability -
+* High Availability -
 	High availability ensures IT resources remain accessible <b>if</b> needed.
 	When designing solutions, it is important to consider availability guarantees. In Azure, these guarantees are defined by service-level agreements (SLAs) that specify the uptime for each service.  
 	> Think: 	High availability is about staying up & focuses on avoiding downtime.
-- Fault Tolerance -
+* Fault Tolerance -
 	Fault tolerance means the system can continue working even -<b>when</b>- parts of it fail. 
-- Low Latency means fast response time. The lower the latency, the faster and smoother the user experience feels.
-- Predicatability - Predictability in the cloud means being able to plan with confidence to avoid surprises. It applies to both cost and performance (e.g. an application behaves as expected in that it’s fast, stable, and handles load consistently).
+* Low Latency means fast response time. The lower the latency, the faster and smoother the user experience feels.
+* Predicatability - Predictability in the cloud means being able to plan with confidence to avoid surprises. It applies to both cost and performance (e.g. an application behaves as expected in that it’s fast, stable, and handles load consistently).
 * Elasticity is the automatic, real-time adjustment (up/down/in/out) of resources to match sudden, unpredictable workloads  
 	Elasticity = using more resources when you need them, and fewer when you don’t.
 * Scalability is the ability to grow resources (up/out) for long-term, predictable demand, often requiring planning. 
