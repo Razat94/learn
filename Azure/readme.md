@@ -47,8 +47,8 @@ All cloud providers provide compute and storage services.
 
 - Public Cloud  
 	- Servers and storage are owned and operated by a third-party cloud service provider.
-	- Services are offered over the internet and are available to anyone who wants to purchase them.''
-		Think: Serverless Computing = Public Cloud
+	- Services are offered over the internet and are available to anyone who wants to purchase them.
+		> Think: Serverless Computing = Public Cloud
 - Private Cloud
 	- Servers are used by a single entity and may be hosted from your on site datacenter
 	- Private cloud provides much greater control but at a higher cost.
@@ -61,7 +61,7 @@ All cloud providers provide compute and storage services.
 - High Availability -
 	High availability ensures IT resources remain accessible <b>if</b> needed.
 	When designing solutions, it is important to consider availability guarantees. In Azure, these guarantees are defined by service-level agreements (SLAs) that specify the uptime for each service.  
-	Think: 	High availability is about staying up & focuses on avoiding downtime.
+	> Think: 	High availability is about staying up & focuses on avoiding downtime.
 - Fault Tolerance -
 	Fault tolerance means the system can continue working even -<b>when</b>- parts of it fail. 
 - Low Latency means fast response time. The lower the latency, the faster and smoother the user experience feels.
@@ -128,8 +128,8 @@ Note: Both PaaS and IaaS use a consumption-based model, so you only pay for what
 <p> <br>
 Recap:
 
-- With PaaS, users can focus on application development because the cloud provider handles all the platform management. 
-- In SaaS, the cloud provider manages all aspects of the application environment, such as virtual machines, networking resources, data storage, and applications. 
+- In SaaS, the cloud provider manages all aspects of the application environment, such as virtual machines, networking resources, data storage, and applications.
+- With PaaS, users can focus on application development because the cloud provider handles all the platform management.  
 - IaaS is the closest service model to managing physical servers.
 
 Recap Examples:
