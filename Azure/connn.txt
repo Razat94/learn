@@ -1,0 +1,768 @@
+
+=== Describe cloud concepts (25–30%) ===
+
+
+Cloud computing is the delivery of IT computing services over the internet, including but not limited to:
+	- virtual machines, 
+	- storage, 
+	- databases, 
+	- networking, 
+	- and advanced services like IoT, machine learning, and AI.
+
+All cloud providers provide compute and storage services.
+
+
+Cloud Models:
+-------------
+[Source](https://learn.microsoft.com/en-us/training/modules/describe-cloud-compute/5-define-cloud-models)
+
+Public Cloud
+	- Servers and storage are owned and operated by a third-party cloud service provider.
+	- Services are offered over the internet and are available to anyone who wants to purchase them.''
+		Think: Serverless Computing = Public Cloud
+
+Private Cloud
+	- Servers are used by a single entity and may be hosted from your on site datacenter
+	- Private cloud provides much greater control but at a higher cost.
+
+
+
+
+Cloud Service Types
+-------------------
+
+SaaS
+	SaaS allows users to connect to and use cloud-based apps over the internet. 
+	Common examples are email, calendaring, and Office tools, such as Office 365.
+
+	You need to recommend a solution for Azure virtual machine deployments. The solution must enforce company standards on the virtual machines.
+
+
+IaaS
+	Virtual networks are part of the IaaS cloud service.
+	Which cloud computing model best categorizes Azure VMs?
+		- Azure VMs
+
+
+PaaS	
+	the cloud provider is responsible for the operating system, physical datacenter, physical hosts, and physical network. 
+	In PaaS, the customer is responsible for accounts and identities.
+	Answer: Azure App, Azure SQL & Cosmos are Platform 
+	- Azure App Service
+	- Azure SQL Database
+	- Cosmos DB
+	In a platform as a service (PaaS) model, which two components are the responsibility of the cloud service provider? 
+	Each correct answer presents a complete solution.
+
+
+	Q: Your organization is building a custom application.
+	You need to focus on application development rather than configuration and management of servers.
+	Which cloud service model should you use?
+	A:	Application development
+
+
+	Q. Which type of cloud service model is typically licensed through a monthly or annual subscription?
+	A. SaaS
+
+
+
+
+In PaaS, the cloud provider is responsible for the operating system, physical datacenter, physical hosts, and physical network. 
+In PaaS, the customer is responsible for accounts and identities.
+
+
+Consumption Based Model
+Utilities
+"Try before you buy"
+
+PaaS and IaaS use a consumption-based model, so you only pay for what you use.
+Azure App Services and Azure Cosmos DB are PaaS offerings.
+Microsoft Office 365 is a SaaS offering.
+
+
+
+SaaS is usually a monthly or annual subscription
+
+PaaS and IaaS use a consumption-based model, so you only pay for what you use.
+
+Netflix
+
+
+
+shared responsibility model
+
+
+
+With PaaS, users can focus on application development because the cloud provider handles all the platform management. In SaaS, the cloud provider manages all aspects of the application environment, such as virtual machines, networking resources, data storage, and applications. IaaS is the closest service model to managing physical servers.
+
+Good test question:
+
+---
+Your organization is building a custom application.
+
+You need to focus on application development rather than configuration and management of servers.
+
+Which cloud service model should you use?
+
+Select only one answer.
+
+infrastructure as a service (IaaS)
+platform as a service (PaaS)
+	This answer is correct.
+software as a service (SaaS)
+---
+
+Azure SQL Database is a PaaS database engine.
+
+
+You plan to build a new solution in Azure that will use platform as a service (PaaS) products.
+What should you use to estimate the monthly costs?
+Planning 
+
+
+
+
+
+
+
+
+What uses the infrastructure as a service (IaaS) cloud service model?
+Select only one answer.
+	Azure App Services
+	Azure Cosmos DB
+	Azure virtual machines
+	Microsoft Office 365
+
+
+
+Scalability is the ability to grow resources (up/out) for long-term, predictable demand, often requiring planning; 
+Elasticity is the automatic, real-time adjustment (up/down/in/out) of resources to match sudden, unpredictable workloads
+	Elasticity = using more resources when you need them, and fewer when you don’t.
+
+
+consumption based model - charged only for what is used.
+subscription model - flat fee every time its used.
+
+
+Capital expenditures are one-time expenses that can be deducted over time.  - Azure is operational
+	[Answer choice] refers to upfront costs incurred one time, such as hardware purchases.
+Operational expenditures are billed as you use services and a do not have upfront costs.
+
+
+Vertical scaling would mean upgrading one server with more CPU or RAM.
+Horizontal scaling means adding more resources (e.g. servers) so the traffic is shared among them.
+	adding instances of resources such as virtual machines
+
+
+
+=== Describe Azure architecture and services (35–40%) ===
+
+Azure VMs are managed via portal.azure.com
+	Note: By default, azure vms can't communicate with one another.
+
+	Virtual machines are software emulations of physical computers. They include a virtual processor, memory, storage, and networking resources. 
+	Virtual machines host an operating system, and you can install and run software just like on a physical computer.
+	Note: If VM Is stopped, you still get charged.
+
+Geography = Country / legal boundary
+
+Region = City
+
+Availability Zone = Building
+
+Datacenter = Floors/rooms inside the building
+
+MUST MEMORIZE:
+Geography ->	Regions -> Availability Zones -> Data Centers
+
+	23. An availability Zone protects against datacenter level failures
+	40. An availabilty set protects against VM Failures.
+
+
+MEMORIZE:
+	To manage Azure VMS using the Azure portal:
+		portal.azure.com
+
+Region pairs allow the replication of Azure resources across geographies to help ensure that a secondary region is available in case of any disaster at the primary region.
+
+https://learn.microsoft.com/en-us/training/modules/describe-core-architectural-components-of-azure/
+
+East US has Zone 1, Zone 2, Zone 3 — all in East US, but isolated from each other.
+Same region, separate datacenters” ✅
+East US ↔ West US
+
+
+Azure region - low latency network 
+
+
+
+https://learn.microsoft.com/en-us/azure/reliability/regions-list
+REGIONS
+
+
+
+Regions > Zones > Data Centre.
+
+When you see a question like this with the keyword Zone AUTOMATICALLY you think protecting or managing data centers!
+
+
+
+
+LRS=datacenter
+
+ZRS=Zone
+
+GRS=Geographical Region
+
+
+
+
+
+
+
+
+Zero Trust
+Verify Explicity
+Use Least Priveleage of ccess
+Assume Breach
+
+
+
+- Azure Storage Services -
+
+
+
+	Which storage service should you use to store thousands of files containing text and images'
+Storage Type?
+Azure Blob storage - text/binary data 
+Azure Disk Storage provides disks for Azure virtual machines. 
+Azure Files supports mounting file storage shares via the Server Message Block Protocal (SMB).
+	Azure Files offers fully managed file shares in the cloud that are accessible via industry-standard SMB and NFS protocols.
+Azure Queue storage - storing large number of messages (e.g. HTTP or HTTPS calls)
+	
+
+Table storage = NOSQL DATA 
+	SCHEMALESS  
+
+What are storage tiers?
+
+Storage tiers let you choose how often your data is accessed, so you can balance cost vs speed.
+
+👉 More access = higher cost
+👉 Less access = lower cost
+
+
+Which Azure Blob storage service tier has the highest storage costs and the fastest access times for reading and writing data?
+The Hot tier is optimized for storing data that is accessed frequently.
+
+
+
+
+
+
+AZURE DATA STORAGE TIER
+
+Which storage tier in Azure Storage delivers the highest
+cost of data?
+HOT
+
+LOWEST cost of data?
+ARchive
+
+
+
+
+=== Describe Azure management and governance (30–35%) ===
+
+	- Cost Managemet -
+	The TCO Calculator helps you estimate the cost savings over time of operating a solution in Azure compared to operating in an on-premises datacenter.
+	You need to compare the costs of running an application in an on-premises datacenter with the costs of running the application in Azure.
+	The TCO Calculator helps you estimate the cost savings over time of operating a solution in Azure compared to operating in an on-premises datacenter.
+	https://learn.microsoft.com/training/modules/plan-manage-azure-costs/4-purchase-azure-services
+
+		Azure pricing calculator = calculates costs prior to migration
+
+
+
+	- Governance and compliance -
+
+	- Deploying Azure resources - 
+
+	- monitoring tools in Azure -
+
+
+=========================================================================================================================================================
+
+
+	
+
+
+
+
+Event grid
+	Event Grid sits in the middle, routing events between them
+
+
+A file is uploaded to Azure Blob Storage
+ -> Blob Storage publishes an event to Event Grid
+ -> Event Grid sends the event to:
+	- An Azure Function (to process the file)
+	- A Logic App (to notify a user)
+
+azure functions - automation at minimum expense
+	great for hosting code as part of a services infrastructe
+	great for runnings small, event driven or short-running scripts.
+Yes — Azure App Service does allow encryption.
+
+Power Automate and Logic Apps automate workflows, but
+Azure Automation automates infrastructure tasks.
+
+
+
+Azure Cloud Shell is an interactive, browser-accessible shell for managing Azure resources.
+
+
+
+
+
+Azure Files = backend file server
+		like a folder, but specifically for applications. 
+
+
+Which two protocols can be used to access Azure file shares?
+SMB & NFS
+
+
+
+
+
+
+
+
+All Azure VMs have an OS disk
+
+That OS disk is Azure Disk Storage
+
+Without it, the VM cannot boot
+
+Each VM has:
+
+OS Disk → Windows or Linux (required)
+
+Data Disks → optional, for apps/data
+
+Both are Azure Disk Storage.
+
+No disk = no VM.
+
+
+
+---
+Very simple example of conditional access
+
+Employee signs in from the office → Allowed
+
+Same employee signs in from a new country → Require MFA
+
+
+how and if a user can sign in, based on certain conditions.
+
+
+When someone tries to sign in, Azure can look at:
+
+Who the user is (user/group)
+
+What they’re trying to access (app/resource)
+
+Where they’re signing in from (location)
+
+What device they’re using
+
+Risk level (suspicious sign-in or not)
+
+---
+
+
+
+Conditional Access can use signals to determine information about authentication attempts, 
+and then determine whether to block access or require additional verifications, such as MFA.
+
+What can you use to allow a user to manage all the resources in a resource group?
+	Azure role-based access control (RBAC)
+
+
+
+
+
+You plan to build a new solution in Azure that will use platform as a service (PaaS) products.
+
+What should you use to estimate the monthly costs?
+
+Select only one answer.
+
+- Azure Advisor
+- Azure Cost Management
+- Azure Pricing calculator
+This answer is correct.
+- Total Cost of Ownership (TOC) Calculator
+
+The Azure Pricing calculator allows you to estimate and configure according to your specific requirements. You will then receive a consolidated estimated price and a detailed breakdown of the costs associated with each resource you added to your solution.
+https://azure.microsoft.com/en-us/pricing/calculator/
+
+
+Resource tags can be used to group billing data and categorize costs by runtime environment, such as billing usage for virtual machines running in a production environment.
+Region pairs allow the replication of Azure resources across GEOGRAPHIES to help ensure that a secondary region is available in case of any disaster at the primary region.
+In a region pair, a region is paired with another region in the same [geography].
+Azure Monitor is a platform that collects metric and logging data, such as CPU percentages. The data can be used to TRIGGER autoscaling.
+
+region lock
+
+Cloud Shell is an interactive, browser-accessible shell for managing Azure resources.
+
+---
+What should you use to access Azure Cloud Shell?
+
+a web browser
+	This answer is correct.
+Azure Resource Manager (ARM)
+Microsoft Visual Studio Code
+the command-line on a local computer
+---
+
+
+
+
+
+
+
+
+
+
+know about plans:
+https://azure.microsoft.com/en-us/support/plans
+	basic, developer, standard, professional direct.
+	
+
+Remember: Resource group can access resources from other regions
+
+Standard Plan : Cheapest 24/7
+Pnemonic: 
+BD SP
+Brilliant Diamond Shining Pearl
+
+
+azure app service = web apps
+ExpressRoute = Private Connection
+
+Azure Archive Tier:
+Note:
+Only then you can read or modify it
+
+
+---------------------------------
+
+Management Group  - manage access, policies, and compliance across multiple subscriptions?
+		  - Everyone must use MFA”
+		  - “No resources outside these regions”
+  └── Subscription (Department)
+        └── Resource Group - What can you use to allow a user to manage all the resources in a resource group?RBAC
+				- delete a resource group - delete all resources
+              └── Resources
+			- Azure Advisor provides RECOMMENDATIONS to reduce the cost of Azure resources?
+			Azure Advisor evaluates Azure resources and makes recommendations
+				for instance, cost of resources do change!
+
+
+
+https://learn.microsoft.com/en-us/training/modules/describe-core-architectural-components-of-azure/
+https://learn.microsoft.com/en-us/training/modules/describe-core-architectural-components-of-azure/3-get-started-azure-accounts
+
+
+
+For which resource does Azure generate separate billing reports and invoices by default? [A: Subscription]
+Azure creates a separate billing report and invoice for each subscription, making it easier to organize and manage costs.
+
+
+
+
+
+
+		
+
+1 management group → enforces security rules for everyone
+
+3 subscriptions → Finance, Engineering, Marketing
+
+Each subscription has multiple resource groups → one per project
+
+Each resource group contains the actual Azure resources
+
+
+
+
+
+
+https://www.examprepper.co/exam/63/93
+second to last
+28,44,46,55,72,80,91,94,95,97,
+100,107,111,128,134,138,149,151,159,227,258,269,277,278,296,307,331,337,330/35
+
+
+
+
+
+Azure Functions = Serverless computing
+
+
+
+You can use tags to categorize costs by department, such as human resources, marketing, or finance, or by environment, such as test or production.
+
+
+Which are two common scenarios for using resource tags? 
+
+
+
+
+
+CoveredCA
+Access Profile
+
+CoveredCA
+No Not at All
+
+CoveredCA
+
+
+
+$896.20
+$448.10
+
+top end = max
+
+
+
+
+
+
+
+Containers (AKS / Container Apps)
+
+
+Everything you create on Azure is a resource.
+https://learn.microsoft.com/en-us/training/modules/host-a-web-app-with-azure-app-service/
+
+A resource is a manageable item that is available through Azure. Virtual machines, storage accounts, web apps, databases, and virtual networks are examples of resources.
+
+https://learn.microsoft.com/en-us/training/modules/host-a-web-app-with-azure-app-service/3-exercise-create-a-web-app-in-the-azure-portal?pivots=csharp
+
+
+
+
+1 resource group = can deploy multiple resources (even across regions)
+
+
+
+What is an Azure Storage account named storage001 an example of?
+	- A resource
+
+
+the logical container used to combine and organize Azure resources.
+Resource Group
+
+
+Azure RBAC allows you to assign a set of permissions to a user or group. 
+Resource tags (keyword) are used to locate and act on resources associated with specific workloads, environments, business units, and owners. 
+Resource locks prevent the accidental change or deletion of a resource. 
+Key Vault is a centralized cloud service for storing an application secrets in a single, central location.
+Azure policy - make sure resources are created in approved regions
+
+
+
+
+[x] resources inherit permissions assigned to the resource group. 
+
+
+
+530 893 8800
+
+
+What is an Azure Storage account named storage001 an example of?
+https://learn.microsoft.com/en-us/training/modules/describe-core-architectural-components-of-azure/3-get-started-azure-accounts
+
+
+
+Resources are combined into resource groups, which act as a logical container into which Azure resources like web apps, databases, and storage accounts, are deployed and managed.
+
+
+Which two components are created in an Azure subscription? Each correct answer presents a complete solution.
+Resources/ Resource Group
+
+Resources can only be associated with a single subscription. 
+Subscriptions may be grouped into management groups. 
+[x] An account may be associated with multiple subscriptions.
+
+
+
+
+
+
+You can deploy apps and data to regional datacenters around the globe, 
+thereby ensuring that your customers always have the best performance in their region. This is referred to as geo-distribution.
+
+
+
+
+
+
+Defense in Depth
+- several layers of protection to prevent information from being accessed by unauthorized users
+
+A defense in depth strategy uses a series of mechanisms to slow the advancement of an attack that aims to gain unauthorized access to data
+
+ The principle of least privilege means restricting access to information to only the level that users need to perform their work. 
+
+
+A DDoS attack attempts to overwhelm and exhaust an application's resources.
+
+The perimeter layer is about protecting an organization's resources from network-based attacks. 
+
+
+
+ARM Templates:
+	used to describe the resources you want to use in a declarative JSON format.
+	to define the resources you want to provision in a declarative JSON format?
+
+ARM templates are just JSON files that tell Azure what resources to create.
+	- it ensures that deployments are the same for each development
+
+Please don't confuse with Azure Resource Manager (ARM): 
+[Answer choice] is the deployment and management service for Azure.
+	ARM deployment and management service for Azure.
+
+
+
+
+Azure Monitor is a platform that collects metric and logging data, such as CPU percentages. The data can be used to trigger autoscaling.
+Azure Container Instances (ACI) is specifically for running containers in Azure.
+	You give ACI a container image (your app + everything it needs)
+	You specify CPU, memory, and environment
+	Azure runs it without you having to manage servers or clusters
+
+
+
+
+	3 separate processes running, one on each VM.
+	
+	They are independent: one VM crashing doesn’t stop the others.
+	They are identical in behavior: same app code, same configuration.
+
+		Together, they handle more users or requests than a single process could.
+
+
+	You have a web app VMSS with 3 VMs.
+
+Each VM runs a web server process.
+
+Traffic is distributed by a load balancer:
+
+VM1 handles some users
+
+VM2 handles others
+
+VM3 handles others
+
+
+
+Each VM in a scale set is a separate machine.
+
+Your app runs on all of them independently.
+
+Each VM runs its own copy of the process, but all copies are identical in code and configuration.
+
+
+
+
+
+
+
+A VM Scale Set can create one or many VMs
+
+You define a minimum number of VMs to start with.
+	Azure can automatically add more VMs if demand goes up (scale out).
+	Azure can remove VMs if demand drops (scale in
+
+
+Azure Kubernetes = Azure App Insights for monitoring health
+
+CLUSTER = Monitor
+
+
+Site-to0Site 
+Azure VPN -> On-Premises VPN
+
+
+What can you use to connect Azure resources, such as Azure SQL databases, to an Azure virtual network?
+Service endpoints are used to expose Azure services to a virtual network, 
+providing communication between the two. 
+ExpressRoute is used to connect an on-premises network to Azure. 
+NSGs allow you to configure inbound and outbound rules for virtual networks and virtual machines. 
+Peering allows you to connect virtual networks together.
+
+
+You can link virtual networks together by using virtual network peering. 
+Peering enables resources in each virtual network to communicate with each other.
+You need to allow resources on two different Azure virtual networks to communicate with each other.
+
+
+
+To which object or level is an Azure role-based access control (RBAC) role applied?
+scope
+
+
+Azure Monitor= VMs top running, service failures
+
+VPN gateway?
+connecting an on-premises datacenter to an Azure virtual network
+A VPN gateway is a type of virtual network gateway. Azure VPN Gateway instances are deployed to a dedicated subnet of a virtual network. You can use them to connect on-premises datacenters to virtual networks through a Site-to-Site (S2S) VPN connection.
+ 
+
+Service endpoints are used to expose Azure services to a virtual network, providing communication between the two. 
+ExpressRoute is used to connect an on-premises network to Azure. 
+NSGs allow you to configure inbound and outbound rules for virtual networks and virtual machines. 
+Peering allows you to connect virtual networks together.
+
+Site-to-Site VPN provides encrypted connectivity over the internet, 
+while ExpressRoute provides a private (more secure), dedicated connection to Azure.
+
+
+
+Azure Policy is a service in Azure that enables you to create, assign, and manage policies that control or audit resources.
+
+Azure Policy - a service in Azure that enables you to create, assign, and manage policies that CONTROL or audit resources.
+		Q: What is used to restrict the deployment of a virtual machine to a specific location?
+			Azure Policy
+
+		Azure Monitor is a platform that collects metric and logging data, such as CPU percentages. The data can be used to trigger autoscaling.
+			 platform that collects metric and logging data
+
+			Which Azure service can generate an alert if virtual machine utilization is over 80% for five minutes?
+			AZURE MONITOR
+			Azure Monitor is a platform for collecting, analyzing, visualizing, and alerting based on metrics
+
+
+Application Insights is a feature of Azure Monitor that allows you to monitor running application
+
+Azure Policy
+
+Azure Monitor
+https://www.youtube.com/watch?v=eSutaPE80PM
+
+
+Azure App Service used to build, deploy & scale web apps
+
+azure advisor = recommending cost optimizations
+
+Incorrect: Data Catalog –– This enables data discovery.
+Incorrect: Data Sharing –– This shares data within and between organizations.
+Incorrect: Data Estate Insights –– This accesses data estate health.
+Correct: Data Policy –– This governs access to data.
