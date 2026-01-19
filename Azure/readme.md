@@ -137,9 +137,9 @@ Recap Examples:
 - Azure App Services and Azure Cosmos DB are PaaS offerings.
 - Azure SQL Database is also PaaS database engine.
 - Microsoft Office 365 is a SaaS offering.
-<p>
+</p>
 
-<b> Good test questions: </b>
+<br> <b> Good test questions: </b>
 
 <div>
 Q1: In a platform as a service (PaaS) model, which two components are the responsibility of the cloud service provider? 
