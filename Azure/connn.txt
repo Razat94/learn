@@ -2,28 +2,31 @@
 === Describe cloud concepts (25–30%) ===
 
 
-Cloud computing is the delivery of IT computing services over the internet, including but not limited to:
-	- virtual machines, 
-	- storage, 
-	- databases, 
-	- networking, 
-	- and advanced services like IoT, machine learning, and AI.
-
-All cloud providers provide compute and storage services.
 
 
-Cloud Models:
--------------
-[Source](https://learn.microsoft.com/en-us/training/modules/describe-cloud-compute/5-define-cloud-models)
 
-Public Cloud
-	- Servers and storage are owned and operated by a third-party cloud service provider.
-	- Services are offered over the internet and are available to anyone who wants to purchase them.''
-		Think: Serverless Computing = Public Cloud
 
-Private Cloud
-	- Servers are used by a single entity and may be hosted from your on site datacenter
-	- Private cloud provides much greater control but at a higher cost.
+consumption based model - charged only for what is used.
+subscription model - flat fee every time its used.
+
+
+Consumption Based Model
+Utilities
+"Try before you buy"
+
+PaaS and IaaS use a consumption-based model, so you only pay for what you use.
+Azure App Services and Azure Cosmos DB are PaaS offerings.
+Microsoft Office 365 is a SaaS offering.
+
+
+
+
+
+
+
+
+shared responsibility model
+
 
 
 
@@ -70,17 +73,6 @@ PaaS
 In PaaS, the cloud provider is responsible for the operating system, physical datacenter, physical hosts, and physical network. 
 In PaaS, the customer is responsible for accounts and identities.
 
-
-Consumption Based Model
-Utilities
-"Try before you buy"
-
-PaaS and IaaS use a consumption-based model, so you only pay for what you use.
-Azure App Services and Azure Cosmos DB are PaaS offerings.
-Microsoft Office 365 is a SaaS offering.
-
-
-
 SaaS is usually a monthly or annual subscription
 
 PaaS and IaaS use a consumption-based model, so you only pay for what you use.
@@ -89,7 +81,6 @@ Netflix
 
 
 
-shared responsibility model
 
 
 
@@ -134,24 +125,6 @@ Select only one answer.
 	Microsoft Office 365
 
 
-
-Scalability is the ability to grow resources (up/out) for long-term, predictable demand, often requiring planning; 
-Elasticity is the automatic, real-time adjustment (up/down/in/out) of resources to match sudden, unpredictable workloads
-	Elasticity = using more resources when you need them, and fewer when you don’t.
-
-
-consumption based model - charged only for what is used.
-subscription model - flat fee every time its used.
-
-
-Capital expenditures are one-time expenses that can be deducted over time.  - Azure is operational
-	[Answer choice] refers to upfront costs incurred one time, such as hardware purchases.
-Operational expenditures are billed as you use services and a do not have upfront costs.
-
-
-Vertical scaling would mean upgrading one server with more CPU or RAM.
-Horizontal scaling means adding more resources (e.g. servers) so the traffic is shared among them.
-	adding instances of resources such as virtual machines
 
 
 
