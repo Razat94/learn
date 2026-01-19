@@ -107,7 +107,7 @@ For the exam, memorize the responsibilities of the shared responsibility model:
 SaaS - <br>
 	SaaS allows users to connect to and use cloud-based apps over the internet. 
 	Common examples are Netflix and Office 365. 
-		Note: SaaS is usually a monthly or annual subscription
+		> Note: SaaS is usually a monthly or annual subscription
 
 PaaS - <br>
 	The cloud provider is responsible for the operating system, physical datacenter, physical hosts, and physical network. 
