@@ -67,7 +67,7 @@ All cloud providers provide compute and storage services.
 * Low Latency means fast response time. The lower the latency, the faster and smoother the user experience feels.
 * Predicatability - Predictability in the cloud means being able to plan with confidence to avoid surprises. It applies to both cost and performance (e.g. an application behaves as expected in that it’s fast, stable, and handles load consistently).
 * Elasticity is the automatic, real-time adjustment (up/down/in/out) of resources to match sudden, unpredictable workloads  
-	Elasticity = using more resources when you need them, and fewer when you don’t.
+	> Elasticity = using more resources when you need them, and fewer when you don’t.
 * Scalability is the ability to grow resources (up/out) for long-term, predictable demand, often requiring planning. 
 	- Vertical scaling means upgrading one server with more CPU or RAM.
 	- Horizontal scaling means adding more resources (e.g. adding servers or instances of resources such as virtual machines) so that the traffic is shared among them.
