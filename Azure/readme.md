@@ -85,14 +85,15 @@ All cloud providers provide compute and storage services.
 <b> Expense Models | [Source](https://learn.microsoft.com/en-us/training/modules/describe-cloud-compute/6-describe-consumption-based-model?ns-enrollment-type=learningpath&ns-enrollment-id=learn.wwl.microsoft-azure-fundamentals-describe-cloud-concepts) </b>
 
 <p>
+
 - Consumption based model - Charged only for what is used.  
-	Think: Utilities e.g. "Try before you buy"
+	Think: Utilities e.g. "Try before you buy"  
+	For instance, PaaS and IaaS use a consumption-based model, 
+	so you only pay for what you use.
+
 - Subscription model - Flat fee every time its used.
 </p>
 
-For instance,
-PaaS and IaaS use a consumption-based model, so you only pay for what you use.
-</p>
 
 <b> Cloud Service Types | [Source](https://learn.microsoft.com/en-us/training/modules/describe-cloud-service-types/) </b>
 
@@ -124,7 +125,7 @@ IaaS - <br>
 Note: Both PaaS and IaaS use a consumption-based model, so you only pay for what you use.
 </p>
 
-<p>
+<p> <br>
 Recap:
 
 - With PaaS, users can focus on application development because the cloud provider handles all the platform management. 
