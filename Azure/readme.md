@@ -59,8 +59,8 @@ All cloud providers provide compute and storage services.
 <p>
 
 * High Availability -
-	High availability ensures IT resources remain accessible -<b>if</b>- needed.
-	When designing solutions, it is important to consider availability guarantees. In Azure, these guarantees are defined by service-level agreements (SLAs) that specify the uptime for each service.  
+	High availability ensures IT resources remain accessible -<b>if</b>- needed.  
+	- When designing solutions, it is important to consider availability guarantees. In Azure, these guarantees are defined by service-level agreements (SLAs) that specify the uptime for each service.  
 	> Think: 	High availability is about staying up & focuses on avoiding downtime.
 * Fault Tolerance -
 	Fault tolerance means the system can continue working even -<b>when</b>- parts of it fail. 
