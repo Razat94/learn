@@ -104,12 +104,13 @@ For the exam, memorize the responsibilities of the shared responsibility model:
 </p>
 
 <p>
+
 SaaS - <br>
 	SaaS allows users to connect to and use cloud-based apps over the internet. 
-	Common examples are Netflix and Office 365. 
-		> Note: SaaS is usually a monthly or annual subscription
+	Common examples are Netflix and Office 365.	
+> Note: SaaS is usually a monthly or annual subscription
 
-PaaS - <br>
+PaaS - <br />
 	The cloud provider is responsible for the operating system, physical datacenter, physical hosts, and physical network. 
 	In PaaS, the customer is responsible for accounts and identities.
 	
@@ -118,11 +119,11 @@ PaaS - <br>
 	- Azure SQL Database
 	- Cosmos DB
 
-IaaS - <br>
+IaaS - <br />
 	Virtual networks are part of the IaaS cloud service.  
 	For example, IaaS cloud computing model best categorizes Azure VMs.
 
-Note: Both PaaS and IaaS use a consumption-based model, so you only pay for what you use.
+> Note: Both PaaS and IaaS use a consumption-based model, so you only pay for what you use.
 </p>
 
 <p> <br>
