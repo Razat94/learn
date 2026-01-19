@@ -119,7 +119,7 @@ PaaS - <br>
 	- Cosmos DB
 
 IaaS - <br>
-	Virtual networks are part of the IaaS cloud service.
+	Virtual networks are part of the IaaS cloud service.  
 	For example, IaaS cloud computing model best categorizes Azure VMs.
 
 Note: Both PaaS and IaaS use a consumption-based model, so you only pay for what you use.
@@ -155,7 +155,7 @@ Q3: Your organization is building a custom application.
 Which cloud service model should you use?  
 A:	Application development
 
-Q4. Which type of cloud service model is typically licensed through a monthly or annual subscription?
+Q4. Which type of cloud service model is typically licensed through a monthly or annual subscription?  
 	A. SaaS
 
 ---	
