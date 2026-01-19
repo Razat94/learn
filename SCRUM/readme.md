@@ -8,8 +8,8 @@
 <br></br>
 ## <p id = "toc"> Table of Contents </p>
 1. [Purpose](#purpose)
-2. ["What is Scrum?"](#whatIsScrum)
-3. [Meet the Scrum Team](#scrumTeam)
+2. ["What is Scrum?"](#scrum)
+3. [Meet the Scrum Team](#scrumteam)
 4. [Scrum Events](#scrumevent)
 5. [Scrum Artifacts](#artifacts)
 
@@ -21,8 +21,8 @@
 <p> This guide is a simplified version of the SCRUM Guide for educational purposes. Please support the official release.</p>
 
 
-
-## <p align="center" id = "whatIsScrum"> "What is Scrum?" | [Back to ToC](#toc) </p>
+<br></br>
+## <p align="center" id = "scrum"> "What is Scrum?" | [Back to ToC](#toc) </p>
 
 Scrum is a lightweight framework. It consists of roles, events & artifacts & employs various processes and techniques. 
 
@@ -58,7 +58,7 @@ Scrum works best when people follow these 5 Values (FROCC):
 
 
 
-## <p align="center" id = "scrumTeam"> "Meet the Scrum Team" | [Back to ToC](#toc) </p>
+## <p align="center" id = "scrumteam"> "Meet the Scrum Team" | [Back to ToC](#toc) </p>
 
 Scrum Teams are:
   - a small group of people (typically 10 or fewer)   
