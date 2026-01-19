@@ -106,7 +106,7 @@ For the exam, memorize the responsibilities of the shared responsibility model:
 <p>
 SaaS - <br>
 	SaaS allows users to connect to and use cloud-based apps over the internet. 
-	Common examples are Netflix Office 365. 
+	Common examples are Netflix and Office 365. 
 		Note: SaaS is usually a monthly or annual subscription
 
 PaaS - <br>
