@@ -7,56 +7,6 @@
 
 
 
-Zero Trust
-Verify Explicity
-Use Least Priveleage of ccess
-Assume Breach
-
-
-
-- Azure Storage Services -
-
-
-
-	Which storage service should you use to store thousands of files containing text and images'
-Storage Type?
-Azure Blob storage - text/binary data 
-Azure Disk Storage provides disks for Azure virtual machines. 
-Azure Files supports mounting file storage shares via the Server Message Block Protocal (SMB).
-	Azure Files offers fully managed file shares in the cloud that are accessible via industry-standard SMB and NFS protocols.
-Azure Queue storage - storing large number of messages (e.g. HTTP or HTTPS calls)
-	
-
-Table storage = NOSQL DATA 
-	SCHEMALESS  
-
-What are storage tiers?
-
-Storage tiers let you choose how often your data is accessed, so you can balance cost vs speed.
-
-👉 More access = higher cost
-👉 Less access = lower cost
-
-
-Which Azure Blob storage service tier has the highest storage costs and the fastest access times for reading and writing data?
-The Hot tier is optimized for storing data that is accessed frequently.
-
-
-
-
-
-
-AZURE DATA STORAGE TIER
-
-Which storage tier in Azure Storage delivers the highest
-cost of data?
-HOT
-
-LOWEST cost of data?
-ARchive
-
-
-
 
 === Describe Azure management and governance (30–35%) ===
 
@@ -75,13 +25,6 @@ ARchive
 	- Deploying Azure resources - 
 
 	- monitoring tools in Azure -
-
-
-=========================================================================================================================================================
-
-
-	
-
 
 
 
@@ -108,74 +51,8 @@ Azure Automation automates infrastructure tasks.
 Azure Cloud Shell is an interactive, browser-accessible shell for managing Azure resources.
 
 
-
-
-
-Azure Files = backend file server
-		like a folder, but specifically for applications. 
-
-
 Which two protocols can be used to access Azure file shares?
 SMB & NFS
-
-
-
-
-
-
-
-
-All Azure VMs have an OS disk
-
-That OS disk is Azure Disk Storage
-
-Without it, the VM cannot boot
-
-Each VM has:
-
-OS Disk → Windows or Linux (required)
-
-Data Disks → optional, for apps/data
-
-Both are Azure Disk Storage.
-
-No disk = no VM.
-
-
-
----
-Very simple example of conditional access
-
-Employee signs in from the office → Allowed
-
-Same employee signs in from a new country → Require MFA
-
-
-how and if a user can sign in, based on certain conditions.
-
-
-When someone tries to sign in, Azure can look at:
-
-Who the user is (user/group)
-
-What they’re trying to access (app/resource)
-
-Where they’re signing in from (location)
-
-What device they’re using
-
-Risk level (suspicious sign-in or not)
-
----
-
-
-
-Conditional Access can use signals to determine information about authentication attempts, 
-and then determine whether to block access or require additional verifications, such as MFA.
-
-What can you use to allow a user to manage all the resources in a resource group?
-	Azure role-based access control (RBAC)
-
 
 
 
@@ -232,18 +109,9 @@ Brilliant Diamond Shining Pearl
 azure app service = web apps
 ExpressRoute = Private Connection
 
-Azure Archive Tier:
-Note:
-Only then you can read or modify it
 
 
 ---------------------------------
-
-Containers (AKS / Container Apps)
-
-
-
-
 Azure RBAC allows you to assign a set of permissions to a user or group. 
 Resource tags (keyword) are used to locate and act on resources associated with specific workloads, environments, business units, and owners. 
 Resource locks prevent the accidental change or deletion of a resource. 
@@ -260,57 +128,10 @@ second to last
 
 
 
-
-
-Azure Functions = Serverless computing
-
-
-
 You can use tags to categorize costs by department, such as human resources, marketing, or finance, or by environment, such as test or production.
-
-
 Which are two common scenarios for using resource tags? 
 
 
-
-
-
-CoveredCA
-Access Profile
-
-CoveredCA
-No Not at All
-
-CoveredCA
-
-
-
-$896.20
-$448.10
-
-top end = max
-
-
-
-
-
-
-
-
-
-
-
-Defense in Depth
-- several layers of protection to prevent information from being accessed by unauthorized users
-
-A defense in depth strategy uses a series of mechanisms to slow the advancement of an attack that aims to gain unauthorized access to data
-
- The principle of least privilege means restricting access to information to only the level that users need to perform their work. 
-
-
-A DDoS attack attempts to overwhelm and exhaust an application's resources.
-
-The perimeter layer is about protecting an organization's resources from network-based attacks. 
 
 
 
@@ -347,6 +168,8 @@ Azure Container Instances (ACI) is specifically for running containers in Azure.
 
 	You have a web app VMSS with 3 VMs.
 
+
+
 Each VM runs a web server process.
 
 Traffic is distributed by a load balancer:
@@ -368,9 +191,6 @@ Each VM runs its own copy of the process, but all copies are identical in code a
 
 
 
-
-
-
 A VM Scale Set can create one or many VMs
 
 You define a minimum number of VMs to start with.
@@ -383,23 +203,6 @@ Azure Kubernetes = Azure App Insights for monitoring health
 CLUSTER = Monitor
 
 
-Site-to0Site 
-Azure VPN -> On-Premises VPN
-
-
-What can you use to connect Azure resources, such as Azure SQL databases, to an Azure virtual network?
-Service endpoints are used to expose Azure services to a virtual network, 
-providing communication between the two. 
-ExpressRoute is used to connect an on-premises network to Azure. 
-NSGs allow you to configure inbound and outbound rules for virtual networks and virtual machines. 
-Peering allows you to connect virtual networks together.
-
-
-You can link virtual networks together by using virtual network peering. 
-Peering enables resources in each virtual network to communicate with each other.
-You need to allow resources on two different Azure virtual networks to communicate with each other.
-
-
 
 To which object or level is an Azure role-based access control (RBAC) role applied?
 scope
@@ -407,18 +210,7 @@ scope
 
 Azure Monitor= VMs top running, service failures
 
-VPN gateway?
-connecting an on-premises datacenter to an Azure virtual network
-A VPN gateway is a type of virtual network gateway. Azure VPN Gateway instances are deployed to a dedicated subnet of a virtual network. You can use them to connect on-premises datacenters to virtual networks through a Site-to-Site (S2S) VPN connection.
- 
 
-Service endpoints are used to expose Azure services to a virtual network, providing communication between the two. 
-ExpressRoute is used to connect an on-premises network to Azure. 
-NSGs allow you to configure inbound and outbound rules for virtual networks and virtual machines. 
-Peering allows you to connect virtual networks together.
-
-Site-to-Site VPN provides encrypted connectivity over the internet, 
-while ExpressRoute provides a private (more secure), dedicated connection to Azure.
 
 
 
@@ -444,7 +236,7 @@ Azure Monitor
 https://www.youtube.com/watch?v=eSutaPE80PM
 
 
-Azure App Service used to build, deploy & scale web apps
+Azure App Service = used to build, deploy & scale web apps
 
 azure advisor = recommending cost optimizations
 

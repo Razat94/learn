@@ -14,7 +14,7 @@
 
 
 <br></br>
-## <p align="center" id = "purpose">  Purpose | [Back to ToC](#toc) </p>
+# <p align="center" id = "purpose">  Purpose | [Back to ToC](#toc) </p>
 
 <p> 
 This guide explains what cloud computing and Microsoft Azure are for educational purposes. The content is organized using the same sections as the official Microsoft course syllabus provided at https://learn.microsoft.com/en-us/training/courses/az-900t00
@@ -24,7 +24,7 @@ Much of the wording follows the language used in official Microsoft Learn guides
 
 
 <br></br>
-## <p align="center" id = "cloud"> What is Cloud Computing? | [Back to ToC](#toc) </p>
+# <p align="center" id = "cloud"> What is Cloud Computing? | [Back to ToC](#toc) </p>
 [Source](https://learn.microsoft.com/en-us/training/paths/microsoft-azure-fundamentals-describe-cloud-concepts/)
 
 <p>
@@ -187,7 +187,7 @@ Question:
 
 </div>
 
-## <p align="center" id = "architecture"> Azure Architecture & Services | [Back to ToC](#toc) </p>
+# <p align="center" id = "architecture"> Azure Architecture & Services | [Back to ToC](#toc) </p>
 
 [Learn more here](https://learn.microsoft.com/en-us/training/paths/azure-fundamentals-describe-azure-architecture-services/)
 
@@ -218,7 +218,7 @@ A resource is a manageable item that is available through Azure. Virtual machine
 
 <p>
 <img src = "./resource-group.png">
-Resources are combined and grouped into resource groups, which act as a logical container into which Azure resources like web apps, databases, and storage accounts, are deployed and managed. Each resource group contains the actual Azure resources.  
+<br> Resources are combined and grouped into resource groups, which act as a logical container into which Azure resources like web apps, databases, and storage accounts, are deployed and managed. Each resource group contains the actual Azure resources.  
 
 Since resource groups organize resources into a single unit, any action taken on the group, such as deleting it or managing access, applies to all resources within the group.
 > Don't forget! Delete a resource group will delete all resources. Resources also inherit permissions assigned to the resource group.
@@ -308,34 +308,205 @@ East US ↔ West US
 
 Region pairs allow the replication of Azure resources across geographies to help ensure that a secondary region is available in case of any disaster at the primary region.
 
+In short, in a region pair, a region is paired with another region in the same geography.
+
 Geo-distribution can allow you to deploy apps and data to regional datacenters around the globe, thereby ensuring that your customers always have the best performance in their region. 
 
 An availabilty set protects against VM Failures.
 
-LRS=datacenter
 
-ZRS=Zone
-
-GRS=Geographical Region
 
 
 ### Azure Compute & Network Services
 
 MEMORIZE:
 	To manage Azure VMS using the Azure portal:
-		portal.azure.com
+	<br>portal.azure.com
 
-	Azure VMs are managed via portal.azure.com
+Azure VMs are managed via portal.azure.com
 	Note: By default, azure vms can't communicate with one another.
 
-	Virtual machines are software emulations of physical computers. They include a virtual processor, memory, storage, and networking resources. 
-	Virtual machines host an operating system, and you can install and run software just like on a physical computer.
-	Note: If VM Is stopped, you still get charged.
+Virtual machines are software emulations of physical computers. They include a virtual processor, memory, storage, and networking resources. Virtual machines host an operating system, and you can install and run software just like on a physical computer.
+>	Note: If VM Is stopped, you still get charged.
 
-### 
+Every Azure VM needs an OS disk to boot up with every OS disk being stored on Azure Disk Storage. Without an OS Disk, the VM cannot boot! 
+<br> So No disk = no VM.
+
+Each VM has: 
+- OS Disk - Windows or Linux (required) 
+- Data Disks - Can be added for apps/extra storage, but they’re optional.
+ 
+
+### Containers (e.g. AKS / Container Apps) 
+[Source](https://learn.microsoft.com/en-us/training/modules/describe-azure-compute-networking-services/5-containers?ns-enrollment-type=learningpath&ns-enrollment-id=learn.wwl.azure-fundamentals-describe-azure-architecture-services)
+
+Containers allows you to run multiple applications on a single host, without needing to manage an operating system for each one.
+All containers running on a given host use the same OS kernel (the core part of the operating system). This is different from virtual machines, which each run their own full operating system
+
+```
+For example, we can use containers to run multiple instances of a web application on a single machine.
+
+During big sales like Black Friday, instead of setting up new VMs to handle extra traffic, you can:
+
+- Spin up more containers to launch new instances of your store app.
+- Each container will handle a portion of the incoming web traffic, allowing the app to scale quickly.
+```
+
+## Azure Functions
+[Source](https://learn.microsoft.com/en-us/training/modules/describe-azure-compute-networking-services/6-functions)
+
+Azure Functions is a serverless computing service that runs your code only when needed, without requiring VMs or containers. It activates in response to events like a request or a timer, and automatically stops when done.
+
+You only pay for the time your function runs. It scales up or down based on demand.
+
+Functions can be:
+- Stateless: Each event is like starting fresh.
+- Stateful (Durable Functions): Tracks info between events.
+
+It’s great for running small tasks and is flexible if your app needs change.
+
+## Azure App Service
+[Source](https://learn.microsoft.com/en-us/training/modules/describe-azure-compute-networking-services/7-describe-application-hosting-options)
+
+Azure App Service is a serverless platform for building and hosting web apps, APIs, mobile backends, and background jobs. It handles infrastructure for you, offering automatic scaling and high availability. App Service supports multiple programming languages (Java, PHP, Python, .NET, etc.) and both Windows and Linux.
+
+## Azure virtual networking
+- Service endpoints are used to expose Azure services to a virtual network, 
+providing communication between the two. 
+- ExpressRoute is used to connect an on-premises network to Azure. 
+- NSGs allow you to configure inbound and outbound rules for virtual networks and virtual machines. 
+- Peering allows you to connect virtual networks together.
+> You can link virtual networks together by using virtual network peering. Peering enables resources in each virtual network to communicate with each other.
 
 
-## <p align="center" id = "management"> Azure Management and Governance | [Back to ToC](#toc) </p>
+VPN gateway?  
+It connects an on-premises datacenter to an Azure virtual network
+A VPN gateway is a type of virtual network gateway. Azure VPN Gateway instances are deployed to a dedicated subnet of a virtual network. You can use them to connect on-premises datacenters to virtual networks through a Site-to-Site (S2S) VPN connection.
+ 
+Service endpoints are used to expose Azure services to a virtual network, providing communication between the two. 
+ExpressRoute is used to connect an on-premises network to Azure. 
+NSGs allow you to configure inbound and outbound rules for virtual networks and virtual machines. 
+Peering allows you to connect virtual networks together.
+
+Site-to-Site VPN provides encrypted connectivity over the internet, 
+while ExpressRoute provides a private (more secure), dedicated connection to Azure.
+
+Site-to-Site 
+Azure VPN -> On-Premises VPN
+
+## Azure Storage
+LRS = Locally Redundant Storage (datacenter)
+
+ZRS = Zone-redundant storage (Zone)
+
+GRS = Geo-redundant storage (Geographical Region)
+
+[Source](https://learn.microsoft.com/en-us/training/modules/describe-azure-storage-services/3-redundancy)
+
+
+### Azure Storage Services
+- Azure Blob storage - text/binary data 
+- Azure Disk Storage provides disks for Azure virtual machines. 
+- Azure Files supports mounting file storage shares via the Server Message Block Protocal (SMB).
+	- Azure Files offers fully managed file shares in the cloud that are accessible via industry-standard SMB and NFS protocols.
+	- Azure Files is like a backend file server
+		It's like a folder, but specifically for applications. 
+- Azure Queue storage - storing large number of messages (e.g. HTTP or HTTPS calls)
+- Table storage = stored large amounts of structured data e.g. NOSQL DATA 
+
+
+### AZURE DATA STORAGE TIER - Storage tiers
+[Source](https://learn.microsoft.com/en-us/azure/storage/blobs/access-tiers-overview)
+
+Storage tiers let you choose how often your data is accessed, so you can balance cost vs speed.
+
+- The Hot storage tier is optimized for storing data that is accessed frequently. 
+- The Cool access tier is the "Goldilocks" option, where data is stored in a way that it can tolerate slightly lower availability but still requires high durability, retrieval latency, and throughput characteristics similar to hot data.
+- Cold tier - An online tier optimized for storing data that is rarely accessed or modified, but still requires fast retrieval. Data in the cold tier should be stored for a minimum of 90 days. The cold tier has lower storage costs and higher access costs compared to the cool tier.
+- The Archive storage tier stores data offline and offers the lowest storage costs, but also the highest costs to rehydrate and access data. 
+
+
+In Short:
+- More access = higher cost
+- Less access = lower cost
+
+
+
+--- 
+Question:
+Which Azure Blob storage service tier has the highest storage costs and the fastest access times for reading and writing data?  
+Answer: The Hot tier is optimized for storing data that is accessed frequently.
+
+Question:
+Which storage tier in Azure Storage delivers the highest cost of data?  
+Answer: HOT
+
+Question:
+What is the LOWEST cost to store data?  
+Answer: Archive
+
+Question:
+Which storage service should you use to store thousands of files containing text and images for Storage Type?  
+Answer: Azure Blob Storage
+
+## Describe Azure identity, access, and security
+Microsoft Entra ID is a cloud-based identity service that manages sign-ins and access to Microsoft and third-party apps, and integrates with on-premises Active Directory.
+
+### Conditional Access 
+[Source](https://learn.microsoft.com/en-us/training/modules/describe-azure-identity-access-security/5-conditional-access)  
+
+Conditional Access is a tool that Microsoft Entra ID can use which provides identity signals to determine information about authentication attempts, and then determine whether to block access or require additional verifications, such as MFA.
+
+
+---
+
+Very simple example of conditional access
+
+- Employee signs in from the office - Allowed
+- Same employee signs in from a new country - Require MFA
+
+Conditional Access overall shows how and if a user can sign in, based on certain conditions.
+When someone tries to sign in, Azure can look at:
+	- Who the user is (user/group)
+	- What they’re trying to access (app/resource)
+	- Where they’re signing in from (location)
+	- What device they’re using
+	- Risk level (suspicious sign-in or not)
+
+---
+
+### Azure Role-Based Access Control (RBAC) 
+[Source](https://learn.microsoft.com/en-us/training/modules/describe-azure-identity-access-security/6-role-based-access-control)
+
+This lets you control who can access Azure resources and what they can do. It uses roles to give permissions which applys the principle of least privilege. This means users are given only the permissions they need to complete their tasks. Instead of managing individual permissions, Azure RBAC uses predefined roles (like Reader, Owner) that grant specific access levels to resources.
+
+What can you use to allow a user to manage all the resources in a resource group?
+	Azure role-based access control (RBAC)
+
+### Zero Trust Model 
+[Source](https://learn.microsoft.com/en-us/training/modules/describe-azure-identity-access-security/7-describe-zero-trust-model)  
+
+Zero Trust is a security model that assumes breaches are inevitable and verifies every request, regardless of where it originates, to protect resources.
+
+Remember:  
+	- Verify Explicity  
+	- Use Least Priveleage of Access/Privelage
+		-  The principle of least privilege means restricting access to information to only the level that users need to perform their work. 
+	- Assume Breach  
+
+
+### Defense in Depth
+[Source](https://learn.microsoft.com/en-us/training/modules/describe-azure-identity-access-security/8-describe-defense-depth)
+
+Provides several layers of protection to prevent information from being accessed by unauthorized users. A defense in depth strategy uses a series of mechanisms to slow the advancement of an attack that aims to gain unauthorized access to data
+
+The perimeter layer is about protecting an organization's resources from network-based attacks. 
+
+A DDoS attack attempts to overwhelm and exhaust an application's resources.
+
+
+
+# <p align="center" id = "management"> Azure Management and Governance | [Back to ToC](#toc) </p>
 
 Azure Advisor provides RECOMMENDATIONS to reduce the cost of Azure resources. So Azure Advisor evaluates Azure resources and makes recommendations
 	
