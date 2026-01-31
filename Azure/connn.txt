@@ -69,6 +69,11 @@ GRS=Geographical Region
 
 
 
+You can deploy apps and data to regional datacenters around the globe, 
+thereby ensuring that your customers always have the best performance in their region. This is referred to as geo-distribution.
+
+
+
 
 
 Zero Trust
@@ -311,45 +316,18 @@ Only then you can read or modify it
 
 ---------------------------------
 
-Management Group  - manage access, policies, and compliance across multiple subscriptions?
-		  - Everyone must use MFA”
-		  - “No resources outside these regions”
-  └── Subscription (Department)
-        └── Resource Group - What can you use to allow a user to manage all the resources in a resource group?RBAC
-				- delete a resource group - delete all resources
-              └── Resources
-			- Azure Advisor provides RECOMMENDATIONS to reduce the cost of Azure resources?
-			Azure Advisor evaluates Azure resources and makes recommendations
-				for instance, cost of resources do change!
-
-
-
-https://learn.microsoft.com/en-us/training/modules/describe-core-architectural-components-of-azure/
-https://learn.microsoft.com/en-us/training/modules/describe-core-architectural-components-of-azure/3-get-started-azure-accounts
-
-
-
-For which resource does Azure generate separate billing reports and invoices by default? [A: Subscription]
-Azure creates a separate billing report and invoice for each subscription, making it easier to organize and manage costs.
+Containers (AKS / Container Apps)
 
 
 
 
-
-
-		
-
-1 management group → enforces security rules for everyone
-
-3 subscriptions → Finance, Engineering, Marketing
-
-Each subscription has multiple resource groups → one per project
-
-Each resource group contains the actual Azure resources
-
-
-
-
+Azure RBAC allows you to assign a set of permissions to a user or group. 
+Resource tags (keyword) are used to locate and act on resources associated with specific workloads, environments, business units, and owners. 
+Resource locks prevent the accidental change or deletion of a resource. 
+Key Vault is a centralized cloud service for storing an application secrets in a single, central location.
+Azure policy - make sure resources are created in approved regions
+			
+=========================================
 
 
 https://www.examprepper.co/exam/63/93
@@ -393,71 +371,6 @@ top end = max
 
 
 
-
-
-Containers (AKS / Container Apps)
-
-
-Everything you create on Azure is a resource.
-https://learn.microsoft.com/en-us/training/modules/host-a-web-app-with-azure-app-service/
-
-A resource is a manageable item that is available through Azure. Virtual machines, storage accounts, web apps, databases, and virtual networks are examples of resources.
-
-https://learn.microsoft.com/en-us/training/modules/host-a-web-app-with-azure-app-service/3-exercise-create-a-web-app-in-the-azure-portal?pivots=csharp
-
-
-
-
-1 resource group = can deploy multiple resources (even across regions)
-
-
-
-What is an Azure Storage account named storage001 an example of?
-	- A resource
-
-
-the logical container used to combine and organize Azure resources.
-Resource Group
-
-
-Azure RBAC allows you to assign a set of permissions to a user or group. 
-Resource tags (keyword) are used to locate and act on resources associated with specific workloads, environments, business units, and owners. 
-Resource locks prevent the accidental change or deletion of a resource. 
-Key Vault is a centralized cloud service for storing an application secrets in a single, central location.
-Azure policy - make sure resources are created in approved regions
-
-
-
-
-[x] resources inherit permissions assigned to the resource group. 
-
-
-
-530 893 8800
-
-
-What is an Azure Storage account named storage001 an example of?
-https://learn.microsoft.com/en-us/training/modules/describe-core-architectural-components-of-azure/3-get-started-azure-accounts
-
-
-
-Resources are combined into resource groups, which act as a logical container into which Azure resources like web apps, databases, and storage accounts, are deployed and managed.
-
-
-Which two components are created in an Azure subscription? Each correct answer presents a complete solution.
-Resources/ Resource Group
-
-Resources can only be associated with a single subscription. 
-Subscriptions may be grouped into management groups. 
-[x] An account may be associated with multiple subscriptions.
-
-
-
-
-
-
-You can deploy apps and data to regional datacenters around the globe, 
-thereby ensuring that your customers always have the best performance in their region. This is referred to as geo-distribution.
 
 
 
@@ -616,3 +529,5 @@ Incorrect: Data Catalog –– This enables data discovery.
 Incorrect: Data Sharing –– This shares data within and between organizations.
 Incorrect: Data Estate Insights –– This accesses data estate health.
 Correct: Data Policy –– This governs access to data.
+
+530 893 8800

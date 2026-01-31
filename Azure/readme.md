@@ -189,8 +189,93 @@ Question:
 
 ## <p align="center" id = "architecture"> Azure Architecture & Services | [Back to ToC](#toc) </p>
 
+<img src = "./account-scope-levels.png">
+
+Management Group  
+	└── Subscription  
+    	└── Resource Group   
+        	└── Resources  
+			
+
+- [Section on Azure Accounts](https://learn.microsoft.com/en-us/training/modules/describe-core-architectural-components-of-azure/)
+- [Highlight Article](https://learn.microsoft.com/en-us/training/modules/describe-core-architectural-components-of-azure/6-describe-azure-management-infrastructure)
+
+<p>
+Creating an Azure account automatically provides one subscription, and more subscriptions can be added later if needed. So keep in mind: An Azure subscription is required to use Azure services.  
+
+> Don't Forget! Using Azure does require an Azure subscription. 
+
+Once a subscription is created, Azure resources can be created and managed i.e. an Azure resource cannot exist without a subscription, since subscriptions acts as the billing and management boundary. Note that resources can only be associated to only one subscription at a time. 
+
+A resource is a manageable item that is available through Azure. Virtual machines, storage accounts, web apps, databases, and virtual networks are examples of resources. In short, everything created/provisioned in Azure is a resource, including a web app as described [here](https://learn.microsoft.com/en-us/training/modules/host-a-web-app-with-azure-app-service/3-exercise-create-a-web-app-in-the-azure-portal?pivots=csharp).
+</p>
+
+<p>
+<img src = "./resource-group.png">
+Resources are combined and grouped into resource groups, which act as a logical container into which Azure resources like web apps, databases, and storage accounts, are deployed and managed. Each resource group contains the actual Azure resources.  
+
+Since resource groups organize resources into a single unit, any action taken on the group, such as deleting it or managing access, applies to all resources within the group.
+> Don't forget! Delete a resource group will delete all resources. Resources also inherit permissions assigned to the resource group.
+ 				
+> NOTE: 1 resource group  can deploy multiple resources (even across regions). So one resource group can hold many resources, but each resource can only belong to one group.
+			
+Lastly, note that in Azure, subscriptions can be grouped into management groups, making management groups sit above subscriptions. They let you manage access, policies, and compliance for many subscriptions at once. Rules applied to a management group automatically affect all its subscriptions, and management groups can be nested for easier organization.
+
+In short, Management groups manage access, policies, and compliance across multiple subscriptions. For example,"Everyone must use MFA” or “No resources outside these regions”
+</p>
+
+### Azure Hierarchy Example:
+- 1 management group → enforces security rules for all subscriptions  
+- 3 subscriptions → Finance, Engineering, Marketing  
+- Each subscription has multiple resource groups, one per project
+- A resource can be a virtual machine running a team’s development environment
+
+
+---
+Question: True/False?
+An account may be associated with multiple subscriptions. 	[Source](https://learn.microsoft.com/en-us/training/modules/describe-core-architectural-components-of-azure/6-describe-azure-management-infrastructure)
+
+	A: TRUE
+
+<img src = "./subscriptions.png">
+
+<br> 
+Question:
+What logical container is used to combine and organize Azure resources?
+
+	A: Resource Group
+
+Question:
+Which two components can be created in an Azure subscription?
+
+	A: Resources/ Resource Group
+
+Question:
+What is an Azure Storage account named storage001 an example of?
+	
+	A: A resource [Source](https://learn.microsoft.com/en-us/training/modules/describe-core-architectural-components-of-azure/3-get-started-azure-accounts)
+
+Question:
+What can you use to allow a user to manage all the resources in a resource group?
+	
+	A: RBAC
+
+Question:
+	For which resource does Azure generate separate billing reports and invoices by default? 	
+
+	A: Subscription
+	Azure creates a separate billing report and invoice for each subscription, making it easier to organize and manage costs.
+
+
+
+
+---
 
 ## <p align="center" id = "management"> Azure Management and Governance | [Back to ToC](#toc) </p>
+
+Azure Advisor provides RECOMMENDATIONS to reduce the cost of Azure resources. So Azure Advisor evaluates Azure resources and makes recommendations
+	
+	For instance, cost of resources do change!
 
 
 THE END! 
