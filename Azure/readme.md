@@ -189,7 +189,13 @@ Question:
 
 ## <p align="center" id = "architecture"> Azure Architecture & Services | [Back to ToC](#toc) </p>
 
+[Learn more here](https://learn.microsoft.com/en-us/training/paths/azure-fundamentals-describe-azure-architecture-services/)
+
+### Core Components of Azure
+
 <img src = "./account-scope-levels.png">
+
+Must Memorize:
 
 Management Group  
 	└── Subscription  
@@ -266,10 +272,68 @@ Question:
 	A: Subscription
 	Azure creates a separate billing report and invoice for each subscription, making it easier to organize and manage costs.
 
-
-
-
 ---
+
+## Describe Azure physical infrastructure
+
+[Source](https://learn.microsoft.com/en-us/training/modules/describe-core-architectural-components-of-azure/5-describe-azure-physical-infrastructure?ns-enrollment-type=learningpath&ns-enrollment-id=learn.wwl.azure-fundamentals-describe-azure-architecture-services)
+
+<img src = "./region-pairs.png">
+
+MUST MEMORIZE:  
+Geography -> Regions -> Availability Zones -> Data Centers
+
+Datacenter = Floors/rooms inside the building (with resources arranged in racks, with dedicated power, cooling, and networking infrastructure).
+
+Availability Zone = Building
+> Each availability zone is made up of one or more datacenters.  
+
+> An availability Zone protects against datacenter level failures  
+Remember: When you think of Availability Zones, AUTOMATICALLY think that it's used to protecting or managing data centers!
+
+Region = City
+> Regions contains at least one, but potentially multiple availability zones that are nearby. Azure regions are designed to offer low-latency network connections for services hosted within those regions.
+
+> List of Azure regions can be found [here](https://learn.microsoft.com/en-us/azure/reliability/regions-list)
+
+Geography = Country / legal boundary
+
+> Remember: Geography > Regions > Zones > Data Centers.
+
+- Example - 
+East US has Zone 1, Zone 2, Zone 3 — all in East US, but isolated from each other.
+Same region, separate datacenters” ✅
+East US ↔ West US
+---
+
+Region pairs allow the replication of Azure resources across geographies to help ensure that a secondary region is available in case of any disaster at the primary region.
+
+Geo-distribution can allow you to deploy apps and data to regional datacenters around the globe, thereby ensuring that your customers always have the best performance in their region. 
+
+An availabilty set protects against VM Failures.
+
+LRS=datacenter
+
+ZRS=Zone
+
+GRS=Geographical Region
+
+
+### Azure Compute & Network Services
+
+MEMORIZE:
+	To manage Azure VMS using the Azure portal:
+		portal.azure.com
+
+	Azure VMs are managed via portal.azure.com
+	Note: By default, azure vms can't communicate with one another.
+
+	Virtual machines are software emulations of physical computers. They include a virtual processor, memory, storage, and networking resources. 
+	Virtual machines host an operating system, and you can install and run software just like on a physical computer.
+	Note: If VM Is stopped, you still get charged.
+
+### 
+
 
 ## <p align="center" id = "management"> Azure Management and Governance | [Back to ToC](#toc) </p>
 

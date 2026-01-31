@@ -3,76 +3,7 @@
 
 
 
-
-
 === Describe Azure architecture and services (35–40%) ===
-
-Azure VMs are managed via portal.azure.com
-	Note: By default, azure vms can't communicate with one another.
-
-	Virtual machines are software emulations of physical computers. They include a virtual processor, memory, storage, and networking resources. 
-	Virtual machines host an operating system, and you can install and run software just like on a physical computer.
-	Note: If VM Is stopped, you still get charged.
-
-Geography = Country / legal boundary
-
-Region = City
-
-Availability Zone = Building
-
-Datacenter = Floors/rooms inside the building
-
-MUST MEMORIZE:
-Geography ->	Regions -> Availability Zones -> Data Centers
-
-	23. An availability Zone protects against datacenter level failures
-	40. An availabilty set protects against VM Failures.
-
-
-MEMORIZE:
-	To manage Azure VMS using the Azure portal:
-		portal.azure.com
-
-Region pairs allow the replication of Azure resources across geographies to help ensure that a secondary region is available in case of any disaster at the primary region.
-
-https://learn.microsoft.com/en-us/training/modules/describe-core-architectural-components-of-azure/
-
-East US has Zone 1, Zone 2, Zone 3 — all in East US, but isolated from each other.
-Same region, separate datacenters” ✅
-East US ↔ West US
-
-
-Azure region - low latency network 
-
-
-
-https://learn.microsoft.com/en-us/azure/reliability/regions-list
-REGIONS
-
-
-
-Regions > Zones > Data Centre.
-
-When you see a question like this with the keyword Zone AUTOMATICALLY you think protecting or managing data centers!
-
-
-
-
-LRS=datacenter
-
-ZRS=Zone
-
-GRS=Geographical Region
-
-
-
-
-
-
-You can deploy apps and data to regional datacenters around the globe, 
-thereby ensuring that your customers always have the best performance in their region. This is referred to as geo-distribution.
-
-
 
 
 
@@ -283,14 +214,6 @@ Azure Resource Manager (ARM)
 Microsoft Visual Studio Code
 the command-line on a local computer
 ---
-
-
-
-
-
-
-
-
 
 
 know about plans:
