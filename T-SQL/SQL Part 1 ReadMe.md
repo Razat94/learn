@@ -59,7 +59,12 @@ SELECT 'After Insertion:'
 PRINT 'Hello World!'
 ```
 
-To run the query, F5 is the shortcut. We could also use Ctrl+E OR Alt-X.  
+Different ways to run the query:  
+	- Shortcuts: F5, Ctrl + E, Alt + X  
+	- Click the green "Execute" button on the toolbar.  
+	- Go to Query (tab) -> Execute.  
+	- Right-click anywhere in the query window and choose 'Execute SQL' from the context menu.  
+
 In SQL Server, you can include multiple SELECT statements in a single query batch and each will return its own result set.
 
 ```
@@ -82,14 +87,14 @@ SELECT fname, lname
 FROM slspers;
 
 
--- Alternate way to retrieves two specific columns via table prefix
+-- Alternate way to retrieves two specific columns via table prefix  
 SELECT
 	Slspers.fname, Slspers.lname
 FROM Slspers;
 
 
-#### We can use table alias/prefix before the wildcard asterisk (*) as well.  
-SELECT Slspers.* FROM Sales
+#### Table alias/prefix can be used before the wildcard asterisk (*) too.  
+SELECT Slspers.* FROM Sales  
 -- Same as: 
 -- SELECT * FROM Slspers
 
@@ -123,18 +128,17 @@ FROM Titles
 SELECT  
 	slprice,  
 	ROUND(slprice,0) -- Round to nearest number  
-
 	-- Q: How to remove trailing 0's without rounding?   
 	-- FORMAT(slprice - slprice * 0.07, '0.##') AS discounted_price  
 FROM TITLES
 
 
 ### Keyboard Shortcuts:
-> Ctrl+K; Ctrl+C (comment)
+> Ctrl+K; Ctrl+C (comment)  
 > Ctrl+K; Ctrl+U (uncomment)
 
 
-> CTRL + Shift + U (Uppercase)
+> CTRL + Shift + U (Uppercase)  
 > CTRL + Shift + L (Lowercase)
 
 
@@ -236,8 +240,6 @@ CREATE TABLE Reviews (
     ReviewDate DATE  
 );  
 ```
-
-
 
 
 
@@ -361,7 +363,7 @@ If I had a table that looked like this:
 ```
 Name	Bonus  
 Alice	1000  
-Bob	NULL  
+Bob		NULL  
 Charlie	500  
 ```
 
@@ -371,14 +373,16 @@ FROM Employees;
 
 
 This would be my result:  
+
 Result:  
 Name	BonusAmount  
 Alice	1000  
-Bob	0  
+Bob		0  
 Charlie	500  
 
-> This function  againce replaces nulls; similar to th Excel function IF(ISBLANK())  
-In MySQL, use the function IFNULL() instead.
+> This function  againce replaces nulls; similar to the Excel function   
+IF(ISBLANK())  
+Note: In MySQL, use the function IFNULL() instead.
 
 
 
@@ -418,8 +422,8 @@ WHERE state = 'CA' OR state = 'NY'
 #### Activity 2.3: Find the Problem:
 Q: Show me people who live either in NY or CA. Amongst those people, they MUST have a zipcode of 92704.
 
-Select *  
-from Customers  
+SELECT *  
+FROM Customers  
 WHERE Customers.state = 'NY' OR state='CA' AND zipcode = '92704'  
 ORDER BY zipcode  
 -- This will return multiple NY resident without the zipcode 92704  
