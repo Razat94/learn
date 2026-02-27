@@ -909,7 +909,7 @@ ON s.repid = sp.repid;
 
 
 
--- 1 to many SHOW ME ALL SALES 
+-- 1 to many SHOW ME ALL SALES  
 SELECT bktitle, qty  
 FROM Titles   
 LEFT   
@@ -924,6 +924,27 @@ JOIN Sales
 ON Titles.partnum = Sales.partnum  
 
 
+-----------------------------------
+SHOW ALL CUSTOMERS with respective salesperson
+Select C.*, S.fname
+FROM Customers C
+LEFT JOIN Slspers S
+ON C.repid = S.repid
+----------------------------------
+
+
+-----------------------------------
+QUERY:
+SELECT * FROM Titles
+SELECT * FROM Sales ORDER BY partnum
+
+-- Sales.qty  Titles.slprice
+SELECT Titles.partnum, bktitle, qty, Sales.qty * Titles.slprice
+FROM Titles
+LEFT
+OUTER JOIN Sales
+ON Titles.partnum = Sales.partnum
+-----------------------------------
 
 Side Q: Show me all sales from each of the Salesrep  
 
