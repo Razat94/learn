@@ -454,8 +454,8 @@ ORDER BY bktitle ASC
 #### Please note that columns can be wrapped in () 
 SELECT 	
 	bktitle,   
-	(devcost),						-- This works with or without () 
-	CAST(pubdate AS DATE) AS pubdate_without_time  		-- To remove time
+	(devcost),						-- This works with or without ()  
+	CAST(pubdate AS DATE) AS pubdate_without_time  		-- To remove time  
 	(slprice * 0.9) 					-- Similar to EXCEL Formula = (A1 * 0.9)  
 FROM Titles  
 
