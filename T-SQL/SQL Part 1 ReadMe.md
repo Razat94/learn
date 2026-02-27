@@ -200,7 +200,7 @@ DROP TABLE IF EXISTS titles_backup
 TRUNCATE TABLE titles_backup  
 
 
-'''
+```
 Note: To Run T-SQL via the command line:  
 
 C:\Users\student> sqlcmd -S UT-LAPTOP\SQLEXPRESS -E  
@@ -210,7 +210,7 @@ C:\Users\student> sqlcmd -S UT-LAPTOP\SQLEXPRESS -E
 1> USE Pub1;  
 2> SELECT * FROM Slspers;  
 3> Go  
-'''
+```
 
 
 
