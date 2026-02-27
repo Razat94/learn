@@ -166,8 +166,14 @@ SELECT * INTO Slspers202XBackup
 FROM Slspers;  
 > After completion, make sure to select 'Refresh' on Object Explorer.
 
+
 -- In SQL Server, once the command is executed, we will need to refresh the Object Explorer by clicking the button Refresh (F5)  
 -- Then, we will need to hide the folder 'Tables' & expand the folder again.  
+
+
+-- When you create a new table in SQL, IntelliSense may not recognize it right away and can display a red squiggly line indicating an invalid object name.  
+-- To refresh IntelliSense cache, either press (Ctrl + Shift + R) or go to Edit -> IntelliSense -> Refresh Local Cache
+
 
 -- Example from w3SCHOOLS  
 SELECT * INTO CustomersBackup2017  
@@ -187,23 +193,24 @@ WHERE 1 = 0;
 > To delete a table:  
 DROP TABLE IF EXISTS titles_backup  
 -- (Note: This will PERMANENTLY delete the table unless you have a backup or haven’t committed the changes yet!)  
--- To drop a table, we can also right click on the table name in the Object Explorer -> Delete 
+-- To drop a table, you can also do the following:  
+-- Right-click the table name in Object Explorer and select Delete.
 
 > To truncate a table i.e. to remove all rows from table:   
 TRUNCATE TABLE titles_backup  
 
 
+'''
+Note: To Run T-SQL via the command line:  
 
-> Note: To Run T-SQL via the command line:  
-
-C:\Users\student>sqlcmd -S UT-LAPTOP\SQLEXPRESS -E  
+C:\Users\student> sqlcmd -S UT-LAPTOP\SQLEXPRESS -E  
 1> select 1 + 2;  
 2> GO  
 
 1> USE Pub1;  
 2> SELECT * FROM Slspers;  
 3> Go  
-
+'''
 
 
 
