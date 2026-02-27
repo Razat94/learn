@@ -358,15 +358,10 @@ WHERE commrate > 0.04;
 ### AND
 EVERY (All) condition MUST be true. [Similar to Excel Function]
 
+-- Exercise: Show only people from Houston, TX since there are multiple Houston cities in America.
 SELECT *  
 FROM customers  
 WHERE state = 'TX' AND city = 'Houston'  
-
-
-SELECT *  
-FROM sales  
-WHERE repid = 'N02' AND qty > 200  
-ORDER BY qty 
 
 
 Select *  
@@ -376,6 +371,11 @@ FROM Titles
 ORDER BY slprice ASC
 
 
+SELECT *  
+FROM sales  
+WHERE repid = 'N02' AND qty > 200  
+ORDER BY qty 
+
 
 ### OR  
 ANY condition MUST be true. [Similar to Excel Function]
@@ -384,6 +384,7 @@ ANY condition MUST be true. [Similar to Excel Function]
 SELECT custname, city, state FROM Customers    
 WHERE state = 'CA' OR state = 'NY'    
 -- Also works: -- WHERE state IN ('CA', 'NY', 'TX');  
+
 
 
 #### Activity 2.3: Find the Problem:
@@ -402,6 +403,11 @@ ORDER BY zipcode
 SELECT *  
 FROM Slspers  
 WHERE fname LIKE 'A%';
+
+-- Another example
+SELECT *
+FROM Titles
+WHERE bktitle LIKE 'The%'
 
 
 Another example:  
