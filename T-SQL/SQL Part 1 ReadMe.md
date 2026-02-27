@@ -94,22 +94,22 @@ FROM Slspers;
 
 
 #### Table alias/prefix can be used before the wildcard asterisk (*) too.  
-SELECT Slspers.* FROM Sales  
--- Same as: 
+SELECT Slspers.* FROM Slspers    
+-- Same as:  
 -- SELECT * FROM Slspers
 
 
 -- Alias 'AS' Keyword --  
 SELECT fname, lname AS 'Last Name' FROM Slspers;  
--- The keyword AS is not needed - just a formality.
+-- The keyword 'AS' is not needed since it's just a formality.  
 -- SELECT fname, lname 'Last Name' FROM Slspers;
 
 #### ...more to discuss in Chapter 5! [Link to Lesson 5](#5). 
 
 
--- In SQL, a new column can be added to the query result by using a fixed value or calculation. 
--- This column exists only in the results and does not affect the actual table data.  
-SELECT fname, lname, 'United States' AS County, '21' AS Age
+-- In SQL, a new column can be added to the query result by using a fixed value or calculation.  
+-- This column exists ONLY in the results and does not affect the actual table data.  
+SELECT fname, lname, 'United States' AS Country, '21' AS Age  
 FROM Slspers
 
 
@@ -144,25 +144,30 @@ FROM TITLES
 
 ```
 Display the table structure  
-/* Also works too */  
-SP_HELP Titles  
+SP_HELP Slspers  
+
+/* Also works too */
+On the Object Explorer, right click on the table of your choice -> Click 'Design'
 ```
 
 ```
 -- Albeit advanced, the below command also outputs column names  
 SELECT COLUMN_NAME  
 FROM INFORMATION_SCHEMA.COLUMNS  
-WHERE TABLE_NAME = 'Titles'
+WHERE TABLE_NAME = 'Slspers'
 ```
 
 
 ### Create a Backup Table
 > Note: Not good practice to create duplicate tables unless for sandboxes & backups
 
-SELECT * INTO titles_backup  
-FROM titles;  
+-- Excercise: Please create TWO Backup tables to showcase the 2 different ways to delete a table:  
+SELECT * INTO Slspers202XBackup  
+FROM Slspers;  
 > After completion, make sure to select 'Refresh' on Object Explorer.
 
+-- In SQL Server, once the command is executed, we will need to refresh the Object Explorer by clicking the button Refresh (F5)  
+-- Then, we will need to hide the folder 'Tables' & expand the folder again.  
 
 -- Example from w3SCHOOLS  
 SELECT * INTO CustomersBackup2017  
@@ -181,65 +186,11 @@ WHERE 1 = 0;
 
 > To delete a table:  
 DROP TABLE IF EXISTS titles_backup  
+-- (Note: This will PERMANENTLY delete the table unless you have a backup or haven’t committed the changes yet!)  
+-- To drop a table, we can also right click on the table name in the Object Explorer -> Delete 
 
 > To truncate a table i.e. to remove all rows from table:   
 TRUNCATE TABLE titles_backup  
-
-
-
-> Excercise: Create simple table 'Vendors' who are partners involved in publishing.  
-
-```
-CREATE TABLE Vendors (  
-    VendorID INT PRIMARY KEY IDENTITY(1000,1), -- KEYWORD 'IDENTITY' AUTOINCREMENTS; FIRST ROW WILL START AT 1000 and increment 1 for each new row!  
-    Name VARCHAR(100),  
-    Phone VARCHAR(20),  
-    Email VARCHAR(100)  
-);
-```
-
-INSERT INTO Vendors(Name, Phone, Email)  
-VALUES  
-('Raza', '818-123-4321', 'Raza@outlook.com')
-
-INSERT INTO Vendors (Name, Phone, Email)
-VALUES  
-('Global Print Solutions', '555-123-4567', 'alice.morgan@globalprint.com'),  
-('BookWorks Inc.', '555-987-6543', 'robert.tan@bookworks.com'),  
-('EcoPaper Co.', '555-555-1212', 'jenna.park@ecopaper.com');  
-
-SELECT * FROM Vendors;
-
-```
-CREATE TABLE Authors (  
-    AuthorID INT PRIMARY KEY,  -- must be unique and not null (Cannot insert duplicate key!)  
-    FirstName VARCHAR(100) NOT NULL,  
-    LastName VARCHAR(100),  
-    AGE INT DEFAULT 21  
-);
-```
-
-INSERT INTO AUTHORS(AuthorID, FirstName, LastName)   
-VALUES    
-(NULL , 'Raza', 'M'), 	-- Will return error because Primary Key can not be null 	-- Fix by changing NULL to number  
-(2, NULL, 'Z'), 	-- Will return error because Firstname can not be null 		-- Fix by adding a name  
-(3, 'Maria', NULL),  
-(4, 'Raza');		-- Will return error because  
-			-- # of columns for each row in a table value constructor must be the same. -- Solution: -- (4, 'Raza', NULL)
-
-SELECT * FROM AUTHORS;
-
-```
--- Good potential table 'Reviews' which stores book reviews from customers or critics:  
-CREATE TABLE Reviews (  
-    ReviewID INT PRIMARY KEY IDENTITY(1,1),  
-    TitleID INT FOREIGN KEY REFERENCES Titles(TitleID),  
-    CustomerID INT FOREIGN KEY REFERENCES Customers(CustomerID),  
-    Rating INT CHECK (Rating BETWEEN 1 AND 5),  
-    ReviewText TEXT,  
-    ReviewDate DATE  
-);  
-```
 
 
 
@@ -992,7 +943,62 @@ FOR XML, MAKE SURE YOU WRAP INFORMATION IN
 
 </document
 
+-- BONUS --
 
+> Excercise: Create simple table 'Vendors' who are partners involved in publishing.  
+
+```
+CREATE TABLE Vendors (  
+    VendorID INT PRIMARY KEY IDENTITY(1000,1), -- KEYWORD 'IDENTITY' AUTOINCREMENTS; FIRST ROW WILL START AT 1000 and increment 1 for each new row!  
+    Name VARCHAR(100),  
+    Phone VARCHAR(20),  
+    Email VARCHAR(100)  
+);
+```
+
+INSERT INTO Vendors(Name, Phone, Email)  
+VALUES  
+('Raza', '818-123-4321', 'Raza@outlook.com')
+
+INSERT INTO Vendors (Name, Phone, Email)
+VALUES  
+('Global Print Solutions', '555-123-4567', 'alice.morgan@globalprint.com'),  
+('BookWorks Inc.', '555-987-6543', 'robert.tan@bookworks.com'),  
+('EcoPaper Co.', '555-555-1212', 'jenna.park@ecopaper.com');  
+
+SELECT * FROM Vendors;
+
+```
+CREATE TABLE Authors (  
+    AuthorID INT PRIMARY KEY,  -- must be unique and not null (Cannot insert duplicate key!)  
+    FirstName VARCHAR(100) NOT NULL,  
+    LastName VARCHAR(100),  
+    AGE INT DEFAULT 21  
+);
+```
+
+INSERT INTO AUTHORS(AuthorID, FirstName, LastName)   
+VALUES    
+(NULL , 'Raza', 'M'), 	-- Will return error because Primary Key can not be null 	-- Fix by changing NULL to number  
+(2, NULL, 'Z'), 	-- Will return error because Firstname can not be null 		-- Fix by adding a name  
+(3, 'Maria', NULL),  
+(4, 'Raza');		-- Will return error because  
+			-- # of columns for each row in a table value constructor must be the same. -- Solution: -- (4, 'Raza', NULL)
+
+SELECT * FROM AUTHORS;
+
+```
+-- Good potential table 'Reviews' which stores book reviews from customers or critics:  
+CREATE TABLE Reviews (  
+    ReviewID INT PRIMARY KEY IDENTITY(1,1),  
+    TitleID INT FOREIGN KEY REFERENCES Titles(TitleID),  
+    CustomerID INT FOREIGN KEY REFERENCES Customers(CustomerID),  
+    Rating INT CHECK (Rating BETWEEN 1 AND 5),  
+    ReviewText TEXT,  
+    ReviewDate DATE  
+);  
+```
+-- End of Bonus --
 
 ==
 FAQ's:
