@@ -268,6 +268,7 @@ WHERE NOT state = 'NY'
 -- ORDER BY state  
 
 
+#### WHERE clause with numbers:
 > -- Another Example  
 SELECT *  
 FROM  titles  
@@ -285,11 +286,6 @@ WHERE pubdate > '2017-01-01' -- Note: Actual date must be wrapped in ''
 ORDER BY pubdate
 
 
-#### WHERE clause with numbers:
-SELECT *  
-INTO HighEarners  
-FROM Slspers  
-WHERE commrate > 0.04;  
 
 #### BE CAREFUL: Computed or alias columns aren't part of the actual table, so they can't be used in the `WHERE` clause since WHERE is evaluated before SELECT.
 
@@ -301,19 +297,6 @@ FROM Titles
 WHERE slprice - slprice * 0.07 >= 45  
 -- WHERE discounted_price >= 45 -- WON'T WORK!  
 ORDER BY discounted_price DESC  -- WILL WORK!  
-
-
-#### Create a new table from a filtered table:  
-SELECT   
-	*  
-	INTO CA_Customers  -- Creates a new table 'CA_Customers'  
-FROM Customers  
-WHERE state = 'CA'  
-ORDER BY custname
-
-> TO DELETE:  
--- DROP TABLE CA_Customers  
-
 
 
 
@@ -353,7 +336,23 @@ IF(ISBLANK())
 Note: In MySQL, use the function IFNULL() instead.
 
 
+#### Create a new table from a filtered table:  
+SELECT   
+	*  
+	INTO CA_Customers  -- Creates a new table 'CA_Customers'  
+FROM Customers  
+WHERE state = 'CA'  
+ORDER BY custname
 
+> TO DELETE:  
+-- DROP TABLE CA_Customers  
+
+
+-- Another Example
+SELECT *  
+INTO HighEarners  
+FROM Slspers  
+WHERE commrate > 0.04;  
 
 
 ### AND
