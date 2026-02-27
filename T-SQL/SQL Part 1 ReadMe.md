@@ -82,6 +82,10 @@ SELECT *
 FROM slspers;  
 
 
+> In SQL Server, you can generate a SELECT query from the Object Explorer:  
+> Right-click the table name and choose 'Select Top 1000 Rows'.
+
+
 #### Query that outputs only 2 columns  
 SELECT fname, lname
 FROM slspers;
@@ -225,20 +229,20 @@ C:\Users\student> sqlcmd -S UT-LAPTOP\SQLEXPRESS -E
 
 #### To sort data by a column  
 SELECT *  
-FROM Titles   
-ORDER BY bktitle ASC -- Sort by bktitle  
+FROM Customers   
+ORDER BY state ASC -- Sorts the table by state  
 
 -- Multilevel Sort  
 SELECT *  
 FROM Titles  
-ORDER BY slprice DESC, bkTitle ASC  
+ORDER BY State ASC, city DESC  
 
 #### To get top 5 rows  
 SELECT  
 TOP 5  
 *  
-FROM Titles  
-ORDER BY bktitle ASC
+FROM Customers  
+ORDER BY State ASC
 
 
 -- In SSMS, you can use the 'Query Options' command to set the ROWCOUNT value.  
@@ -249,7 +253,12 @@ ORDER BY bktitle ASC
 SELECT *  
 FROM Customers  
 WHERE state = 'NY'   
--- verify that 6 people are there.
+-- verify that 6 people are there.  
+
+-- NOTE: In SQL Server, use single quotation marks (' ') for string literals.  
+-- Double quotation marks (" ") are not valid for this purpose.
+
+> Practice Exercise: Show all people from the city 'Houston'.
 
 
 #### NOT   
@@ -259,6 +268,7 @@ WHERE NOT state = 'NY'
 -- ORDER BY state  
 
 
+> -- Another Example  
 SELECT *  
 FROM  titles  
 WHERE  
@@ -278,8 +288,8 @@ ORDER BY pubdate
 #### WHERE clause with numbers:
 SELECT *  
 INTO HighEarners  
-FROM Employees  
-WHERE Salary > 80000;  
+FROM Slspers  
+WHERE commrate > 0.04;  
 
 #### BE CAREFUL: Computed or alias columns aren't part of the actual table, so they can't be used in the `WHERE` clause since WHERE is evaluated before SELECT.
 
