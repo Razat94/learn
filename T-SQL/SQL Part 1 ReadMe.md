@@ -81,6 +81,7 @@ USE Pub1
 SELECT *  
 FROM slspers;  
 
+> Note: Spelling matters. We can't type 'slsperson' or else the query won't work.
 
 > In SQL Server, you can generate a SELECT query from the Object Explorer:  
 > Right-click the table name and choose 'Select Top 1000 Rows'.
@@ -231,6 +232,7 @@ C:\Users\student> sqlcmd -S UT-LAPTOP\SQLEXPRESS -E
 SELECT *  
 FROM Customers   
 ORDER BY state ASC -- Sorts the table by state  
+-- IN SQL SERVER, ORDER BY does default to ASC.  
 
 -- Multilevel Sort  
 SELECT *  
@@ -358,6 +360,8 @@ WHERE commrate > 0.04;
 ### AND
 EVERY (All) condition MUST be true. [Similar to Excel Function]
 
+
+
 -- Exercise: Show only people from Houston, TX since there are multiple Houston cities in America.
 SELECT *  
 FROM customers  
@@ -378,8 +382,7 @@ ORDER BY qty
 
 
 ### OR  
-ANY condition MUST be true. [Similar to Excel Function]
-
+ONE/ANY condition MUST be true. [Similar to Excel Function]
 
 SELECT custname, city, state FROM Customers    
 WHERE state = 'CA' OR state = 'NY'    
@@ -409,6 +412,7 @@ SELECT *
 FROM Titles
 WHERE bktitle LIKE 'The%'
 
+## Exercise: Show all last names that end with 'an'
 
 Another example:  
 -- SELECT title, director FROM movies   
@@ -461,6 +465,7 @@ FROM Titles
 
 
 SELECT GETDATE();  
+SELECT CAST(GETDATE() AS DATE);
 SELECT YEAR( GETDATE() ); 	-- like Excel, you also have MONTH( date ) AND DAY( date ) too.  
 -- Also works: -- SELECT DATEPART( year, GETDATE() )
 
@@ -489,6 +494,13 @@ FROM Obsolete_Titles
 WHERE MONTH(pubdate) BETWEEN 5 AND 10  
 
 
+#### Exercise: Show booktitles published on July 2016
+-- Solution:  
+SELECT *
+FROM Titles
+WHERE YEAR(pubdate) = 2016 AND MONTH(Pubdate) = 7
+ORDER BY pubdate
+
 
 SELECT  
 	pubdate,   
@@ -496,6 +508,8 @@ SELECT
 	DATEADD(YEAR, 1, pubdate) AS Pub_Date_1_Year_Later -- Adds 1 year to the publication date  
 FROM Titles  
 WHERE pubdate BETWEEN '1/1/1994' AND '12/31/2013'  
+
+
 
 
 
@@ -925,7 +939,7 @@ ON Titles.partnum = Sales.partnum
 
 
 -----------------------------------
-SHOW ALL CUSTOMERS with respective salesperson
+### SHOW ALL CUSTOMERS with respective salesperson  
 Select C.*, S.fname
 FROM Customers C
 LEFT JOIN Slspers S
@@ -934,11 +948,12 @@ ON C.repid = S.repid
 
 
 -----------------------------------
-QUERY:
-SELECT * FROM Titles
-SELECT * FROM Sales ORDER BY partnum
+### QUERY:  
+SELECT T.* FROM Titles T  
+SELECT S.* FROM Sales S  
+ORDER BY partnum
 
--- Sales.qty  Titles.slprice
+
 SELECT Titles.partnum, bktitle, qty, Sales.qty * Titles.slprice
 FROM Titles
 LEFT
