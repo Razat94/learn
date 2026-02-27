@@ -860,12 +860,12 @@ Note:
 ### JOIN STATEMENT!!  
 
 -- INNER JOIN – Match only where repid is present in both tables  
--- MATCH UP VLOOKUP
-SELECT S.*, sp.fname  
+-- MATCH UP VLOOKUP  
+SELECT S.*, sp.fname   
 FROM sales2 s  
-INNER -- INNER JOIN WORKS functionally the same as JOIN  -- It only includes rows where a match exists in both sales and slspers.
+INNER -- INNER JOIN WORKS functionally the same as JOIN  -- It only includes rows where a match exists in both sales and slspers.  
 JOIN slspers2 sp   
-ON s.repid = sp.repid
+ON s.repid = sp.repid  
 -- ORDER BY repid
 
 
@@ -886,7 +886,7 @@ ON 1 = 0;  -- Forces no match
 
 
 
--- All records from both tables, match where possible
+-- All records from both tables, match where possible  
 SELECT *  
 FROM sales2 s  
 FULL OUTER  
