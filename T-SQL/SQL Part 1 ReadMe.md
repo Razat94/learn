@@ -947,6 +947,17 @@ ON C.repid = S.repid
 ----------------------------------
 
 
+#### Example of multi-join statement
+SELECT DISTINCT t.*, c.*
+FROM Titles t
+INNER JOIN Sales s
+    ON s.partnum = t.partnum
+INNER JOIN Customers c
+    ON s.custnum = c.custnum
+WHERE s.qty = 500;
+
+
+
 -----------------------------------
 ### QUERY:  
 SELECT T.* FROM Titles T  
