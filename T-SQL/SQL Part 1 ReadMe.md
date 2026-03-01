@@ -998,7 +998,7 @@ JOIN Customers c
 WHERE s.qty > 500;
 ```
 
-This query:
+This query:  
 	* Starts with `Sales` Table  
 	* Joins to `Title` Table to find what the purchased title was  
 	* Joins to `Customers` Table to get the customer name  
