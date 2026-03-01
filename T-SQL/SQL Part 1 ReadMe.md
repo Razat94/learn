@@ -913,9 +913,9 @@ LEFT JOIN Slspers S
     ON C.repid = S.repid;
 ```
 
-> Remember if you're struggling to output the two tables 
-> SELECT C.* FROM Customers C
-> SELECT S.* FROM Slspers S
+> Remember if you're struggling to output the two tables  
+> SELECT C.* FROM Customers C  
+> SELECT S.* FROM Slspers S  
 
 ### Sample - Inner Join Demo: Show All Matching Titles with Obsolete Titles
 
