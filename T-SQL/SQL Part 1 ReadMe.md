@@ -947,17 +947,22 @@ ON t.partnum = o.partnum;
 ```
 
 
-### Exercise #1: One-to-Many Example (Titles → Slspers)
+### Exercise #1: One-to-Many Example
 
 ```sql
--- Another Sample Exercise: Show all Customers who are in the Customers Table AND Potential Customers Table
+-- Sample Exercise: Show all Customers who are in the Customers Table AND Potential Customers Table
+
+SELECT *
+FROM Customers C
+INNER JOIN Potential_Customers P
+ON C.custnum = P.custnum
 
 ```
 
 ### Exercise #2: Calculated Column with JOIN
 
 ```sql
--- Shows all titles and display matching sales if they exist.
+-- Sample Exercise: Show all titles and display matching sales if they exist (Bonus: Add TotalSales).
 SELECT Titles.partnum,
        bktitle,
        qty,
@@ -968,25 +973,36 @@ LEFT JOIN Sales
 ```
 
 * Demonstrates calculated column inside SELECT.
-* `total_amount` = quantity × selling price.
+* `Total_amount` = Quantity × selling price.
 
 ---
 
 
-### Exercise #3: Multi-Join Example
+### Exercise #3: Multi-Join Example - Show which customers bought 500 copies of which books.
+
+-- i.e. Find out for all sales where qty = 500, who was the customer and what did they buy.
+
+-- To start off:  
+SELECT * FROM Sales WHERE qty = 500  
+
+> NOTE - In this simplified example, every sale corresponds to a valid customer account and a valid purchased book.
+> Because of this, it doesn’t matter which JOIN type is used.
 
 ```sql
-SELECT DISTINCT t.*, c.*
-FROM Titles t
-INNER JOIN Sales s
+SELECT S.*, C.Custname, T.bktitle
+FROM Sales s 
+JOIN Titles t
     ON s.partnum = t.partnum
-INNER JOIN Customers c
+JOIN Customers c
     ON s.custnum = c.custnum
-WHERE s.qty = 500;
+WHERE s.qty > 500;
 ```
 
-* Join Titles → Sales → Customers.
-* Filters where quantity equals 500.
+This query:
+	* Starts with Sales
+	* Joins to Title to find what the purchased title was 
+	* Joins to Customers to get the customer name
+	* Filters to only sales where book quantity = 500
 
 ---
 
