@@ -820,9 +820,10 @@ FROM Obsolete_Titles
 ORDER BY bktitle
 
 
+## JOIN Statements
 ### /* ------------ JOINS Statement ------------ */
 
-## Recall: Table Aliases
+### Recall: Table Aliases (Important Sidenote)
 
 ```sql
 SELECT Sales.ordnum
@@ -840,9 +841,7 @@ FROM Sales S;
 * Once an alias is declared, you must use the alias instead of the full table name.
 
 
-## JOIN Statements
-
-### Alias Rules (Important)
+#### Overview of Aliases:
 
 ```sql
 -- Works:
