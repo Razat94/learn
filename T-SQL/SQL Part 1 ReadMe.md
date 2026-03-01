@@ -842,7 +842,7 @@ WHERE S.qty > 300;
 
 ```sql
 -- Does NOT work:
-SELECT *
+SELECT S.*
 FROM Sales S
 WHERE Sales.qty > 300; -- Must change to S.qty
 ```
