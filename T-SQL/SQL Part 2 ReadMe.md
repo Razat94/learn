@@ -27,74 +27,74 @@ WHERE commrate >
 	(SELECT AVG(commrate) FROM Slspers)
 
 
--- Exercise: Show all titles that are cheaper to develop than the cheapest obsolete title.
-SELECT *
-FROM Titles
+-- Exercise: Show all titles that are cheaper to develop than the cheapest obsolete title.  
+SELECT *  
+FROM Titles  
 WHERE devcost < (SELECT MIN(devcost) FROM Obsolete_Titles);
 
 
--- Same as if we use ALL Statement
+-- Same as if we use ALL Statement  
 SELECT *  
 FROM Titles  
-WHERE devcost < ALL (Select devcost from Obsolete_Titles)
+WHERE devcost < ALL (Select devcost from Obsolete_Titles)  
 
 
 -- ## Exercise: Show me all salespersons who have never made a sale.
-SELECT *
-FROM Slspers
-WHERE repid NOT IN
-(
-    SELECT repid
-    FROM Sales
-    GROUP BY repid
-)
+SELECT *  
+FROM Slspers  
+WHERE repid NOT IN  
+(  
+    SELECT repid  
+    FROM Sales  
+    GROUP BY repid  
+)  
 
 
--- Returns all rows from Titles where a matching partnum exists in Sales.
-SELECT * FROM Titles  -- This statement alone will return 92 rows.   
+-- Returns all rows from Titles where a matching partnum exists in Sales.  
+SELECT * FROM Titles  -- This statement alone will return 92 rows.  
 WHERE partnum IN  
-	(SELECT partnum  
+	(SELECT partnum    
 	FROM Sales) -- Executes what's in parenthesis first  
 
 
--- Alternate Solution: Inner Join Statement
+-- Alternate Solution: Inner Join Statement  
 SELECT DISTINCT t.*  
 FROM Titles t  
 INNER JOIN Sales s  
     ON t.partnum = s.partnum;  
 
 
--- For each row in Titles, output each row in Obsolete_Titles with the same partnum
-SELECT *
-FROM Titles
-WHERE EXISTS
-	(SELECT partnum
-	FROM Obsolete_Titles
-	WHERE partnum = Titles.partnum)
+-- For each row in Titles, output each row in Obsolete_Titles with the same partnum  
+SELECT *  
+FROM Titles  
+WHERE EXISTS  
+	(SELECT partnum  
+	FROM Obsolete_Titles  
+	WHERE partnum = Titles.partnum)  
 
 
--- Alternate Solution: INNER JOIN Statement
-SELECT DISTINCT t.*
-FROM Titles t
-INNER JOIN Obsolete_Titles o
-    ON t.partnum = o.partnum;
+-- Alternate Solution: INNER JOIN Statement  
+SELECT DISTINCT t.*  
+FROM Titles t  
+INNER JOIN Obsolete_Titles o  
+    ON t.partnum = o.partnum;  
 
 
 
--- ### Additional Example:
-SELECT *
-FROM Customers
-WHERE Custnum IN
-(
-    SELECT custnum
-    FROM Sales
-    WHERE partnum IN
-    (
-        SELECT partnum
-        FROM Titles
-        WHERE slprice >= 49
-    )
-);
+-- ### Additional Example:  
+SELECT *  
+FROM Customers  
+WHERE Custnum IN  
+(  
+    SELECT custnum  
+    FROM Sales  
+    WHERE partnum IN  
+    (  
+        SELECT partnum  
+        FROM Titles  
+        WHERE slprice >= 49  
+    )  
+);  
 
 
 
