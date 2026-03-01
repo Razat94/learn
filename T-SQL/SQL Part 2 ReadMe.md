@@ -75,7 +75,7 @@ WHERE EXISTS
 
 
 -- Alternate Solution: INNER JOIN Statement  
-SELECT DISTINCT t.*  
+SELECT t.*  
 FROM Titles t  
 INNER JOIN Obsolete_Titles o  
     ON t.partnum = o.partnum;  

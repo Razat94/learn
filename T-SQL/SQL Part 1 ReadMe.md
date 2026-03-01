@@ -822,132 +822,160 @@ ORDER BY bktitle
 
 ### /* ------------ JOINS Statement ------------ */
 
+## Recall: Table Aliases
+
+```sql
+SELECT Sales.ordnum
+FROM Sales;
+```
 
 
--- Prerequisite Knowledge 
+```sql
+-- Using an alias S
+SELECT S.* -- Outputting Individual Columns -- S.ordnum, S.ordnum
+FROM Sales S;
+```
 
-SELECT *  
--- Recall: -- SELECT sldate AS purchase_date  
+* `Sales S` assigns alias `S` to the `Sales` table.
+* Once an alias is declared, you must use the alias instead of the full table name.
 
 
-Select Sales.ordnum
+## JOIN Statements
+
+### Alias Rules (Important)
+
+```sql
+-- Works:
+SELECT *, Sales.Ordnum -- Note: Ordnum would be outputted twice in this example.
 FROM Sales
+WHERE Sales.qty > 300;
+```
 
 
-FROM Sales
+```sql
+-- Works:
+SELECT S.*
+FROM Sales S
+WHERE S.qty > 300;
+```
 
+```sql
+-- Does NOT work:
+SELECT *
+FROM Sales S
+WHERE Sales.qty > 300; -- Must change to S.qty
+```
 
-	SELECT *  
-	-- Possible Individual Columns:
-	-- SELECT S.*  -- SELECT S.ordnum, S.qty
-	FROM Sales S  
-	-- WHERE S.qty > 300  
+* Remember, if you alias a table (Sales S), you must reference it as `S`, not `Sales`.
 
+---
 
-Note:  
-	## GOOD COMPARISON!
-	SELECT Sales.ordnum
-	FROM Sales
-
-	SELECT S.ordnum
-	FROM Sales S
-	-- WHERE S.qty > 300
-
-
-	------------- PROOFREAD
-
-	-- WORKS!  
-	SELECT *  
-	FROM Sales  
-	WHERE Sales.qty > 300  
-	
-
-	-- DOESN'T WORK!  
-	SELECT *  
-	FROM Sales S  
-	WHERE Sales.qty > 300  
-	-- MUST BE  
-	-- WHERE S.qty > 300  
+<br/>
+<br/>
 
 
 
-### JOIN STATEMENT!!  
-
--- INNER JOIN – Match only where repid is present in both tables  
--- MATCH UP VLOOKUP  
-SELECT S.*, sp.fname   
-FROM sales2 s  
-INNER -- INNER JOIN WORKS functionally the same as JOIN  -- It only includes rows where a match exists in both sales and slspers.  
-JOIN slspers2 sp   
-ON s.repid = sp.repid  
--- ORDER BY repid
+### INNER JOIN
 
 
+Match rows where the key exists in both tables.
+[Link](https://www.w3schools.com/sql/sql_join_inner.asp)
 
--- OUTER JOIN 
-
--- FULL OUTER JOIN with no matching keys, or more directly  
--- FULL OUTER JOIN include all rows from both table  
-SELECT S.*, sp.fname  
-FROM sales2 s  
-FULL OUTER JOIN  
-slspers2 sp   
-ON 1 = 0;  -- Forces no match
-
+NOTE:
+It's always a great idea to check what the contents of each table is:
+```sql
+SELECT S.* FROM Sales2 S
+SELECT SP.* FROM Slspers2 SP
+```
 
 
--- A FULL OUTER JOIN gives all rows from both tables based on matching keys but not every possible combination of rows. 
+```sql
+-- Prerequisite: Assure that both Sales2 & Slspers2 tables are created.  
+-- `INNER JOIN` returns only matching rows & functionally is the same as writing just `JOIN`.
+SELECT s.*, sp.fname
+FROM sales2 s
+INNER JOIN slspers2 sp
+    ON s.repid = sp.repid;
+```
 
 
 
--- All records from both tables, match where possible  
-SELECT *  
-FROM sales2 s  
-FULL OUTER  
-JOIN slspers2 sp   
-ON s.repid = sp.repid; -- Only statement that changes from last example.  
+### LEFT JOIN
 
+Similar idea to VLOOKUP (matching keys), `LEFT JOIN` and `LEFT OUTER JOIN` are the same.
 
+```sql
+-- Include all rows from the left table.
+SELECT s.*, sp.fname
+FROM sales2 s
+LEFT JOIN slspers2 sp
+    ON s.repid = sp.repid;
+```
 
+Note:
+* All rows from `sales2` are returned.
+* Matching rows from `slspers2` are included.
+* Non-matching rows show NULL values.
 
--- LEFT JOIN and LEFT OUTER JOIN are the same thing.
+---
 
--- LEFT JOIN on Sales  
--- Optional: Include all sales, even if no matching rep exists (LEFT JOIN):  
-SELECT S.*, sp.fname  
-FROM sales2 s  
-LEFT  
-JOIN slspers2 sp   
-ON s.repid = sp.repid;
+### Sample - Left Join Demo: Show All Customers with Their Salesperson
 
-
-
-
--- 1 to many SHOW ME ALL SALES  
-SELECT bktitle, qty  
-FROM Titles   
-LEFT   
-OUTER JOIN Sales  
-ON Titles.partnum = Sales.partnum  
-
--- 
-SELECT bktitle, qty  
-FROM Titles   
-LEFT   
-JOIN Sales  
-ON Titles.partnum = Sales.partnum  
-
-
------------------------------------
-### SHOW ALL CUSTOMERS with respective salesperson  
-Select C.*, S.fname
+```sql
+-- Returns all customers & shows assigned salesperson name if available.
+SELECT C.*, S.fname
 FROM Customers C
 LEFT JOIN Slspers S
-ON C.repid = S.repid
-----------------------------------
+    ON C.repid = S.repid;
+```
+
+> Remember if you're struggling to output the two tables 
+> SELECT C.* FROM Customers C
+> SELECT S.* FROM Slspers S
+
+### Sample - Inner Join Demo: Show All Matching Titles with Obsolete Titles
+
+```sql
+-- Before attempting INNER JOIN, look at individual titles
+
+-- SELECT T.* FROM Titles T  
+-- SELECT O.* FROM Obsolete_Titles O
+SELECT t.*  
+FROM Titles t  
+INNER JOIN Obsolete_Titles o  
+ON t.partnum = o.partnum;  
+```
 
 
-#### Example of multi-join statement
+### Exercise #1: One-to-Many Example (Titles → Slspers)
+
+```sql
+-- Another Sample Exercise: Show all Customers who are in the Customers Table AND Potential Customers Table
+
+```
+
+### Exercise #2: Calculated Column with JOIN
+
+```sql
+-- Shows all titles and display matching sales if they exist.
+SELECT Titles.partnum,
+       bktitle,
+       qty,
+       Sales.qty * Titles.slprice AS total_amount
+FROM Titles
+LEFT JOIN Sales
+    ON Titles.partnum = Sales.partnum;
+```
+
+* Demonstrates calculated column inside SELECT.
+* `total_amount` = quantity × selling price.
+
+---
+
+
+## Exercise #3: Multi-Join Example
+
+```sql
 SELECT DISTINCT t.*, c.*
 FROM Titles t
 INNER JOIN Sales s
@@ -955,32 +983,62 @@ INNER JOIN Sales s
 INNER JOIN Customers c
     ON s.custnum = c.custnum
 WHERE s.qty = 500;
+```
+
+* Join Titles → Sales → Customers.
+* Filters where quantity equals 500.
+
+---
 
 
+## Bonus Exercise: Count Sales Per Salesperson (Even if 0)
 
------------------------------------
-### QUERY:  
-SELECT T.* FROM Titles T  
-SELECT S.* FROM Sales S  
-ORDER BY partnum
+```sql
+SELECT sp.repid,
+       sp.fname,
+       COUNT(s.ordnum) AS sales_count
+FROM slspers2 sp
+LEFT JOIN sales2 s
+    ON sp.repid = s.repid
+GROUP BY sp.repid, sp.fname;
+```
 
+* LEFT JOIN ensures reps with zero sales still appear.
+* `COUNT(s.ordnum)` counts only matching sales rows.
 
-SELECT Titles.partnum, bktitle, qty, Sales.qty * Titles.slprice
-FROM Titles
-LEFT
-OUTER JOIN Sales
-ON Titles.partnum = Sales.partnum
------------------------------------
-
-Side Q: Show me all sales from each of the Salesrep  
-
--- Count Sales Per Salesperson (Even if 0)  
-SELECT sp.repid, sp.fname, COUNT(s.ordnum) AS sales_count  
-FROM slspers2 sp  
-LEFT JOIN sales2 s ON sp.repid = s.repid  
-GROUP BY sp.repid, sp.fname;  
+---
 
 
+## FULL OUTER JOIN
+
+Include all rows from both tables, matching where possible.
+
+Example forcing no matches:
+
+```sql
+SELECT s.*, sp.fname
+FROM sales2 s
+FULL OUTER JOIN slspers2 sp
+    ON 1 = 0;
+```
+
+* `ON 1 = 0` forces no match.
+* Returns all rows from both tables with NULLs where no match exists.
+
+Standard FULL OUTER JOIN:
+
+```sql
+SELECT *
+FROM sales2 s
+FULL OUTER JOIN slspers2 sp
+    ON s.repid = sp.repid;
+```
+
+* Returns all rows from both tables.
+* Matches where keys align.
+* Does NOT create every possible combination (not a Cartesian product).
+
+---
 
 /* -------------------------------------------------------
 ## <p id = "6"> LESSON 6: Exporting Query Results | [Back to ToC](#toc)</p> 
