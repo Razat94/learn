@@ -14,12 +14,13 @@
 ## <p id = "0"> LESSON 0: Before We Begin </p>
 ---------------------------------------------------------- */
 
-Remember the helpful Mnemonic: 
+Remember the helpful Mnemonic:  
 Start Fridays With Grandma's Homemade Oatmeal
 
 /* -------------------------------------------------------
 ## <p id = "1"> LESSON 1: Using Nested Queries | [Back to ToC](#toc) </p>
 ---------------------------------------------------------- */
+
 
 
 SELECT * FROM Slspers  
@@ -39,7 +40,7 @@ FROM Titles
 WHERE devcost < ALL (Select devcost from Obsolete_Titles)  
 
 
--- ## Exercise: Show me all salespersons who have never made a sale.
+-- ## Exercise: Show me all salespersons who have never made a sale.  
 SELECT *  
 FROM Slspers  
 WHERE repid NOT IN  
@@ -105,41 +106,41 @@ WHERE Custnum IN
 
 ===== END OF SIDE EXAMPLE =====
 
--- Create a backup copy of  Slspers
+-- Create a backup copy of  Slspers  
 SELECT * INTO Slspers_Backup  
 FROM Slspers  
 
 
 -- Exercise: Create a backup table of Titles  
 -- Solution:  
-SELECT *
-INTO TitlesRevised
-FROM Titles
+SELECT *  
+INTO TitlesRevised  
+FROM Titles  
 
 
--- Trick to create a new table (Cust2025) with the same structure as Customers, but copies no data.
-SELECT *
-INTO Cust2025
-FROM Customers
-WHERE 1 = 0
+-- Trick to create a new table (Cust2025) with the same structure as Customers, but copies no data.  
+SELECT *  
+INTO Cust2025  
+FROM Customers  
+WHERE 1 = 0  
 
 
-> Now that we have a backup table, we can modify it freely.
-> Be sure to make changes to the backup table, not the original.
+> Now that we have a backup table, we can modify it freely.  
+> Be sure to make changes to the backup table, not the original.  
 
 
--- Recall that the Object Explorer must be refreshed to see the new table.
--- Additionally, refresh IntelliSense to avoid the red error underline on the table name by going to:
--- Edit -> IntelliSense -> Refresh Local Cache (Ctrl + Shift + R)
+-- Recall that the Object Explorer must be refreshed to see the new table.  
+-- Additionally, refresh IntelliSense to avoid the red error underline on the table name by going to:  
+-- Edit -> IntelliSense -> Refresh Local Cache (Ctrl + Shift + R)  
 
 
-> Remember CRUD: Create - Read - Update - Delete
+> Remember CRUD: Create - Read - Update - Delete  
 
 /* ------------ CRUD statement ------------ */
--- C -- Create	
-		/* 
-		INSERT INTO 
-		table_name (column1, column2, column3, ...)
+-- C -- Create	 
+		/*  
+		INSERT INTO   
+		table_name (column1, column2, column3, ...)  
 		VALUES (value1, value2, value3, ...); 
 		*/
 -- R -- Read	-- SELECT * FROM table_name;
@@ -848,7 +849,7 @@ DROP VIEW mediumprice
 
 
 /* -------------------------------------------------------
-## <p id = "procedures"> Bonus Lesson: Procedures | [Back to ToC](#toc)</p> 
+## <p id = "procedure"> Bonus Lesson: Procedures | [Back to ToC](#toc)</p> 
 ---------------------------------------------------------- */
 
 
