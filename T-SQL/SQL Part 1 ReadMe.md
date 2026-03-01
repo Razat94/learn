@@ -973,7 +973,7 @@ LEFT JOIN Sales
 ---
 
 
-## Exercise #3: Multi-Join Example
+### Exercise #3: Multi-Join Example
 
 ```sql
 SELECT DISTINCT t.*, c.*
@@ -991,7 +991,7 @@ WHERE s.qty = 500;
 ---
 
 
-## Bonus Exercise: Count Sales Per Salesperson (Even if 0)
+### Bonus Exercise: Count Sales Per Salesperson (Even if 0)
 
 ```sql
 SELECT sp.repid,
@@ -1009,7 +1009,7 @@ GROUP BY sp.repid, sp.fname;
 ---
 
 
-## FULL OUTER JOIN
+### FULL OUTER JOIN
 
 Include all rows from both tables, matching where possible.
 
