@@ -999,10 +999,10 @@ WHERE s.qty > 500;
 ```
 
 This query:
-	* Starts with Sales
-	* Joins to Title to find what the purchased title was 
-	* Joins to Customers to get the customer name
-	* Filters to only sales where book quantity = 500
+	* Starts with Sales  
+	* Joins to Title to find what the purchased title was  
+	* Joins to Customers to get the customer name  
+	* Filters to only sales where book quantity = 500  
 
 ---
 
