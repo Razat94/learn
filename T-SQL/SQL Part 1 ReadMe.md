@@ -913,7 +913,7 @@ LEFT JOIN Slspers S
     ON C.repid = S.repid;
 ```
 
-> Remember if you're struggling to output the two tables  
+> Remember if you're struggling to output the two tables, use the following:  
 > SELECT C.* FROM Customers C  
 > SELECT S.* FROM Slspers S  
 
