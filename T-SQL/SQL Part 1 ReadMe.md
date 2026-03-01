@@ -820,40 +820,22 @@ FROM Obsolete_Titles
 ORDER BY bktitle
 
 
+--- 
 ## JOIN Statements
 ### /* ------------ JOINS Statement ------------ */
 
-### Recall: Table Aliases (Important Sidenote)
-
-```sql
-SELECT Sales.ordnum
-FROM Sales;
-```
-
-
-```sql
--- Using an alias S
-SELECT S.* -- Outputting Individual Columns -- S.ordnum, S.ordnum
-FROM Sales S;
-```
-
-* `Sales S` assigns alias `S` to the `Sales` table.
-* Once an alias is declared, you must use the alias instead of the full table name.
-
-
-#### Overview of Aliases:
+#### Recall: Table Aliases (Important Sidenote)
 
 ```sql
 -- Works:
-SELECT *, Sales.Ordnum -- Note: Ordnum would be outputted twice in this example.
+SELECT Sales.Ordnum, * -- Note: Ordnum would be outputted twice in this example.
 FROM Sales
 WHERE Sales.qty > 300;
 ```
 
-
 ```sql
 -- Works:
-SELECT S.*
+SELECT S.* -- Using an alias S  -- Outputting Individual Columns -- S.ordnum, S.ordnum
 FROM Sales S
 WHERE S.qty > 300;
 ```
@@ -865,7 +847,10 @@ FROM Sales S
 WHERE Sales.qty > 300; -- Must change to S.qty
 ```
 
-* Remember, if you alias a table (Sales S), you must reference it as `S`, not `Sales`.
+* `Sales S` assigns alias `S` to the `Sales` table.
+* Remember, once an alias is declared on a table (Sales S), you must reference it as `S`, not `Sales`.
+
+> Don't forget this! You must use the alias instead of the full table name! 
 
 ---
 
