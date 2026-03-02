@@ -973,7 +973,7 @@ SELECT * FROM Sales WHERE qty = 500
 > Because of this, it doesn’t matter which JOIN type is used.
 
 ```sql
-SELECT S.*, C.Custname, T.bktitle
+SELECT S.*, C.Custname, T.bktitle -- The order of the columns does not matter.
 FROM Sales s 
 JOIN Titles t
     ON s.partnum = t.partnum
