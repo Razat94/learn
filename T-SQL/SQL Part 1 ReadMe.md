@@ -1123,10 +1123,10 @@ CREATE TABLE Reviews (
     ReviewDate DATE  
 );  
 ```
--- End of Bonus --
+-- End of Bonus Chapter --
 
-==
-FAQ's:
+== FAQ's: ==  
+
 Q: How to return all columns?  
 A: 
 ```sql
