@@ -40,8 +40,8 @@ The main parts of the SSMS interface are the:
 Reopening SSMS could cause problems, so we’ll use SQL Server 20XX Configuration Manager to start the service.  
 Additional Note: Don’t use Windows Services to start SSMS.
 
-1. Type in "Configuration Manager" to launch the application
-2. Start the service for "SQL Server" (SQL EXPRESS)
+1. Type in 'Configuration Manager' to launch the application
+2. Start the service for 'SQL Server' (SQL EXPRESS)
 3. Relaunch SSMS normally.
 
 [Stack Overflow Reference](https://stackoverflow.com/questions/35630344/unable-to-connect-to-local-sql-server-after-ending-tasks)
@@ -61,7 +61,7 @@ PRINT 'Hello World!'
 
 Different ways to run the query:  
 	- Shortcuts: F5, Ctrl + E, Alt + X  
-	- Click the green "Execute" button on the toolbar.  
+	- Click the green 'Execute' button on the toolbar.  
 	- Go to Query (tab) -> Execute.  
 	- Right-click anywhere in the query window and choose 'Execute SQL' from the context menu.  
 
@@ -248,7 +248,7 @@ ORDER BY State ASC
 
 
 -- In SSMS, you can use the 'Query Options' command to set the ROWCOUNT value.  
--- i.e. "Specify the maxinum number of rows to return before the server stops processing
+-- i.e. 'Specify the maxinum number of rows to return before the server stops processing'
 
 
 #### WHERE clause acts as a Filter 
@@ -402,7 +402,7 @@ ORDER BY zipcode
 
 
 #### omg LIKE Operator 
--- Get all people whose first name starts with the letter "A"  
+-- Get all people whose first name starts with the letter 'A'  
 SELECT *  
 FROM Slspers  
 WHERE fname LIKE 'A%';
@@ -416,7 +416,7 @@ WHERE bktitle LIKE 'The%'
 
 Another example:  
 -- SELECT title, director FROM movies   
--- WHERE title LIKE "Toy Story%";
+-- WHERE title LIKE 'Toy Story%';
 
 
 #### EXACT MATCH 
@@ -638,7 +638,7 @@ FROM CUSTOMERS
 
 SELECT COUNT(*)  
 FROM Slspers;  
--- in SSMS, Clicking on "Messages" will display output of Count of Rows as well.
+-- in SSMS, Clicking on 'Messages' will display output of Count of Rows as well.
 
 
 -- Show Row #'s for each row  
