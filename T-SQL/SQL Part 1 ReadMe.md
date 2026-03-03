@@ -155,7 +155,7 @@ SP_HELP Slspers
 On the Object Explorer, right click on the table of your choice -> Click 'Design'
 ```
 
-```
+``` 
 -- Albeit advanced, the below command also outputs column names  
 SELECT COLUMN_NAME  
 FROM INFORMATION_SCHEMA.COLUMNS  
@@ -1038,20 +1038,18 @@ FULL OUTER JOIN slspers2 sp
 * Matches where keys align.
 * Does NOT create every possible combination (not a Cartesian product).
 
+#### Group By With Join Example
+SELECT pubdate, qty  
+FROM Titles  
+LEFT JOIN Sales  
+ON Titles.partnum = Sales.partnum  
+GROUP BY pubdate  
+
 ---
 
 /* -------------------------------------------------------
 ## <p id = "6"> LESSON 6: Exporting Query Results | [Back to ToC](#toc)</p> 
 ---------------------------------------------------------- */
-
-SELECT 
-	pubdate, qty
-FROM Titles
-LEFT JOIN Sales
-ON Titles.partnum = Sales.partnum
-GROUP BY pubdate
-
-
 
 
 
@@ -1066,9 +1064,9 @@ FOR XML AUTO, ROOT('Document')
 FOR XML AUTO, TYPE, ELEMENTS  
 
 FOR XML, MAKE SURE YOU WRAP INFORMATION IN  
-<document>
+`<document>`
 
-</document
+</document>
 
 -- BONUS --
 
@@ -1129,16 +1127,38 @@ CREATE TABLE Reviews (
 
 ==
 FAQ's:
-Q: How to get all columns?
-Q: How to get count of rows returned?
-Q: Can I call a table plural/singular when it isn't? A: NO
-Q: Can I use "" instead of ''? A: NO
-Q: How to copy output into text file?
-	A:
-	Ctrl + Shift + F (Results to File): Save the query results directly to a file, such as a CSV or text file.
-	You can then run the query again to save it to a file.
- 
-	OR 
-	Select all the data via CTRL + A 
-	Press Ctrl + Shift + C to copy all data + column headers
-==
+Q: How to return all columns?  
+A: 
+```sql
+SELECT COLUMN_NAME  
+FROM INFORMATION_SCHEMA.COLUMNS  
+WHERE TABLE_NAME = 'Slspers'
+```
+
+Q: How to get count of rows returned?  
+A: ``` SELECT COUNT(*) FROM Employees; ```
+OR
+```sql
+SELECT COUNT(*)
+FROM (
+    SELECT *
+    FROM Employees
+    WHERE Salary > 70000
+) AS Sub;
+```
+Q: If a table is called Employees, will ``` SELECT * FROM Employee; ``` work?  
+A: NO.
+
+Q: For string literals, can I use double quotes "" instead of single quotes ''?  
+A: NO  
+
+Q: How to copy output into text file?  
+A:  
+	`Ctrl` + `Shift` + `F` (Results to File): 
+	Save the query results directly to a file, such as a CSV or text file.
+	You can then run the query again to save it to a file.  
+OR   
+	Select all the data via `CTRL` + `A` and then 
+	press `Ctrl` + `Shift` + `C` to copy all data + column headers
+
+---
