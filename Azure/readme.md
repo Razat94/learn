@@ -145,19 +145,20 @@ Recap Examples:
 <div>
 Q1: In a platform as a service (PaaS) model, which two components are the responsibility of the cloud service provider? 
 
-Q2: You plan to build a new solution in Azure that will use platform as a service (PaaS) products.
+<br />
 
+Q2: You plan to build a new solution in Azure that will use platform as a service (PaaS) products.
 What should you use to estimate the monthly costs?  
-Answer: Planning 
+``` Answer: Planning ```
 
 Q3: Your organization is building a custom application.
 	You need to focus on application development rather than configuration and management of servers.
-	
+
 Which cloud service model should you use?  
-A:	Application development
+``` A:	Application development ```
 
 Q4. Which type of cloud service model is typically licensed through a monthly or annual subscription?  
-	A. SaaS
+``` A. SaaS ```
 
 ---	
 Question: 
@@ -170,7 +171,9 @@ Question:
 	- software as a service (SaaS)
 	
 	Answer: platform as a service (PaaS)
----
+---  
+
+<br />  
 
 ---
 Question:
@@ -197,11 +200,12 @@ Question:
 
 Must Memorize:
 
+```
 Management Group  
 	└── Subscription  
-    	└── Resource Group   
-        	└── Resources  
-			
+	  └── Resource Group   
+			└── Resources  
+```		
 
 - [Section on Azure Accounts](https://learn.microsoft.com/en-us/training/modules/describe-core-architectural-components-of-azure/)
 - [Highlight Article](https://learn.microsoft.com/en-us/training/modules/describe-core-architectural-components-of-azure/6-describe-azure-management-infrastructure)
@@ -301,9 +305,10 @@ Geography = Country / legal boundary
 > Remember: Geography > Regions > Zones > Data Centers.
 
 - Example - 
-East US has Zone 1, Zone 2, Zone 3 — all in East US, but isolated from each other.
-Same region, separate datacenters” ✅
-East US ↔ West US
+East US has Zone 1, Zone 2, Zone 3  
+- all in East US, but isolated from each other.  
+- Same region, separate datacenters  
+- East US is not the same as West US
 ---
 
 Region pairs allow the replication of Azure resources across geographies to help ensure that a secondary region is available in case of any disaster at the primary region.
@@ -321,7 +326,8 @@ An availabilty set protects against VM Failures.
 
 MEMORIZE:
 	To manage Azure VMS using the Azure portal:
-	<br>portal.azure.com
+	<br>
+	``` portal.azure.com ```
 
 Azure VMs are managed via portal.azure.com
 	Note: By default, azure vms can't communicate with one another.
@@ -437,21 +443,22 @@ In Short:
 --- 
 
 <br /> 
+
 Question:
 Which Azure Blob storage service tier has the highest storage costs and the fastest access times for reading and writing data?  
-Answer: The Hot tier is optimized for storing data that is accessed frequently.
+``` Answer: The Hot tier is optimized for storing data that is accessed frequently. ```
 
 Question:
 Which storage tier in Azure Storage delivers the highest cost of data?  
-Answer: HOT
+``` Answer: HOT ```
 
 Question:
 What is the LOWEST cost to store data?  
-Answer: Archive
+``` Answer: Archive ```
 
 Question:
 Which storage service should you use to store thousands of files containing text and images for Storage Type?  
-Answer: Azure Blob Storage
+``` Answer: Azure Blob Storage ```
 
 ## Describe Azure identity, access, and security
 Microsoft Entra ID is a cloud-based identity service that manages sign-ins and access to Microsoft and third-party apps, and integrates with on-premises Active Directory.
@@ -470,11 +477,11 @@ Very simple example of conditional access
 - Same employee signs in from a new country - Require MFA
 
 Conditional Access overall shows how and if a user can sign in, based on certain conditions.
-When someone tries to sign in, Azure can look at:
-	- Who the user is (user/group)
-	- What they’re trying to access (app/resource)
-	- Where they’re signing in from (location)
-	- What device they’re using
+When someone tries to sign in, Azure can look at:  
+	- Who the user is (user/group)  
+	- What they’re trying to access (app/resource)  
+	- Where they’re signing in from (location)  
+	- What device they’re using  
 	- Risk level (suspicious sign-in or not)
 
 ---
@@ -493,10 +500,10 @@ What can you use to allow a user to manage all the resources in a resource group
 Zero Trust is a security model that assumes breaches are inevitable and verifies every request, regardless of where it originates, to protect resources.
 
 Remember:  
-	- Verify Explicity  
-	- Use Least Priveleage of Access/Privelage
-		-  The principle of least privilege means restricting access to information to only the level that users need to perform their work. 
-	- Assume Breach  
+- Verify Explicity  
+- Use Least Priveleage of Access/Privelage  
+	-  The principle of least privilege means restricting access to information to only the level that users need to perform their work.  
+- Assumes Breaches occur  
 
 
 ### Defense in Depth
@@ -555,8 +562,7 @@ Select only one answer.
 
 - Azure Advisor
 - Azure Cost Management
-- Azure Pricing calculator
-[This answer is correct.]
+- ``` Azure Pricing calculator ``` [This answer is correct.]
 - Total Cost of Ownership (TOC) Calculator
 
 <br/>
