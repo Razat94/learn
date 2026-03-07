@@ -466,38 +466,40 @@ FROM Titles
 
 
 SELECT GETDATE();  
-SELECT CAST(GETDATE() AS DATE);
+SELECT CAST(GETDATE() AS DATE);  
 SELECT YEAR( GETDATE() ); 	-- like Excel, you also have MONTH( date ) AND DAY( date ) too.  
 -- Also works: -- SELECT DATEPART( year, GETDATE() )
 
 
-SELECT 
+SELECT  
+	bktitle,  
 	pubdate  
 FROM Titles  
--- Filter by 2011: 	-- WHERE Year(pubdate) = 2011  
--- Same as: 		-- WHERE DATEPART(year, pubdate) = 2011  
+WHERE Year(pubdate) = 2017  -- Filter by 2017
 ORDER BY YEAR(pubdate), Month(pubdate)
 
 
 #### Recap:
-SELECT   	
+SELECT  
 	bktitle,   
 	pubdate,  
-	YEAR(pubdate), -- Use Year function to return YEAR of each record.  
+	YEAR(pubdate) -- Use Year function to return YEAR of each record.  
 FROM Titles  
-WHERE YEAR(pubdate) = 2017  -- Filter by 2017
+WHERE YEAR(pubdate) = 2017  -- Filter by 2017  
+-- Same as: -- WHERE DATEPART(year, pubdate) = 2017  
 
 
 #### Filter for months between May & Oct  
 SELECT  
- 	CAST(pubdate AS DATE)  
-FROM Obsolete_Titles  
+ 	bktitle, CAST(pubdate AS DATE)  
+FROM Titles  
 WHERE MONTH(pubdate) BETWEEN 5 AND 10  
 
 
 #### Sample Exercise: Show booktitles published on July 2016
 -- Solution:  
-SELECT *  
+SELECT 
+	bktitle, CAST(pubdate AS DATE)  
 FROM Titles  
 WHERE YEAR(pubdate) = 2016 AND MONTH(Pubdate) = 7  
 ORDER BY pubdate
