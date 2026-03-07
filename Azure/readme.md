@@ -11,7 +11,7 @@
 2. [Describe Cloud Concepts](#cloud)
 3. [Describe Azure architecture and services](#architecture)
 4. [Describe Azure management and governance](#management)
-
+5. [Azure Principles](#azureprinciples)
 
 <br></br>
 # <p align="center" id = "purpose">  Purpose | [Back to ToC](#toc) </p>
@@ -511,6 +511,29 @@ A DDoS attack attempts to overwhelm and exhaust an application's resources.
 Azure Advisor provides RECOMMENDATIONS to reduce the cost of Azure resources. So Azure Advisor evaluates Azure resources and makes recommendations
 	
 	For instance, cost of resources do change!
+
+
+
+# <p align="center" id = "azureprinciples"> Azure Principles | [Back to ToC](#toc) </p>
+This guide reflects my personal experience preparing for and taking the AZ-900 exam.  
+This guide does not disclose any actual exam questions and respects Microsoft’s certification NDA.
+
+Key Topics to Understand for the AZ-900 Exam:  
+	- Availability Zones [Link 1](./region-pairs.png) / [Link2](./regions-availability-zones.svg)  
+	- Understand the differences between IaaS, PaaS, and SaaS, and given a well-known or fictional product, be able to identify which model it is classified under.  
+	- Understand the differences between Public vs. Private Cloud and know the advantages and disadvantages when moving from private -> public environment.   
+	- For Storage Tiers, understand the differences between Hot, Cool, and Archive storage and when each is typically used.  
+	- Be familiar with Core Cloud concepts such as:  
+		- elasticity, fault tolerance, high availability, and low latency.  
+		- concepts like agility and predictability in cloud computing.  
+	- Know about Resource Management and how Resource Locks help prevent accidental deletion or modification of Azure resources.  
+	- Understand Total Cost of Ownership (TCO) and how it relates to evaluating cloud adoption.  
+	- Be familiar with Microsoft Purview and its role in data governance and compliance.  
+	- Understand general governance concepts and the purpose of Azure Government environments.  
+	- Be familiar with how users are managed in Azure and the basics of Microsoft Entra ID.  
+	- Understand what Azure Functions are and how serverless computing works in Azure.  
+	- Lastly, know about Geo-distribution and how distributing services across regions improves reliability and availability.  
+
 
 
 THE END! 
