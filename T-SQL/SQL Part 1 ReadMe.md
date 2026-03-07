@@ -461,6 +461,7 @@ SELECT CAST(GETDATE() AS DATE);
 SELECT YEAR( GETDATE() ); 	-- like Excel, you also have MONTH( date ) AND DAY( date ) too.  
 -- Also works: -- SELECT DATEPART( year, GETDATE() )
 
+<br/>
 
 -- Example: Filter by 2017  
 SELECT  
