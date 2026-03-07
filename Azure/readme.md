@@ -512,11 +512,59 @@ A DDoS attack attempts to overwhelm and exhaust an application's resources.
 
 # <p align="center" id = "management"> Azure Management and Governance | [Back to ToC](#toc) </p>
 
-Azure Advisor provides RECOMMENDATIONS to reduce the cost of Azure resources. So Azure Advisor evaluates Azure resources and makes recommendations
+[Link](https://learn.microsoft.com/training/modules/plan-manage-azure-costs/4-purchase-azure-services)
+
+### <u> Azure Cost Management </u>
+
+Costs of resources in Azure can change depending on usage and configuration, so Microsoft provides several tools to help estimate and optimize costs.
+
+#### Total Cost of Ownership (TCO) Calculator
+
+The TCO Calculator helps estimate the cost savings of moving from an on-premises datacenter to Azure i.e. it's used to compare the cost of running an application on-premises vs. in Azure.
+
+It estimates long-term savings when migrating infrastructure to Azure and is useful when evaluating whether a cloud migration is financially beneficial.
+
+
+#### Azure Pricing Calculator | [Reference](https://azure.microsoft.com/en-us/pricing/calculator/)
+
+The Azure Pricing Calculator estimates what the costs are before deploying or migrating resources to Azure. It allows you to configure services based on your requirements and generates a cost estimate for your planned solution.
+
+Note: It provides a detailed cost breakdown for each resource included in the architecture. 
+
+To summarize in 1 Sentence: Azure pricing calculator calculates the costs prior to migration
+
+
+
+#### Azure Advisor
+
+Azure Advisor helps optimize Azure resources <b> after deployment.</b>
+
+It evaluates your Azure environment and provides recommendations to reduce costs by suggesting ways to improve performance, security, reliability, and cost efficiency.
+
+To summarize: Azure Advisor provides RECOMMENDATIONS to reduce the cost of Azure resources. The tool evaluates Azure resources and makes recommendations.
 	
-	For instance, cost of resources do change!
 
 
+### The Azure Pricing calculator | [Link](https://azure.microsoft.com/en-us/pricing/calculator/)  
+This tool lets you estimate and configure services based on your specific requirements and then provides a total estimated cost along with a detailed breakdown for each resource added in your solution.
+
+---
+
+Question:  
+You plan to build a new solution in Azure that will use platform as a service (PaaS) products.
+
+What should you use to estimate the monthly costs?
+
+Select only one answer.
+
+- Azure Advisor
+- Azure Cost Management
+- Azure Pricing calculator
+This answer is correct.
+- Total Cost of Ownership (TOC) Calculator
+
+
+<br/>
 
 # <p align="center" id = "azureprinciples"> Azure Principles | [Back to ToC](#toc) </p>
 This guide reflects my personal experience preparing for and taking the AZ-900 exam.  

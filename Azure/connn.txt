@@ -8,15 +8,10 @@
 
 
 
+
 === Describe Azure management and governance (30–35%) ===
 
-	- Cost Managemet -
-	The TCO Calculator helps you estimate the cost savings over time of operating a solution in Azure compared to operating in an on-premises datacenter.
-	You need to compare the costs of running an application in an on-premises datacenter with the costs of running the application in Azure.
-	The TCO Calculator helps you estimate the cost savings over time of operating a solution in Azure compared to operating in an on-premises datacenter.
-	https://learn.microsoft.com/training/modules/plan-manage-azure-costs/4-purchase-azure-services
 
-		Azure pricing calculator = calculates costs prior to migration
 
 
 
@@ -55,22 +50,6 @@ Which two protocols can be used to access Azure file shares?
 SMB & NFS
 
 
-
-
-You plan to build a new solution in Azure that will use platform as a service (PaaS) products.
-
-What should you use to estimate the monthly costs?
-
-Select only one answer.
-
-- Azure Advisor
-- Azure Cost Management
-- Azure Pricing calculator
-This answer is correct.
-- Total Cost of Ownership (TOC) Calculator
-
-The Azure Pricing calculator allows you to estimate and configure according to your specific requirements. You will then receive a consolidated estimated price and a detailed breakdown of the costs associated with each resource you added to your solution.
-https://azure.microsoft.com/en-us/pricing/calculator/
 
 
 Resource tags can be used to group billing data and categorize costs by runtime environment, such as billing usage for virtual machines running in a production environment.
