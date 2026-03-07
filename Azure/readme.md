@@ -430,9 +430,13 @@ In Short:
 - More access = higher cost
 - Less access = lower cost
 
-
+<img src = "./access-tiers.png">
+  
+<br /> 
 
 --- 
+
+<br /> 
 Question:
 Which Azure Blob storage service tier has the highest storage costs and the fastest access times for reading and writing data?  
 Answer: The Hot tier is optimized for storing data that is accessed frequently.
@@ -519,20 +523,20 @@ This guide reflects my personal experience preparing for and taking the AZ-900 e
 This guide does not disclose any actual exam questions and respects Microsoft’s certification NDA.
 
 Key Topics to Understand for the AZ-900 Exam:  
-	- Availability Zones [Link 1](./region-pairs.png) / [Link2](./regions-availability-zones.svg)  
-	- Understand the differences between IaaS, PaaS, and SaaS, and given a well-known or fictional product, be able to identify which model it is classified under.  
-	- Understand the differences between Public vs. Private Cloud and know the advantages and disadvantages when moving from private -> public environment.   
-	- For Storage Tiers, understand the differences between Hot, Cool, and Archive storage and when each is typically used.  
-	- Be familiar with Core Cloud concepts such as:  
-		- elasticity, fault tolerance, high availability, and low latency.  
-		- concepts like agility and predictability in cloud computing.  
-	- Know about Resource Management and how Resource Locks help prevent accidental deletion or modification of Azure resources.  
-	- Understand Total Cost of Ownership (TCO) and how it relates to evaluating cloud adoption.  
-	- Be familiar with Microsoft Purview and its role in data governance and compliance.  
-	- Understand general governance concepts and the purpose of Azure Government environments.  
-	- Be familiar with how users are managed in Azure and the basics of Microsoft Entra ID.  
-	- Understand what Azure Functions are and how serverless computing works in Azure.  
-	- Lastly, know about Geo-distribution and how distributing services across regions improves reliability and availability.  
+- Availability Zones [Link 1](./region-pairs.png) / [Link2](./regions-availability-zones.svg)  
+- Understand the differences between IaaS, PaaS, and SaaS, and given a well-known or fictional product, be able to identify which model it is classified under.  [Link](./shared-responsibility-model.svg)  
+- Understand cloud models e.g. the differences between Public vs. Private cloud and what the advantages and disadvantages are when moving from private -> public environment.  [Link](./cloud-models.png  )   
+- For Storage Tiers, understand the differences between Hot, Cool, and Archive storage and when each is typically used. [Link](./access-tiers.png)  
+- Be familiar with Core Cloud concepts such as:   
+	- elasticity, fault tolerance, high availability, and low latency.  
+	- agility and predictability in cloud computing.  
+- Know about Resource Management and how Resource Locks help prevent accidental deletion or modification of Azure resources.  
+- Understand Total Cost of Ownership (TCO) and how it relates to evaluating cloud adoption.  
+- Be familiar with Microsoft Purview and its role in data governance and compliance.  
+- Understand general governance concepts and the purpose of Azure Government environments.  
+- Be familiar with how users are managed in Azure and the basics of Microsoft Entra ID.  
+- Understand what Azure Functions are and how serverless computing works in Azure.  
+- Lastly, know about Geo-distribution and how distributing services across regions improves reliability and availability.  
 
 
 
