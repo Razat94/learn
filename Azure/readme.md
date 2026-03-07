@@ -155,7 +155,7 @@ Q3: Your organization is building a custom application.
 	You need to focus on application development rather than configuration and management of servers.
 
 Which cloud service model should you use?  
-``` A:	Application development ```
+``` A: Application development ```
 
 Q4. Which type of cloud service model is typically licensed through a monthly or annual subscription?  
 ``` A. SaaS ```
