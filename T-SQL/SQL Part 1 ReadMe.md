@@ -451,7 +451,8 @@ ORDER BY bktitle ASC
 ## <p id = "3"> LESSON 3: Working with Functions | [Back to ToC](#toc)</p>
 ---------------------------------------------------------- */
 
-
+Database functions are reusable expressions (blocks of code) used in SQL queries to compute and return values.  
+There are many built-in SQL functions similar to Excel’s ```SUM``` and ```CONCATENATE```, and you can also create your own custom functions.
 
 ### Date Functions
 
@@ -577,46 +578,24 @@ WHERE commrate > (SELECT AVG(commrate) From Slspers)
 
 
 
-
-
 ### String Functions
 
-
-#### Concatenate text to make full name
-
-# PLEASE CHANGE TO LAST NAME, FIRST!!!!!
-SELECT 
-	lname + ', ' + TRIM(fname)
-FROM Slspers
-
-## CONSIDER?
-SELECT TRIM(fname) + ', ' + lname  
--- Also works: -- SELECT CONCAT(TRIM(fname), ' ', lname) AS full_name   
-FROM Slspers
-
-
-#### Convert Concatenated Text to Lowercase 
-SELECT   
-	LOWER(  
-		CONCAT(TRIM(fname), ' ', lname)  
-	) AS Full_Name  
-FROM Slspers;
-
-
 #### TRIM Function  
-SELECT city + ', ' + state  
+```
+SELECT  
+city + ', ' + state  
 -- TRIM Function removes TRAILING SPACE  
 -- Rochester           <- space ends here  
--- Solution: -- SELECT TRIM(city) + ', ' + state  
+-- Solution: -- TRIM(city) + ', ' + state  
 FROM CUSTOMERS
+```
 
--- It does not automatically apply to all columns in a table.
+> NOTE:  TRIM function does not automatically apply to all columns in a table.  
+You must specify each column you want to trim.
 
--- You must specify each column you want to trim.
+```
+-- Optional Excercise: Create a column that contains the full address from Customers table 
 
-
-
-> Optional Excercise: Create a column that contains the full address from Customers table 
 -- Solution:  
 
 -- SELECT 
@@ -627,8 +606,33 @@ FROM CUSTOMERS
 --     TRIM(Zipcode)  
 --   AS Address  
 -- FROM Customers;
+```
 
 
+
+#### Exercise #1: Concatenate text to create a full name column of LAST NAME, FIRST
+-- Solution:  
+SELECT   
+	TRIM(lname) + ', ' + fname AS 'Full Name'  -- Two word Aliases must be wrapped in single quotes.  
+	-- CONSIDER THIS SINCE IT ALSO WORKS:   
+	-- CONCAT(TRIM(fname), ' ', lname) AS full_name  
+FROM Slspers
+
+
+#### Bonus: Convert Concatenated Text to Lowercase 
+-- Solution:  
+SELECT   
+	LOWER(  
+		CONCAT(TRIM(fname), ' ', lname)  
+	) AS Full_Name  
+FROM Slspers;
+
+#### Exercise 2: Create a fake email for each salesperson. The format should be: ```fname.lname@outlook.com```
+
+-- Solution:  
+SELECT  
+	TRIM(fname) + '.' + TRIM(lname) + '@outlook.com'  
+FROM Slspers  
 
 /* -------------------------------------------------------
 ## <p id = "4"> LESSON 4: Organizing Data | [Back to ToC](#toc)</p> 
