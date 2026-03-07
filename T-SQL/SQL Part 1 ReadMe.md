@@ -462,6 +462,7 @@ SELECT YEAR( GETDATE() ); 	-- like Excel, you also have MONTH( date ) AND DAY( d
 -- Also works: -- SELECT DATEPART( year, GETDATE() )
 
 
+-- Example: Filter by 2017  
 SELECT  
 	bktitle,  
 	pubdate  
