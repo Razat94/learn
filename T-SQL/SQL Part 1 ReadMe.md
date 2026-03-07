@@ -626,7 +626,7 @@ You must specify each column you want to trim.
 SELECT   
 	TRIM(lname) + ', ' + fname AS 'Full Name'  -- Two word Aliases must be wrapped in single quotes.  
 	-- CONSIDER THIS SINCE IT ALSO WORKS:   
-	-- CONCAT(TRIM(fname), ' ', lname) AS full_name  
+	-- CONCAT(TRIM(fname), ' ', lname) AS full_name  -- One word Aliases do not need quotes  
 FROM Slspers
 ```
 
