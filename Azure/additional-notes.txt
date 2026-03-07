@@ -7,11 +7,7 @@
 
 
 
-
-
 === Describe Azure management and governance (30–35%) ===
-
-
 
 
 
@@ -42,14 +38,11 @@ Power Automate and Logic Apps automate workflows, but
 Azure Automation automates infrastructure tasks.
 
 
-
 Azure Cloud Shell is an interactive, browser-accessible shell for managing Azure resources.
 
 
 Which two protocols can be used to access Azure file shares?
 SMB & NFS
-
-
 
 
 Resource tags can be used to group billing data and categorize costs by runtime environment, such as billing usage for virtual machines running in a production environment.
@@ -89,15 +82,13 @@ azure app service = web apps
 ExpressRoute = Private Connection
 
 
-
 ---------------------------------
 Azure RBAC allows you to assign a set of permissions to a user or group. 
 Resource tags (keyword) are used to locate and act on resources associated with specific workloads, environments, business units, and owners. 
 Resource locks prevent the accidental change or deletion of a resource. 
 Key Vault is a centralized cloud service for storing an application secrets in a single, central location.
-Azure policy - make sure resources are created in approved regions
-			
-=========================================
+Azure policy - make sure resources are created in approved regions			
+---------------------------------
 
 
 https://www.examprepper.co/exam/63/93
@@ -109,8 +100,6 @@ second to last
 
 You can use tags to categorize costs by department, such as human resources, marketing, or finance, or by environment, such as test or production.
 Which are two common scenarios for using resource tags? 
-
-
 
 
 
@@ -127,13 +116,11 @@ Please don't confuse with Azure Resource Manager (ARM):
 
 
 
-
 Azure Monitor is a platform that collects metric and logging data, such as CPU percentages. The data can be used to trigger autoscaling.
 Azure Container Instances (ACI) is specifically for running containers in Azure.
 	You give ACI a container image (your app + everything it needs)
 	You specify CPU, memory, and environment
 	Azure runs it without you having to manage servers or clusters
-
 
 
 
@@ -169,7 +156,6 @@ Each VM runs its own copy of the process, but all copies are identical in code a
 
 
 
-
 A VM Scale Set can create one or many VMs
 
 You define a minimum number of VMs to start with.
@@ -188,8 +174,6 @@ scope
 
 
 Azure Monitor= VMs top running, service failures
-
-
 
 
 

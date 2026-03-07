@@ -559,8 +559,11 @@ Select only one answer.
 [This answer is correct.]
 - Total Cost of Ownership (TOC) Calculator
 
-
 <br/>
+
+[Any additional notes can be found here.](./additional-notes.txt)
+
+<br/>  
 
 # <p align="center" id = "azureprinciples"> Azure Principles | [Back to ToC](#toc) </p>
 This guide reflects my personal experience preparing for and taking the AZ-900 exam.  
