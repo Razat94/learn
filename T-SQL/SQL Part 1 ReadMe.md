@@ -452,7 +452,7 @@ ORDER BY bktitle ASC
 ---------------------------------------------------------- */
 
 Database functions are reusable expressions (blocks of code) used in SQL queries to compute and return values.  
-There are many built-in SQL functions similar to Excel’s ```SUM``` and ```CONCATENATE```, and you can also create your own custom functions.
+There are many built-in SQL functions similar to Excel's `SUM` and `CONCATENATE`, and you can also create your own custom functions.
 
 ### Date Functions
 
@@ -495,14 +495,15 @@ FROM Obsolete_Titles
 WHERE MONTH(pubdate) BETWEEN 5 AND 10  
 
 
-#### Exercise: Show booktitles published on July 2016
+#### Sample Exercise: Show booktitles published on July 2016
 -- Solution:  
-SELECT *
-FROM Titles
-WHERE YEAR(pubdate) = 2016 AND MONTH(Pubdate) = 7
+SELECT *  
+FROM Titles  
+WHERE YEAR(pubdate) = 2016 AND MONTH(Pubdate) = 7  
 ORDER BY pubdate
 
 
+#### This query lists publication date, and extra columns depicting the next day, and one year later.
 SELECT  
 	pubdate,   
 	pubdate + 1 AS next_day,  
@@ -542,7 +543,7 @@ SELECT AVG(CAST( commrate AS DECIMAL(10,1) )) FROM Slspers
 Q: Can we use a sum function across a row?
 
 Short answer:  
-No, you can't use `SUM()` to add values across columns like `Q1 + Q2` in a single row.  
+No, you can't use `SUM()` to add values across columns like `Q1 + Q2` in a single total row.  
 `SUM()` works vertically by adding values in one column over many rows
 
 You can however do a row-wise sum across columns like Q1 + Q2:
@@ -555,8 +556,12 @@ SELECT
     Q1 + Q2 AS Total  
     FROM sales;  
 ```
- 
-> Note: We can wrap SELECT QUERIES in parenthesis just like in Excel!
+
+<br /> 
+
+--- 
+
+#### Note: Wrap SELECT Queries in parenthesis to form nested queries (Similar to Nested Functions in Excel)
 
 #### Query 1  
 SELECT fname, commrate From Slspers  
@@ -570,17 +575,20 @@ SELECT AVG(commrate) FROM Slspers -- RESULT: 0.037
 )  
 
 
+#### Query 3 (Combined)
 > Combining the last 2 queries together...  
 
 SELECT fname, commrate From Slspers  
 WHERE commrate > (SELECT AVG(commrate) From Slspers)  
 -- ORDER BY commrate DESC  
 
-
+---
 
 ### String Functions
 
+
 #### TRIM Function  
+
 ```
 SELECT  
 city + ', ' + state  
@@ -608,8 +616,6 @@ You must specify each column you want to trim.
 -- FROM Customers;
 ```
 
-
-
 #### Exercise #1: Concatenate text to create a full name column of LAST NAME, FIRST
 -- Solution:  
 SELECT   
@@ -627,12 +633,14 @@ SELECT
 	) AS Full_Name  
 FROM Slspers;
 
+
 #### Exercise 2: Create a fake email for each salesperson. The format should be: ```fname.lname@outlook.com```
 
 -- Solution:  
 SELECT  
 	TRIM(fname) + '.' + TRIM(lname) + '@outlook.com'  
 FROM Slspers  
+
 
 /* -------------------------------------------------------
 ## <p id = "4"> LESSON 4: Organizing Data | [Back to ToC](#toc)</p> 
