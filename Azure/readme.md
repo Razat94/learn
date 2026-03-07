@@ -529,10 +529,11 @@ It estimates long-term savings when migrating infrastructure to Azure and is use
 
 The Azure Pricing Calculator estimates what the costs are before deploying or migrating resources to Azure. It allows you to configure services based on your requirements and generates a cost estimate for your planned solution.
 
+This tool lets you estimate and configure services based on your specific requirements and then provides a total estimated cost along with a detailed breakdown for each resource added in your solution.
+
 Note: It provides a detailed cost breakdown for each resource included in the architecture. 
 
 To summarize in 1 Sentence: Azure pricing calculator calculates the costs prior to migration
-
 
 
 #### Azure Advisor
@@ -543,11 +544,6 @@ It evaluates your Azure environment and provides recommendations to reduce costs
 
 To summarize: Azure Advisor provides RECOMMENDATIONS to reduce the cost of Azure resources. The tool evaluates Azure resources and makes recommendations.
 	
-
-
-### The Azure Pricing calculator | [Link](https://azure.microsoft.com/en-us/pricing/calculator/)  
-This tool lets you estimate and configure services based on your specific requirements and then provides a total estimated cost along with a detailed breakdown for each resource added in your solution.
-
 ---
 
 Question:  
@@ -560,7 +556,7 @@ Select only one answer.
 - Azure Advisor
 - Azure Cost Management
 - Azure Pricing calculator
-This answer is correct.
+[This answer is correct.]
 - Total Cost of Ownership (TOC) Calculator
 
 
