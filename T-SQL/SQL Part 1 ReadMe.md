@@ -624,9 +624,9 @@ You must specify each column you want to trim.
 ```
 -- Solution:  
 SELECT   
-	TRIM(lname) + ', ' + fname AS 'Full Name'  -- Two word Aliases must be wrapped in single quotes.  
+	TRIM(lname) + ', ' + fname AS 'Full Name'  -- Two-word Alias must be wrapped in single quotes.  
 	-- CONSIDER THIS SINCE IT ALSO WORKS:   
-	-- CONCAT(TRIM(fname), ' ', lname) AS full_name  -- One word Aliases do not need quotes  
+	-- CONCAT(TRIM(fname), ' ', lname) AS full_name  -- One-word Alias does not need quotes  
 FROM Slspers
 ```
 
