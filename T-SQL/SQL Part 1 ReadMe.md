@@ -456,15 +456,6 @@ There are many built-in SQL functions similar to Excel's `SUM` and `CONCATENATE`
 
 ### Date Functions
 
-#### Please note that columns can be wrapped in () 
-SELECT 	
-	bktitle,   
-	(devcost),						-- This works with or without ()  
-	CAST(pubdate AS DATE) AS pubdate_without_time  		-- To remove time  
-	(slprice * 0.9) 					-- Similar to EXCEL Formula = (A1 * 0.9)  
-FROM Titles  
-
-
 SELECT GETDATE();  
 SELECT CAST(GETDATE() AS DATE);  
 SELECT YEAR( GETDATE() ); 	-- like Excel, you also have MONTH( date ) AND DAY( date ) too.  
@@ -487,6 +478,15 @@ SELECT
 FROM Titles  
 WHERE YEAR(pubdate) = 2017  -- Filter by 2017  
 -- Same as: -- WHERE DATEPART(year, pubdate) = 2017  
+
+
+
+#### Sidenote: Please note that columns can be wrapped in parenthesis ( ) 
+SELECT  
+	bktitle,   
+	(pubdate),  -- This works with or without ()  
+	(slprice * 0.9)  -- Similar to EXCEL Formula = (A1 * 0.9)  
+FROM Titles  
 
 
 #### Filter for months between May & Oct  
