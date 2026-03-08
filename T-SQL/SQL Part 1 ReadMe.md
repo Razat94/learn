@@ -455,24 +455,27 @@ Database functions are reusable expressions (blocks of code) used in SQL queries
 There are many built-in SQL functions similar to Excel's `SUM` and `CONCATENATE`, and you can also create your own custom functions.
 
 ### Date Functions
-
+``` sql
 SELECT GETDATE();  
 SELECT CAST(GETDATE() AS DATE);  
 SELECT YEAR( GETDATE() ); 	-- like Excel, you also have MONTH( date ) AND DAY( date ) too.  
 -- Also works: -- SELECT DATEPART( year, GETDATE() )
-
+```
 <br/>
 
+#### Filter By Year 2017
+``` sql
 -- Example: Filter by 2017  
 SELECT  
 	bktitle,  
 	pubdate  
 FROM Titles  
-WHERE Year(pubdate) = 2017  -- Filter by 2017
+WHERE Year(pubdate) = 2017  -- Filter by 2017  
 ORDER BY YEAR(pubdate), Month(pubdate)
-
+```
 
 #### Recap:
+``` sql
 SELECT  
 	bktitle,   
 	pubdate,  
@@ -480,68 +483,75 @@ SELECT
 FROM Titles  
 WHERE YEAR(pubdate) = 2017  -- Filter by 2017  
 -- Same as: -- WHERE DATEPART(year, pubdate) = 2017  
-
-
+```
 
 #### Sidenote: Please note that columns can be wrapped in parenthesis ( ) 
+``` sql
 SELECT  
 	bktitle,   
 	(pubdate),  -- This works with or without ()  
 	(slprice * 0.9)  -- Similar to EXCEL Formula = (A1 * 0.9)  
 FROM Titles  
-
+```
 
 #### Filter for months between May & Oct  
+``` sql
 SELECT  
  	bktitle, CAST(pubdate AS DATE)  
 FROM Titles  
 WHERE MONTH(pubdate) BETWEEN 5 AND 10  
-
+```
 
 #### Sample Exercise: Show booktitles published on July 2016
+``` sql
 -- Solution:  
-SELECT 
+SELECT  
 	bktitle, CAST(pubdate AS DATE)  
 FROM Titles  
 WHERE YEAR(pubdate) = 2016 AND MONTH(Pubdate) = 7  
 ORDER BY pubdate
-
+```
 
 #### This query lists publication date, and extra columns depicting the next day, and one year later.
+``` sql
 SELECT  
 	pubdate,   
 	pubdate + 1 AS next_day,  
 	DATEADD(YEAR, 1, pubdate) AS Pub_Date_1_Year_Later -- Adds 1 year to the publication date  
 FROM Titles  
 WHERE pubdate BETWEEN '1/1/1994' AND '12/31/2013'  
-
-
+```
 
 
 
 ### AGGREGATE FUNCTIONS  
 
+``` sql
 SELECT	
 	COUNT(*),  
 	COUNT(DISTINCT pubdate) AS distinct_publish_dates  -- Count UNIQUE publish dates.
 FROM	TITLES  
 WHERE 	YEAR(pubdate) = 2017  
+```
 
-
+``` sql
 SELECT  
 	SUM(devcost),  
 	AVG(slprice),  
 	AVG(slprice * 0.9) AS AVERAGE_DISCOUNT_PRICE,  
-	MAX(slprice) Highest_Price,  
-	MIN(slprice) Lowest  -- might be easier to drop AS
+	MAX(slprice) Highest_Price,  --  AS keyword is dropped  
+	MIN(slprice) Lowest  
 FROM Titles  
 WHERE YEAR(pubdate) = 2017  
+```
 
+``` sql
+-- Notice the difference between answers
+SELECT AVG( CAST(commrate AS DECIMAL(10,1)) ) FROM Slspers
+SELECT AVG( CAST(commrate AS DECIMAL(10,2)) ) FROM Slspers
+```
 
--- If your column has a data type of text but contains numeric values,  
--- you must cast it as an INT  
-SELECT AVG(CAST( commrate AS DECIMAL(10,1) )) FROM Slspers
-
+> Side Note: If a SQL column is stored as TEXT but contains numbers, you must cast it to a numeric type before doing numeric operations or comparisons.
 
 --  
 Q: Can we use a sum function across a row?
@@ -552,13 +562,13 @@ No, you can't use `SUM()` to add values across columns like `Q1 + Q2` in a singl
 
 You can however do a row-wise sum across columns like Q1 + Q2:
 
-```
+``` sql
 SELECT 
     id,  
     Q1,  
     Q2,  
     Q1 + Q2 AS Total  
-    FROM sales;  
+FROM sales;  
 ```
 
 <br /> 
@@ -567,24 +577,28 @@ SELECT
 
 #### Note: Wrap SELECT Queries in parenthesis to form nested queries (Similar to Nested Functions in Excel)
 
-#### Query 1  
+#### Query 1
+``` sql
 SELECT fname, commrate From Slspers  
 WHERE commrate > 0.02  
 -- ORDER BY commrate DESC  
-
+```
 
 #### Query 2  
+``` sql
 (  
 SELECT AVG(commrate) FROM Slspers -- RESULT: 0.037  
 )  
-
+```
 
 #### Query 3 (Combined)
 > Combining the last 2 queries together...  
 
+``` sql
 SELECT fname, commrate From Slspers  
 WHERE commrate > (SELECT AVG(commrate) From Slspers)  
 -- ORDER BY commrate DESC  
+```
 
 ---
 
@@ -593,45 +607,46 @@ WHERE commrate > (SELECT AVG(commrate) From Slspers)
 
 #### TRIM Function  
 
-```
+``` sql
 SELECT  
-city + ', ' + state  
--- TRIM Function removes TRAILING SPACE  
--- Rochester           <- space ends here  
--- Solution: -- TRIM(city) + ', ' + state  
+	city + ', ' + state  
+	-- TRIM Function removes TRAILING SPACE  
+	-- Rochester           <- space ends here  
+	-- Solution: -- TRIM(city) + ', ' + state  
 FROM CUSTOMERS
 ```
 
-> NOTE:  TRIM function does not automatically apply to all columns in a table.  
+> NOTE:  The TRIM function does not automatically apply to all columns in a table.  
 You must specify each column you want to trim.
 
-```
--- Optional Excercise: Create a column that contains the full address from the Customers table 
+#### Optional Excercise: Create a column that contains the full address from the Customers table 
 
+```sql
 -- Solution:  
-
--- SELECT 
---   Custname, 
---     TRIM(Address) + ', ' +  
---     TRIM(City) + ', ' +  
---     TRIM(State) + ', ' +  
---     TRIM(Zipcode)  
---   AS Address  
--- FROM Customers;
+SELECT 
+    Custname, 
+    TRIM(Address) + ', ' +  
+    TRIM(City) + ', ' +  
+    TRIM(State) + ', ' +  
+    TRIM(Zipcode)  
+  AS Address  
+FROM Customers;
 ```
 
 #### Exercise #1: Concatenate text to create a full name column of LAST NAME, FIRST
-```
+
+``` sql
 -- Solution:  
 SELECT   
 	TRIM(lname) + ', ' + fname AS 'Full Name'  -- Two-word Alias must be wrapped in single quotes.  
-	-- CONSIDER THIS SINCE IT ALSO WORKS:   
+	-- Below Also Works:   
 	-- CONCAT(TRIM(fname), ' ', lname) AS full_name  -- One-word Alias does not need quotes.  
 FROM Slspers
 ```
 
 #### Bonus: Convert Concatenated Text to Lowercase 
-```
+
+``` sql
 -- Solution:  
 SELECT   
 	LOWER(  
@@ -641,7 +656,8 @@ FROM Slspers;
 ```
 
 #### Exercise 2: Create a fake email for each salesperson. The format should be: ```fname.lname@outlook.com```
-```
+
+``` sql
 -- Solution:  
 SELECT  
 	TRIM(fname) + '.' + TRIM(lname) + '@outlook.com'  
