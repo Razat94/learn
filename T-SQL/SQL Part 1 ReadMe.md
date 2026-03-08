@@ -655,7 +655,7 @@ SELECT
 FROM Slspers;
 ```
 
-#### Exercise 2: Create a fake email for each salesperson. The output should be: ```fname.lname@outlook.com```
+#### Exercise 2: Create a fake email for each salesperson by using the format: `fname.lname@outlook.com`
 
 ``` sql
 -- Solution:  
