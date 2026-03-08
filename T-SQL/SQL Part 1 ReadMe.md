@@ -458,7 +458,7 @@ There are many built-in SQL functions similar to Excel's `SUM` and `CONCATENATE`
 ``` sql
 SELECT GETDATE();  
 SELECT CAST(GETDATE() AS DATE);  
-SELECT YEAR( GETDATE() ); 	-- like Excel, you also have MONTH( date ) AND DAY( date ) too.  
+SELECT YEAR( GETDATE() ); 	-- like in Excel, the functions MONTH(date) and DAY(date) are available too.  
 -- Also works: -- SELECT DATEPART( year, GETDATE() )
 ```
 <br/>
@@ -489,8 +489,8 @@ WHERE YEAR(pubdate) = 2017  -- Filter by 2017
 ``` sql
 SELECT  
 	bktitle,   
-	(pubdate),  -- This works with or without ()  
-	(slprice * 0.9)  -- Similar to EXCEL Formula = (A1 * 0.9)  
+	(pubdate),  -- Column name works with or without ()  
+	(slprice * 0.9)  -- Similar to Excel Formula '=(A1*0.9)'  
 FROM Titles  
 ```
 
