@@ -539,7 +539,7 @@ SELECT
 	SUM(devcost),  
 	AVG(slprice),  
 	AVG(slprice * 0.9) AS AVERAGE_DISCOUNT_PRICE,  
-	MAX(slprice) Highest_Price,  --  AS keyword is dropped  
+	MAX(slprice) Highest_Price,  --  Note: AS keyword is dropped  
 	MIN(slprice) Lowest  
 FROM Titles  
 WHERE YEAR(pubdate) = 2017  
@@ -575,7 +575,7 @@ FROM sales;
 
 --- 
 
-#### Note: Wrap SELECT Queries in parenthesis to form nested queries (Similar to Nested Functions in Excel)
+#### Note: Wrap `SELECT` Queries in parenthesis to form nested queries (Similar to Nested Functions in Excel)
 
 #### Query 1
 ``` sql
@@ -633,7 +633,7 @@ SELECT
 FROM Customers;
 ```
 
-#### Exercise #1: Concatenate text to create a full name column of LAST NAME, FIRST
+#### Exercise #1: Create a 'Full Name' column by concatenating Lane Name, First
 
 ``` sql
 -- Solution:  
@@ -655,7 +655,7 @@ SELECT
 FROM Slspers;
 ```
 
-#### Exercise 2: Create a fake email for each salesperson. The format should be: ```fname.lname@outlook.com```
+#### Exercise 2: Create a fake email for each salesperson. The output should be: ```fname.lname@outlook.com```
 
 ``` sql
 -- Solution:  
