@@ -633,7 +633,7 @@ SELECT
 FROM Customers;
 ```
 
-#### Exercise #1: Create a 'Full Name' column by concatenating Lane Name, First
+#### Exercise #1: Create a 'Full Name' column by concatenating Last Name, First
 
 ``` sql
 -- Solution:  
