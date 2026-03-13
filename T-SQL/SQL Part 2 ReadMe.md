@@ -354,9 +354,10 @@ WHERE partnum = '98765'
 ## <p id = "3"> LESSON 3: Manipulating Table Structure | [Back to ToC](#toc)</p>  
 ---------------------------------------------------------- */  
 
+A SQL data type defines the type of value a column can store.  
+SQL data types are a core rule of the table structure that restricts the type of data that can go into a column, and is similar to the Data Validation tool in Excel.
 
--- Learn more about field Data types by going to the  
-[Learn Microsoft Page](https://learn.microsoft.com/en-us/sql/t-sql/data-types/data-types-transact-sql?view=sql-server-ver17)  
+Learn more about field Data types by going to the [Learn Microsoft Page.](https://learn.microsoft.com/en-us/sql/t-sql/data-types/data-types-transact-sql?view=sql-server-ver17)  
 
 
 
@@ -401,7 +402,7 @@ TRUNCATE TABLE ProduceInventory
 DROP TABLE ProduceInventory  
 
 
-/* ------------ Create & Verify Duplicate Table ------------ */  
+/* ------------ Create & Verify a Duplicate Table ------------ */  
 SELECT *  
 INTO Slspers_Copy  
 FROM Slspers  
@@ -421,8 +422,6 @@ ALTER TABLE Slspers_Copy
 ADD email varchar(40)  
 -- NOTE: Every column will contain NULL  
 
-SELECT * FROM Slspers_Copy  
-
 -- Check Info on ALTERED Table  
 sp_help Slspers_Copy  
 
@@ -432,12 +431,15 @@ UPDATE Slspers_Copy
 SET email = 'test@outlook.com'  
 WHERE email IS NULL;  
 
+-- Check Columns  
+SELECT * FROM Slspers_Copy  
 
 -- Change Anna's email  
 UPDATE Slspers_Copy  
 SET email = 'annarules@outlook.com'  
 WHERE fname = 'anna';  
 
+-- Check Columns
 SELECT * FROM Slspers_Copy  
 
 -- DROP Column IF EXISTS  
