@@ -103,10 +103,10 @@ WHERE Custnum IN
 ---------------------------------------------------------- */  
 
 
--- Create a backup copy of `Customers`    
+-- Create a backup copy of `Slspers`  
 SELECT *  
-INTO Customers_Backup    
-FROM Customers  
+INTO Slspers_Backup    
+FROM Slspers  
 
 
 #### Recall that the Object Explorer must be refreshed to see the new table.  
@@ -116,21 +116,17 @@ FROM Customers
 > Edit -> IntelliSense -> Refresh Local Cache (Ctrl + Shift + R)  
 
 
--- Exercise: Create a backup table of `Slspers` called `SlspersRevised`  
+-- Exercise: Create a backup table of `Titles` called `TitlesRevised`  
 SELECT *  
-INTO Slspers_Revised  
-FROM Slspers
+INTO Titles_Revised  
+FROM Titles
 
 
--- Trick to create a new table (Cust2025) with the same structure as Customers, without copying any data.  
+-- Useful Trick: Create a new table (Cust2025) with the same structure as Customers, without copying any data.  
 SELECT *  
-INTO Cust2025    
+INTO Cust2025  
 FROM Customers  
 WHERE 1 = 0  
-
-
-> Now that we have a backup table, we can modify it freely.  
-> NOTE: Be sure to make changes to the backup table, not the original.  
 
 
 #### Different ways to delete a table:  
@@ -167,6 +163,9 @@ WHERE 1 = 0
 
 /* ------------ List of CRUD statements ------------ */  
 
+> We have modify backup tables freely.  
+> NOTE: Be sure to make changes to the backup table, not the original!  
+
 /* ------------ C: INSERT INTO statement ------------ */  
 
 #### Adding ONE value  
@@ -185,18 +184,17 @@ VALUES
 #### Adding MANY values    
 INSERT INTO Slspers_Backup    
 VALUES  
-('P01', 'Paul', 'Smith' , 0.05),  
-('P01', 'Steven', 'Stone' , 0.05),  -- Duplicate REPID 'P01' is intentional as it is a setup for a deletion example.  
-('A01', 'Angie', 'Lopez' , 0.05)    
+('P01', 'Angie', 'Lopez' , 0.05),  
+('P01', 'Steven', 'Stone' , 0.05)  -- Duplicate REPID 'P01' is intentional as it is a setup for a deletion example.  
 
 
 
 -- Exercise: Add the following information into SQL Table 'Titles'  
 
 ```  
-partnum bktitle                                  devcost               slprice               pubdate  
-------- ---------------------------------------- --------------------- --------------------- -----------------------  
-12345   The Role of SQL in Big Data              8000.00               45.00                 2017-01-01 00:00:00  
+partnum bktitle                            devcost          slprice          pubdate  
+------- ---------------------------------- ---------------- ---------------- -----------------------  
+12345   The Role of SQL in Big Data        8000.00          45.00            2017-01-01 00:00:00  
 ```  
 
 -- Solution:  
@@ -240,7 +238,7 @@ WHERE commrate = 0.03
 -- SELECT * FROM Slspers_Backup WHERE commrate = 0.06  
 
 
--- Exercise: Fix the spelling mistake of 'Anne' on RepID W02 to 'Annie'    
+-- Exercise: Fix the spelling mistake of 'Anne' on RepID 'W02' to 'Annie'    
 -- Solution:  
 UPDATE Slspers_Backup  
 SET fname = 'Annie'  
@@ -262,7 +260,7 @@ WHERE partnum BETWEEN 39904 AND 39906
 -- WHERE partnum BETWEEN 40123 AND 40124  
 
 
--- Update Table w/Multiple Parameters  
+-- Update Multiple Columns in a Table
 UPDATE Titles_Revised  
 SET 	bktitle = 'Alex loves Windsurfing',  
 	devcost = 5000,  
