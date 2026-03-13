@@ -103,21 +103,26 @@ WHERE Custnum IN
 ---------------------------------------------------------- */  
 
 
-===== END OF SIDE EXAMPLE =====  
-
--- Create a backup copy of  Slspers    
-SELECT * INTO Slspers_Backup  
-FROM Slspers  
-
-
--- Exercise: Create a backup table of Titles    
--- Solution:  
+-- Create a backup copy of `Customers`    
 SELECT *  
-INTO TitlesRevised    
-FROM Titles  
+INTO Customers_Backup    
+FROM Customers  
 
 
--- Trick to create a new table (Cust2025) with the same structure as Customers, but copies no data.  
+#### Recall that the Object Explorer must be refreshed to see the new table.  
+<img src = "./zz_refresh.png">
+
+> Additionally, refresh IntelliSense to avoid the red error underline on the table name by going to:  
+> Edit -> IntelliSense -> Refresh Local Cache (Ctrl + Shift + R)  
+
+
+-- Exercise: Create a backup table of `Slspers` called `SlspersRevised`  
+SELECT *  
+INTO Slspers_Revised  
+FROM Slspers
+
+
+-- Trick to create a new table (Cust2025) with the same structure as Customers, without copying any data.  
 SELECT *  
 INTO Cust2025    
 FROM Customers  
@@ -125,28 +130,42 @@ WHERE 1 = 0
 
 
 > Now that we have a backup table, we can modify it freely.  
-> Be sure to make changes to the backup table, not the original.  
+> NOTE: Be sure to make changes to the backup table, not the original.  
 
 
--- Recall that the Object Explorer must be refreshed to see the new table.  
--- Additionally, refresh IntelliSense to avoid the red error underline on the table name by going to:  
--- Edit -> IntelliSense -> Refresh Local Cache (Ctrl + Shift + R)  
+#### Different ways to delete a table:  
+- DROP TABLE `Cust2025`  
+- DROP TABLE IF EXISTS `Customers2025`;
+- In the Object Explorer of SSMS, find the table you want to delete in your database (e.g. `Customers2025`).
+  - Right-click the table and select 'Delete'.
+  - In the Delete Object dialog, click 'OK' to drop the table.
 
+---
+<br/>
 
-> Remember CRUD: Create - Read - Update - Delete  
+### <u> Aww CRUD! </u>
 
-/* ------------ CRUD statement ------------ */
--- C -- Create	 
-		/*  
-		INSERT INTO   
-		table_name (column1, column2, column3, ...)  
-		VALUES (value1, value2, value3, ...);  
-		*/  
--- R -- Read	-- SELECT * FROM table_name;  
--- U -- Update	-- UPDATE table_name SET column1 = value1 WHERE condition;  
--- D -- Delete	-- DELETE FROM table_name WHERE condition;  
+#### CRUD refers to the four basic operations you can perform on data in a database: <br> Create, Read, Update, & Delete.
 
+-- C -- Create  
+-- R -- Read  
+-- U -- Update  
+-- D -- Delete	
 
+--- 
+
+## CRUD Example
+
+| Operation | SQL Example |
+|-----------|-------------|
+**C — Create** | `INSERT INTO table_name (column1, column2, ...) VALUES (value1, value2, ...);`
+**R — Read**   | `SELECT * FROM table_name;`
+**U — Update** | `UPDATE table_name SET column1 = value1 WHERE condition;` 
+**D — Delete** | `DELETE FROM table_name WHERE condition;`
+
+<br>
+
+/* ------------ List of CRUD statements ------------ */  
 
 /* ------------ C: INSERT INTO statement ------------ */  
 
