@@ -163,7 +163,7 @@ WHERE 1 = 0
 
 /* ------------ List of CRUD statements ------------ */  
 
-> We will be modifying the backup tables.
+> We will be modifying the backup tables.  
 > NOTE: Be sure to make changes to the backup table, not the original!  
 
 /* ------------ C: INSERT INTO statement ------------ */  
