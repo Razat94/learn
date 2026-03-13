@@ -168,20 +168,20 @@ WHERE 1 = 0
 
 /* ------------ C: INSERT INTO statement ------------ */  
 
-#### Adding ONE value  
+#### Insert ONE Record (with all specified columns).  
 INSERT INTO Slspers_Backup    
 --optional -- (repid, fname, lname, commrate)    
 VALUES  
 ('J01', 'Jane', 'Doe' , 0.05)  
 
 
-#### Add One Value with Null values  
+#### Insert a record with unspecified columns as NULL.  
 INSERT INTO Slspers_Backup (repid, fname)    
 VALUES  
 ('N01', 'Nickki')  
 
 
-#### Adding MANY values    
+#### Insert MANY records at once.     
 INSERT INTO Slspers_Backup    
 VALUES  
 ('P01', 'Angie', 'Lopez' , 0.05),  
