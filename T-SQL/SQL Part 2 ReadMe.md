@@ -377,18 +377,19 @@ VALUES
 ('Pumpkin', 0.33, 1),  
 ('Ginger', 0.99, 0);  
 
+-- Verify Data  
+SELECT * FROM ProduceInventory
 
-/* Output */  
+```
+/* Following Output */  
 Produce		Price ($/lb)	In Stock?  
-Cantaloupe	$0.50 		TRUE  
-Cucumbers	$0.25 		TRUE  
-Pumpkin		$0.33 		TRUE  
-Ginger		$0.99 		FALSE  
+Cantaloupe	$0.50 			TRUE  
+Cucumbers	$0.25 			TRUE  
+Pumpkin		$0.33 			TRUE  
+Ginger		$0.99 			FALSE  
 /* End of Output */  
+```
 
-
-
--- Suggestion: Create a new query for retrieving the data but make sure you're on correct database.  
 
 /* ------------ Check Info ------------ */  
 sp_help ProduceInventory  
@@ -402,7 +403,7 @@ TRUNCATE TABLE ProduceInventory
 DROP TABLE ProduceInventory  
 
 
-/* ------------ Create & Verify a Duplicate Table ------------ */  
+/* ------------ Create a Duplicate Table ------------ */  
 SELECT *  
 INTO Slspers_Copy  
 FROM Slspers  
@@ -417,63 +418,101 @@ FROM Slspers
 
 
 /* ------------ ADD Column to ALTER TABLE ------------ */  
+In a previous section, we covered how to add and delete records (rows) in a table. In this subsection, we will cover how to add and remove columns.
 
+
+``` sql
 ALTER TABLE Slspers_Copy  
 ADD email varchar(40)  
 -- NOTE: Every column will contain NULL  
+```
 
+``` sql
 -- Check Info on ALTERED Table  
 sp_help Slspers_Copy  
+```
 
-
+``` sql
 -- Fill every salesperson with generic email  
 UPDATE Slspers_Copy  
 SET email = 'test@outlook.com'  
 WHERE email IS NULL;  
+```
 
+``` sql
 -- Check Columns  
 SELECT * FROM Slspers_Copy  
+```
 
+``` sql
 -- Change Anna's email  
 UPDATE Slspers_Copy  
 SET email = 'annarules@outlook.com'  
 WHERE fname = 'anna';  
+```
 
+``` sql
 -- Check Columns
 SELECT * FROM Slspers_Copy  
+```
 
+``` sql
 -- DROP Column IF EXISTS  
 ALTER TABLE Slspers_Copy  
 DROP COLUMN IF EXISTS email  
+```
 
-
+``` sql
 -- Check Info on ALTERED Table  
 sp_help Slspers_Copy  
-
+```
 
 
 /* ------------ Change Column property ------------ */  
 
-Task: Change the fname column so it can hold up to 10 characters and is required (it cannot be left blank or NULL)  
+``` sql  
+sp_help Slspers_Copy -- verify table  
+-- if a column is nullable, it means that the column is allowed to contain NULL values i.e. values are optional
+```
 
--- Check TO VERIFY the Table.  
-sp_help Slspers_Copy  
-
-
+``` sql
 -- First, verify that we can enter a NULL value for Fname  
 INSERT INTO Slspers_Copy  
 VALUES ('N01', NULL, 'Nguyen', 0.05)  
+```
 
+``` sql
+-- Ensure that we delete said row
+DELETE Slspers_Copy  
+WHERE fname is NULL
+```
 
--- Alter the Table  
+#### Task: Change the fname column so it can hold up to 10 characters and is required (it cannot be left blank or NULL)  
+
+> KEY NOTE: An  error may occur if some rows in the table already contain NULL (e.g. in fname column). SQL Server cannot enforce NOT NULL if NULL values already exist. 
+
+-- Confirm that `fname` holds no `NULL` values.  
+``` sql
+SELECT * FROM Slspers_Copy  
+WHERE fname is NULL  
+```
+
+``` sql
+-- Alter Table to have max 10 characters & not contain NULL values (a value is required).   
 ALTER TABLE Slspers_Copy   
 ALTER COLUMN fname varchar(10) NOT NULL  
-
+```
 
 -- Check TO VERIFY the change.  
 sp_help Slspers_Copy  
 -- Under the column "Nullable", we see that the fname column says 'No'   
 
+
+-- Assure that the following query does NOT work:  
+``` sql
+INSERT INTO Slspers_Copy  
+VALUES ('N01', NULL, 'Nguyen', 0.05)  
+```
 
 -- Executing the above query should now throw an error:  
 ```  
@@ -481,14 +520,11 @@ Cannot insert the value NULL into column 'fname', table 'Pub1.dbo.Slspers_Copy';
 The statement has been terminated.  
 ```
 
-INSERT INTO Slspers_Copy  
-VALUES ('N01', NULL, 'Nguyen', 0.05)  
-
-
-/* To revert the column back to the way it was.  
+``` sql
+/* To revert the column back to the way it was: */
 ALTER TABLE Slspers_Copy   
 ALTER COLUMN fname VARCHAR(40) NULL;  
-
+```
 
 
 /* ------------ CONSTRAINTS  i.e. Create a constraint after a table is already created. ------------ */
@@ -497,81 +533,103 @@ Constraints are rules that limit data. Inserting invalid data will fail if the c
 In SQL Server, constraints are separate objects, so we drop/remove the constraint to allow invalid data again.  
 
 
-Task: Add a rule (constraint) to make sure commission values are between 0 and 10% (0 to 0.1).  
+#### Task: Add a rule (constraint) to make sure commission values are between 0 and 10% (0 to 0.1).  
 To enforce a value range like 0 <= commrate <= 0.1, we'll use a CHECK constraint.  
 
-
+``` sql
 -- Invalid data can be initially be inserted since there are no constraints  
 INSERT INTO Slspers_Copy  
 VALUES (1, 'Finnie', 'Nguyen', 0.25);  
+```
 
+NOTE: Just like in the last example, please note that there can be NO existing commrate values that break the rule defined in chk_commrate. Please make sure you delete the constraint.
 
+``` sql
+DELETE FROM Slspers_Copy
+WHERE commrate = 0.25
+```
+
+``` sql
 -- Adding the constraint to enforce Commission between 0 and 10%  
 ALTER TABLE Slspers_Copy  
 ADD CONSTRAINT chk_commrate CHECK (commrate >= 0 AND commrate <= 0.1);  
+```
 
-
+Constraints are stored in the database metadata, so you can always look them up later.
+``` sql
 -- To verify constraint  
 EXEC sp_help 'Slspers_Copy';  
+```
 
--- Running the previous insertion will now fail   
+Output:
+Constraint Type        | Constraint Name | Table | Column   | Status  | Option             | Constraint_Keys (Condition)            |
+-----------------------|-----------------|-------|----------|---------|--------------------|----------------------------------------|
+CHECK (commrate)       | chk_commrate    | N/A   | N/A      | Enabled | Is_For_Replication | ([commrate] >= 0 AND [commrate] <= 0.1)|
+
+
+> Note: Additionally, in SSMS Object Explorer, expand the table folder and then expand Constraints to view your constraints.
+
+So now, running the previous insertion will now fail   
+``` sql
 INSERT INTO Slspers_Copy  
 VALUES (1, 'Finnie', 'Nguyen', 0.25); -- Invalid Insertion Data since 0.25 is greater than 0.1 (10%)  
+```
 
-
-> Use DROP CONSTRAINT to remove the Constraint to allow any commission value  
-
-
+Use `DROP CONSTRAINT` to remove the Constraint to allow any commission value  
+``` sql
 -- Remove the commission constraint  
 ALTER TABLE Slspers_Copy  
 DROP CONSTRAINT chk_commrate;  
+```
 
-
--- Re-inserting data will now work after removing the constraint  
+Re-inserting data will now work after removing the constraint  
+``` sql
 INSERT INTO Slspers_Copy  
 VALUES (1, 'Finnie', 'Nguyen', 0.25);  
-
-
+```
 
 
 
 /* ------------ ADDING A DEFAULT CONSTRAINT ------------ */
 
--- DEFAULT keyword sets a value for future inserts only  
--- It does NOT change existing rows with 'some value'  
+The DEFAULT keyword sets a value for future inserts only. 
+It however does NOT change existing rows with 'some value' (this applies for rows that contain NULL values too.)   
+In SQL Server, notice that we can stack constraints on top of one another.
 
-
+``` sql
 ALTER TABLE Slspers_Copy  
 ADD CONSTRAINT df_commrate DEFAULT 0.02 FOR commrate;  
-
+```
 
 -- To verify constraint  
 EXEC sp_help 'Slspers_Copy';  
 
-
+``` sql
 -- This works:   
 INSERT INTO Slspers_Copy   
 VALUES (1, 'Alice', 'Smith', 0.05);  
+```
 
+``` sql
 -- This also works since we added a DEFAULT constraint:  
 INSERT INTO Slspers_Copy (repid, fname, lname)  
 VALUES (1, 'Alice', 'Smith');  
+```
 
-
+``` sql
 -- This does NOT work:  
 INSERT INTO Slspers_Copy   
--- (repid, fname, lname) -- SQL Server expects values for all columns in the table  
+(repid, fname, lname) -- Again, this doesn't work since SQL Server expects values for all columns in the table  
 VALUES (1, 'Alice', 'Smith');  
+```
 
 -- Verify:  
 SELECT * FROM Slspers_Copy  
 
 
-
--- Notice about DROPPING CONSTRAINT!  
-
--- If a column has a constraint, dropping the column won't work:   
-ALTER TABLE YourTableName  
+#### Notice about DROPPING CONSTRAINT!  
+-- If a column has a constraint, dropping the column won't work since the constraint is dependent on column 'commrate':
+ALTER TABLE Slspers_Copy  
 DROP COLUMN commrate -- won't work  
 
 
@@ -586,33 +644,49 @@ DROP COLUMN commrate
 
 
 -- Verify  
-sp_help YourTableName  
+sp_help YourTableName   
 
 
 
 /* ------------ Exercise: Try to add a default constraint  ------------ */  
 
+-- Make a new constraint to add generic emails  
 CONSTRAINT generic_email DEFAULT 'iloveSQL@gmail.com';  
 
--- Using SSMS,  Verify constraint via Design View by right-click the table -> Design View   
+-- Recall: Using SSMS, there are different ways of verifing constraints.   
+One additional way is via the Design View. Right-click the table -> Design View   
 Once the view is open, make sure to click on "Email"  
 In the column properties pane, see the default under "Default Value or Binding".  
 
--- Make a new query to test  
+
+
+#### Solution
+``` sql
+ALTER TABLE Slspers_Copy
+ADD email VARCHAR(20) 
+    CONSTRAINT DF_Email DEFAULT 'iloveSQL@gmail.com'
+```
+
+``` sql
 -- Test Constraint  
 INSERT INTO  
-YourTableName (repid, fname, lname, commrate)  
+Slspers_Copy (repid, fname, lname, commrate)  
 Values  
 ('E04', 'Raza', 'Tahir', 0.01)  
+```
 
-
+``` sql
+-- Drop Constraint
+ALTER TABLE Slspers_Copy  
+DROP CONSTRAINT DF_Email;
+```
  
 /* ------------ Primary KEY Constraint!!! ------------ */  
 
 
 -- we can add primary key constraints   
 -- A Primary Key is a unique identifier for each record in a table and cannot contain duplicates or NULL values!  
--- You can have only 1 primary key per table unless it's a composite.  
+-- You can have only 1 primary key per table unless it's a composite i.e. a combination of columns.  
 -- NOTE: Make sure we effect the DIFFERENT TABLE
 
 SP_HELP Slspers_Copy
@@ -621,36 +695,52 @@ SP_HELP Slspers_Copy
 -- Warning - We can not make a column a primary key if it contains duplicates.  
 TRUNCATE TABLE Slspers_Copy  
 
+
 -- SQL Server refuses to make it a primary key because NULLs are allowed  
+``` sql
 ALTER TABLE Slspers_Copy  
 ALTER COLUMN repid varchar(6) NOT NULL; -- Exercise: Make the Slspers_Copy to be a NON null value.  
+```
 
-
-
+``` sql
+-- Add the Constraint
 ALTER TABLE Slspers_Copy  
 ADD CONSTRAINT pk_slspers PRIMARY KEY (repid);  
-
+```
 
 -- To verify constraint  
 EXEC sp_help 'Slspers_Copy';  
 
 
+``` sql
 INSERT INTO Slspers_Copy  
 VALUES (1, 'Raza', 'Tahir', 0.05)   
+```
 
 
+``` sql
 -- To Remove Constraint  
 ALTER TABLE Slspers_Copy  
 DROP CONSTRAINT pk_slspers;  
+```
 
-
--- How to AutoIncrement Primary Key Constraint  
+How to AutoIncrement Primary Key Constraint  
+``` sql
 -- Note: IDENTITY can only be set when the column is created  
 ALTER TABLE Slspers_Copy  
-ADD repid_new INT IDENTITY(1,1) PRIMARY KEY;  
+ADD repid_new INT IDENTITY(1,1) PRIMARY KEY;  -- Starts at 1, increments by 1
+-- We've added a new column 'REPID_NEW' 
+```
 
+``` sql
+INSERT INTO Slspers_Copy (fname, lname, commrate)
+VALUES ('Raza', 'Tahir', 0.05)   
+``` 
 
-
+Check
+``` sql
+SELECT * FROM Slspers_Copy
+```
 
 /* -------------------------------------------------------  
 ## <p id = "4"> LESSON 4: Working with Views | [Back to ToC](#toc)</p>   
