@@ -103,11 +103,12 @@ WHERE Custnum IN
 ---------------------------------------------------------- */  
 
 
--- Create a backup copy of `Slspers`  
+-- Exercise: Create a backup table of `Titles` called `TitlesRevised`  
+``` sql
 SELECT *  
-INTO Slspers_Backup    
-FROM Slspers  
-
+INTO Titles_Revised  
+FROM Titles
+```
 
 #### Recall that the Object Explorer must be refreshed to see the new table.  
 <img src = "./zz_refresh.png">
@@ -116,17 +117,26 @@ FROM Slspers
 > Edit -> IntelliSense -> Refresh Local Cache (Ctrl + Shift + R)  
 
 
--- Exercise: Create a backup table of `Titles` called `TitlesRevised`  
+Useful Trick: Create a new table `Slspers_Backup` with the same structure as `Slspers`, without copying any data (i.e. do not copy any rows.)
+``` sql
+-- Create a backup copy of `Slspers`  
 SELECT *  
-INTO Titles_Revised  
-FROM Titles
+INTO Slspers_Backup    
+FROM Slspers  
+WHERE 1 = 0  -- always false
+-- SQL Server does not support Boolean literals `TRUE` and `FALSE` in SQL queries. 
+-- So instead we must use an expression that evaluates to false.
+```
 
 
--- Useful Trick: Create a new table (Cust2025) with the same structure as Customers, without copying any data.  
+
+Exercise #2 (Optional): Create an empty table called Cust2025 based on the structure of the Customers table.
+``` sql
 SELECT *  
 INTO Cust2025  
 FROM Customers  
-WHERE 1 = 0  
+WHERE 1 = 0  -- always false
+```
 
 
 #### Different ways to delete a table:  
@@ -135,6 +145,7 @@ WHERE 1 = 0
 - In the Object Explorer of SSMS, find the table you want to delete in your database (e.g. `Customers2025`).
   - Right-click the table and select 'Delete'.
   - In the Delete Object dialog, click 'OK' to drop the table.
+
 
 ---
 <br/>
@@ -168,28 +179,59 @@ WHERE 1 = 0
 
 /* ------------ C: INSERT INTO statement ------------ */  
 
+
+#### (Jumping ahead) Optional: Introduction to the TRUNCATE statement
+``` TRUNCATE TABLE Slspers_Backup ```
+
+
 #### Insert ONE Record (with all specified columns).  
+``` sql
 INSERT INTO Slspers_Backup    
 --optional -- (repid, fname, lname, commrate)    
 VALUES  
 ('J01', 'Jane', 'Doe' , 0.05)  
+```
 
 
 #### Insert a record with unspecified columns as NULL.  
+``` sql
 INSERT INTO Slspers_Backup (repid, fname)    
 VALUES  
 ('N01', 'Nickki')  
-
+```
 
 #### Insert MANY records at once.     
+``` sql
 INSERT INTO Slspers_Backup    
 VALUES  
 ('P01', 'Angie', 'Lopez' , 0.05),  
 ('P01', 'Steven', 'Stone' , 0.05)  -- Duplicate REPID 'P01' is intentional as it is a setup for a deletion example.  
+```
 
 
+#### (Jumping ahead) Optional: Introduction to the TRUNCATE statement
+``` TRUNCATE TABLE Slspers_Backup ```
 
--- Exercise: Add the following information into SQL Table 'Titles'  
+
+#### Copy all rows from `Slspers` and insert them into the `Slspers_Backup` table.
+``` sql
+INSERT INTO Slspers_Backup  
+SELECT *  
+FROM Slspers 
+-- WHERE fname LIKE 'A%';  -- Additional Exercise: Inserting only records where the first names starts with "A" 
+```
+
+
+#### Exercise: Insert data from one table `Potential_Customers` into another table `Customers`.  
+``` sql
+INSERT INTO Customers  
+SELECT *  
+FROM Potential_Customers  
+WHERE State = 'CA';  
+```
+
+
+-- End of Exercise: Add the following information into SQL Table 'Titles'  
 
 ```  
 partnum bktitle                            devcost          slprice          pubdate  
@@ -198,92 +240,120 @@ partnum bktitle                            devcost          slprice          pub
 ```  
 
 -- Solution:  
+``` sql
 INSERT INTO Titles_Revised  
 -- optional -- (partnum, bktitle, devcost, slprice, pubdate)  
 VALUES  
 (12345, 'The Role of SQL in Big Data', 8000, 45, '2017-01-01')  
-
-
-
--- Insert data from one table into another.  
-    INSERT INTO Customers  
-    SELECT *  
-    FROM Potential_Customers  
-    WHERE State = 'CA';  
+```
 
 
 /* ------------ R: SELECT statement ------------ */  
 
 #### Output the table  
+``` sql
 SELECT *  
 FROM Slspers_Backup  
 WHERE commrate = 0.05  
-
+```
 
 #### Output another table.  
+``` sql
 SELECT *  
 FROM Titles_Revised  
 WHERE partnum BETWEEN 39906 AND 39909 -- Check table with WHERE condition  
+```
 
+#### Exercise: Selects all rows from `Slspers` with `commrate` between 0.03 and 0.04, ordered by `commrate`.
+``` sql
+SELECT *  
+FROM Slspers 
+WHERE commrate BETWEEN 0.03 and 0.04  
+ORDER BY commrate
+```
 
 
 /* ------------ U: Update Table ------------ */  
 
--- Update all salesperson commission from 0.3 -> 0.6  
+
+Update all salesperson commission from 0.3 -> 0.6  
+``` sql
 UPDATE Slspers_Backup  
 SET commrate = 0.06  
-WHERE commrate = 0.03  
+WHERE commrate = 0.03  -- NOTE: Always include a WHERE clause, or the UPDATE statement will affect all records!
+```
+
 
 -- Check:  
 -- SELECT * FROM Slspers_Backup WHERE commrate = 0.06  
 
 
--- Exercise: Fix the spelling mistake of 'Anne' on RepID 'W02' to 'Annie'    
+Exercise: Fix the spelling mistake of 'Anne' on RepID 'W02' to 'Annie'    
+``` sql
 -- Solution:  
 UPDATE Slspers_Backup  
 SET fname = 'Annie'  
 WHERE REPID = 'W02'  
 -- Bad Practice -- WHERE fname = 'Anne' -- Since there could be multiple 'Anne', this is bad practice.  
+```
 
 
--- UPDATE Titles where partnum b/w 39904 & 39906  
+From the newly created `Titles_Revised` table, UPDATE Titles where partnum b/w 39904 & 39906  
+``` sql
+-- Solution
 UPDATE Titles_Revised  
 SET devcost = 21000  
-WHERE partnum BETWEEN 39904 AND 39906  
--- WHERE partnum BETWEEN 40123 AND 40124  
+WHERE partnum BETWEEN 40123 AND 40125 
+-- WHERE partnum BETWEEN 39904 AND 39906  
+```
 
-
--- Check Updated Table  
+-- Check Updated Table 
+``` sql 
 SELECT *  
 FROM Titles_Revised  
-WHERE partnum BETWEEN 39904 AND 39906  
--- WHERE partnum BETWEEN 40123 AND 40124  
-
+WHERE partnum BETWEEN 40123 AND 40125  
+-- WHERE partnum BETWEEN 39904 AND 39906  
+```
 
 -- Update Multiple Columns in a Table
-UPDATE Titles_Revised  
+``` sql
+UPDATE 	Titles_Revised  
 SET 	bktitle = 'Alex loves Windsurfing',  
-	devcost = 5000,  
-	slprice = 22,  
-	pubdate = '2017/11/01'  
+		devcost = 5000,  
+		slprice = 22,  
+		pubdate = '2017/11/01'  
 WHERE partnum='40123'  
+```
 
 
 -- Check Updated Table  
+``` sql
 SELECT *  
 FROM Titles_Revised  
 WHERE partnum = 40123  
-
+```
 
 /* ------------ D: Delete Rows ------------ */  
+
+
+Deletes all rows from Titles_Revised where partnum equals 40123.
+``` sql
 DELETE Titles_Revised  
 WHERE partnum = 40123  
+```
 
-
--- Check Updated Table  
+Check Updated Table  
+``` sql
 SELECT *  
 FROM Titles_Revised  
 -- WHERE partnum = 40123  
+```
+
+To Truncate All Rows  
+``` TRUNCATE TABLE Titles_Revised  ```
+
+To Delete ALL Rows  
+``` DELETE FROM Titles_Revised  ```
 
 
 -- Exercise: Attempt to delete one of the Salespeople Paul that was added earlier.  
@@ -292,14 +362,6 @@ FROM Titles_Revised
 -- Solution:  
 DELETE Slspers_Backup  
 WHERE REPID = 'P01' AND fname = 'Paul'  
-
-
--- To Truncate All Rows  
-TRUNCATE TABLE Slspers_Backup;  
-
--- To Delete ALL Rows  
-DELETE FROM Slspers_Backup;  
-
 
 
 ===== End of Chapter Exercise =====  
@@ -365,7 +427,7 @@ Learn more about field Data types by going to the [Learn Microsoft Page.](https:
 CREATE TABLE ProduceInventory (  
     ProduceName VARCHAR(50),  
     PricePerPound DECIMAL(5,2), -- Exactly 2 decimal places that goes up to 999.99  
-    InStock BIT NOT NULL  
+    InStock BIT NOT NULL  -- Closest thing to a Boolean type in T-SQL.  A value of `0` represents false, and `1` represents true.  
 );  
 
 
@@ -489,7 +551,8 @@ WHERE fname is NULL
 
 #### Task: Change the fname column so it can hold up to 10 characters and is required (it cannot be left blank or NULL)  
 
-> KEY NOTE: An  error may occur if some rows in the table already contain NULL (e.g. in fname column). SQL Server cannot enforce NOT NULL if NULL values already exist. 
+> KEY NOTE: An  error may occur if some rows in the table already contain NULL (e.g. in fname column).  
+SQL Server cannot enforce NOT NULL if NULL values already exist. 
 
 -- Confirm that `fname` holds no `NULL` values.  
 ``` sql
@@ -542,7 +605,8 @@ INSERT INTO Slspers_Copy
 VALUES (1, 'Finnie', 'Nguyen', 0.25);  
 ```
 
-NOTE: Just like in the last example, please note that there can be NO existing commrate values that break the rule defined in chk_commrate. Please make sure you delete the constraint.
+NOTE: Just like in the last example, please note that there can be NO existing commrate values that break the rule defined in chk_commrate. 
+Please make sure you delete the constraint.
 
 ``` sql
 DELETE FROM Slspers_Copy
