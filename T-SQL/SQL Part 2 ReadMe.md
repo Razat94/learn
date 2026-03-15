@@ -428,7 +428,6 @@ SQL data types are a core rule of the table structure that restricts the type of
 Learn more about field Data types by going to the [Learn Microsoft Page.](https://learn.microsoft.com/en-us/sql/t-sql/data-types/data-types-transact-sql?view=sql-server-ver17)  
 
 
-
 -- Create the table  
 CREATE TABLE ProduceInventory (  
     ProduceName VARCHAR(50),  
