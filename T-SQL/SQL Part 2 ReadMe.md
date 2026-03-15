@@ -372,7 +372,7 @@ WHERE REPID = 'P01' AND fname = 'Paul'
 
 #### ===== End of Chapter Exercise =====  
 
--- Task #1 Exercise: Insert a new book into the Titles_Revised table with the following details  
+Task #1 Exercise: Insert a new book into the Titles_Revised table with the following details  
 
 ```  
 partnum 	bktitle						devcost 	slprice 	pubdate  
@@ -380,6 +380,7 @@ partnum 	bktitle						devcost 	slprice 	pubdate
 98765 		Learn to Play the Violin 	5000.00 	45.00 		2025-01-01  
 ```
 
+``` sql
 -- Task #1 Solution: Insert a Record  
 INSERT INTO Titles_Revised   
 -- Optional -- (partnum, bktitle ,devcost, slprice, pubdate)   
@@ -390,9 +391,10 @@ VALUES (98765, 'Learn to Play the Violin', 5000, 45, '2010-05-11')
 SELECT *  
 FROM Titles_Revised    
 WHERE partnum = 98765  
+```
 
-
--- Task #2 Exercise: Update the book title with part number 98765 to: 'Learn to Play the Viola'  
+Task #2 Exercise: Update the book title with part number 98765 to: 'Learn to Play the Viola'  
+``` sql
 -- Task #2 Solution: Update the Record  
 UPDATE Titles_Revised   
 SET bktitle = 'Learn to Play the Viola'    
@@ -403,9 +405,10 @@ WHERE partnum = '98765'
 SELECT *   
 FROM Titles_Revised    
 WHERE partnum = '98765'    
+```
 
-
--- Task #3 Exercise: Delete the record with part number 98765.  
+Task #3 Exercise: Delete the record with part number 98765.  
+``` sql
 -- Task #3 Solution:  
 DELETE Titles_Revised   
 WHERE partnum= '98765'   
@@ -415,7 +418,7 @@ WHERE partnum= '98765'
 SELECT *  
 FROM Titles_Revised   
 WHERE partnum = '98765'  
-
+```
 
 
 /* -------------------------------------------------------  
@@ -487,7 +490,7 @@ FROM Slspers
 
 
 
-/* ------------ ADD Column to ALTER TABLE ------------ */  
+/* ------------ C: ADD Column to ALTER TABLE ------------ */  
 In a previous section, we covered how to add and delete records (rows) in a table. In this subsection, we will cover how to add and remove columns.
 
 
@@ -526,6 +529,8 @@ WHERE fname = 'anna';
 SELECT * FROM Slspers_Backup  
 ```
 
+
+/* ------------ D: DROP Column to ALTER TABLE ------------ */  
 ``` sql
 -- DROP Column IF EXISTS  
 ALTER TABLE Slspers_Backup  
@@ -538,7 +543,7 @@ sp_help Slspers_Backup
 ```
 
 
-/* ------------ Change Column property ------------ */  
+/* ------------ U: Update/ALTER Column property ------------ */  
 
 ``` sql  
 sp_help Slspers_Copy -- verify table  
@@ -562,7 +567,7 @@ WHERE fname is NULL
 > KEY NOTE: An  error may occur if some rows in the table already contain NULL (e.g. in fname column).  
 SQL Server cannot enforce NOT NULL if NULL values already exist. 
 
--- Confirm that `fname` holds no `NULL` values.  
+Assure that `fname` holds no `NULL` values.  
 ``` sql
 SELECT * FROM Slspers_Backup  
 WHERE fname is NULL  
@@ -574,12 +579,12 @@ ALTER TABLE Slspers_Backup
 ALTER COLUMN fname varchar(10) NOT NULL  
 ```
 
--- Check TO VERIFY the change.  
-sp_help Slspers_Backup  
--- Under the column "Nullable", we see that the fname column says 'No'   
+Check TO VERIFY the change.  
+``` sp_help Slspers_Backup ```  
+-- NOTE: Under the column "Nullable", see that the fname column says 'No'   
 
 
--- Assure that the following query does NOT work:  
+Assure that the following query does NOT work:  
 ``` sql
 INSERT INTO Slspers_Backup  
 VALUES ('N01', NULL, 'Nguyen', 0.05)  
@@ -617,7 +622,7 @@ NOTE: Just like in the last example, please note that there can be NO existing c
 Please make sure you delete the constraint.
 
 ``` sql
-DELETE FROM Slspers_Copy
+DELETE FROM Slspers_Backup  
 WHERE commrate = 0.25
 ```
 
@@ -630,7 +635,7 @@ ADD CONSTRAINT chk_commrate CHECK (commrate >= 0 AND commrate <= 0.1);
 Constraints are stored in the database metadata, so you can always look them up later.
 ``` sql
 -- To verify constraint  
-EXEC sp_help 'Slspers_Copy';  
+EXEC sp_help 'Slspers_Backup';  
 ```
 
 Output:
@@ -674,7 +679,7 @@ ADD CONSTRAINT df_commrate DEFAULT 0.02 FOR commrate;
 ```
 
 -- To verify constraint  
-EXEC sp_help 'Slspers_Copy';  
+EXEC sp_help 'Slspers_Backup';  
 
 ``` sql
 -- This works:   
@@ -684,14 +689,14 @@ VALUES (1, 'Alice', 'Smith', 0.05);
 
 ``` sql
 -- This also works since we added a DEFAULT constraint:  
-INSERT INTO Slspers_Copy (repid, fname, lname)  
+INSERT INTO Slspers_Backup (repid, fname, lname)  
 VALUES (1, 'Alice', 'Smith');  
 ```
 
 ``` sql
 -- This does NOT work:  
 INSERT INTO Slspers_Backup   
-(repid, fname, lname) -- Again, this doesn't work since SQL Server expects values for all columns in the table  
+-- (repid, fname, lname) -- commenting this line out will not work since SQL Server expects values for all columns in the table  
 VALUES (1, 'Alice', 'Smith');  
 ```
 
@@ -700,11 +705,15 @@ SELECT * FROM Slspers_Backup
 
 
 #### Notice about DROPPING CONSTRAINT!  
--- If a column has a constraint, dropping the column won't work since the constraint is dependent on column 'commrate':
+If a column has a constraint, dropping the column won't work since the constraint is dependent on column 'commrate':
+```sql
+-- Will not work  
 ALTER TABLE Slspers_Backup  
-DROP COLUMN commrate -- won't work  
+DROP COLUMN commrate 
+```
 
-
+First we must drop the constraint, and then we can drop the column.
+``` sql
 -- Step 1: First drop the default constraint  
 ALTER TABLE Slspers_Backup  
 DROP CONSTRAINT df_commrate; -- remember to use 'sp_help YourTableName' if you forget the constraints name.  
@@ -715,9 +724,9 @@ ALTER TABLE Slspers_Backup
 DROP COLUMN commrate  
 
 
--- Verify  
+-- Step 3: Verify  
 sp_help YourTableName   
-
+```
 
 
 /* ------------ Exercise: Try to add a default constraint  ------------ */  
@@ -754,18 +763,14 @@ DROP CONSTRAINT DF_Email;
 ```
  
 /* ------------ Primary KEY Constraint!!! ------------ */  
-
-
--- we can add primary key constraints   
+ 
 -- A Primary Key is a unique identifier for each record in a table and cannot contain duplicates or NULL values!  
 -- You can have only 1 primary key per table unless it's a composite i.e. a combination of columns.  
 -- NOTE: Make sure we effect the DIFFERENT TABLE
 
-SP_HELP Slspers_Copy
 
-
--- Warning - We can not make a column a primary key if it contains duplicates.  
-TRUNCATE TABLE Slspers_Backup  
+Warning - We can not make a column a primary key if it contains duplicates.  
+``` TRUNCATE TABLE Slspers_Backup  ```
 
 
 -- SQL Server refuses to make it a primary key because NULLs are allowed  
@@ -774,6 +779,10 @@ ALTER TABLE Slspers_Backup
 ALTER COLUMN repid varchar(6) NOT NULL; -- Exercise: Make the Slspers_Copy to be a NON null value.  
 ```
 
+Check:
+``` SP_HELP Slspers_Backup ```
+
+
 ``` sql
 -- Add the Constraint
 ALTER TABLE Slspers_Backup  
@@ -781,7 +790,7 @@ ADD CONSTRAINT pk_slspers PRIMARY KEY (repid);
 ```
 
 -- To verify constraint  
-EXEC sp_help 'Slspers_Copy';  
+``` EXEC sp_help 'Slspers_Backup' ```
 
 
 ``` sql
@@ -805,7 +814,7 @@ ADD repid_new INT IDENTITY(1,1) PRIMARY KEY;  -- Starts at 1, increments by 1
 ```
 
 ``` sql
-INSERT INTO Slspers_Copy (fname, lname, commrate)
+INSERT INTO Slspers_Copy (fname, lname, commrate) -- notice no mention of the newly added column 'repid_new' 
 VALUES ('Raza', 'Tahir', 0.05)   
 ``` 
 
@@ -814,10 +823,10 @@ Check
 SELECT * FROM Slspers_Copy
 ```
 
+
 /* -------------------------------------------------------  
 ## <p id = "4"> LESSON 4: Working with Views | [Back to ToC](#toc)</p>   
 ---------------------------------------------------------- */  
-
 
 
 > SQL can execute basic logic  
