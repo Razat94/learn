@@ -179,8 +179,10 @@ WHERE 1 = 0  -- always false
 
 /* ------------ C: INSERT INTO statement ------------ */  
 
+> In SQL, the keyword `INTO` usually indicates that data is being written into something
 
-#### (Jumping ahead) Optional: Introduction to the TRUNCATE statement
+
+(Jumping ahead) Optional: Introduction to the TRUNCATE statement
 ``` TRUNCATE TABLE Slspers_Backup ```
 
 
@@ -191,7 +193,6 @@ INSERT INTO Slspers_Backup
 VALUES  
 ('J01', 'Jane', 'Doe' , 0.05)  
 ```
-
 
 #### Insert a record with unspecified columns as NULL.  
 ``` sql
@@ -210,7 +211,9 @@ VALUES
 
 
 #### (Jumping ahead) Optional: Introduction to the TRUNCATE statement
-``` TRUNCATE TABLE Slspers_Backup ```
+``` sql 
+TRUNCATE TABLE Slspers_Backup 
+```
 
 
 #### Copy all rows from `Slspers` and insert them into the `Slspers_Backup` table.
@@ -261,7 +264,7 @@ WHERE commrate = 0.05
 ``` sql
 SELECT *  
 FROM Titles_Revised  
-WHERE partnum BETWEEN 39906 AND 39909 -- Check table with WHERE condition  
+WHERE partnum BETWEEN 40123 AND 40125 -- BETWEEN 39906 AND 39909 -- Check table with WHERE condition  
 ```
 
 #### Exercise: Selects all rows from `Slspers` with `commrate` between 0.03 and 0.04, ordered by `commrate`.
@@ -276,13 +279,12 @@ ORDER BY commrate
 /* ------------ U: Update Table ------------ */  
 
 
-Update all salesperson commission from 0.3 -> 0.6  
+Update all salesperson commission from 0.3 to 0.6  
 ``` sql
 UPDATE Slspers_Backup  
 SET commrate = 0.06  
 WHERE commrate = 0.03  -- NOTE: Always include a WHERE clause, or the UPDATE statement will affect all records!
 ```
-
 
 -- Check:  
 -- SELECT * FROM Slspers_Backup WHERE commrate = 0.06  
@@ -298,7 +300,7 @@ WHERE REPID = 'W02'
 ```
 
 
-From the newly created `Titles_Revised` table, UPDATE Titles where partnum b/w 39904 & 39906  
+From the newly created `Titles_Revised` table, UPDATE `devcost` where `partnum` b/w 39904 & 39906  
 ``` sql
 -- Solution
 UPDATE Titles_Revised  
@@ -364,7 +366,7 @@ DELETE Slspers_Backup
 WHERE REPID = 'P01' AND fname = 'Paul'  
 
 
-===== End of Chapter Exercise =====  
+#### ===== End of Chapter Exercise =====  
 
 -- Task #1 Exercise: Insert a new book into the Titles_Revised table with the following details  
 
