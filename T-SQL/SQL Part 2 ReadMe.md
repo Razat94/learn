@@ -234,7 +234,7 @@ WHERE State = 'CA';
 ```
 
 
--- End of Exercise: Add the following information into SQL Table 'Titles'  
+-- End of Subsection Exercise: Add the following information into SQL Table 'Titles'  
 
 ```  
 partnum bktitle                            devcost          slprice          pubdate  
@@ -242,7 +242,7 @@ partnum bktitle                            devcost          slprice          pub
 12345   The Role of SQL in Big Data        8000.00          45.00            2017-01-01 00:00:00  
 ```  
 
--- Solution:  
+Solution:  
 ``` sql
 INSERT INTO Titles_Revised  
 -- optional -- (partnum, bktitle, devcost, slprice, pubdate)  
@@ -300,7 +300,7 @@ WHERE REPID = 'W02'
 ```
 
 
-From the newly created `Titles_Revised` table, UPDATE `devcost` where `partnum` b/w 39904 & 39906  
+From the newly created `Titles_Revised` table, UPDATE `devcost` where `partnum` b/w 40123 & 40125  
 ``` sql
 -- Solution
 UPDATE Titles_Revised  
@@ -352,10 +352,14 @@ FROM Titles_Revised
 ```
 
 To Truncate All Rows  
-``` TRUNCATE TABLE Titles_Revised  ```
+``` sql
+TRUNCATE TABLE Titles_Revised  
+```
 
 To Delete ALL Rows  
-``` DELETE FROM Titles_Revised  ```
+``` sql
+DELETE FROM Titles_Revised  
+```
 
 
 -- Exercise: Attempt to delete one of the Salespeople Paul that was added earlier.  
