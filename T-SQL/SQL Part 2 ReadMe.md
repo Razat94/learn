@@ -375,8 +375,8 @@ WHERE REPID = 'P01' AND fname = 'Paul'
 -- Task #1 Exercise: Insert a new book into the Titles_Revised table with the following details  
 
 ```  
-partnum 	bktitle				devcost 	slprice 	pubdate  
----------- 	------------------------------ 	---------- 	---------- 	----------  
+partnum 	bktitle						devcost 	slprice 	pubdate  
+---------- 	-------------------------- 	---------- 	---------- 	----------  
 98765 		Learn to Play the Violin 	5000.00 	45.00 		2025-01-01  
 ```
 
@@ -428,21 +428,24 @@ SQL data types are a core rule of the table structure that restricts the type of
 Learn more about field Data types by going to the [Learn Microsoft Page.](https://learn.microsoft.com/en-us/sql/t-sql/data-types/data-types-transact-sql?view=sql-server-ver17)  
 
 
--- Create the table  
+Create the table  
+``` sql
 CREATE TABLE ProduceInventory (  
     ProduceName VARCHAR(50),  
     PricePerPound DECIMAL(5,2), -- Exactly 2 decimal places that goes up to 999.99  
     InStock BIT NOT NULL  -- Closest thing to a Boolean type in T-SQL.  A value of `0` represents false, and `1` represents true.  
 );  
-
+```
 
 -- Insert the data  
+``` sql
 INSERT INTO ProduceInventory (ProduceName, PricePerPound, InStock)  
 VALUES  
 ('Cantaloupe', 0.50, 1),  
 ('Cucumbers', 0.25, 1),  
 ('Pumpkin', 0.33, 1),  
 ('Ginger', 0.99, 0);  
+```
 
 -- Verify Data  
 SELECT * FROM ProduceInventory
@@ -470,9 +473,9 @@ TRUNCATE TABLE ProduceInventory
 DROP TABLE ProduceInventory  
 
 
-/* ------------ Create a Duplicate Table ------------ */  
+/* ------------ Recall: To create a Duplicate Table ------------ */  
 SELECT *  
-INTO Slspers_Copy  
+INTO Slspers_Backup  
 FROM Slspers  
 
 
@@ -489,49 +492,49 @@ In a previous section, we covered how to add and delete records (rows) in a tabl
 
 
 ``` sql
-ALTER TABLE Slspers_Copy  
+ALTER TABLE Slspers_Backup  
 ADD email varchar(40)  
 -- NOTE: Every column will contain NULL  
 ```
 
 ``` sql
 -- Check Info on ALTERED Table  
-sp_help Slspers_Copy  
+sp_help Slspers_Backup  
 ```
 
 ``` sql
 -- Fill every salesperson with generic email  
-UPDATE Slspers_Copy  
+UPDATE Slspers_Backup  
 SET email = 'test@outlook.com'  
 WHERE email IS NULL;  
 ```
 
 ``` sql
 -- Check Columns  
-SELECT * FROM Slspers_Copy  
+SELECT * FROM Slspers_Backup  
 ```
 
 ``` sql
 -- Change Anna's email  
-UPDATE Slspers_Copy  
+UPDATE Slspers_Backup  
 SET email = 'annarules@outlook.com'  
 WHERE fname = 'anna';  
 ```
 
 ``` sql
 -- Check Columns
-SELECT * FROM Slspers_Copy  
+SELECT * FROM Slspers_Backup  
 ```
 
 ``` sql
 -- DROP Column IF EXISTS  
-ALTER TABLE Slspers_Copy  
+ALTER TABLE Slspers_Backup  
 DROP COLUMN IF EXISTS email  
 ```
 
 ``` sql
 -- Check Info on ALTERED Table  
-sp_help Slspers_Copy  
+sp_help Slspers_Backup  
 ```
 
 
@@ -544,13 +547,13 @@ sp_help Slspers_Copy -- verify table
 
 ``` sql
 -- First, verify that we can enter a NULL value for Fname  
-INSERT INTO Slspers_Copy  
+INSERT INTO Slspers_Backup  
 VALUES ('N01', NULL, 'Nguyen', 0.05)  
 ```
 
 ``` sql
 -- Ensure that we delete said row
-DELETE Slspers_Copy  
+DELETE Slspers_Backup  
 WHERE fname is NULL
 ```
 
@@ -561,24 +564,24 @@ SQL Server cannot enforce NOT NULL if NULL values already exist.
 
 -- Confirm that `fname` holds no `NULL` values.  
 ``` sql
-SELECT * FROM Slspers_Copy  
+SELECT * FROM Slspers_Backup  
 WHERE fname is NULL  
 ```
 
 ``` sql
 -- Alter Table to have max 10 characters & not contain NULL values (a value is required).   
-ALTER TABLE Slspers_Copy   
+ALTER TABLE Slspers_Backup   
 ALTER COLUMN fname varchar(10) NOT NULL  
 ```
 
 -- Check TO VERIFY the change.  
-sp_help Slspers_Copy  
+sp_help Slspers_Backup  
 -- Under the column "Nullable", we see that the fname column says 'No'   
 
 
 -- Assure that the following query does NOT work:  
 ``` sql
-INSERT INTO Slspers_Copy  
+INSERT INTO Slspers_Backup  
 VALUES ('N01', NULL, 'Nguyen', 0.05)  
 ```
 
@@ -590,7 +593,7 @@ The statement has been terminated.
 
 ``` sql
 /* To revert the column back to the way it was: */
-ALTER TABLE Slspers_Copy   
+ALTER TABLE Slspers_Backup   
 ALTER COLUMN fname VARCHAR(40) NULL;  
 ```
 
@@ -606,7 +609,7 @@ To enforce a value range like 0 <= commrate <= 0.1, we'll use a CHECK constraint
 
 ``` sql
 -- Invalid data can be initially be inserted since there are no constraints  
-INSERT INTO Slspers_Copy  
+INSERT INTO Slspers_Backup  
 VALUES (1, 'Finnie', 'Nguyen', 0.25);  
 ```
 
@@ -620,7 +623,7 @@ WHERE commrate = 0.25
 
 ``` sql
 -- Adding the constraint to enforce Commission between 0 and 10%  
-ALTER TABLE Slspers_Copy  
+ALTER TABLE Slspers_Backup  
 ADD CONSTRAINT chk_commrate CHECK (commrate >= 0 AND commrate <= 0.1);  
 ```
 
@@ -640,20 +643,20 @@ CHECK (commrate)       | chk_commrate    | N/A   | N/A      | Enabled | Is_For_R
 
 So now, running the previous insertion will now fail   
 ``` sql
-INSERT INTO Slspers_Copy  
+INSERT INTO Slspers_Backup  
 VALUES (1, 'Finnie', 'Nguyen', 0.25); -- Invalid Insertion Data since 0.25 is greater than 0.1 (10%)  
 ```
 
 Use `DROP CONSTRAINT` to remove the Constraint to allow any commission value  
 ``` sql
 -- Remove the commission constraint  
-ALTER TABLE Slspers_Copy  
+ALTER TABLE Slspers_Backup  
 DROP CONSTRAINT chk_commrate;  
 ```
 
 Re-inserting data will now work after removing the constraint  
 ``` sql
-INSERT INTO Slspers_Copy  
+INSERT INTO Slspers_Backup  
 VALUES (1, 'Finnie', 'Nguyen', 0.25);  
 ```
 
@@ -666,7 +669,7 @@ It however does NOT change existing rows with 'some value' (this applies for row
 In SQL Server, notice that we can stack constraints on top of one another.
 
 ``` sql
-ALTER TABLE Slspers_Copy  
+ALTER TABLE Slspers_Backup  
 ADD CONSTRAINT df_commrate DEFAULT 0.02 FOR commrate;  
 ```
 
@@ -675,7 +678,7 @@ EXEC sp_help 'Slspers_Copy';
 
 ``` sql
 -- This works:   
-INSERT INTO Slspers_Copy   
+INSERT INTO Slspers_Backup   
 VALUES (1, 'Alice', 'Smith', 0.05);  
 ```
 
@@ -687,28 +690,28 @@ VALUES (1, 'Alice', 'Smith');
 
 ``` sql
 -- This does NOT work:  
-INSERT INTO Slspers_Copy   
+INSERT INTO Slspers_Backup   
 (repid, fname, lname) -- Again, this doesn't work since SQL Server expects values for all columns in the table  
 VALUES (1, 'Alice', 'Smith');  
 ```
 
 -- Verify:  
-SELECT * FROM Slspers_Copy  
+SELECT * FROM Slspers_Backup  
 
 
 #### Notice about DROPPING CONSTRAINT!  
 -- If a column has a constraint, dropping the column won't work since the constraint is dependent on column 'commrate':
-ALTER TABLE Slspers_Copy  
+ALTER TABLE Slspers_Backup  
 DROP COLUMN commrate -- won't work  
 
 
 -- Step 1: First drop the default constraint  
-ALTER TABLE Slspers_Copy  
+ALTER TABLE Slspers_Backup  
 DROP CONSTRAINT df_commrate; -- remember to use 'sp_help YourTableName' if you forget the constraints name.  
 
 
 -- Step 2: Then drop the column  
-ALTER TABLE Slspers_Copy  
+ALTER TABLE Slspers_Backup  
 DROP COLUMN commrate  
 
 
@@ -746,7 +749,7 @@ Values
 
 ``` sql
 -- Drop Constraint
-ALTER TABLE Slspers_Copy  
+ALTER TABLE Slspers_Backup  
 DROP CONSTRAINT DF_Email;
 ```
  
@@ -762,18 +765,18 @@ SP_HELP Slspers_Copy
 
 
 -- Warning - We can not make a column a primary key if it contains duplicates.  
-TRUNCATE TABLE Slspers_Copy  
+TRUNCATE TABLE Slspers_Backup  
 
 
 -- SQL Server refuses to make it a primary key because NULLs are allowed  
 ``` sql
-ALTER TABLE Slspers_Copy  
+ALTER TABLE Slspers_Backup  
 ALTER COLUMN repid varchar(6) NOT NULL; -- Exercise: Make the Slspers_Copy to be a NON null value.  
 ```
 
 ``` sql
 -- Add the Constraint
-ALTER TABLE Slspers_Copy  
+ALTER TABLE Slspers_Backup  
 ADD CONSTRAINT pk_slspers PRIMARY KEY (repid);  
 ```
 
@@ -782,21 +785,21 @@ EXEC sp_help 'Slspers_Copy';
 
 
 ``` sql
-INSERT INTO Slspers_Copy  
+INSERT INTO Slspers_Backup  
 VALUES (1, 'Raza', 'Tahir', 0.05)   
 ```
 
 
 ``` sql
 -- To Remove Constraint  
-ALTER TABLE Slspers_Copy  
+ALTER TABLE Slspers_Backup  
 DROP CONSTRAINT pk_slspers;  
 ```
 
 How to AutoIncrement Primary Key Constraint  
 ``` sql
 -- Note: IDENTITY can only be set when the column is created  
-ALTER TABLE Slspers_Copy  
+ALTER TABLE Slspers_Backup  
 ADD repid_new INT IDENTITY(1,1) PRIMARY KEY;  -- Starts at 1, increments by 1
 -- We've added a new column 'REPID_NEW' 
 ```
@@ -939,7 +942,7 @@ DROP VIEW CA_Cust;
 -- Create a virtual table called Top_Salesperson that shows only repid and fname  
 CREATE VIEW Top_Salesperson AS  
 SELECT repid, fname  
-FROM Slspers_Copy  
+FROM Slspers_Backup  
 WHERE commrate > 0.04  
 
 -- Displays the SQL code used to define the view.  
@@ -955,7 +958,7 @@ sp_helptext Top_Salesperson
 -- Subtask: Alter the Salesperson view to now display repid, fname & lname  
 ALTER VIEW Top_Salesperson AS  -- Change ALTER VIEW with CREATE VIEW to update the view instead of making a new one.  
 SELECT repid, fname, lname  
-FROM Slspers_Copy  
+FROM Slspers_Backup  
 
 
 SELECT * FROM Top_Salesperson  
@@ -1085,7 +1088,7 @@ DELETE FROM Customers
 WHERE custnum = 31004;  
 
 -- Another delete example  
-DELETE FROM Slspers_Copy  
+DELETE FROM Slspers_Backup  
 WHERE repid = '1';  
 
 
