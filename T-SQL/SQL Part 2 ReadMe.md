@@ -829,76 +829,10 @@ SELECT * FROM Slspers_Copy
 ---------------------------------------------------------- */  
 
 
-> SQL can execute basic logic  
-
-IF 1 = 1  
-    PRINT 'This is true';  
-
-
-> IF statements can only be used inside T-SQL blocks (e.g., stored procedures, scripts)  
-
-'''  
-SELECT COUNT(*) From Slspers -- Output: 10  
-
-IF ( ( SELECT COUNT(*) From Slspers ) > 5 )  
-	PRINT 'More than 5'  
-ELSE  
-	PRINT 'Less than or equal to 5'  
-'''
- 
-
-> BEGIN/END block defines a statement block which is a group of T-SQL statements executed as a single unit in procedural logic.
-
--- This code will NOT work  
-IF (3+3) != 6  
-	PRINT 'Condition is true';   
-	PRINT 'Do more things here'; -- Statement becomes printed when it shouldn't.  
-
--- Nothing becomes printed as it should.  
-IF (3+3) != 6  
-BEGIN  
-    PRINT 'Condition is true';  
-    PRINT 'Do more things here';  
-END   
-
-
-
-### Another Example
-
-```
--- This code will NOT execute.  
-IF ( ( SELECT COUNT(*) From Slspers ) > 5 )  
-	PRINT 'More than 5'  
-	PRINT 'Hooray!'  
-ELSE  
-	PRINT 'Less than or equal to 5'  
-	PRINT 'Oh no!'  
-```
-
-```  
--- This code WILL execute.  
-IF ( ( SELECT COUNT(*) From Slspers ) > 5 )  
-	BEGIN  
-		PRINT	'More than 5'  
-		PRINT	'Hooray!'  
-	END  
-ELSE  
-	BEGIN  
-		PRINT 'Less than or equal to 5'  
-		PRINT 'Oh no!'  
-	END  
-```  
-
-
 ### Views  
-View is essentially a SAVED QUERY.  
-Think: A SQL View is a virtual table.  
+A SQL View is a virtual table and is essentially a SAVED QUERY.  
 
-A view does not "physically" store data — it just stores the query.  
-
-Since a view doesn’t store data itself and is just a saved query on a table,  
-So if we delete data through the view, we'll actually be deleting it from the underlying table, because that’s where the real data is stored.  
-  
+A view does not store data since it just stores the query.  
 
 Views can be based on:  
 - One entire table  
@@ -907,55 +841,59 @@ Views can be based on:
 - Subqueries  
 - Functions  
 
-
-Why Views Matter  
-- Security  
-	- DBAs can restrict access to tables but grant access to views.  
-	- A view can expose only specific rows and columns.  
-Efficiency  
-	- It’s much faster. Instead of loading all 100 columns of a table, you only retrieve the 3 you need.  
-
-
-Difference between VIEWS & PROCEDURES  
+NOTE: The difference between VIEWS & PROCEDURES  
 - Can’t store/accept parameters (no input).  
 - Doesn’t contain procedural logic (no IF, loops, etc.).  
 
 
--- After a View is created, Expand the views folder in the object explorer to now see your view.  
--- When creating the view, make sure to refresh Intellisense  
--- Edit -> Intellisense -> Refresh Local Cache  
+#### Why Views Matter  
+- Security  
+	- DBAs can restrict access to tables but grant access to views.  
+	- A view can expose only specific rows and columns.  
+- Efficiency  
+	- It’s much faster. Instead of loading all 100 columns of a table, you only retrieve the 3 columns you need.  
+<br/>
 
+---
 
-> -- You can make views VIA THE OBJECT EXPLORER AS WELL  
-
-
--- Task #1: Create a view to show only people from state 'CA'  
+#### Task #1: Create a view to show only people from state 'CA'  
+``` sql
 CREATE VIEW CA_Cust AS  
 SELECT custname, city, state  
 FROM Customers  
 WHERE state = 'CA';  
 -- Note: The ORDER BY clause is invalid in views  
+```
 
--- Result: If you refresh the views folder, you can see the view there.  
+Result:  After a View is created, expand/refresh the views folder in the object explorer to now see the view.  
 
--- A view can be queried like a table.  
+> NOTE: When creating the view, make sure to refresh Intellisense  
+> Edit -> Intellisense -> Refresh Local Cache  
+
+
+Result: A view can be queried like a table.  
+``` sql
 SELECT * FROM CA_Cust  
 WHERE city = 'Quebec'-- also works as an addition  
+```
 
+Syntax to Delete (Drop) a View  
+``` DROP VIEW CA_Cust  ```
 
--- Syntax to Delete (Drop) a View  
-DROP VIEW CA_Cust;  
+--- 
 
+#### Task: #2  
+Create a virtual table called Top_Salesperson that shows only repid and fname  
 
--- Task: #2  
--- Create a virtual table called Top_Salesperson that shows only repid and fname  
+``` sql
 CREATE VIEW Top_Salesperson AS  
 SELECT repid, fname  
 FROM Slspers_Backup  
 WHERE commrate > 0.04  
+```
 
 -- Displays the SQL code used to define the view.  
-sp_helptext Top_Salesperson
+``` sp_helptext Top_Salesperson ```
 
 -- INSERT INTO Top_Salesperson VALUES (1, 'John', 'Smith', 0.5); -- Won't Work  
 -- INSERT INTO Top_Salesperson VALUES (1, 'John');  -- Will Work  
@@ -964,10 +902,11 @@ sp_helptext Top_Salesperson
 
 
 
--- Subtask: Alter the Salesperson view to now display repid, fname & lname  
+#### Subtask: Alter the Salesperson view to now display repid, fname & lname  
 ALTER VIEW Top_Salesperson AS  -- Change ALTER VIEW with CREATE VIEW to update the view instead of making a new one.  
 SELECT repid, fname, lname  
 FROM Slspers_Backup  
+WHERE commrate > 0.04  
 
 
 SELECT * FROM Top_Salesperson  
@@ -976,10 +915,12 @@ SELECT * FROM Top_Salesperson
 DROP VIEW Top_Salesperson  
 
 
-SELECT * FROM  Top_Salesperson -- Won't work
+SELECT * FROM Top_Salesperson -- Won't work
 
 
+> NOTE: Since a view doesn’t store data itself and is just a saved query on a table, if we delete data through the view, we'll actually be deleting it from the underlying table, because that’s where the real data is stored.  
 
+> NOTE: You can make views VIA THE OBJECT EXPLORER AS WELL  
 
 
 /* ------------ EXERCISE SNIPPET: Activity 4-1 Step 3B ------------ */  
@@ -1058,10 +999,95 @@ sp_help is a built-in stored procedure
 > Since Procedures add PROGRAMMABILITY, they are more like FUNCTIONS.  
 
 
+Before we work on a task, lets understand Conditional Logic.
+
+
+
+> SQL can execute basic logic  
+
+
+``` sql 
+IF 1 = 1  
+    PRINT 'This is true';  
+```
+
+> IF statements can only be used inside T-SQL blocks (e.g., stored procedures, scripts)  
+
+``` sql
+SELECT COUNT(*) From Slspers -- Output: 10  
+
+IF ( ( SELECT COUNT(*) From Slspers ) > 5 )  
+	PRINT 'More than 5'  
+ELSE  
+	PRINT 'Less than or equal to 5'  
+```
+ 
+
+BEGIN/END block defines a statement block which is a group of T-SQL statements executed as a single unit in procedural logic. Think of them as curly braces {} like in C, Java, or JavaScript. Without BEGIN/END Block, only the first statement gets printed.
+
+``` sql
+-- This code will NOT work  
+IF (3 + 3) != 6  
+	PRINT 'Condition is true';   
+	PRINT 'Do more things here'; -- the second PRINT is not part of the IF, so it runs regardless of the condition. In other words, the statement becomes printed when it shouldn't i.e. it always runs
+```
+
+In programming we can think  of it like this:
+```
+IF condition
+    statement1  <--  Only this line belongs to the IF
+statement2  <-- always runs
+```
+
+``` sql
+-- Nothing becomes printed as it should.  
+IF ( 3 + 3) != 6  
+BEGIN  
+    PRINT 'Condition is true';  
+    PRINT 'Do more things here';  
+END   
+```
+
+In programming we can think of it like this:
+```
+IF condition {
+    statement1
+    statement2
+}
+```
+
+
+### Another Example
+
+``` sql
+-- This code will NOT execute.  
+IF ( ( SELECT COUNT(*) From Slspers ) > 5 )  
+	PRINT 'More than 5'  
+	PRINT 'Hooray!'  
+ELSE  
+	PRINT 'Less than or equal to 5'  
+	PRINT 'Oh no!'  
+```
+
+```  sql
+-- This code WILL execute.  
+IF ( ( SELECT COUNT(*) From Slspers ) > 5 )  
+	BEGIN  
+		PRINT	'More than 5'  
+		PRINT	'Hooray!'  
+	END  
+ELSE  
+	BEGIN  
+		PRINT 'Less than or equal to 5'  
+		PRINT 'Oh no!'  
+	END  
+```  
+
+
+Now that we understand Conditional Logic, let's understand Procedures.
 
 Task:  
-Write a stored procedure that accepts a @State parameter,  
-retrieves all matching records from the PotentialCustomers table,   
+Write a stored procedure that accepts a @State parameter, and retrieves all matching records from the PotentialCustomers table,   
 and inserts those records into the Customers table.  
 
 
