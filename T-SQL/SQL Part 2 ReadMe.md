@@ -939,7 +939,7 @@ Step 3: Let’s say we want users to see some data from the 'Titles' table. To d
 
 Step 4: Once the fields have been added, save the view. Click the save icon or just close the window and confirm the save. Give your view a name, like 'TitlesInfo'.
 
-Result: Now the view is created. To run it, expand the Views folder, find your new view, right-click it, and select "Select Top 1000 Rows" or run a SELECT query. You’ll see the data just like in the table—but without the credit card field.
+Result: Now the view is created. To run it, expand the Views folder, find your new view, right-click it, and select "Select Top 1000 Rows" or run a SELECT query. You’ll see the data just like in a standard  table.
 
 ---
 
