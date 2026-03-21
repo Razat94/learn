@@ -833,12 +833,15 @@ SELECT * FROM Slspers_Copy
 
 
 ### Views  
-A SQL View is a virtual table and is essentially a saved query. If the original data changes, then the view will automatically reflect it.  In simple terms, a SQL view is a reference to a table.   
+A view is gives the user a different way to look at data in a table (hence the name). 
+For example, if you have a table and you want the data displayed in a different order, or you want to hide certain fields, a view is a great way to do that.
 
-> Note: A view does not store data on its own since it just stores the query. Think of it like a query that pretends to be a table.  
-
+Another way to look at it is that a SQL View is a virtual table and is essentially a saved query. In simple terms, a SQL view is a reference to a table.  So think of it like a query that pretends to be a table.  
+ 
 > Views are similar to dashboards in Excel/PowerBI & Views in SharePoint Lists  
 > Fun Analogy: Think of a Work Phone/Laptop. It's a device with limited features.
+
+> Note: A view does not store data on its own since it just stores the query. If the original data changes, then the view will automatically reflect it. 
 
 Views can be based on:  
 - One entire table  
@@ -851,6 +854,8 @@ Views can be based on:
 - Security  
 	- DBAs can refuse/restrict access to tables but only grant access to views.  
 	- A view can expose only specific rows and columns.  
+	- So instead of giving users direct access to a table, we can create a view and allow users to only see the data through that.
+
 - Ease of access  
 	- Views reduce complexity. Instead of loading all 100 columns of a table, you only retrieve the 3 columns you need.  
 	- Ultimately, it helps when manipulating/joining large tables.  
@@ -882,14 +887,14 @@ Result:  After a View is created, expand/refresh the views folder in the object 
 
 Now that a view is created, that view can be queried like a table.  
 ``` sql
-SELECT * FROM Customers -- Still Works
-SELECT * FROM CA_Cust  -- Newly created View
+SELECT * FROM Customers	-- Still Works
+SELECT * FROM CA_Cust  	-- View that outputs only customers from California.
 ```
 
 
 We can insert data through the view, and it will update the original Customers table.
 ``` sql
--- Will work.
+-- Will work
 INSERT INTO CA_Cust
 VALUES 
 ('Nickkis Design', 'Oakland', 'CA')
@@ -898,14 +903,14 @@ VALUES
 Due to the `WITH CHECK OPTION`, any INSERT, UPDATE, or MERGE through the view must satisfy the view’s defining WHERE clause condition(s).
 
 ``` sql
--- Will NOT work.
+-- Will NOT work
 INSERT INTO CA_Cust
 VALUES 
-('Nickkis Design', 'Oakland', 'NY')
+('Nickkis Design', 'Brooklyn', 'NY')
 ```
 
 
-If needed, we can delete from the view as well:  
+If needed, we can delete any customers from the view as well:  
 ``` sql
 DELETE FROM CA_Cust
 WHERE custname LIKE 'Nickki%'
@@ -918,8 +923,28 @@ Syntax to Delete (Drop) a View
 
 --- 
 
+#### Bonus Example: Create a View via the Object Explorer Interface.
+As we've seen, views can be created using raw SQL code, but here's how to see it using the interface.
+
+
+Navigate to the database where you want to create the view. Expand your database, and you’ll see a “Views” folder. 
+
+<img src = './Views_Folder.png'>
+
+Step 1: Right-click on it and select "New View."
+
+Step 2: Next, choose the table you want to base your view on. In this example, I’ll use the 'Titles' table. Select it, click "Add" and then close the dialog box.
+
+Step 3: Let’s say we want users to see some of the Titles data. To do that, we simply select all the fields except the fields we want to exclude. As you click each field, it gets added to the view.
+
+Step 4: Once the fields have been added, save the view. Click the save icon or just close the window and confirm the save. Give your view a name, like 'TitlesInfo.'
+
+Result: Now the view is created. To run it, expand the Views folder, find your new view, right-click it, and select "Select Top 1000 Rows" or run a SELECT query. You’ll see the data just like in the table—but without the credit card field.
+
+---
+
 #### Task: #2  
-Create a virtual table called Top_Salesperson that shows only repid and fname  
+Create a virtual table called Top_Salesperson that shows repid, fname & commrate.  
 
 ``` sql
 CREATE VIEW Top_Salesperson AS  
@@ -932,11 +957,11 @@ WITH CHECK OPTION
 -- Displays the SQL code used to define the view.  
 ``` sp_helptext Top_Salesperson ```
 
-Using only the known columns would work  
--- INSERT INTO Top_Salesperson VALUES (1, 'John', 'Smith', 0.5); -- Won't Work  
+Inserting data into a view ONLY with known columns will work.  
+-- INSERT INTO Top_Salesperson VALUES (1, 'John', 'Smith', 0.5); -- Won't Work
 -- INSERT INTO Top_Salesperson VALUES (1, 'John', 0.05);  -- Will Work  
 
-Using only what's according to the rule of anything >0.04 would work  
+Adding records where commrate is above 0.04 will ONLY work.
 -- INSERT INTO Top_Salesperson VALUES (1, 'Elvis', 0.03);  -- Won't Work  
 -- INSERT INTO Top_Salesperson VALUES (1, 'Elvis', 0.06);  -- Will Work 
 
@@ -944,11 +969,10 @@ Using only what's according to the rule of anything >0.04 would work
 -- SELECT * FROM Top_Salesperson  
 
 
-
-#### Subtask: Alter the Salesperson view to now display fname & commrate  
+#### Subtask: Alter the Salesperson view to now only display fname & commrate  
 ``` sql
 -- Change ALTER VIEW with CREATE VIEW to update the view instead of making a new one.  
-ALTER VIEW Top_Salesperson AS 
+CREATE OR ALTER VIEW Top_Salesperson AS 
 SELECT fname, commrate    
 FROM Slspers_Backup  
 WHERE commrate > 0.04  
