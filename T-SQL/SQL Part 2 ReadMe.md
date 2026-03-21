@@ -833,13 +833,12 @@ SELECT * FROM Slspers_Copy
 
 
 ### Views  
-A view is gives the user a different way to look at data in a table (hence the name). 
-For example, if you have a table and you want the data displayed in a different order, or you want to hide certain fields, a view is a great way to do that.
+A view gives the user a different way to look at data in a table (hence the name). For example, if you have a table and you want to hide certain fields, a view would be a great way to do that.
 
-Another way to look at it is that a SQL View is a virtual table and is essentially a saved query. In simple terms, a SQL view is a reference to a table.  So think of it like a query that pretends to be a table.  
+More formally, a SQL View is a virtual table and is essentially a saved query. In simple terms, a SQL view is a reference to a table.  So think of it like a query that pretends to be a table.  
  
 > Views are similar to dashboards in Excel/PowerBI & Views in SharePoint Lists  
-> Fun Analogy: Think of a Work Phone/Laptop. It's a device with limited features.
+> Fun Analogy: Think of a View like a Work Phone/Laptop. It's a device with limited features.
 
 > Note: A view does not store data on its own since it just stores the query. If the original data changes, then the view will automatically reflect it. 
 
