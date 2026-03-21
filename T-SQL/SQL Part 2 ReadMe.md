@@ -103,7 +103,7 @@ WHERE Custnum IN
 ---------------------------------------------------------- */  
 
 
--- Exercise: Create a backup table of `Titles` called `TitlesRevised`  
+Create a backup table of `Titles` called `TitlesRevised`  
 ``` sql
 SELECT *  
 INTO Titles_Revised  
@@ -113,8 +113,8 @@ FROM Titles
 #### Recall that the Object Explorer must be refreshed to see the new table.  
 <img src = "./zz_refresh.png">
 
-> Additionally, refresh IntelliSense to avoid the red error underline on the table name by going to:  
-> Edit -> IntelliSense -> Refresh Local Cache (Ctrl + Shift + R)  
+> Additionally, refresh IntelliSense to avoid the red error underline on the newly created table name by going to:  
+> Edit (Tab) -> IntelliSense -> Refresh Local Cache (Ctrl + Shift + R)  
 
 
 Useful Trick: Create a new table `Slspers_Backup` with the same structure as `Slspers`, without copying any data (i.e. do not copy any rows.)
@@ -125,12 +125,12 @@ INTO Slspers_Backup
 FROM Slspers  
 WHERE 1 = 0  -- always false
 -- SQL Server does not support Boolean literals `TRUE` and `FALSE` in SQL queries. 
--- So instead we must use an expression that evaluates to false.
+-- So instead, we must use an expression that evaluates to false.
 ```
 
 
 
-Exercise #2 (Optional): Create an empty table called Cust2025 based on the structure of the Customers table.
+Exercise #1 (Optional): Create an empty table called `Cust2025` based on the structure of the `Customers` table.
 ``` sql
 SELECT *  
 INTO Cust2025  
@@ -144,13 +144,13 @@ WHERE 1 = 0  -- always false
 - DROP TABLE IF EXISTS `Customers2025`;
 - In the Object Explorer of SSMS, find the table you want to delete in your database (e.g. `Customers2025`).
   - Right-click the table and select 'Delete'.
-  - In the Delete Object dialog, click 'OK' to drop the table.
+  - A pop up 'Delete Object' dialog box will appear. Click 'OK' to drop the table.
 
 
 ---
 <br/>
 
-### <u> Aww CRUD! </u>
+### <u> Aww, CRUD! </u>
 
 #### CRUD refers to the four basic operations you can perform on data in a database: <br> Create, Read, Update, & Delete.
 
@@ -161,7 +161,7 @@ WHERE 1 = 0  -- always false
 
 --- 
 
-## CRUD Example
+## CRUD Overview
 
 | Operation | SQL Example |
 |-----------|-------------|
@@ -179,10 +179,10 @@ WHERE 1 = 0  -- always false
 
 /* ------------ C: INSERT INTO statement ------------ */  
 
-> In SQL, the keyword `INTO` usually indicates that data is being written into something
+> NOTE: In SQL, the keyword `INTO` usually indicates that data is being written into something
 
 
-(Jumping ahead) Optional: Introduction to the TRUNCATE statement
+(Jumping ahead) Optional Mention: The TRUNCATE statement removes all rows from a table  
 ``` TRUNCATE TABLE Slspers_Backup ```
 
 
@@ -201,7 +201,7 @@ VALUES
 ('N01', 'Nickki')  
 ```
 
-#### Insert MANY records at once.     
+#### Insert MANY (2+) records at once.     
 ``` sql
 INSERT INTO Slspers_Backup    
 VALUES  
@@ -210,7 +210,7 @@ VALUES
 ```
 
 
-#### (Jumping ahead) Optional: Introduction to the TRUNCATE statement
+#### (Jumping ahead) Optional: The TRUNCATE statement
 ``` sql 
 TRUNCATE TABLE Slspers_Backup 
 ```
@@ -270,7 +270,7 @@ WHERE partnum BETWEEN 40123 AND 40125 -- BETWEEN 39906 AND 39909 -- Check table 
 #### Exercise: Selects all rows from `Slspers` with `commrate` between 0.03 and 0.04, ordered by `commrate`.
 ``` sql
 SELECT *  
-FROM Slspers 
+FROM Slspers_Backup   
 WHERE commrate BETWEEN 0.03 and 0.04  
 ORDER BY commrate
 ```
@@ -278,6 +278,7 @@ ORDER BY commrate
 
 /* ------------ U: Update Table ------------ */  
 
+> Note: Before updating any rows with an UPDATE statement, it’s always a good idea to run a SELECT statement first to see exactly which rows will be updated. After knowing which rows the SELECT query returns, the conditions in the WHERE clause can then be reused in an UPDATE statement.
 
 Update all salesperson commission from 0.3 to 0.6  
 ``` sql
@@ -287,7 +288,7 @@ WHERE commrate = 0.03  -- NOTE: Always include a WHERE clause, or the UPDATE sta
 ```
 
 -- Check:  
--- SELECT * FROM Slspers_Backup WHERE commrate = 0.06  
+``` SELECT * FROM Slspers_Backup WHERE commrate = 0.06  ```
 
 
 Exercise: Fix the spelling mistake of 'Anne' on RepID 'W02' to 'Annie'    
@@ -336,6 +337,8 @@ WHERE partnum = 40123
 ```
 
 /* ------------ D: Delete Rows ------------ */  
+
+> Similar to the UPDATE statement, always verify which rows the DELETE query will remove by first running the SELECT query with the same WHERE clause.
 
 
 Deletes all rows from Titles_Revised where partnum equals 40123.
@@ -426,12 +429,12 @@ WHERE partnum = '98765'
 ---------------------------------------------------------- */  
 
 A SQL data type defines the type of value a column can store.  
-SQL data types are a core rule of the table structure that restricts the type of data that can go into a column, and is similar to the Data Validation tool in Excel.
+SQL data types are a core rule of the SQL table structure that restricts & validates the type of data that can go into a column, and is similar to the Data Validation tool in Excel.
 
 Learn more about field Data types by going to the [Learn Microsoft Page.](https://learn.microsoft.com/en-us/sql/t-sql/data-types/data-types-transact-sql?view=sql-server-ver17)  
 
 
-Create the table  
+Step 1: Create the table  
 ``` sql
 CREATE TABLE ProduceInventory (  
     ProduceName VARCHAR(50),  
@@ -440,25 +443,23 @@ CREATE TABLE ProduceInventory (
 );  
 ```
 
--- Insert the data  
+Step 2: Insert a few rows of data  
 ``` sql
 INSERT INTO ProduceInventory (ProduceName, PricePerPound, InStock)  
 VALUES  
 ('Cantaloupe', 0.50, 1),  
 ('Cucumbers', 0.25, 1),  
-('Pumpkin', 0.33, 1),  
 ('Ginger', 0.99, 0);  
 ```
 
--- Verify Data  
-SELECT * FROM ProduceInventory
+Step 3: Verify Data  
+``` SELECT * FROM ProduceInventory ```
 
 ```
 /* Following Output */  
 Produce		Price ($/lb)	In Stock?  
 Cantaloupe	$0.50 			TRUE  
 Cucumbers	$0.25 			TRUE  
-Pumpkin		$0.33 			TRUE  
 Ginger		$0.99 			FALSE  
 /* End of Output */  
 ```
@@ -476,23 +477,25 @@ TRUNCATE TABLE ProduceInventory
 DROP TABLE ProduceInventory  
 
 
-/* ------------ Recall: To create a Duplicate Table ------------ */  
+### Let’s now review CRUD operations related to affecting columns in a table.
+
+In a previous section, we covered how to add and delete records (rows) in a table. In this subsection, we will cover how to add and remove columns and we will first create our duplicate table.
+
+#### Recall: To create a Duplicate Table 
+``` sql
 SELECT *  
 INTO Slspers_Backup  
 FROM Slspers  
+-- Please keep this table as it will be used in upcoming examples throughout this chapter.
+```
 
-
-
-### Recall  
+Remember:  
 -- The Object Explorer must be refreshed to see the new table.  
 -- Additionally, refresh IntelliSense to avoid the red error underline on the table name by going to:  
 -- Edit -> IntelliSense -> Refresh Local Cache (Ctrl + Shift + R)  
 
 
-
 /* ------------ C: ADD Column to ALTER TABLE ------------ */  
-In a previous section, we covered how to add and delete records (rows) in a table. In this subsection, we will cover how to add and remove columns.
-
 
 ``` sql
 ALTER TABLE Slspers_Backup  
@@ -546,12 +549,12 @@ sp_help Slspers_Backup
 /* ------------ U: Update/ALTER Column property ------------ */  
 
 ``` sql  
-sp_help Slspers_Copy -- verify table  
+sp_help Slspers_Backup -- verify table  
 -- if a column is nullable, it means that the column is allowed to contain NULL values i.e. values are optional
 ```
 
 ``` sql
--- First, verify that we can enter a NULL value for Fname  
+-- First, verify that we can enter a NULL (blank) value for Fname  
 INSERT INTO Slspers_Backup  
 VALUES ('N01', NULL, 'Nguyen', 0.05)  
 ```
@@ -565,7 +568,7 @@ WHERE fname is NULL
 #### Task: Change the fname column so it can hold up to 10 characters and is required (it cannot be left blank or NULL)  
 
 > KEY NOTE: An  error may occur if some rows in the table already contain NULL (e.g. in fname column).  
-SQL Server cannot enforce NOT NULL if NULL values already exist. 
+SQL Server cannot enforce a column to be NOT NULL if there are NULL values that already exist in the table. 
 
 Assure that `fname` holds no `NULL` values.  
 ``` sql
@@ -590,14 +593,14 @@ INSERT INTO Slspers_Backup
 VALUES ('N01', NULL, 'Nguyen', 0.05)  
 ```
 
--- Executing the above query should now throw an error:  
+Executing the above query should now throw an error:  
 ```  
 Cannot insert the value NULL into column 'fname', table 'Pub1.dbo.Slspers_Copy'; column does not allow nulls. INSERT fails.  
 The statement has been terminated.  
 ```
 
+Finally, to revert the column back to the way it was:
 ``` sql
-/* To revert the column back to the way it was: */
 ALTER TABLE Slspers_Backup   
 ALTER COLUMN fname VARCHAR(40) NULL;  
 ```
@@ -605,13 +608,13 @@ ALTER COLUMN fname VARCHAR(40) NULL;
 
 /* ------------ CONSTRAINTS  i.e. Create a constraint after a table is already created. ------------ */
 
-Constraints are rules that limit data. Inserting invalid data will fail if the constraint is active.  
-In SQL Server, constraints are separate objects, so we drop/remove the constraint to allow invalid data again.  
+Constraints are rules that limit data. If the constraint is active, then inserting invalid data will fail.  
+In SQL Server, constraints are separate objects, so we drop/remove the constraint to allow the user to enter invalid data again.  
 
 
 #### Task: Add a rule (constraint) to make sure commission values are between 0 and 10% (0 to 0.1).  
-To enforce a value range like 0 <= commrate <= 0.1, we'll use a CHECK constraint.  
 
+First check to see if invalid data can be inputted.
 ``` sql
 -- Invalid data can be initially be inserted since there are no constraints  
 INSERT INTO Slspers_Backup  
@@ -626,6 +629,7 @@ DELETE FROM Slspers_Backup
 WHERE commrate = 0.25
 ```
 
+To enforce a value range like 0 <= commrate <= 0.1, we'll use a CHECK constraint.  
 ``` sql
 -- Adding the constraint to enforce Commission between 0 and 10%  
 ALTER TABLE Slspers_Backup  
@@ -644,7 +648,7 @@ Constraint Type        | Constraint Name | Table | Column   | Status  | Option  
 CHECK (commrate)       | chk_commrate    | N/A   | N/A      | Enabled | Is_For_Replication | ([commrate] >= 0 AND [commrate] <= 0.1)|
 
 
-> Note: Additionally, in SSMS Object Explorer, expand the table folder and then expand Constraints to view your constraints.
+> Note: Additionally, in SSMS Object Explorer, expand the `Tables` folder and then expand `Constraints` folder to view your constraints.
 
 So now, running the previous insertion will now fail   
 ``` sql
@@ -671,7 +675,7 @@ VALUES (1, 'Finnie', 'Nguyen', 0.25);
 
 The DEFAULT keyword sets a value for future inserts only. 
 It however does NOT change existing rows with 'some value' (this applies for rows that contain NULL values too.)   
-In SQL Server, notice that we can stack constraints on top of one another.
+
 
 ``` sql
 ALTER TABLE Slspers_Backup  
@@ -679,7 +683,7 @@ ADD CONSTRAINT df_commrate DEFAULT 0.02 FOR commrate;
 ```
 
 -- To verify constraint  
-EXEC sp_help 'Slspers_Backup';  
+``` EXEC sp_help 'Slspers_Backup';  ```
 
 ``` sql
 -- This works:   
@@ -688,7 +692,7 @@ VALUES (1, 'Alice', 'Smith', 0.05);
 ```
 
 ``` sql
--- This also works since we added a DEFAULT constraint:  
+-- This also works since we added a DEFAULT constraint of 0.02:  
 INSERT INTO Slspers_Backup (repid, fname, lname)  
 VALUES (1, 'Alice', 'Smith');  
 ```
@@ -707,7 +711,7 @@ SELECT * FROM Slspers_Backup
 #### Notice about DROPPING CONSTRAINT!  
 If a column has a constraint, dropping the column won't work since the constraint is dependent on column 'commrate':
 ```sql
--- Will not work  
+-- will NOT work  
 ALTER TABLE Slspers_Backup  
 DROP COLUMN commrate 
 ```
@@ -764,12 +768,11 @@ DROP CONSTRAINT DF_Email;
  
 /* ------------ Primary KEY Constraint!!! ------------ */  
  
--- A Primary Key is a unique identifier for each record in a table and cannot contain duplicates or NULL values!  
--- You can have only 1 primary key per table unless it's a composite i.e. a combination of columns.  
--- NOTE: Make sure we effect the DIFFERENT TABLE
+A Primary Key is a unique identifier for each record in a table and cannot contain duplicates or NULL values! You can have only 1 primary key per table unless it's a composite i.e. a combination of columns.  
+-- NOTE: Make sure we affect the DUPLICATE table.
 
 
-Warning - We can not make a column a primary key if it contains duplicates.  
+Warning: We can not make a column a primary key if it already contains duplicates.  
 ``` TRUNCATE TABLE Slspers_Backup  ```
 
 
