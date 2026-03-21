@@ -837,8 +837,8 @@ A SQL View is a virtual table and is essentially a saved query. If the original 
 
 > Note: A view does not store data on its own since it just stores the query. Think of it like a query that pretends to be a table.  
 
-> Views are similar to dashboards in PowerBI & Views in SharePoint Lists
-> Fun Analogy: Children Play Phones
+> Views are similar to dashboards in Excel/PowerBI & Views in SharePoint Lists  
+> Fun Analogy: Think of a Work Phone/Laptop. It's a device with limited features.
 
 Views can be based on:  
 - One entire table  
@@ -852,7 +852,8 @@ Views can be based on:
 	- DBAs can refuse/restrict access to tables but only grant access to views.  
 	- A view can expose only specific rows and columns.  
 - Ease of access  
-	- It helps when manipulating/joining large tables. Instead of loading all 100 columns of a table, you only retrieve the 3 columns you need.  
+	- Views reduce complexity. Instead of loading all 100 columns of a table, you only retrieve the 3 columns you need.  
+	- Ultimately, it helps when manipulating/joining large tables.  
 
 <br/>
 
@@ -881,8 +882,8 @@ Result:  After a View is created, expand/refresh the views folder in the object 
 
 Now that a view is created, that view can be queried like a table.  
 ``` sql
-SELECT * FROM CA_Cust  
-SELECT * FROM Customers
+SELECT * FROM Customers -- Still Works
+SELECT * FROM CA_Cust  -- Newly created View
 ```
 
 
@@ -1037,8 +1038,12 @@ Recall that a View:
 - Can't use loops  
 
 
-A view is a saved query - it doesn’t execute logic.  
+A view is a saved query with inline SQL so it doesn’t execute logic.  
 A stored procedure can run logic, like IF, SET, or UPDATE statements.  
+
+
+> Key Note: Stored procedures are used for specific tasks or operations.  
+
 
 sp_help is a built-in stored procedure  
 
@@ -1132,11 +1137,31 @@ ELSE
 
 Now that we understand Conditional Logic, let's understand Procedures.
 
+Remember that a Procedure is used like a script/function that can form perform multiple operations.
+
+A Procedure is a standalone operation: It’s a programmatic block of code that executes specific code and returns results.
+
+
+A Procedure is not a dataset; it cannot attach a WHERE clause directly to a stored procedure call.
+When your procedure runs a SELECT, it outputs a <b> result set </b>.
+
+
+CREATE OR ALTER PROCEDURE GetSalespersonNames
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    SELECT FirstName, LastName
+    FROM Salesperson;
+END;
+
+
+
 Task:  
 Write a stored procedure that accepts a @State parameter, and retrieves all matching records from the PotentialCustomers table,   
 and inserts those records into the Customers table.  
 
-```
+``` sql
 CREATE PROCEDURE InsertPotentialCustomersByState  
     @State NVARCHAR(50)  
 AS  
@@ -1164,6 +1189,11 @@ EXEC InsertPotentialCustomersByState @State = 'CA';
 SELECT * FROM Customers  
 WHERE STATE = 'CA'  
 
+EXEC InsertPotentialCustomersByState @State = 'NY';  
+-- CHECK  
+SELECT * FROM Customers  
+WHERE STATE = 'NY'  
+
 
 -- To delete  
 DELETE FROM Customers  
@@ -1172,6 +1202,10 @@ WHERE custnum = 31004;
 -- Another delete example  
 DELETE FROM Slspers_Backup  
 WHERE repid = '1';  
+
+
+Q: How to view all of the stored procedures in a table?
+
 
 
 Task: Write a procedure to update 2 tables.  
