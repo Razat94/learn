@@ -837,6 +837,8 @@ A SQL View is a virtual table and is essentially a saved query. If the original 
 
 > Note: A view does not store data on its own since it just stores the query. Think of it like a query that pretends to be a table.  
 
+> Views are similar to dashboards in PowerBI & Views in SharePoint Lists!
+
 Views can be based on:  
 - One entire table  
 - A few columns from a table  
