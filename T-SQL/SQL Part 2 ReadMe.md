@@ -833,7 +833,8 @@ SELECT * FROM Slspers_Copy
 
 
 ### Views  
-A view gives the user a different way to look at data in a table (hence the name). For example, if you have a table and you want to hide certain fields, a view would be a great way to do that.
+A view gives the user a different way to look at data in a table (hence the name).  
+For example, if you have a table and you want to hide certain fields, a view would be a great way to do that.
 
 More formally, a SQL View is a virtual table and is essentially a saved query. In simple terms, a SQL view is a reference to a table.  So think of it like a query that pretends to be a table.  
  
