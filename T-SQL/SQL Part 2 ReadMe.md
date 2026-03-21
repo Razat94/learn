@@ -931,13 +931,13 @@ Navigate to the database where you want to create the view. Expand your database
 
 <img src = './Views_Folder.png'>
 
-Step 1: Right-click on it and select "New View."
+Step 1: Right-click on the 'Views' folder and select "New View."
 
-Step 2: Next, choose the table you want to base your view on. In this example, I’ll use the 'Titles' table. Select it, click "Add" and then close the dialog box.
+Step 2: Next, choose the table you want to base your view on. In this example, I’ll select the 'Titles' table, click "Add", and then close the dialog box.
 
-Step 3: Let’s say we want users to see some of the Titles data. To do that, we simply select all the fields except the fields we want to exclude. As you click each field, it gets added to the view.
+Step 3: Let’s say we want users to see some data from the 'Titles' table. To do that, simply select all the fields we'd like to include. As you click each field, the column gets added to the view.
 
-Step 4: Once the fields have been added, save the view. Click the save icon or just close the window and confirm the save. Give your view a name, like 'TitlesInfo.'
+Step 4: Once the fields have been added, save the view. Click the save icon or just close the window and confirm the save. Give your view a name, like 'TitlesInfo'.
 
 Result: Now the view is created. To run it, expand the Views folder, find your new view, right-click it, and select "Select Top 1000 Rows" or run a SELECT query. You’ll see the data just like in the table—but without the credit card field.
 
