@@ -833,21 +833,16 @@ SELECT * FROM Slspers_Copy
 
 
 ### Views  
-A SQL View is a virtual table and is essentially a SAVED QUERY.  
+A SQL View is a virtual table and is essentially a saved query.  
 
-A view does not store data since it just stores the query.  
+> Note: A view does not store data since it just stores the query.  
 
 Views can be based on:  
 - One entire table  
-- A few columns from 1 table  
+- A few columns from a table  
 - Multiple joined tables  
 - Subqueries  
 - Functions  
-
-NOTE: The difference between VIEWS & PROCEDURES  
-- Can’t store/accept parameters (no input).  
-- Doesn’t contain procedural logic (no IF, loops, etc.).  
-
 
 #### Why Views Matter  
 - Security  
@@ -855,7 +850,12 @@ NOTE: The difference between VIEWS & PROCEDURES
 	- A view can expose only specific rows and columns.  
 - Efficiency  
 	- It’s much faster. Instead of loading all 100 columns of a table, you only retrieve the 3 columns you need.  
+
 <br/>
+
+NOTE: The difference between VIEWS & PROCEDURES  
+- Views can't store/accept parameters (no input).  
+- Doesn't contain procedural logic (no IF, loops, etc.).  
 
 ---
 
@@ -864,7 +864,8 @@ NOTE: The difference between VIEWS & PROCEDURES
 CREATE VIEW CA_Cust AS  
 SELECT custname, city, state  
 FROM Customers  
-WHERE state = 'CA';  
+WHERE state = 'CA'
+WITH CHECK OPTION -- This rule forces the view to reject any rows that don’t meet the view’s filter
 -- Note: The ORDER BY clause is invalid in views  
 ```
 
@@ -873,12 +874,40 @@ Result:  After a View is created, expand/refresh the views folder in the object 
 > NOTE: When creating the view, make sure to refresh Intellisense  
 > Edit -> Intellisense -> Refresh Local Cache  
 
+<br />
 
-Result: A view can be queried like a table.  
+Now that a view is created, that view can be queried like a table.  
 ``` sql
 SELECT * FROM CA_Cust  
-WHERE city = 'Quebec'-- also works as an addition  
+SELECT * FROM Customers
 ```
+
+
+We can insert data through the view, and it will update the original Customers table.
+``` sql
+-- Will work.
+INSERT INTO CA_Cust
+VALUES 
+('Nickkis Design', 'Oakland', 'CA')
+```
+
+Due to the `WITH CHECK OPTION`, any INSERT, UPDATE, or MERGE through the view must satisfy the view’s defining WHERE clause condition(s).
+
+``` sql
+-- Will NOT work.
+INSERT INTO CA_Cust
+VALUES 
+('Nickkis Design', 'Oakland', 'NY')
+```
+
+
+If needed, we can delete from the view as well:  
+``` sql
+DELETE FROM CA_Cust
+WHERE custname LIKE 'Nickki%'
+```
+
+> NOTE: Since a view doesn’t store data itself and is just a saved query on a table, if we delete data through the view, we'll actually be deleting it from the underlying table, because that’s where the real data is stored.  
 
 Syntax to Delete (Drop) a View  
 ``` DROP VIEW CA_Cust  ```
@@ -890,38 +919,46 @@ Create a virtual table called Top_Salesperson that shows only repid and fname
 
 ``` sql
 CREATE VIEW Top_Salesperson AS  
-SELECT repid, fname  
+SELECT repid, fname, commrate    
 FROM Slspers_Backup  
 WHERE commrate > 0.04  
+WITH CHECK OPTION
 ```
 
 -- Displays the SQL code used to define the view.  
 ``` sp_helptext Top_Salesperson ```
 
+Using only the known columns would work  
 -- INSERT INTO Top_Salesperson VALUES (1, 'John', 'Smith', 0.5); -- Won't Work  
--- INSERT INTO Top_Salesperson VALUES (1, 'John');  -- Will Work  
+-- INSERT INTO Top_Salesperson VALUES (1, 'John', 0.05);  -- Will Work  
+
+Using only what's according to the rule of anything >0.04 would work  
+-- INSERT INTO Top_Salesperson VALUES (1, 'Elvis', 0.03);  -- Won't Work  
+-- INSERT INTO Top_Salesperson VALUES (1, 'Elvis', 0.06);  -- Will Work 
+
 
 -- SELECT * FROM Top_Salesperson  
 
 
 
-#### Subtask: Alter the Salesperson view to now display repid, fname & lname  
-ALTER VIEW Top_Salesperson AS  -- Change ALTER VIEW with CREATE VIEW to update the view instead of making a new one.  
-SELECT repid, fname, lname  
+#### Subtask: Alter the Salesperson view to now display fname & commrate  
+``` sql
+-- Change ALTER VIEW with CREATE VIEW to update the view instead of making a new one.  
+ALTER VIEW Top_Salesperson AS 
+SELECT fname, commrate    
 FROM Slspers_Backup  
 WHERE commrate > 0.04  
+WITH CHECK OPTION
+```
 
+``` SELECT * FROM Top_Salesperson ```
 
-SELECT * FROM Top_Salesperson  
+Note, once we drop the view...  
+``` DROP VIEW Top_Salesperson  ```
 
+We won't be able to use the view.  
+``` SELECT * FROM Top_Salesperson -- Won't work ```
 
-DROP VIEW Top_Salesperson  
-
-
-SELECT * FROM Top_Salesperson -- Won't work
-
-
-> NOTE: Since a view doesn’t store data itself and is just a saved query on a table, if we delete data through the view, we'll actually be deleting it from the underlying table, because that’s where the real data is stored.  
 
 > NOTE: You can make views VIA THE OBJECT EXPLORER AS WELL  
 
@@ -995,9 +1032,7 @@ Recall that a View:
 A view is a saved query - it doesn’t execute logic.  
 A stored procedure can run logic, like IF, SET, or UPDATE statements.  
 
-
 sp_help is a built-in stored procedure  
-
 
 > Since Procedures add PROGRAMMABILITY, they are more like FUNCTIONS.  
 
@@ -1093,7 +1128,7 @@ Task:
 Write a stored procedure that accepts a @State parameter, and retrieves all matching records from the PotentialCustomers table,   
 and inserts those records into the Customers table.  
 
-
+```
 CREATE PROCEDURE InsertPotentialCustomersByState  
     @State NVARCHAR(50)  
 AS  
@@ -1106,6 +1141,7 @@ BEGIN
     FROM Potential_Customers  
     WHERE State = @State;  
 END;  
+```
 
 -- TO DELETE  
 DROP PROCEDURE InsertPotentialCustomersByState;  
