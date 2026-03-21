@@ -833,9 +833,9 @@ SELECT * FROM Slspers_Copy
 
 
 ### Views  
-A SQL View is a virtual table and is essentially a saved query.  
+A SQL View is a virtual table and is essentially a saved query. If the original data changes, then the view will automatically reflect it.  In simple terms, a SQL view is a reference to a table.   
 
-> Note: A view does not store data since it just stores the query.  
+> Note: A view does not store data on its own since it just stores the query. Think of it like a query that pretends to be a table.  
 
 Views can be based on:  
 - One entire table  
@@ -846,10 +846,10 @@ Views can be based on:
 
 #### Why Views Matter  
 - Security  
-	- DBAs can restrict access to tables but grant access to views.  
+	- DBAs can refuse/restrict access to tables but only grant access to views.  
 	- A view can expose only specific rows and columns.  
-- Efficiency  
-	- It’s much faster. Instead of loading all 100 columns of a table, you only retrieve the 3 columns you need.  
+- Ease of access  
+	- It helps when manipulating/joining large tables. Instead of loading all 100 columns of a table, you only retrieve the 3 columns you need.  
 
 <br/>
 
@@ -962,6 +962,11 @@ We won't be able to use the view.
 
 > NOTE: You can make views VIA THE OBJECT EXPLORER AS WELL  
 
+> Bonus Option: We can grant users read only, but not insert/update/delete operations.
+``` sql
+GRANT SELECT ON CA_Cust TO some_user;
+REVOKE INSERT, UPDATE, DELETE ON CA_Cust FROM some_user;
+```
 
 /* ------------ EXERCISE SNIPPET: Activity 4-1 Step 3B ------------ */  
 ```  
