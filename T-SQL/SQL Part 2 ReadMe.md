@@ -1026,14 +1026,14 @@ INSERT mediumprice (partnum, bktitle, slprice)
 VALUES ('40257', 'How to Play Violin (Advanced)', 23)  
 
 
--- Verify that Insertions have worked  
+-- Verify that the insertions have worked  
 SELECT *  
 FROM mediumprice  
 WHERE partnum IN ('40256', '40257')  
 -- WHERE partnum BETWEEN '40250' AND '40259' -- also works
 
 
--- Will update price in both the view & table  
+-- Using the View, update the price in both the view & table  
 UPDATE mediumprice  
 SET slprice = 30  
 WHERE partnum = '40257'  
