@@ -1076,6 +1076,8 @@ A stored procedure can run logic, like IF, SET, or UPDATE statements.
 
 
 > Key Note: Stored procedures are used for specific tasks or operations.  
+[From W3Schools](https://www.w3schools.com/sql/sql_stored_procedures.asp):  
+"If you have an SQL query that you write over and over again, save it as a stored procedure, and then just call it to execute it."
 
 
 sp_help is a built-in stored procedure  
