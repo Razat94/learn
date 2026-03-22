@@ -836,10 +836,10 @@ SELECT * FROM Slspers_Copy
 A view gives the user a different way to look at data in a table (hence the name).  
 For example, if you have a table and you want to hide certain fields, a view would be a great way to do that.
 
-More formally, a SQL View is a virtual table and is essentially a saved query. In simple terms, a SQL view is a reference to a table.  So think of it like a query that pretends to be a table.  
+More formally, a SQL View is a virtual table and is essentially a saved query that references a table.  So think of it like a query that pretends to be a table.  
  
 > Views are similar to dashboards in Excel/PowerBI & Views in SharePoint Lists  
-> Fun Analogy: Think of a View like a Work Phone/Laptop. It's a device with limited features.
+> Fun Analogy: Think of a view like a work phone or laptop since it acts like a device with limited features.
 
 > Note: A view does not store data on its own since it just stores the query. If the original data changes, then the view will automatically reflect it. 
 
@@ -852,9 +852,9 @@ Views can be based on:
 
 #### Why Views Matter  
 - Security  
-	- DBAs can refuse/restrict access to tables but only grant access to views.  
 	- A view can expose only specific rows and columns.  
 	- So instead of giving users direct access to a table, we can create a view and allow users to only see the data through that.
+	- DBAs can refuse/restrict access to tables but only grant access to views.  
 
 - Ease of access  
 	- Views reduce complexity. Instead of loading all 100 columns of a table, you only retrieve the 3 columns you need.  
@@ -875,7 +875,7 @@ SELECT custname, city, state
 FROM Customers  
 WHERE state = 'CA'
 WITH CHECK OPTION -- This rule forces the view to reject any rows that don’t meet the view’s filter
--- Note: The ORDER BY clause is invalid in views  
+-- Note: The ORDER BY clause is invalid in views.
 ```
 
 Result:  After a View is created, expand/refresh the views folder in the object explorer to now see the view.  
@@ -916,7 +916,7 @@ DELETE FROM CA_Cust
 WHERE custname LIKE 'Nickki%'
 ```
 
-> NOTE: Since a view doesn’t store data itself and is just a saved query on a table, if we delete data through the view, we'll actually be deleting it from the underlying table, because that’s where the real data is stored.  
+> NOTE: Since a view doesn’t store data itself and is just a saved query on a table, a view will always shows real-time data. So if we delete data through the view, we'll actually be deleting it from the underlying table, because that’s where the real data is stored.  
 
 Syntax to Delete (Drop) a View  
 ``` DROP VIEW CA_Cust  ```
@@ -924,31 +924,30 @@ Syntax to Delete (Drop) a View
 --- 
 
 #### Bonus Example: Create a View via the Object Explorer Interface.
-As we've seen, views can be created using raw SQL code, but here's how to see it using the interface.
+As we've seen, views can be created using raw SQL code, but here's how to access & create views via the Object Explorer in SSMS.
 
-
-Navigate to the database where you want to create the view. Expand your database, and you’ll see a “Views” folder. 
+Navigate to the database where the view will be created. Expand the database, and notice the "Views" folder. 
 
 <img src = './Views_Folder.png'>
 
 Step 1: Right-click on the 'Views' folder and select "New View."
 
-Step 2: Next, choose the table you want to base your view on. In this example, I’ll select the 'Titles' table, click "Add", and then close the dialog box.
+Step 2: Next, choose the table you want to base your view on. In this example, select the 'Titles_Revised' table, click "Add", and then close the dialog box.
 
-Step 3: Let’s say we want users to see some data from the 'Titles' table. To do that, simply select all the fields we'd like to include. As you click each field, the column gets added to the view.
+Step 3: Let's suppose the goal is for users to view some data from the 'Titles_Revised' table. To do that, simply select all the fields we'd like to include. As you click each field, the column gets added to the view.
 
-Step 4: Once the fields have been added, save the view. Click the save icon or just close the window and confirm the save. Give your view a name, like 'TitlesInfo'.
+Step 4: Once all the fields have been added, save the view. Click the save icon or just close the window and confirm the save. Give the view a name, like 'TitlesInfo'.
 
-Result: Now the view is created. To run it, expand the Views folder, find your new view, right-click it, and select "Select Top 1000 Rows" or run a SELECT query. You’ll see the data just like in a standard  table.
+Result: Now the view is created. To run it, expand the Views folder, find the new view, right-click it, and select "Select Top 1000 Rows" or run a SELECT query. You’ll see the data just like in a standard  table.
 
 ---
 
 #### Task: #2  
-Create a virtual table called Top_Salesperson that shows repid, fname & commrate.  
+Create a virtual table called 'Top_Salesperson' that shows repid, fname & commrate.  
 
 ``` sql
 CREATE VIEW Top_Salesperson AS  
-SELECT repid, fname, commrate    
+SELECT repid, fname, commrate  -- 3 Columns    
 FROM Slspers_Backup  
 WHERE commrate > 0.04  
 WITH CHECK OPTION
@@ -957,11 +956,11 @@ WITH CHECK OPTION
 -- Displays the SQL code used to define the view.  
 ``` sp_helptext Top_Salesperson ```
 
-Inserting data into a view ONLY with known columns will work.  
--- INSERT INTO Top_Salesperson VALUES (1, 'John', 'Smith', 0.5); -- Won't Work
+Insertions will ONLY work when the number of values matches the number of columns.
+-- INSERT INTO Top_Salesperson VALUES (1, 'John', 'Smith', 0.5); -- Won't Work since this inserts 4 values, but the view only has 3 columns.
 -- INSERT INTO Top_Salesperson VALUES (1, 'John', 0.05);  -- Will Work  
 
-Adding records where commrate is above 0.04 will ONLY work.
+Adding records where commrate is above 0.04 will ONLY work.  
 -- INSERT INTO Top_Salesperson VALUES (1, 'Elvis', 0.03);  -- Won't Work  
 -- INSERT INTO Top_Salesperson VALUES (1, 'Elvis', 0.06);  -- Will Work 
 
@@ -988,8 +987,6 @@ We won't be able to use the view.
 ``` SELECT * FROM Top_Salesperson -- Won't work ```
 
 
-> NOTE: You can make views VIA THE OBJECT EXPLORER AS WELL  
-
 > Bonus Option: We can grant users read only, but not insert/update/delete operations.
 ``` sql
 GRANT SELECT ON CA_Cust TO some_user;
@@ -997,22 +994,33 @@ REVOKE INSERT, UPDATE, DELETE ON CA_Cust FROM some_user;
 ```
 
 /* ------------ EXERCISE SNIPPET: Activity 4-1 Step 3B ------------ */  
-```  
+
+``` sql
 CREATE VIEW mediumprice AS  
-SELECT TOP 15 partnum, bktitle, slprice  
-FROM Titles  
+SELECT partnum, bktitle, slprice  
+FROM Titles_Revised    
 WHERE slprice BETWEEN 20 AND 30  
-ORDER BY slprice  
 
 
--- Verify that View works.  
-SELECT * FROM mediumprice  
+-- Verify that the View works.  
+SELECT * FROM mediumprice ORDER BY slprice  
+
+
+-- NOTE: The View will not return any books outside of that range...
+SELECT *  
+FROM mediumprice
+WHERE partnum='40121' -- This book title has a slprice of $36.50 
+
+
+-- ...but the table will still hold the data.
+SELECT *  
+FROM Titles_Revised
+WHERE partnum='40121'
 
 
 -- Insert 2 titles via the View  
 INSERT mediumprice (partnum, bktitle, slprice)  
 VALUES ('40256', 'How to Play Violin (Intermediate)', 22)  
-
 
 INSERT mediumprice (partnum, bktitle, slprice)  
 VALUES ('40257', 'How to Play Violin (Advanced)', 23)  
@@ -1022,28 +1030,29 @@ VALUES ('40257', 'How to Play Violin (Advanced)', 23)
 SELECT *  
 FROM mediumprice  
 WHERE partnum IN ('40256', '40257')  
+-- WHERE partnum BETWEEN '40250' AND '40259' -- also works
 
 
 -- Will update price in both the view & table  
 UPDATE mediumprice  
 SET slprice = 30  
-WHERE partnum = '40121'  
+WHERE partnum = '40257'  
 
 
 -- Check Update (Both queries are the same)  
-SELECT * FROM mediumprice WHERE partnum='40121'  
-SELECT * FROM Titles WHERE partnum='40121'  
+SELECT * FROM mediumprice WHERE partnum='40257'  
+SELECT * FROM Titles_Revised WHERE partnum='40257'  -- Note that the record in the actual table contains NULLs
 
 
 -- Use the View to delete a specific Title.  
 DELETE mediumprice  
-WHERE partnum='40121'  
+WHERE partnum='40257'  
 
 
 -- Chcek that it got deleted.  
 SELECT *  
 FROM mediumprice  
-WHERE partnum='40121'  
+WHERE partnum='40257'  
 
 
 -- Finish the exercise by dropping the view.  
