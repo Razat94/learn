@@ -956,12 +956,12 @@ WITH CHECK OPTION
 -- Displays the SQL code used to define the view.  
 ``` sp_helptext Top_Salesperson ```
 
-Insertions will ONLY work when the number of values matches the number of columns.
--- INSERT INTO Top_Salesperson VALUES (1, 'John', 'Smith', 0.5); -- Won't Work since this inserts 4 values, but the view only has 3 columns.
+Insertions will ONLY work when the number of values matches the number of columns.  
+-- INSERT INTO Top_Salesperson VALUES (1, 'John', 'Smith', 0.5); -- Won't Work since this inserts 4 values, but the view only has 3 columns.  
 -- INSERT INTO Top_Salesperson VALUES (1, 'John', 0.05);  -- Will Work  
 
 Adding records where commrate is above 0.04 will ONLY work.  
--- INSERT INTO Top_Salesperson VALUES (1, 'Elvis', 0.03);  -- Won't Work  
+-- INSERT INTO Top_Salesperson VALUES (1, 'Elvis', 0.03);  -- Won't Work    
 -- INSERT INTO Top_Salesperson VALUES (1, 'Elvis', 0.06);  -- Will Work 
 
 
