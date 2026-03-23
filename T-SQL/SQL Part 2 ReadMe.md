@@ -1172,10 +1172,10 @@ Procedures can be used like a function or a script inside the database. Each pro
 
 > Since Procedures add PROGRAMMABILITY, they are similar to FUNCTIONS.  
 
-SQL Server provides a built-in stored procedure to list all procedures in the current database. 
+SQL Server provides a built-in stored procedure to list all procedures in the current database.  
 ``` EXEC sp_stored_procedures; ```
 
-For instance, another built-in stored procedure we've seen before in the SQL Part 1 Class is sp_help:  
+For instance, another built-in stored procedure we've seen before in the SQL Part 1 Class is `sp_help`:  
 ``` EXEC SP_Help Slspers ```
 
 > 1st NOTE:  
