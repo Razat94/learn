@@ -605,7 +605,7 @@ VALUES ('N01', NULL, 'Nguyen', 0.05)
 
 Executing the above query should now throw an error:  
 ```  
-Cannot insert the value NULL into column 'fname', table 'Pub1.dbo.Slspers_Copy'; column does not allow nulls. INSERT fails.  
+Cannot insert the value NULL into column 'fname', table 'Pub1.dbo.Slspers_Backup'; column does not allow nulls. INSERT fails.  
 The statement has been terminated.  
 ```
 
@@ -757,7 +757,7 @@ In the column properties pane, see the default under "Default Value or Binding".
 
 #### Solution
 ``` sql
-ALTER TABLE Slspers_Copy
+ALTER TABLE Slspers_Backup
 ADD email VARCHAR(20) 
     CONSTRAINT DF_Email DEFAULT 'iloveSQL@gmail.com'
 ```
@@ -765,7 +765,7 @@ ADD email VARCHAR(20)
 ``` sql
 -- Test Constraint  
 INSERT INTO  
-Slspers_Copy (repid, fname, lname, commrate)  
+Slspers_Backup (repid, fname, lname, commrate)  
 Values  
 ('E04', 'Raza', 'Tahir', 0.01)  
 ```
@@ -789,7 +789,7 @@ Warning: We can not make a column a primary key if it already contains duplicate
 -- SQL Server refuses to make it a primary key because NULLs are allowed  
 ``` sql
 ALTER TABLE Slspers_Backup  
-ALTER COLUMN repid varchar(6) NOT NULL; -- Exercise: Make the Slspers_Copy to be a NON null value.  
+ALTER COLUMN repid varchar(6) NOT NULL; -- Exercise: Make the Slspers_Backup to be a NON null value.  
 ```
 
 Check:
@@ -827,13 +827,13 @@ ADD repid_new INT IDENTITY(1,1) PRIMARY KEY;  -- Starts at 1, increments by 1
 ```
 
 ``` sql
-INSERT INTO Slspers_Copy (fname, lname, commrate) -- notice no mention of the newly added column 'repid_new' 
+INSERT INTO Slspers_Backup (fname, lname, commrate) -- notice no mention of the newly added column 'repid_new' 
 VALUES ('Raza', 'Tahir', 0.05)   
 ``` 
 
 Check
 ``` sql
-SELECT * FROM Slspers_Copy
+SELECT * FROM Slspers_Backup
 ```
 
 
@@ -1277,7 +1277,7 @@ BEGIN
 	DROP TABLE IF EXISTS Slspers_Backup
 
 	SELECT *
-	INTO Slspers_Backup
+	INTO Slspers_Backup  
 	FROM Slspers
 END;
 ```
@@ -1334,9 +1334,33 @@ BEGIN
 END;
 ```
 
+#### Optional Demo #4:  
+Create a Procedure that inserts a record into 2 seperate tables: the PotentialCustomers table & the Customers table.  
+(An additional procedure can be made to update/delete from 2 tables.)
+
+``` sql
+CREATE OR ALTER PROCEDURE InsertSlsPers
+    @FirstName VARCHAR(50),
+    @LastName  VARCHAR(50)
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    INSERT INTO 
+	Slspers_Backup (fname, lname)
+    VALUES (@FirstName, @LastName);
+
+	INSERT INTO 
+	Slspers (fname, lname)
+    VALUES (@FirstName, @LastName);
+END;
+```
+
+EXEC InsertSlsPers @FirstName = 'Raza', @LastName = 'Tahir'
+
 ---
 
-#### Optional Task:  
+#### Optional Task: 
 Write a stored procedure that accepts a @State parameter, and retrieves all matching records from the PotentialCustomers table,   
 and inserts those records into the Customers table.  
 
@@ -1372,8 +1396,6 @@ WHERE STATE = 'NY'
 ``` DROP PROCEDURE InsertPotentialCustomersByState;  ```
 
 ---
-
-Additional Optional Task: Write a procedure to update 2 tables.  
 
 ```
 If a view is updateable, you can only insert into one underlying (base) table through it.  
