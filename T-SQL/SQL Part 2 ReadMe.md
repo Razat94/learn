@@ -1265,6 +1265,8 @@ EXEC GetTopSlspers
 -- GetTopSlspers
 ```
 
+---
+
 #### Demo #3: Simplified
 Create a backup of Slspers.
 
@@ -1333,6 +1335,8 @@ BEGIN
 	/* NOTE: The path should specify a file name with a .bak extension. NOT to a folder. */
 END;
 ```
+
+---
 
 #### Optional Demo #4:  
 Create a Procedure that inserts a record into 2 seperate tables: the PotentialCustomers table & the Customers table.  
