@@ -365,6 +365,16 @@ DELETE FROM Titles_Revised
 ```
 
 
+-- To delete  
+DELETE FROM Customers  
+WHERE custnum = 31004;  
+
+-- Another delete example  
+DELETE FROM Slspers_Backup  
+WHERE repid = '1';  
+
+
+
 -- Exercise: Attempt to delete one of the Salespeople Paul that was added earlier.  
 ('P01', 'Paul', 'Smith' , 0.05)  
 
@@ -1065,28 +1075,7 @@ DROP VIEW mediumprice
 ---------------------------------------------------------- */  
 
 
-Recall that a View:  
-- Can’t accept parameters (no input).  
-- Doesn’t run conditional logic (e.g. no IFs)  
-- Can't use loops  
-
-
-A view is a saved query with inline SQL so it doesn’t execute logic.  
-A stored procedure can run logic, like IF, SET, or UPDATE statements.  
-
-
-> Key Note: Stored procedures are used for specific tasks or operations.  
-[From W3Schools](https://www.w3schools.com/sql/sql_stored_procedures.asp):  
-"If you have an SQL query that you write over and over again, save it as a stored procedure, and then just call it to execute it."
-
-
-sp_help is a built-in stored procedure  
-
-> Since Procedures add PROGRAMMABILITY, they are more like FUNCTIONS.  
-
-
-Before we work on a task, lets understand Conditional Logic.
-
+Before we understand what a Procedure is, let's first understand what is Conditional Logic.
 
 
 > SQL can execute basic logic  
@@ -1169,30 +1158,185 @@ ELSE
 	END  
 ```  
 
+___
 
-Now that we understand Conditional Logic, let's understand Procedures.
+Now that we understand what is Conditional Logic, let's understand Procedures.
 
-Remember that a Procedure is used like a script/function that can form perform multiple operations.
+In SQL, A stored procedure is a reusable block of code; it is a saved set of SQL commands to perform specific tasks that can be executed whenever needed.  
 
-A Procedure is a standalone operation: It’s a programmatic block of code that executes specific code and returns results.
+Procedures can be used like a function or a script inside the database. Each procedure is a standalone operation that executes a block of saved code and can be reused anytime.
+
+> [From W3Schools](https://www.w3schools.com/sql/sql_stored_procedures.asp):  
+"If you have an SQL query that you write over and over again, save it as a stored procedure, and then just call it to execute it."
 
 
-A Procedure is not a dataset; it cannot attach a WHERE clause directly to a stored procedure call.
+> Since Procedures add PROGRAMMABILITY, they are similar to FUNCTIONS.  
+
+SQL Server provides a built-in stored procedure to list all procedures in the current database. 
+``` EXEC sp_stored_procedures; ```
+
+For instance, another built-in stored procedure we've seen before in the SQL Part 1 Class is sp_help:  
+``` EXEC SP_Help Slspers ```
+
+> 1st NOTE:  
+
+A View:  
+- Can't accept parameters (no input).  
+- Doesn't run conditional logic (e.g. no IFs)  
+- Can't use loops  
+
+A view is a saved query with inline SQL so it doesn’t execute logic.  
+A stored procedure can run logic, like IF, SET, or UPDATE statements.  
+
+We shouldn't use a view solely for inserting data, but rather, a procedure is more effective when making insertions. For example, adding/deleting users/orders to a database is often a routine task, so it makes sense to create a procedure to handle it.
+
+
+> 2nd NOTE: 
+
+Keep in mind that a Procedure is not a dataset; it cannot attach a WHERE clause directly to a stored procedure call.  
 When your procedure runs a SELECT, it outputs a <b> result set </b>.
 
+---
 
-CREATE OR ALTER PROCEDURE GetSalespersonNames
+#### Demo #1
+A common example of a procedure is retrieving data using a lookup value as a parameter to get specific results (similar to an Excel VLOOKUP)
+
+Possible Applications: Find student based off their student email, StudentID, etc.
+
+``` sql
+-- A procedure called `GetCustomerDetails` that takes a CustomerID as an input and returns that customer’s information.
+CREATE OR ALTER PROCEDURE GetCustomerDetails
+	@CustID NVARCHAR(10)
 AS
 BEGIN
     SET NOCOUNT ON;
 
-    SELECT FirstName, LastName
-    FROM Salesperson;
+    SELECT Custnum, Custname, City, State  
+    FROM Customers  
+	WHERE Custnum = @CustID  
 END;
+```
+
+Once a procedure is saved, run the procedure via the Execute statement:  
+``` sql
+EXEC GetCustomerDetails @CustID = '20042' 
+```
 
 
+Stored Procedures exist at the database level. One way to list all stored procedures in the database:
+``` sql
+SELECT name
+FROM sys.procedures
+ORDER BY name;
+```
 
-Task:  
+Another way to view Stored Procedures would be under:  
+Pub1 -> Programmability -> Stored Precedures  
+
+To drop the procedure:  
+``` DROP PROCEDURE GetCustomerDetails ```
+
+---
+
+#### Demo #2
+#### Create a procedure to get the Top 5 Saleperson  
+(This example can be rewritten to get Top 5 Selling Products). 
+
+``` sql
+CREATE OR ALTER PROCEDURE GetTopSlspers
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    SELECT 
+	TOP (5) WITH TIES 
+	fname, commrate
+	FROM Slspers
+	ORDER BY commrate DESC;
+END;
+```
+
+> Note: The above example includes additional rows when there are duplicates (ties) and/or based on a specific date range.
+
+Run the Procedure:
+``` sql
+EXEC GetTopSlspers 
+-- NOTE: The EXEC keyword is optional; you can run the procedure simply by calling:
+-- GetTopSlspers
+```
+
+#### Demo #3: Simplified
+Create a backup of Slspers.
+
+```
+CREATE OR ALTER PROCEDURE GenerateSlsPersBackup
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+	DROP TABLE IF EXISTS Slspers_Backup
+
+	SELECT *
+	INTO Slspers_Backup
+	FROM Slspers
+END;
+```
+
+Now to run the backup:  
+``` EXEC GenerateSlsPersBackup ```
+
+Now suppose we somehow mess up the backup table:  
+``` UPDATE Slspers_Backup SET fname = 'Raza' ```
+
+You should be able to verify that all the names have been updated:  
+``` SELECT * FROM Slspers_Backup ```
+
+But now if you run the same backup command again:  
+``` EXEC GenerateSlsPersBackup ```
+
+Running the SELECT query should see all the names back to normal:  
+``` SELECT * FROM Slspers_Backup ```
+
+To drop the procedure:  
+``` DROP PROCEDURE GenerateSlsPersBackup ```
+
+
+#### Demo #3: Longer Version
+Create a backup database of 'Pub1'
+
+- Step #1: Create a folder 'SQLP2BackupFolder' in my documents.
+- Step #2: Open Folder Properties
+	- Go to the folder you created, e.g., C:\Backup
+	- Right-click the folder -> Properties -> Security tab  
+- Step 3: Add “Everyone” (Temporary Easy Fix)
+	- Click Edit…
+	- Click Add…
+	- In the box, type: 'Everyone'
+	- Click Check Names → it should underline Everyone
+	- Click OK  
+- Step 4: Give Full Control
+	- In the Permissions window for Everyone:
+	- Check Full Control
+	- Click Apply → OK
+
+Result: This will gives all users (including SQL Server) permission to write to this folder.
+
+
+``` sql
+CREATE OR ALTER PROCEDURE GeneratePub1Backup
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+	BACKUP DATABASE pub1
+	TO DISK = 'C:\Users\Razat\Documents\SQLP2BackupFolder\testPub1.bak'; 
+	/* NOTE: The path should specify a file name with a .bak extension. NOT to a folder. */
+END;
+```
+
+---
+
+#### Optional Task:  
 Write a stored procedure that accepts a @State parameter, and retrieves all matching records from the PotentialCustomers table,   
 and inserts those records into the Customers table.  
 
@@ -1211,39 +1355,26 @@ BEGIN
 END;  
 ```
 
--- TO DELETE  
-DROP PROCEDURE InsertPotentialCustomersByState;  
-
--- I CAN VIEW THIS STORED PROCEDURE UNDER:  
-	Pub1 -> Programmability -> Stored Precedures  
-
-
-EXEC InsertPotentialCustomersByState @State = 'CA';  
+``` EXEC InsertPotentialCustomersByState @State = 'CA';  ```
 
 -- CHECK  
 SELECT * FROM Customers  
 WHERE STATE = 'CA'  
 
-EXEC InsertPotentialCustomersByState @State = 'NY';  
+``` EXEC InsertPotentialCustomersByState @State = 'NY';  ```
+
 -- CHECK  
 SELECT * FROM Customers  
 WHERE STATE = 'NY'  
 
 
--- To delete  
-DELETE FROM Customers  
-WHERE custnum = 31004;  
+-- TO DELETE THE PROCEDURE:
+``` DROP PROCEDURE InsertPotentialCustomersByState;  ```
 
--- Another delete example  
-DELETE FROM Slspers_Backup  
-WHERE repid = '1';  
+---
 
+Additional Optional Task: Write a procedure to update 2 tables.  
 
-Q: How to view all of the stored procedures in a table?
-
-
-
-Task: Write a procedure to update 2 tables.  
 ```
 If a view is updateable, you can only insert into one underlying (base) table through it.  
 If you need to insert into multiple tables, the view alone won’t handle that. You could use a trigger to do extra inserts automatically.  
@@ -1285,6 +1416,8 @@ Common Examples of Transactions could be
 		Step 2: Deduct items from Inventory table.  
 		Step 3: Update customer’s balance in Accounts table.  
 
+
+For instance, we can create a procedure named DeleteEmployee that removes an employee record and includes TRY...CATCH blocks for robust error handling.
 
 
 #### Example #1
