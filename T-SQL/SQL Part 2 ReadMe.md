@@ -876,6 +876,11 @@ NOTE: The difference between VIEWS & PROCEDURES
 - Views can't store/accept parameters (no input).  
 - Doesn't contain procedural logic (no IF, loops, etc.).  
 
+
+Views in SQL Server are created using a SELECT query and do not store data themselves e.g. A view is strictly defined by a SELECT query.
+In Microsoft SQL Server, a view definition cannot contain DML statements (INSERT, UPDATE, and DELETE operations) and can not be a part of the view's definition.
+
+> Note: While you cannot contain DML inside the view definition, you can use DML statements against a view. We will touch base with it here. 
 ---
 
 #### Task #1: Create a view to show only people from state 'CA'  
@@ -1184,11 +1189,13 @@ A View:
 - Can't accept parameters (no input).  
 - Doesn't run conditional logic (e.g. no IFs)  
 - Can't use loops  
+- Can't use DML opeartions (a view definition cannot contain DML statements such as INSERT, UPDATE, DROP AND DELETE)
 
 A view is a saved query with inline SQL so it doesn’t execute logic.  
 A stored procedure can run logic, like IF, SET, or UPDATE statements.  
 
-We shouldn't use a view solely for inserting data, but rather, a procedure is more effective when making insertions. For example, adding/deleting users/orders to a database is often a routine task, so it makes sense to create a procedure to handle it.
+We shouldn't use a view solely for inserting data, but rather, a procedure is more effective when making insertions. 
+For example, adding/deleting users/orders to a database is often a routine task, so it makes sense to create a procedure to handle it.
 
 
 > 2nd NOTE: 
