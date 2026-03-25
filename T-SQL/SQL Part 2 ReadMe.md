@@ -930,7 +930,12 @@ DELETE FROM CA_Cust
 WHERE custname LIKE 'Nickki%'
 ```
 
-> NOTE: Since a view doesn’t store data itself and is just a saved query on a table, a view will always shows real-time data. So if we delete data through the view, we'll actually be deleting it from the underlying table, because that’s where the real data is stored.  
+> NOTE: A view will always show real-time data. 
+
+Since a view doesn’t store data itself and is just a saved query on a table:  
+- If we delete data through the view, we'll actually be deleting it from the underlying table, because that’s where the real data is stored.  
+- If we delete data on the table, the view will update.
+
 
 Syntax to Delete (Drop) a View  
 ``` DROP VIEW CA_Cust  ```
