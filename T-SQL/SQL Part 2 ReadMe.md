@@ -875,12 +875,11 @@ Views can be based on:
 NOTE: The difference between VIEWS & PROCEDURES  
 - Views can't store/accept parameters (no input).  
 - Doesn't contain procedural logic (no IF, loops, etc.).  
-
-
-Views in SQL Server are created using a SELECT query and do not store data themselves e.g. A view is strictly defined by a SELECT query.
-In Microsoft SQL Server, a view definition cannot contain DML statements (INSERT, UPDATE, and DELETE operations) and can not be a part of the view's definition.
+- Views can't use DML opeartions (a view definition cannot contain DML statements such as INSERT, UPDATE, DROP AND DELETE). 
+	- It can only use a SELECT query and do not store data themselves e.g. A view is strictly defined by a SELECT query
 
 > Note: While you cannot contain DML inside the view definition, you can use DML statements against a view. We will touch base with it here. 
+
 ---
 
 #### Task #1: Create a view to show only people from state 'CA'  
