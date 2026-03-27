@@ -1303,7 +1303,7 @@ Now suppose we somehow mess up the backup table:
 You should be able to verify that all the names have been updated:  
 ``` SELECT * FROM Slspers_Backup ```
 
-But now if you run the same backup command again to overwrite the previous backup:  
+But now if you run the same backup command again to overwrite any previous backups:  
 ``` EXEC GenerateSlsPersBackup ```
 
 Running the SELECT query should show all the original names:  
@@ -1348,7 +1348,7 @@ END;
 
 ---
 
-#### Optional Demo #4:  
+#### Exercise #1:  
 Create a Procedure that inserts a record into 2 seperate tables: `PotentialCustomers` table & `Customers` table.  
 (An additional example can be used where a procedure can be made to update/delete from 2 tables.)
 
@@ -1374,7 +1374,7 @@ EXEC InsertSlsPers @FirstName = 'Raza', @LastName = 'Tahir'
 
 ---
 
-#### Optional Task: 
+#### Exercise #2: 
 Write a stored procedure that accepts a @State parameter, and retrieves all matching records from the PotentialCustomers table,   
 and inserts those records into the Customers table.  
 
@@ -1393,6 +1393,7 @@ BEGIN
 END;  
 ```
 
+To Test:
 ``` EXEC InsertPotentialCustomersByState @State = 'CA';  ```
 
 -- CHECK  
@@ -1401,6 +1402,7 @@ SELECT * FROM Customers
 WHERE STATE = 'CA'  
 ```
 
+To Test:
 ``` EXEC InsertPotentialCustomersByState @State = 'NY';  ```
 
 -- CHECK  
@@ -1416,7 +1418,7 @@ WHERE STATE = 'NY'
 
 ```
 If a view is updateable, you can only insert into one underlying (base) table through it.  
-If you need to insert into multiple tables, the view alone won’t handle that. You could use a trigger to do extra inserts automatically.  
+If you need to insert into multiple tables, the view alone won't handle that. You could use a trigger to do extra inserts automatically.  
 But it’s usually better to use a stored procedure, because a procedure can easily insert two rows — one in each table — in a clear and controlled way.  
 ```
 
