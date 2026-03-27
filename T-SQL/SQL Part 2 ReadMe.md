@@ -9,6 +9,7 @@
 4. [Bonus Lesson: Procedures](#procedure)
 5. [Lesson 5: Indexing Data](#5)
 6. [Lesson 6: Managing Transactions](#6)
+7. [Lesson 7: The End](#7)
 
 /* -------------------------------------------------------
 ## <p id = "0"> LESSON 0: Before We Begin </p>
@@ -1218,7 +1219,7 @@ CREATE OR ALTER PROCEDURE GetCustomerDetails
 	@CustID NVARCHAR(10)
 AS
 BEGIN
-    SET NOCOUNT ON;
+    SET NOCOUNT ON; -- Suppresses "rows affected" messages
 
     SELECT Custnum, Custname, City, State  
     FROM Customers  
@@ -1433,12 +1434,12 @@ Speeds up sorts & searches especially common ones
 
 Transactions protects your database from partial updates.  
 
-When I need to run multiple queries, transactions ensure that a series of operations are executed as a single unit of work   
-> Think of it as 'ALL OR NOTHING'. Either all succeed (committed) or all fail (rolled back)  
+When runing multiple queries, transactions ensure that a series of operations are executed as a single unit of work.   
+> Think of it as 'ALL OR NOTHING'. Either the statements all succeed (committed) or all fail (rolled back).  
 
-Once a transaction is committed or rolled back, the transaction ends. You can't roll back a committed transaction.  
+Once a transaction is committed or rolled back, the transaction ends and can't be undone or rolled back.  
 
-Common Examples of Transactions could be  
+Common Examples of Transactions could be:  
 
 	- Bank Transfers from Saving -> Checking  
 		Step 1: Subtract amount from Account A (Saving).  
@@ -1454,44 +1455,48 @@ Common Examples of Transactions could be
 		Step 2: Deduct items from Inventory table.  
 		Step 3: Update customer’s balance in Accounts table.  
 
-
-For instance, we can create a procedure named DeleteEmployee that removes an employee record and includes TRY...CATCH blocks for robust error handling.
+	- HRIS Systems to manage employee records.
+		Example: Have a procedure named DeleteEmployee that removes an employee record and includes TRY...CATCH blocks for robust error handling across different tables.
 
 
 #### Example #1
 
+Create a transaction that inserts two salesperson records.  
+This is a good way to test for errors before the code becomes implemented.
 
--- Create a transaction that inserts two salesperson records.  
--- This is a good way to test for errors before the code becomes implemented.
-
+``` sql
 BEGIN TRANSACTION;  
-INSERT INTO Slspers_Backup VALUES ('N123', 'Nickki', 'Nguyen', 0.05)  
+INSERT INTO Slspers_Backup VALUES ('N123', 'Jennifer', 'Reyes', 0.05)  
 INSERT INTO Slspers_Backup VALUES ('L123', 'Lena', 'Duong', 0.05)  
 ROLLBACK TRANSACTION; -- Switch 'ROLLBACK' with 'COMMIT' TRANSACTION when ready to implement  
+```
 
 -- Check  
-SELECT * FROM Slspers
+``` SELECT * FROM Slspers_Backup ```
 
 
 #### Example #2
 
--- First create a table to start off this example:  
+To start off this example, first create the following table: 
+
+``` sql
+-- First create a table with a UNIQUE field.
 CREATE TABLE person (  
     name VARCHAR(100) UNIQUE  
 );  
 
--- Now try inserting these names (without a transaction):  
+-- Then, insert the following names (without a transaction):  
 INSERT INTO person (name) VALUES ('Alice');  
 INSERT INTO person (name) VALUES ('Bob');  
 INSERT INTO person (name) VALUES ('Alice'); -- duplicate  
+```
 
 The first two inserts will work, but the third will fail because name must be unique. i.e. the table becomes only partially filled.  
 
--- Execute the code below to view the contents of the Person table.  
-SELECT * FROM person;  
+Execute the code ```  SELECT * FROM person ``` will show the contents of the Person table.  
 
-Output:  
 ```  
+-- Output:  
 Alice  
 Bob  
 ```  
@@ -1499,9 +1504,10 @@ Bob
 > To reset the table for the solution:  
 TRUNCATE TABLE Person  
 
-> Note: Using a transaction ensures that if the third insert fails, no rows are saved.  
+Task: Create a transaction to ensures that if the third insert fails, no rows are saved.  
 
--- Solution  
+``` sql
+-- Solution:
 BEGIN TRANSACTION;  
 
 INSERT INTO person (name) VALUES ('Alice');  
@@ -1509,27 +1515,28 @@ INSERT INTO person (name) VALUES ('Bob');
 INSERT INTO person (name) VALUES ('Alice');  -- duplicate name (violates UNIQUE constraint)  
 
 COMMIT TRANSACTION;  
+```
 
-The transaction will not execute any of the statements until everything (particularly the 3rd line) is correct.  
-All or nothing becomes executed.  
+The transaction will not execute any of the statements until everything (particularly the 3rd line) is correct. Either all or nothing becomes executed.  
 
 
 #### Example #3  
 
--- Use a TRY/CATCH block as a way of Exception Handling  
+A TRY/CATCH block can be used as a way of Exception Handling.  
 
 How it works:  
 If all operations in the TRY block succeed, then the COMMIT block is then executed.    
 If any error occurs, control moves to the CATCH block and ROLLBACK TRAN is executed instead.  
 
-
-Make sure a table has been created  
+First confirm that a table has been created.  
+```
 CREATE TABLE person (  
 	name VARCHAR(100) UNIQUE  
 );  
+```
 
-
-
+Create the Transaction:
+```
 BEGIN TRANSACTION;  
 BEGIN TRY  
 	-- Some SQL statements  
@@ -1540,10 +1547,13 @@ BEGIN CATCH
 	SELECT * FROM Person  
 	PRINT('Log Error')  
 END CATCH  
+```
 
 
 
-
+/* -------------------------------------------------------  
+## <p id = "7"> LESSON 7: The End | [Back to ToC](#toc)</p>   
+---------------------------------------------------------- */ 
 
 -- Bonus Chapter --  
 /* ------------ Check Tables ------------ */  
