@@ -851,7 +851,8 @@ More formally, a SQL View is a virtual table and is essentially a saved query th
 > Views are similar to dashboards in Excel/PowerBI & Views in SharePoint Lists  
 > Fun Analogy: Think of a view like a work phone or laptop since it acts like a device with limited features.
 
-> Note: A view does not store data on its own since it just stores the query. If the original data changes, then the view will automatically reflect it. 
+> Note: A view does not store data on its own since it just stores the query.  
+> If the original data changes, then the view will automatically reflect it. 
 
 Views can be based on:  
 - One entire table  
@@ -875,8 +876,8 @@ Views can be based on:
 NOTE: The difference between VIEWS & PROCEDURES  
 - Views can't store/accept parameters (no input).  
 - Doesn't contain procedural logic (no IF, loops, etc.).  
-- Views can't use DML opeartions (a view definition cannot contain DML statements such as INSERT, UPDATE, DROP AND DELETE). 
-	- It can only use a SELECT query and do not store data themselves e.g. A view is strictly defined by a SELECT query
+- A view definition can't use or contain DML statements such as INSERT, UPDATE, DROP and DELETE. 
+	- A View definition can only use a SELECT query since it doesn't data.
 
 > Note: While you cannot contain DML inside the view definition, you can use DML statements against a view. We will touch base with it here. 
 
@@ -892,7 +893,7 @@ WITH CHECK OPTION -- This rule forces the view to reject any rows that don’t m
 -- Note: The ORDER BY clause is invalid in views.
 ```
 
-Result:  After a View is created, expand/refresh the views folder in the object explorer to now see the view.  
+Result:  After a View is created, expand/refresh the `Views` folder in the Object Explorer to now see the view.  
 
 > NOTE: When creating the view, make sure to refresh Intellisense  
 > Edit -> Intellisense -> Refresh Local Cache  
@@ -901,8 +902,8 @@ Result:  After a View is created, expand/refresh the views folder in the object 
 
 Now that a view is created, that view can be queried like a table.  
 ``` sql
-SELECT * FROM Customers	-- Still Works
-SELECT * FROM CA_Cust  	-- View that outputs only customers from California.
+SELECT * FROM Customers	-- Original Query still works
+SELECT * FROM CA_Cust  	-- The view will only return customers from California.
 ```
 
 
@@ -934,7 +935,7 @@ WHERE custname LIKE 'Nickki%'
 
 Since a view doesn’t store data itself and is just a saved query on a table:  
 - If we delete data through the view, we'll actually be deleting it from the underlying table, because that’s where the real data is stored.  
-- If we delete data on the table, the view will update.
+- If we delete data on the original table, the view will update.
 
 
 Syntax to Delete (Drop) a View  
@@ -945,19 +946,17 @@ Syntax to Delete (Drop) a View
 #### Bonus Example: Create a View via the Object Explorer Interface.
 As we've seen, views can be created using raw SQL code, but here's how to access & create views via the Object Explorer in SSMS.
 
-Navigate to the database where the view will be created. Expand the database, and notice the "Views" folder. 
+Step 1: Navigate to the database where the view will be created. Expand the database, and notice the "Views" folder.
 
 <img src = './Views_Folder.png'>
 
-Step 1: Right-click on the 'Views' folder and select "New View."
+Step 2: Right-click on the 'Views' folder and select "New View." On the alert, choose the table you want to base your view on. In this example, select the `Titles_Revised` table, click 'Add', and then close the dialog box.
 
-Step 2: Next, choose the table you want to base your view on. In this example, select the 'Titles_Revised' table, click "Add", and then close the dialog box.
+Step 3: Let's suppose the goal is for users to view some data from the `Titles_Revised` table. To do that, simply select all the fields we'd like to include. As you click each field, the column gets added to the view.
 
-Step 3: Let's suppose the goal is for users to view some data from the 'Titles_Revised' table. To do that, simply select all the fields we'd like to include. As you click each field, the column gets added to the view.
+Step 4: Once all the fields have been added, save the view. Click the save icon or just close the window and confirm the save. Give the view a name, like `TitlesInfo`.
 
-Step 4: Once all the fields have been added, save the view. Click the save icon or just close the window and confirm the save. Give the view a name, like 'TitlesInfo'.
-
-Result: Now the view is created. To run it, expand the Views folder, find the new view, right-click it, and select "Select Top 1000 Rows" or run a SELECT query. You’ll see the data just like in a standard  table.
+Result: Now the view is created. To run it, expand the Views folder, find the new view, right-click it, and select "Select Top 1000 Rows" or run a SELECT query. You’ll see the data returned just like in a standard  table.
 
 ---
 
@@ -975,6 +974,7 @@ WITH CHECK OPTION
 -- Displays the SQL code used to define the view.  
 ``` sp_helptext Top_Salesperson ```
 
+``` sql
 Insertions will ONLY work when the number of values matches the number of columns.  
 -- INSERT INTO Top_Salesperson VALUES (1, 'John', 'Smith', 0.5); -- Won't Work since this inserts 4 values, but the view only has 3 columns.  
 -- INSERT INTO Top_Salesperson VALUES (1, 'John', 0.05);  -- Will Work  
@@ -983,9 +983,8 @@ Adding records where commrate is above 0.04 will ONLY work.
 -- INSERT INTO Top_Salesperson VALUES (1, 'Elvis', 0.03);  -- Won't Work    
 -- INSERT INTO Top_Salesperson VALUES (1, 'Elvis', 0.06);  -- Will Work 
 
-
--- SELECT * FROM Top_Salesperson  
-
+-- Verify: -- SELECT * FROM Top_Salesperson  
+```
 
 #### Subtask: Alter the Salesperson view to now only display fname & commrate  
 ``` sql
@@ -997,12 +996,13 @@ WHERE commrate > 0.04
 WITH CHECK OPTION
 ```
 
+Verify:  
 ``` SELECT * FROM Top_Salesperson ```
 
-Note, once we drop the view...  
+NOTE: Once we drop the view...  
 ``` DROP VIEW Top_Salesperson  ```
 
-We won't be able to use the view.  
+...we won't be able to use the view:  
 ``` SELECT * FROM Top_Salesperson -- Won't work ```
 
 
@@ -1028,13 +1028,13 @@ SELECT * FROM mediumprice ORDER BY slprice
 -- NOTE: The View will not return any books outside of that range...
 SELECT *  
 FROM mediumprice
-WHERE partnum='40121' -- This book title has a slprice of $36.50 
+WHERE partnum = '40121' -- This book title has a slprice of $36.50 
 
 
 -- ...but the table will still hold the data.
 SELECT *  
 FROM Titles_Revised
-WHERE partnum='40121'
+WHERE partnum = '40121'
 
 
 -- Insert 2 titles via the View  
@@ -1059,19 +1059,19 @@ WHERE partnum = '40257'
 
 
 -- Check Update (Both queries are the same)  
-SELECT * FROM mediumprice WHERE partnum='40257'  
-SELECT * FROM Titles_Revised WHERE partnum='40257'  -- Note that the record in the actual table contains NULLs
+SELECT * FROM mediumprice WHERE partnum = '40257'  
+SELECT * FROM Titles_Revised WHERE partnum = '40257'  -- Note that the record in the actual table contains NULLs
 
 
 -- Use the View to delete a specific Title.  
 DELETE mediumprice  
-WHERE partnum='40257'  
+WHERE partnum = '40257'  
 
 
 -- Chcek that it got deleted.  
 SELECT *  
 FROM mediumprice  
-WHERE partnum='40257'  
+WHERE partnum = '40257'  
 
 
 -- Finish the exercise by dropping the view.  
@@ -1086,9 +1086,7 @@ DROP VIEW mediumprice
 
 Before we understand what a Procedure is, let's first understand what is Conditional Logic.
 
-
 > SQL can execute basic logic  
-
 
 ``` sql 
 IF 1 = 1  
@@ -1210,9 +1208,9 @@ When your procedure runs a SELECT, it outputs a <b> result set </b>.
 ---
 
 #### Demo #1
-A common example of a procedure is retrieving data using a lookup value as a parameter to get specific results (similar to an Excel VLOOKUP)
+A common example of a procedure is retrieving data using a lookup value as an input to get specific results (similar to an Excel VLOOKUP)
 
-Possible Applications: Find student based off their student email, StudentID, etc.
+Possible Applications: Find a student based off their student email or StudentID, etc.
 
 ``` sql
 -- A procedure called `GetCustomerDetails` that takes a CustomerID as an input and returns that customer’s information.
@@ -1250,7 +1248,7 @@ To drop the procedure:
 ---
 
 #### Demo #2
-#### Create a procedure to get the Top 5 Saleperson  
+Create a procedure to get the Top 5 Saleperson  
 (This example can be rewritten to get Top 5 Selling Products). 
 
 ``` sql
@@ -1260,7 +1258,7 @@ BEGIN
     SET NOCOUNT ON;
 
     SELECT 
-	TOP (5) WITH TIES 
+	TOP (5) WITH TIES  -- include duplicates
 	fname, commrate
 	FROM Slspers
 	ORDER BY commrate DESC;
@@ -1279,9 +1277,9 @@ EXEC GetTopSlspers
 ---
 
 #### Demo #3: Simplified
-Create a backup of Slspers.
+Create a procedure that generates a backup of the `Slspers` table.
 
-```
+``` sql
 CREATE OR ALTER PROCEDURE GenerateSlsPersBackup
 AS
 BEGIN
@@ -1304,13 +1302,13 @@ Now suppose we somehow mess up the backup table:
 You should be able to verify that all the names have been updated:  
 ``` SELECT * FROM Slspers_Backup ```
 
-But now if you run the same backup command again:  
+But now if you run the same backup command again to overwrite the previous backup:  
 ``` EXEC GenerateSlsPersBackup ```
 
-Running the SELECT query should see all the names back to normal:  
+Running the SELECT query should show all the original names:  
 ``` SELECT * FROM Slspers_Backup ```
 
-To drop the procedure:  
+Finally, to drop the procedure:  
 ``` DROP PROCEDURE GenerateSlsPersBackup ```
 
 
@@ -1350,8 +1348,8 @@ END;
 ---
 
 #### Optional Demo #4:  
-Create a Procedure that inserts a record into 2 seperate tables: the PotentialCustomers table & the Customers table.  
-(An additional procedure can be made to update/delete from 2 tables.)
+Create a Procedure that inserts a record into 2 seperate tables: `PotentialCustomers` table & `Customers` table.  
+(An additional example can be used where a procedure can be made to update/delete from 2 tables.)
 
 ``` sql
 CREATE OR ALTER PROCEDURE InsertSlsPers
@@ -1397,17 +1395,20 @@ END;
 ``` EXEC InsertPotentialCustomersByState @State = 'CA';  ```
 
 -- CHECK  
+``` 
 SELECT * FROM Customers  
 WHERE STATE = 'CA'  
+```
 
 ``` EXEC InsertPotentialCustomersByState @State = 'NY';  ```
 
 -- CHECK  
+```
 SELECT * FROM Customers  
 WHERE STATE = 'NY'  
+```
 
-
--- TO DELETE THE PROCEDURE:
+-- TO DELETE THE PROCEDURE:  
 ``` DROP PROCEDURE InsertPotentialCustomersByState;  ```
 
 ---
