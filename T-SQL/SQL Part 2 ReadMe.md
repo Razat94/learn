@@ -1434,12 +1434,10 @@ Speeds up sorts & searches especially common ones
 
 Transactions protects your database from partial updates.  
 
-When runing multiple queries, transactions ensure that a series of operations are executed as a single unit of work.   
-> Think of it as 'ALL OR NOTHING'. Either the statements all succeed (committed) or all fail (rolled back).  
+For example, transactions can help handle problems when multiple users modify a database at the same time.  
+In multi-user systems, different users may be viewing, adding, updating, or deleting data simultaneously and so SQL transactions ensure that these actions are done safely and correctly by keeping the data accurate and reliable.
 
-Once a transaction is committed or rolled back, the transaction ends and can't be undone or rolled back.  
-
-Common Examples of Transactions could be:  
+Some common examples of transactions could be:  
 
 	- Bank Transfers from Saving -> Checking  
 		Step 1: Subtract amount from Account A (Saving).  
@@ -1447,6 +1445,7 @@ Common Examples of Transactions could be:
 
 		BEGIN TRANSACTION;  
 			UPDATE accounts SET savingBalance = savingBalance - 500 WHERE account_id = '123';  
+			... -- Some Code occurs that breaks the query.
 			UPDATE accounts SET checkingBalance = checkingBalance + 500 WHERE account_id = '123';  
 		COMMIT;  
 
@@ -1457,6 +1456,19 @@ Common Examples of Transactions could be:
 
 	- HRIS Systems to manage employee records.
 		Example: Have a procedure named DeleteEmployee that removes an employee record and includes TRY...CATCH blocks for robust error handling across different tables.
+
+To keep data accurate and reliable during database operations, experts follow four key principles known as ACID properties:
+
+- Atomicity - Transactions must be all-or-nothing. If any part fails, the whole transaction is canceled.
+	> When runing multiple queries, transactions ensure that a series of operations are executed as a single unit of work.   
+	> Think of it as 'ALL OR NOTHING'. Either the statements all succeed (committed) or all fail (rolled back).  
+	
+	> Once a transaction is committed or rolled back, the transaction ends and can't be undone or rolled back.  
+- Consistency - Transactions must leave the database in a valid state, following all rules like data types, primary keys, and constraints.
+- Isolation - Transactions should not interfere with each other. When multiple transactions occur at the same time, they are processed sequentially to prevent conflicts.
+- Durability - Once a transaction is complete, its changes are permanent, even if the system crashes, unless later changed by another transaction.
+
+Database systems provide tools to enforce these rules, but SQL users must also carefully manage transactions to maintain data integrity.
 
 
 #### Example #1
@@ -1475,7 +1487,7 @@ BEGIN TRANSACTION;
 ROLLBACK TRANSACTION; -- Switch 'ROLLBACK' with 'COMMIT' TRANSACTION when ready to implement  
 ```
 
-Notice that as long as the transaction hasn't been committed, the values will not have been implemented into the actual table.
+Notice that as long as the transaction hasn't been committed, the values will not have been implemented into the actual table.  
 ``` SELECT * FROM Slspers_Backup WHERE commrate IS NULL ```
 
 
@@ -1505,7 +1517,7 @@ Alice
 Bob  
 ```  
 
-> To reset the table for the solution:  
+To reset the table for the solution:  
 ``` TRUNCATE TABLE Person  ```
 
 Task: Create a transaction to ensures that if the third insert fails, no rows are saved.  
@@ -1524,7 +1536,7 @@ COMMIT TRAN addPerson;
 The transaction will not execute any of the statements until everything (particularly the 3rd line) is correct. Either all or nothing becomes executed.  
 
 Notice that if we assign a transaction a name, that name exists only in memory for the duration of the current transaction.
-The name is not saved in the database and can not be used later.
+The transaction is not saved in the database and can not be used later.
 
 #### Example #3  
 
@@ -1542,7 +1554,7 @@ CREATE TABLE person (
 ```
 
 Create the Transaction:
-```
+``` sql
 BEGIN TRANSACTION;  
 BEGIN TRY  
 	-- Some SQL statements  
@@ -1555,7 +1567,7 @@ BEGIN CATCH
 END CATCH  
 ```
 
-
+To summarize, Transactions ensure that either all changes in a query are completed successfully, or all changes are undone if something goes wrong.
 
 /* -------------------------------------------------------  
 ## <p id = "7"> LESSON 7: The End | [Back to ToC](#toc)</p>   
