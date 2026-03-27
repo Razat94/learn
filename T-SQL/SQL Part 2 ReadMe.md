@@ -1474,6 +1474,10 @@ FROM Customers
 WHERE LastName = 'Smith';
 ```
 
+To see a list of all indexes on a table,  
+expand the database in the Object Explorer and go to Tables -> Your table -> Indexes
+
+
 If we no longer need the index, we can drop the index like so:
 ``` sql
 -- Deletes the index and frees up the space it was using.
