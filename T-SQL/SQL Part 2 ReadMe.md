@@ -1466,7 +1466,7 @@ To keep data accurate and reliable during database operations, experts follow fo
 	> Once a transaction is committed or rolled back, the transaction ends and can't be undone or rolled back.  
 - Consistency - Transactions must leave the database in a valid state, following all rules like data types, primary keys, and constraints.
 - Isolation - Transactions should not interfere with each other. When multiple transactions occur at the same time, they are processed sequentially to prevent conflicts.
-- Durability - Once a transaction is complete, its changes are permanent, even if the system crashes, unless later changed by another transaction.
+- Durability - Once a transaction is complete, the changes are permanent.
 
 Database systems provide tools to enforce these rules, but SQL users must also carefully manage transactions to maintain data integrity.
 
