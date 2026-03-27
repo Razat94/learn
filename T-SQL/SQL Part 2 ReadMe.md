@@ -1462,17 +1462,21 @@ Common Examples of Transactions could be:
 #### Example #1
 
 Create a transaction that inserts two salesperson records.  
-This is a good way to test for errors before the code becomes implemented.
+This is a good way to test for errors before the code becomes implemented.  
 
 ``` sql
-BEGIN TRANSACTION;  
-INSERT INTO Slspers_Backup VALUES ('N123', 'Jennifer', 'Reyes', 0.05)  
-INSERT INTO Slspers_Backup VALUES ('L123', 'Lena', 'Duong', 0.05)  
+BEGIN TRANSACTION; 
+	INSERT INTO Slspers_Backup (fname, lname)  
+	VALUES  
+	('Jennifer', 'Reyes'),  
+	('Lena', 'Duong')  
+
+	SELECT * FROM Slspers_Backup WHERE commrate IS NULL
 ROLLBACK TRANSACTION; -- Switch 'ROLLBACK' with 'COMMIT' TRANSACTION when ready to implement  
 ```
 
--- Check  
-``` SELECT * FROM Slspers_Backup ```
+Notice that as long as the transaction hasn't been committed, the values will not have been implemented into the actual table.
+``` SELECT * FROM Slspers_Backup WHERE commrate IS NULL ```
 
 
 #### Example #2
@@ -1502,23 +1506,25 @@ Bob
 ```  
 
 > To reset the table for the solution:  
-TRUNCATE TABLE Person  
+``` TRUNCATE TABLE Person  ```
 
 Task: Create a transaction to ensures that if the third insert fails, no rows are saved.  
 
 ``` sql
 -- Solution:
-BEGIN TRANSACTION;  
+BEGIN TRAN addPerson;  -- A transaction can be assigned a name so that developers can identify and distinguish between various transactions.
 
 INSERT INTO person (name) VALUES ('Alice');  
 INSERT INTO person (name) VALUES ('Bob');  
-INSERT INTO person (name) VALUES ('Alice');  -- duplicate name (violates UNIQUE constraint)  
+INSERT INTO person (name) VALUES ('Alice');  -- duplicate name (violates UNIQUE constraint)  -- fix later to 'Charles'
 
-COMMIT TRANSACTION;  
+COMMIT TRAN addPerson;  
 ```
 
 The transaction will not execute any of the statements until everything (particularly the 3rd line) is correct. Either all or nothing becomes executed.  
 
+Notice that if we assign a transaction a name, that name exists only in memory for the duration of the current transaction.
+The name is not saved in the database and can not be used later.
 
 #### Example #3  
 
