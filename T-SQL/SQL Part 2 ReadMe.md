@@ -1434,7 +1434,7 @@ Speeds up sorts & searches especially common ones
 
 Transactions protects your database from partial updates.  
 
-For example, transactions can help handle problems when multiple users modify a database at the same time.  
+For example, transactions are often used when multiple users need to modify a database at the same time.  
 In multi-user systems, different users may be viewing, adding, updating, or deleting data simultaneously and so SQL transactions ensure that these actions are done safely and correctly by keeping the data accurate and reliable.
 
 Some common examples of transactions could be:  
