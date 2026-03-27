@@ -1438,10 +1438,10 @@ We can create indexes on table columns and drop indexes too but please note that
 
 Indexes are similar to how you look through a book to find a certain part.
 
-Imagine you’re trying to find the word “transactions” in a book. You could look at every page one by one, or you could use the book’s index to go straight to the page where the word is. For example:
-• Table of Contents
-• Table of Indexes
-• Glossary of Terms, including the page number where the term was first used
+Imagine you’re trying to find the word “transactions” in a book. You could look at every page one by one, or you could use the book’s index to go straight to the page where the word is. For example:  
+- Table of Contents
+- Table of Indexes
+- Glossary of Terms, including the page number where the term was first used
 
 Books can have different indexes to help you find different things fast.  
 Since they are organized neatly, using an index can be much quicker than looking through every page.
@@ -1458,8 +1458,8 @@ The index keeps the values from those columns and points to the original rows in
 
 To summarize, an index can reduce the time needed to retrieve information & speed up data retrieval.
 
-<Taken from w3Schools:>
-Suppose we have a table called Customers with a column LastName. We can make an index on LastName like this:
+(Taken from w3Schools:)
+Suppose we have a table called Customers with a column LastName. We can make an index on LastName like this:  
 ``` sql
 CREATE INDEX idx_lastname
 ON Persons (LastName);
