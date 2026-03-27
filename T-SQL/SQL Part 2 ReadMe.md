@@ -1427,8 +1427,58 @@ But it’s usually better to use a stored procedure, because a procedure can eas
 ## <p id = "5"> Lesson 5: Indexing Data | [Back to ToC](#toc)</p>   
 ---------------------------------------------------------- */  
 
-Speeds up sorts & searches especially common ones  
+[w3Schools Reference](https://www.w3schools.com/sql/sql_create_index.asp)
 
+Usually, a database server spends a lot of time looking for particular information.
+When SQL Server looks for data, it usually checks every row in a table one by one. This is fast, but if there’s a huge amount of data, it can still take a long time.
+
+To improve the efficiency of SQL Server, creating indexes can help specifically support your most frequent queries such as speeding up sorts & searches especially common ones.
+
+We can create indexes on table columns and drop indexes too but please note that the users cannot see the indexes since they're only used to speed up searches/queries.
+
+Indexes are similar to how you look through a book to find a certain part.
+
+Imagine you’re trying to find the word “transactions” in a book. You could look at every page one by one, or you could use the book’s index to go straight to the page where the word is. For example:
+• Table of Contents
+• Table of Indexes
+• Glossary of Terms, including the page number where the term was first used
+
+Books can have different indexes to help you find different things fast.  
+Since they are organized neatly, using an index can be much quicker than looking through every page.
+
+So just like how a book index helps you find things fast, a database index helps the server find information quickly. It makes searches faster and helps everything run better.
+
+You can make an index on a table using the `CREATE INDEX` command.  
+An index is made from one or more columns, called the index keys. You give the index a name, say which table it’s for, and list the column(s) in parentheses.
+
+The index keeps the values from those columns and points to the original rows in the table. When you run a query, SQL Server can use the index to find the data faster. If the query needs other columns not in the index, it uses the pointers to get them from the table.
+
+> Note: Indexes in SQL can help you find things faster, but they also take up space.  
+> They can also slow things down when you add or change data, so you should only use indexes for things you search for a lot.
+
+To summarize, an index can reduce the time needed to retrieve information & speed up data retrieval.
+
+<Taken from w3Schools:>
+Suppose we have a table called Customers with a column LastName. We can make an index on LastName like this:
+``` sql
+CREATE INDEX idx_lastname
+ON Persons (LastName);
+```
+
+Now, if we search for all customers with a certain last name, SQL Server can use the index to find them faster:
+
+``` sql
+--  SQL Server looks up 'Smith' in the index instead of scanning every row in the table.
+SELECT * 
+FROM Customers
+WHERE LastName = 'Smith';
+```
+
+If we no longer need the index, we can drop the index like so:
+``` sql
+-- Deletes the index and frees up the space it was using.
+DROP INDEX table_name.index_name;
+```
 
 /* -------------------------------------------------------  
 ## <p id = "6"> LESSON 6: Managing Transactions | [Back to ToC](#toc)</p>   
