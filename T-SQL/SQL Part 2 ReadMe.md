@@ -5,6 +5,7 @@
 1. [Lesson 1: Using Nested Queries](#1)
 2. [Lesson 2: Manipulating Table Data](#2)
 3. [Lesson 3: Manipulating Table Structure](#3)
+4. [Bonus Lesson: Working with Databases](#databases)
 4. [Lesson 4: Working with Views](#4)
 4. [Bonus Lesson: Procedures](#procedure)
 5. [Lesson 5: Indexing Data](#5)
@@ -839,6 +840,94 @@ SELECT * FROM Slspers_Backup
 
 
 /* -------------------------------------------------------  
+## <p id = "databases"> BONUS LESSON: Working with Databases | [Back to ToC](#toc)</p>   
+---------------------------------------------------------- */  
+
+### To create a new database  
+CREATE DATABASE MyDatabase;
+
+We can also create databases from the Object Explorer.  
+1. In Object Explorer, right-click on Databases and click 'New Database'
+2. Enter a name (e.g., MyDatabase) and then click 'OK'
+
+On the database, create a table called `People`.
+```
+CREATE TABLE MyDatabase.dbo.People (  
+    name VARCHAR(100) 
+);  
+```
+
+Insert Values:
+```
+INSERT INTO People VALUES 
+('Raza'), 
+('Nickki'),
+('Zara')
+```
+
+Verify:  
+``` SELECT * FROM People ```
+
+To Empty/Truncate The Table:  
+``` TRUNCATE TABLE People ```
+
+### Create a backup table 'Slsperson' from one database to another.  
+(Great for restoring old datas from backups, as what you'll soon see)
+
+SELECT *
+INTO MyDatabase.dbo.Slspers_Backup
+FROM Pub1.dbo.Slspers_Backup
+
+
+### Insert one row from a table in one database to another table
+INSERT INTO MyDatabase.dbo.Slspers_Backup
+SELECT *
+FROM Pub1.dbo.Slspers_Backup
+WHERE fname = 'Fred'
+
+
+### Create a database backup  
+In Microsoft SQL Server, there are several ways to back up a database
+
+One easy way is to create a .BACPAC file.
+[Reference Link](https://www.youtube.com/watch?v=XLzV_gagkZc)
+
+To create it, right click on a Database and then go to 
+Click 'Tasks' -> 'Export Data-tier Application'  
+
+The wizard alert will then pop up to help guide you through the steps.
+
+On the 'Export Settings' screen, choose 'Save to local disk' and then select a file path and name (e.g., YourDB.bacpac)
+
+Click Next to verify the specified settings & then click 'Finish'
+
+Voila, the backup file should be created.
+
+### To import a database backup
+With our newly created .BACPAC file, we'll now find that importing a .bacpac file in Microsoft SQL Server is basically the reverse of exporting
+
+1. In Object Explorer, right-click Databases.
+2. Click Import Data-tier Application to view the Wizard.
+
+3. Click Next on the welcome screen.
+4. Choose Import from local disk & browse to select your .bacpac file (e.g., YourDB.bacpac).
+5. Click Next & then you'll be prompted to Enter a name for the new database.
+
+> Note: This is the database that will be created from the BACPAC. Specify the data and log file locations (optional, defaults are fine).
+
+6. Click Next and then click 'Finish'. You'll find that SSMS will show a progress bar as it:
+	- Creates the database
+	- Recreates all tables, views, and other schema
+	- Import all data
+
+7. When the progress is complete, click Close.
+8. Verify by expanding Databases and checking your new database.
+
+### To drop a database  
+``` DROP DATABASE MyDatabase ```
+
+
+/* -------------------------------------------------------  
 ## <p id = "4"> LESSON 4: Working with Views | [Back to ToC](#toc)</p>   
 ---------------------------------------------------------- */  
 
@@ -1242,6 +1331,15 @@ ORDER BY name;
 
 Another way to view Stored Procedures would be under:  
 Pub1 -> Programmability -> Stored Precedures  
+
+
+To assign a shortcut to a stored procedure or query:
+1. 	Go to Tools -> Options
+2. 	Navigate to:
+	Environment → Keyboard → Query Shortcuts
+3. 	In the shortcut box, enter a command such as EXEC dbo.MyStoredProcedure for an entry and then press "OK"
+4.  Now pressing Ctrl + 1 will run that command in a query window.
+
 
 To drop the procedure:  
 ``` DROP PROCEDURE GetCustomerDetails ```
@@ -1659,12 +1757,9 @@ SET NOCOUNT ON;
 UPDATE Customers SET State = 'CA' WHERE State = 'California';
 
 
+
 — Additional —
 * Create a PivotTable from a SQL Server table  
-* Create custom shortcut keys for useful commands  
-* Create a new database  
-* Create a database backup  
-* Restore a deleted table from a backup  
-* Understand transaction logs  
+* Understand transaction logs  (backups?)
 * Hide a column but allow inserts (using trigger)  
-* Display SQL P2.txt file  
+* Display SQL P2.txt file  ?

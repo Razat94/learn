@@ -65,6 +65,16 @@ Different ways to run the query:
 	- Go to Query (tab) -> Execute.  
 	- Right-click anywhere in the query window and choose 'Execute SQL' from the context menu.  
 
+To create custom keyboard shortcuts for useful commands e.g.  executing queries:
+1. 	Go to Tools -> Options
+2. 	Navigate to:
+	Environment → Keyboard
+3.  In 'Show commands containing', search for: `Query.Execute` & click on it
+4.  Under 'Press shortcut keys', press your desired combination (e.g., Ctrl + Shift + N)
+5.  Click Assign, then OK
+
+<img src = "./zz_add_shortcut.png" />
+
 In SQL Server, you can include multiple SELECT statements in a single query batch and each will return its own result set.
 
 ```
