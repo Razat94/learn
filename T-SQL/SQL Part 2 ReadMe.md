@@ -152,24 +152,27 @@ WHERE custnum IN (
 ## <p id = "2"> LESSON 2: Manipulating Table Data | [Back to ToC](#toc) </p>  
 ---------------------------------------------------------- */  
 
+In this lesson, we'll cover how to insert, update, and delete records in a table.
 
-Create a backup table of `Titles` called `TitlesRevised`  
+Create a backup table of `Titles` called `Titles_Revised`  
 ``` sql
 SELECT *  
 INTO Titles_Revised  
 FROM Titles
 ```
 
-#### Recall that the Object Explorer must be refreshed to see the new table.  
+#### To see the new table, recall that the Object Explorer must be refreshed   
 <img src = "./zz_refresh.png">
 
-> Additionally, refresh IntelliSense to avoid the red error underline on the newly created table name by going to:  
+> Additionally, refresh IntelliSense to avoid the red error underline on the newly created table name via:  
 > Edit (Tab) -> IntelliSense -> Refresh Local Cache (Ctrl + Shift + R)  
 
 
-Useful Trick: Create a new table `Slspers_Backup` with the same structure as `Slspers`, without copying any data (i.e. do not copy any rows.)
+#### Useful Trick: Create an Empty table with the same structure  
+Create a new table `Slspers_Backup` with the same structure as `Slspers`, without copying any data.
+
 ``` sql
--- Create a backup copy of `Slspers`  
+-- -- Create a backup copy of Slspers (no data or rows copied)
 SELECT *  
 INTO Slspers_Backup    
 FROM Slspers  
@@ -177,8 +180,6 @@ WHERE 1 = 0  -- always false
 -- SQL Server does not support Boolean literals `TRUE` and `FALSE` in SQL queries. 
 -- So instead, we must use an expression that evaluates to false.
 ```
-
-
 
 Exercise #1 (Optional): Create an empty table called `Cust2025` based on the structure of the `Customers` table.
 ``` sql
@@ -188,16 +189,20 @@ FROM Customers
 WHERE 1 = 0  -- always false
 ```
 
+#### Different Ways to Delete a Table in SQL Server:
+- Using T-SQL Commands:
+	- DROP TABLE `Cust2025`  
+	- DROP TABLE IF EXISTS `Customers2025` -- avoid errors if the table has already been deleted.
+- Using the SSMS Object Explorer (GUI):
+	- In the Object Explorer pane, navigate to your database and expand the Tables folder to locate the table you wish to delete (e.g., `Customers2025`).
+	- Right-click the table and select Delete.
+	- When the Delete Object dialog box appears, verify the selection and click OK to drop the table
 
-#### Different ways to delete a table:  
-- DROP TABLE `Cust2025`  
-- DROP TABLE IF EXISTS `Customers2025`;
-- In the Object Explorer of SSMS, find the table you want to delete in your database (e.g. `Customers2025`).
-  - Right-click the table and select 'Delete'.
-  - A pop up 'Delete Object' dialog box will appear. Click 'OK' to drop the table.
-
+(Jumping ahead) Optional Mention: The TRUNCATE statement removes all rows from a table but keeps the structure  
+``` TRUNCATE TABLE Slspers_Backup ```
 
 ---
+
 <br/>
 
 ### <u> Aww, CRUD! </u>
@@ -224,24 +229,21 @@ WHERE 1 = 0  -- always false
 
 /* ------------ List of CRUD statements ------------ */  
 
-> We will be modifying the backup tables.  
-> NOTE: Be sure to make changes to the backup table, not the original!  
+>> Note: We will be modifying the backup tables.  
+Make sure to apply all changes to the backup table, not the original table. 
 
-/* ------------ C: INSERT INTO statement ------------ */  
+<br>
 
-> NOTE: In SQL, the keyword `INTO` usually indicates that data is being written into something
+/* ------------ C: INSERT INTO statement ------------ */
 
+> *Note:* In SQL, the keyword `INTO` usually indicates that data is being written into something.
 
-(Jumping ahead) Optional Mention: The TRUNCATE statement removes all rows from a table  
-``` TRUNCATE TABLE Slspers_Backup ```
-
-
-#### Insert ONE Record (with all specified columns).  
-``` sql
-INSERT INTO Slspers_Backup    
---optional -- (repid, fname, lname, commrate)    
-VALUES  
-('J01', 'Jane', 'Doe' , 0.05)  
+#### Insert ONE record (with all specified columns)
+```sql
+INSERT INTO Slspers_Backup
+-- Optional: (repid, fname, lname, commrate)
+VALUES
+('J01', 'Jane', 'Doe', 0.05);
 ```
 
 #### Insert a record with unspecified columns as NULL.  
@@ -259,21 +261,18 @@ VALUES
 ('P01', 'Steven', 'Stone' , 0.05)  -- Duplicate REPID 'P01' is intentional as it is a setup for a deletion example.  
 ```
 
-
-#### (Jumping ahead) Optional: The TRUNCATE statement
+#### TRUNCATE statement used to remove rows from the table
 ``` sql 
 TRUNCATE TABLE Slspers_Backup 
 ```
 
-
-#### Copy all rows from `Slspers` and insert them into the `Slspers_Backup` table.
+Copy all rows from `Slspers` and pastes the rows into `Slspers_Backup`
 ``` sql
-INSERT INTO Slspers_Backup  
-SELECT *  
-FROM Slspers 
--- WHERE fname LIKE 'A%';  -- Additional Exercise: Inserting only records where the first names starts with "A" 
+INSERT INTO Slspers_Backup
+SELECT *
+FROM Slspers;
+-- WHERE fname LIKE 'A%';  -- Optional: insert only rows where first name starts with "A"
 ```
-
 
 #### Exercise: Insert data from one table `Potential_Customers` into another table `Customers`.  
 ``` sql
@@ -282,7 +281,6 @@ SELECT *
 FROM Potential_Customers  
 WHERE State = 'CA';  
 ```
-
 
 -- End of Subsection Exercise: Add the following information into SQL Table 'Titles'  
 
@@ -300,6 +298,7 @@ VALUES
 (12345, 'The Role of SQL in Big Data', 8000, 45, '2017-01-01')  
 ```
 
+<br>
 
 /* ------------ R: SELECT statement ------------ */  
 
@@ -314,7 +313,8 @@ WHERE commrate = 0.05
 ``` sql
 SELECT *  
 FROM Titles_Revised  
-WHERE partnum BETWEEN 40123 AND 40125 -- BETWEEN 39906 AND 39909 -- Check table with WHERE condition  
+WHERE partnum BETWEEN 40123 AND 40125 
+-- BETWEEN 39906 AND 39909 (alternative example)
 ```
 
 #### Exercise: Selects all rows from `Slspers` with `commrate` between 0.03 and 0.04, ordered by `commrate`.
@@ -325,33 +325,36 @@ WHERE commrate BETWEEN 0.03 and 0.04
 ORDER BY commrate
 ```
 
+<br>
 
-/* ------------ U: Update Table ------------ */  
+/* ------------ U: Update Table ------------ */
 
-> Note: Before updating any rows with an UPDATE statement, it’s always a good idea to run a SELECT statement first to see exactly which rows will be updated. After knowing which rows the SELECT query returns, the conditions in the WHERE clause can then be reused in an UPDATE statement.
+> *Note:* Before updating any rows with the `UPDATE` keyword, it's always a good idea to run a `SELECT` statement first to see exactly which rows will be updated. After knowing which rows the `SELECT` query returns, the conditions in the `WHERE` clause can then be reused in an `UPDATE` statement.
 
-Update all salesperson commission from 0.3 to 0.6  
-``` sql
-UPDATE Slspers_Backup  
-SET commrate = 0.06  
-WHERE commrate = 0.03  -- NOTE: Always include a WHERE clause, or the UPDATE statement will affect all records!
+---
+
+#### Demo: Update all salesperson commission from 0.3 to 0.6  
+```sql
+UPDATE Slspers_Backup
+SET commrate = 0.06
+WHERE commrate = 0.03;  -- NOTE: Always include a WHERE clause, or the UPDATE statement will affect all records!
 ```
 
 -- Check:  
 ``` SELECT * FROM Slspers_Backup WHERE commrate = 0.06  ```
 
-
-Exercise: Fix the spelling mistake of 'Anne' on RepID 'W02' to 'Annie'    
+Exercise: Fix the spelling mistake of 'Anne' (RepID 'W02') to 'Annie'    
 ``` sql
 -- Solution:  
 UPDATE Slspers_Backup  
 SET fname = 'Annie'  
 WHERE REPID = 'W02'  
--- Bad Practice -- WHERE fname = 'Anne' -- Since there could be multiple 'Anne', this is bad practice.  
+-- Bad Practice:   
+-- WHERE fname = 'Anne' 
+-- This is not recommended since multiple records of 'Anne' could match
 ```
 
-
-From the newly created `Titles_Revised` table, UPDATE `devcost` where `partnum` b/w 40123 & 40125  
+From the newly created `Titles_Revised` table, Update values in a range by updating `devcost` for part numbers b/w 40123 & 40125  
 ``` sql
 -- Solution
 UPDATE Titles_Revised  
@@ -360,7 +363,7 @@ WHERE partnum BETWEEN 40123 AND 40125
 -- WHERE partnum BETWEEN 39904 AND 39906  
 ```
 
--- Check Updated Table 
+Check the Updated Table 
 ``` sql 
 SELECT *  
 FROM Titles_Revised  
@@ -368,7 +371,7 @@ WHERE partnum BETWEEN 40123 AND 40125
 -- WHERE partnum BETWEEN 39904 AND 39906  
 ```
 
--- Update Multiple Columns in a Table
+-- Update Multiple Columns of 1 Row in a Table
 ``` sql
 UPDATE 	Titles_Revised  
 SET 	bktitle = 'Alex loves Windsurfing',  
@@ -378,20 +381,21 @@ SET 	bktitle = 'Alex loves Windsurfing',
 WHERE partnum='40123'  
 ```
 
-
--- Check Updated Table  
+-- Check Updated Row  
 ``` sql
 SELECT *  
 FROM Titles_Revised  
 WHERE partnum = 40123  
 ```
 
+<br>
+
 /* ------------ D: Delete Rows ------------ */  
 
-> Similar to the UPDATE statement, always verify which rows the DELETE query will remove by first running the SELECT query with the same WHERE clause.
+> Similar to the `UPDATE` statement, always verify which rows the `DELETE` query will remove by first running the `SELECT` query with the same `WHERE` clause.
 
 
-Deletes all rows from Titles_Revised where partnum equals 40123.
+Deletes all specified rows from `Titles_Revised` where `partnum` equals 40123.
 ``` sql
 DELETE Titles_Revised  
 WHERE partnum = 40123  
@@ -404,34 +408,33 @@ FROM Titles_Revised
 -- WHERE partnum = 40123  
 ```
 
-To Truncate All Rows  
+Additional delete examples
+``` sql
+DELETE FROM Customers
+WHERE custnum = 31004;
+
+DELETE FROM Slspers_Backup
+WHERE repid = '1';
+```
+
+(Option 1) We can delete all rows via `TRUNCATE` keyword:
 ``` sql
 TRUNCATE TABLE Titles_Revised  
 ```
 
-To Delete ALL Rows  
+(Option 2) We can delete all rows via `DELETE` keyword:  
 ``` sql
 DELETE FROM Titles_Revised  
 ```
 
+#### Exercise: Attempt to delete the Salesperson Paul that was added earlier:  
+('P01', 'Paul', 'Smith' , 0.05)
 
--- To delete  
-DELETE FROM Customers  
-WHERE custnum = 31004;  
-
--- Another delete example  
-DELETE FROM Slspers_Backup  
-WHERE repid = '1';  
-
-
-
--- Exercise: Attempt to delete one of the Salespeople Paul that was added earlier.  
-('P01', 'Paul', 'Smith' , 0.05)  
-
--- Solution:  
+> Solution:  
+``` sql
 DELETE Slspers_Backup  
 WHERE REPID = 'P01' AND fname = 'Paul'  
-
+```
 
 #### ===== End of Chapter Exercise =====  
 
@@ -487,6 +490,9 @@ WHERE partnum = '98765'
 /* -------------------------------------------------------  
 ## <p id = "3"> LESSON 3: Manipulating Table Structure | [Back to ToC](#toc)</p>  
 ---------------------------------------------------------- */  
+
+
+SQL Server allows you to manage and modify database structure and content directly, which is useful for setup and maintenance tasks outside of client applications. 
 
 A SQL data type defines the type of value a column can store.  
 SQL data types are a core rule of the SQL table structure that restricts & validates the type of data that can go into a column, and is similar to the Data Validation tool in Excel.
