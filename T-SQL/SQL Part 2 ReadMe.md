@@ -230,7 +230,7 @@ WHERE 1 = 0  -- always false
 /* ------------ List of CRUD statements ------------ */  
 
 >> Note: We will be modifying the backup tables.  
-Make sure to apply all changes to the backup table, not the original table. 
+Make sure to apply all changes to the BACKUP table, not the original table! 
 
 <br>
 
@@ -397,7 +397,7 @@ WHERE partnum = 40123
 
 #### Delete all specified rows from `Titles_Revised` where `partnum` equals 40123.
 ``` sql
-DELETE Titles_Revised  
+DELETE Titles_Revised  -- Shorthand DELETE syntax (SQL Server only); equivalent to DELETE FROM
 WHERE partnum = 40123  
 ```
 
@@ -410,7 +410,7 @@ FROM Titles_Revised
 
 Below are a few additional examples for deletions:
 ``` sql
-DELETE FROM Customers
+DELETE FROM Customers  -- 'DELETE FROM' is standard syntax
 WHERE custnum = 31004;
 
 DELETE FROM Slspers_Backup
