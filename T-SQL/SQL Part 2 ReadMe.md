@@ -16,87 +16,135 @@
 ## <p id = "0"> LESSON 0: Before We Begin </p>
 ---------------------------------------------------------- */
 
-Remember the helpful Mnemonic:  
-Start Fridays With Grandma's Homemade Oatmeal
+### Prerequisites
+
+Please be familiar with the following concepts:
+
+- Fundamental relational database concepts (databases, tables, rows, columns)
+- Basic SQL syntax: `SELECT`, `FROM`, `WHERE`, `ORDER BY`  
+  - Helpful mnemonic: *Start Fridays With Grandma’s Homemade Oatmeal*
+- Common filtering techniques (`AND`, `OR`, `LIKE`, `IN`)
+- Aggregate functions (`COUNT`, `SUM`, `AVG`) and `GROUP BY`
+- Basic joins (`INNER JOIN`)
 
 /* -------------------------------------------------------
 ## <p id = "1"> LESSON 1: Using Nested Queries | [Back to ToC](#toc) </p>
 ---------------------------------------------------------- */
 
+### Subquery Demos
 
-SELECT * FROM Slspers  
-WHERE commrate >   
-	(SELECT AVG(commrate) FROM Slspers)
+Demo 1: Show all salespersons whose commission rate is above average
 
+```sql
+SELECT *
+FROM Slspers
+WHERE commrate > (
+    SELECT AVG(commrate)
+    FROM Slspers
+);
+```
 
--- Exercise: Show all titles that are cheaper to develop than the cheapest obsolete title.  
-SELECT *  
-FROM Titles  
-WHERE devcost < (SELECT MIN(devcost) FROM Obsolete_Titles);  
+Demo 2: Show all titles that are cheaper to develop than the cheapest obsolete title
 
+```sql
+SELECT *
+FROM Titles
+WHERE devcost < (
+    SELECT MIN(devcost)
+    FROM Obsolete_Titles
+)
+ORDER BY devcost DESC;
+```
 
--- Same as if we use ALL Statement  
-SELECT *  
-FROM Titles  
-WHERE devcost < ALL (Select devcost from Obsolete_Titles)  
+> Alternatively, we could have used the `ALL` modifier.  
+> Note: In SQL Server, using `MAX()` or `MIN()` is generally faster and more efficient than using `ALL`.
 
+```sql
+SELECT *
+FROM Titles
+WHERE devcost < ALL (
+    SELECT devcost
+    FROM Obsolete_Titles
+);
+```
 
--- ## Exercise: Show me all salespersons who have never made a sale.    
-SELECT *  
-FROM Slspers    
-WHERE repid NOT IN    
-(  
-    SELECT repid  
-    FROM Sales  
-    GROUP BY repid  
-)   
+- `ALL` compares a value to every value returned by the subquery
+- In this case, it returns rows where `devcost` is less than *every* value (i.e., less than the minimum)
 
+Demo 3: Show all salespersons who have never made a sale.
 
--- Returns all rows from Titles where a matching partnum exists in Sales.  
+```sql
+SELECT *
+FROM Slspers
+WHERE repid NOT IN (
+    SELECT repid
+    FROM Sales
+    GROUP BY repid
+);
+```
+
+---
+
+### Using Subqueries vs Joins
+
+Returns all rows from Titles where a matching partnum exists in Sales, using the `IN` keyword.
+
+```sql
 SELECT * FROM Titles  -- This statement alone will return 92 rows.  
-WHERE partnum IN  
-	(SELECT partnum    
-	FROM Sales) -- Executes what's in parenthesis first  
+WHERE partnum IN (
+    SELECT partnum FROM Sales  -- Note: The subquery gets executes first.
+);
+```
 
+Alternate Solution: `INNER JOIN`
 
--- Alternate Solution: Inner Join Statement  
-SELECT DISTINCT t.*  
-FROM Titles t  
-INNER JOIN Sales s  
-    ON t.partnum = s.partnum;  
+```sql
+SELECT DISTINCT t.*
+FROM Titles t
+INNER JOIN Sales s
+    ON t.partnum = s.partnum
+ORDER BY t.partnum;
+```
 
+<br>
 
--- For each row in Titles, output each row in Obsolete_Titles with the same partnum  
-SELECT *  
-FROM Titles  
-WHERE EXISTS  
-	(SELECT partnum  
-	FROM Obsolete_Titles  
-	WHERE partnum = Titles.partnum)  
+For each row in `Titles`, check if a matching `partnum` exists in `Obsolete_Titles`, using the `EXISTS` keyword.
 
+```sql
+SELECT *
+FROM Titles
+WHERE EXISTS (
+    SELECT partnum
+    FROM Obsolete_Titles
+    WHERE partnum = Titles.partnum
+);
+```
 
--- Alternate Solution: INNER JOIN Statement  
-SELECT t.*  
-FROM Titles t  
-INNER JOIN Obsolete_Titles o  
-    ON t.partnum = o.partnum;  
+Alternate Solution: `INNER JOIN`
 
+```sql
+SELECT t.*
+FROM Titles t
+INNER JOIN Obsolete_Titles o
+    ON t.partnum = o.partnum;
+```
 
+<br>
+Additional Example: Show all customers who have purchased titles priced at $49 or higher.
 
--- ### Additional Example:  
-SELECT *  
-FROM Customers  
-WHERE Custnum IN    
-(  
-    SELECT custnum    
-    FROM Sales  
-    WHERE partnum IN    
-    (  
-        SELECT partnum  
-        FROM Titles  
-        WHERE slprice >= 49    
-    )  
-);  
+```sql
+SELECT *
+FROM Customers
+WHERE custnum IN (
+    SELECT custnum
+    FROM Sales
+    WHERE partnum IN (
+        SELECT partnum
+        FROM Titles
+        WHERE slprice >= 49
+    )
+);
+```
 
 
 
