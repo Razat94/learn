@@ -266,7 +266,7 @@ VALUES
 TRUNCATE TABLE Slspers_Backup 
 ```
 
-Copy all rows from `Slspers` and pastes the rows into `Slspers_Backup`
+#### Copy all rows from `Slspers` and pastes the rows into `Slspers_Backup`
 ``` sql
 INSERT INTO Slspers_Backup
 SELECT *
@@ -274,7 +274,7 @@ FROM Slspers;
 -- WHERE fname LIKE 'A%';  -- Optional: insert only rows where first name starts with "A"
 ```
 
-#### Exercise: Insert data from one table `Potential_Customers` into another table `Customers`.  
+#### Optional Exercise: Insert data from one table `Potential_Customers` with a condition into another table `Customers`.  
 ``` sql
 INSERT INTO Customers  
 SELECT *  
@@ -354,7 +354,7 @@ WHERE REPID = 'W02'
 -- This is not recommended since multiple records of 'Anne' could match
 ```
 
-From the newly created `Titles_Revised` table, Update values in a range by updating `devcost` for part numbers b/w 40123 & 40125  
+#### From the newly created `Titles_Revised` table, update the `devcost` field for a range of part numbers between 40123 and 40125.
 ``` sql
 -- Solution
 UPDATE Titles_Revised  
@@ -371,7 +371,7 @@ WHERE partnum BETWEEN 40123 AND 40125
 -- WHERE partnum BETWEEN 39904 AND 39906  
 ```
 
--- Update Multiple Columns of 1 Row in a Table
+#### Update multiple columns in a single row of a table
 ``` sql
 UPDATE 	Titles_Revised  
 SET 	bktitle = 'Alex loves Windsurfing',  
@@ -381,7 +381,7 @@ SET 	bktitle = 'Alex loves Windsurfing',
 WHERE partnum='40123'  
 ```
 
--- Check Updated Row  
+Check Updated Row  
 ``` sql
 SELECT *  
 FROM Titles_Revised  
@@ -395,7 +395,7 @@ WHERE partnum = 40123
 > Similar to the `UPDATE` statement, always verify which rows the `DELETE` query will remove by first running the `SELECT` query with the same `WHERE` clause.
 
 
-Deletes all specified rows from `Titles_Revised` where `partnum` equals 40123.
+#### Delete all specified rows from `Titles_Revised` where `partnum` equals 40123.
 ``` sql
 DELETE Titles_Revised  
 WHERE partnum = 40123  
@@ -408,7 +408,7 @@ FROM Titles_Revised
 -- WHERE partnum = 40123  
 ```
 
-Additional delete examples
+Below are a few additional examples for deletions:
 ``` sql
 DELETE FROM Customers
 WHERE custnum = 31004;
