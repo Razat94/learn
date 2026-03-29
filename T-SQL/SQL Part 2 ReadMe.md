@@ -194,7 +194,7 @@ WHERE 1 = 0  -- always false
 	- DROP TABLE `Cust2025`  
 	- DROP TABLE IF EXISTS `Customers2025` -- avoid errors if the table has already been deleted.
 - Using the SSMS Object Explorer (GUI):
-	- In the Object Explorer pane, navigate to your database and expand the Tables folder to locate the table you wish to delete (e.g., `Customers2025`).
+	- In the Object Explorer pane, navigate to your database and find the table you wish to delete (e.g., `Customers2025`).
 	- Right-click the table and select Delete.
 	- When the Delete Object dialog box appears, verify the selection and click OK to drop the table
 
