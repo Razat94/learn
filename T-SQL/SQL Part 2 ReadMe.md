@@ -31,6 +31,7 @@ Please be familiar with the following concepts:
 ## <p id = "1"> LESSON 1: Using Nested Queries | [Back to ToC](#toc) </p>
 ---------------------------------------------------------- */
 
+
 ### Subquery Demos
 
 Demo 1: Show all salespersons whose commission rate is above average
@@ -87,7 +88,7 @@ WHERE repid NOT IN (
 
 ### Using Subqueries vs Joins
 
-Returns all rows from Titles where a matching partnum exists in Sales, using the `IN` keyword.
+Demo #4: Returns all rows from Titles where a matching partnum exists in Sales, using the `IN` keyword.
 
 ```sql
 SELECT * FROM Titles  -- This statement alone will return 92 rows.  
@@ -96,7 +97,7 @@ WHERE partnum IN (
 );
 ```
 
-Alternate Solution: `INNER JOIN`
+Alternate Solution: Use `INNER JOIN`
 
 ```sql
 SELECT DISTINCT t.*
@@ -120,7 +121,7 @@ WHERE EXISTS (
 );
 ```
 
-Alternate Solution: `INNER JOIN`
+Alternate Solution: Use `INNER JOIN`
 
 ```sql
 SELECT t.*
@@ -145,7 +146,6 @@ WHERE custnum IN (
     )
 );
 ```
-
 
 
 /* -------------------------------------------------------  
