@@ -257,7 +257,8 @@ VALUES
 ``` sql
 INSERT INTO Slspers_Backup    
 VALUES  
-('P01', 'Angie', 'Lopez' , 0.05),  
+('P01', 'Angie', 'Lopez' , 0.05),  -- Notice the comma on all lines except the last one.
+('P01', 'Angel', 'Smith' , 0.05),  
 ('P01', 'Steven', 'Stone' , 0.05)  -- Duplicate REPID 'P01' is intentional as it is a setup for a deletion example.  
 ```
 
@@ -410,7 +411,7 @@ FROM Titles_Revised
 
 Below are a few additional examples for deletions:
 ``` sql
-DELETE FROM Customers  -- 'DELETE FROM' is standard syntax used in SQL Server.
+DELETE FROM Customers  -- 'DELETE FROM' is standard syntax used in SQL.
 WHERE custnum = 31004;
 
 DELETE FROM Slspers_Backup
