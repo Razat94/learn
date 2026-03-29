@@ -410,7 +410,7 @@ FROM Titles_Revised
 
 Below are a few additional examples for deletions:
 ``` sql
-DELETE FROM Customers  -- 'DELETE FROM' is standard syntax
+DELETE FROM Customers  -- 'DELETE FROM' is standard syntax used in SQL Server.
 WHERE custnum = 31004;
 
 DELETE FROM Slspers_Backup
