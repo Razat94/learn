@@ -493,10 +493,11 @@ WHERE partnum = '98765'
 ---------------------------------------------------------- */  
 
 
-SQL Server allows you to manage and modify database structure and content directly, which is useful for setup and maintenance tasks outside of client applications. 
+SQL Server lets you manage and modify database structure directly. 
 
-A SQL data type defines the type of value a column can store.  
-SQL data types are a core rule of the SQL table structure that restricts & validates the type of data that can go into a column, and is similar to the Data Validation tool in Excel.
+When creating a SQL table, the table’s structure is defined by specifying column names and data types, and any optional constraints that enforce what data is valid. 
+
+A SQL data type is an attribute of a column that determines the kind of values the column can store. SQL data types are a core rule of the SQL table structure that restricts & validates the type of data that a column allows, and is similar to the Data Validation tool in Excel.
 
 Learn more about field Data types by going to the [Learn Microsoft Page.](https://learn.microsoft.com/en-us/sql/t-sql/data-types/data-types-transact-sql?view=sql-server-ver17)  
 
@@ -546,9 +547,9 @@ DROP TABLE ProduceInventory
 
 ### Let’s now review CRUD operations related to affecting columns in a table.
 
-In a previous section, we covered how to add and delete records (rows) in a table. In this subsection, we will cover how to add and remove columns and we will first create our duplicate table.
+In a previous section, we covered how to add and delete records (rows) in a table. In this subsection, we will cover how to add and remove columns on a duplicate table.
 
-#### Recall: To create a Duplicate Table 
+#### Recall: To Create a Duplicate Table 
 ``` sql
 SELECT *  
 INTO Slspers_Backup  
@@ -613,29 +614,28 @@ sp_help Slspers_Backup
 ```
 
 
-/* ------------ U: Update/ALTER Column property ------------ */  
+/* ------------ U: UPDATE/ALTER Column property ------------ */  
 
-``` sql  
-sp_help Slspers_Backup -- verify table  
--- if a column is nullable, it means that the column is allowed to contain NULL values i.e. values are optional
+Fields marked as nullable means that the columns can contain NULL values i.e. values are optional
+``` sql
+sp_help Slspers_Backup -- Check for nullable columns by looking at the table
 ```
 
-``` sql
--- First, verify that we can enter a NULL (blank) value for Fname  
+First, verify that we can enter a NULL (blank) value for the Fname field. 
+``` sql 
 INSERT INTO Slspers_Backup  
 VALUES ('N01', NULL, 'Nguyen', 0.05)  
 ```
 
+Ensure that we delete the added row.
 ``` sql
--- Ensure that we delete said row
 DELETE Slspers_Backup  
 WHERE fname is NULL
 ```
 
-#### Task: Change the fname column so it can hold up to 10 characters and is required (it cannot be left blank or NULL)  
+#### Task: Change the fname column so it can hold up to 10 characters and is required (i.e. the field can not contain blank or NULL values).  
 
-> KEY NOTE: An  error may occur if some rows in the table already contain NULL (e.g. in fname column).  
-SQL Server cannot enforce a column to be NOT NULL if there are NULL values that already exist in the table. 
+> KEY NOTE: SQL Server cannot enforce a column to be `NOT NULL` if there are `NULL` values that already exist in the table, so make sure to delete any rows with a `NULL` value or else an error will occur (e.g. in fname column). 
 
 Assure that `fname` holds no `NULL` values.  
 ``` sql
@@ -643,15 +643,17 @@ SELECT * FROM Slspers_Backup
 WHERE fname is NULL  
 ```
 
-``` sql
--- Alter Table to have max 10 characters & not contain NULL values (a value is required).   
+Alter a table to have a maximum of 10 characters & not contain NULL values (i.e. a value is required).  
+``` sql 
 ALTER TABLE Slspers_Backup   
 ALTER COLUMN fname varchar(10) NOT NULL  
 ```
 
 Check TO VERIFY the change.  
-``` sp_help Slspers_Backup ```  
--- NOTE: Under the column "Nullable", see that the fname column says 'No'   
+``` SQL
+sp_help Slspers_Backup  
+-- Note: The field `fname` is marked as 'No' in the "Nullable" column.
+```  
 
 
 Assure that the following query does NOT work:  
@@ -673,37 +675,37 @@ ALTER COLUMN fname VARCHAR(40) NULL;
 ```
 
 
-/* ------------ CONSTRAINTS  i.e. Create a constraint after a table is already created. ------------ */
+/* ------------ CONSTRAINTS  ------------ */
+
+In this subchapter, we will be creating a constraint after a table is already created.
 
 Constraints are rules that limit data. If the constraint is active, then inserting invalid data will fail.  
 In SQL Server, constraints are separate objects, so we drop/remove the constraint to allow the user to enter invalid data again.  
 
-
 #### Task: Add a rule (constraint) to make sure commission values are between 0 and 10% (0 to 0.1).  
 
-First check to see if invalid data can be inputted.
+First, check to see if invalid data can be inputted:  
 ``` sql
--- Invalid data can be initially be inserted since there are no constraints  
+-- Invalid data can initially be inserted since there are no constraints  
 INSERT INTO Slspers_Backup  
 VALUES (1, 'Finnie', 'Nguyen', 0.25);  
 ```
 
-NOTE: Just like in the last example, please note that there can be NO existing commrate values that break the rule defined in chk_commrate. 
-Please make sure you delete the constraint.
+NOTE: As seen before in the last example, please ensure that there are NO existing commrate values that can violate the new constraint to be added.
 
 ``` sql
 DELETE FROM Slspers_Backup  
 WHERE commrate = 0.25
 ```
 
-To enforce a value range like 0 <= commrate <= 0.1, we'll use a CHECK constraint.  
+The CHECK constraint will now be added to enforce a value range from 0 <= commrate <= 0.1,   
 ``` sql
--- Adding the constraint to enforce Commission between 0 and 10%  
+-- The constraint added will enforce Commission to be between 0 and 10%  
 ALTER TABLE Slspers_Backup  
 ADD CONSTRAINT chk_commrate CHECK (commrate >= 0 AND commrate <= 0.1);  
 ```
 
-Constraints are stored in the database metadata, so you can always look them up later.
+Constraints are stored in the metadata of a database, so they can always look up later.
 ``` sql
 -- To verify constraint  
 EXEC sp_help 'Slspers_Backup';  
@@ -717,20 +719,20 @@ CHECK (commrate)       | chk_commrate    | N/A   | N/A      | Enabled | Is_For_R
 
 > Note: Additionally, in SSMS Object Explorer, expand the `Tables` folder and then expand `Constraints` folder to view your constraints.
 
-So now, running the previous insertion will now fail   
+Having added the constraint, running the initial insertion will now fail   
 ``` sql
 INSERT INTO Slspers_Backup  
 VALUES (1, 'Finnie', 'Nguyen', 0.25); -- Invalid Insertion Data since 0.25 is greater than 0.1 (10%)  
 ```
 
-Use `DROP CONSTRAINT` to remove the Constraint to allow any commission value  
+Use `DROP CONSTRAINT` to remove the constraint and allow all commission values:  
 ``` sql
 -- Remove the commission constraint  
 ALTER TABLE Slspers_Backup  
 DROP CONSTRAINT chk_commrate;  
 ```
 
-Re-inserting data will now work after removing the constraint  
+Since the constraint is removed, re-inserting the initial data will now work.    
 ``` sql
 INSERT INTO Slspers_Backup  
 VALUES (1, 'Finnie', 'Nguyen', 0.25);  
@@ -741,7 +743,7 @@ VALUES (1, 'Finnie', 'Nguyen', 0.25);
 /* ------------ ADDING A DEFAULT CONSTRAINT ------------ */
 
 The DEFAULT keyword sets a value for future inserts only. 
-It however does NOT change existing rows with 'some value' (this applies for rows that contain NULL values too.)   
+It does NOT change existing rows with a value (this applies for rows that contain NULL values too.)   
 
 
 ``` sql
@@ -767,7 +769,7 @@ VALUES (1, 'Alice', 'Smith');
 ``` sql
 -- This does NOT work:  
 INSERT INTO Slspers_Backup   
--- (repid, fname, lname) -- commenting this line out will not work since SQL Server expects values for all columns in the table  
+-- (repid, fname, lname) -- commenting this line out will not work since SQL Server needs to know what values will be assigned to what columns.  
 VALUES (1, 'Alice', 'Smith');  
 ```
 
@@ -810,8 +812,6 @@ One additional way is via the Design View. Right-click the table -> Design View
 Once the view is open, make sure to click on "Email"  
 In the column properties pane, see the default under "Default Value or Binding".  
 
-
-
 #### Solution
 ``` sql
 ALTER TABLE Slspers_Backup
@@ -836,22 +836,20 @@ DROP CONSTRAINT DF_Email;
 /* ------------ Primary KEY Constraint!!! ------------ */  
  
 A Primary Key is a unique identifier for each record in a table and cannot contain duplicates or NULL values! You can have only 1 primary key per table unless it's a composite i.e. a combination of columns.  
--- NOTE: Make sure we affect the DUPLICATE table.
 
+> NOTE: Make sure that the following queries affect the DUPLICATE table.
 
 Warning: We can not make a column a primary key if it already contains duplicates.  
 ``` TRUNCATE TABLE Slspers_Backup  ```
 
-
--- SQL Server refuses to make it a primary key because NULLs are allowed  
+SQL Server refuses to make it a primary key because NULLs are allowed  
 ``` sql
 ALTER TABLE Slspers_Backup  
-ALTER COLUMN repid varchar(6) NOT NULL; -- Exercise: Make the Slspers_Backup to be a NON null value.  
+ALTER COLUMN repid varchar(6) NOT NULL;  
 ```
 
-Check:
+Check that the column `repid` is NOT NULL:  
 ``` SP_HELP Slspers_Backup ```
-
 
 ``` sql
 -- Add the Constraint
@@ -859,15 +857,13 @@ ALTER TABLE Slspers_Backup
 ADD CONSTRAINT pk_slspers PRIMARY KEY (repid);  
 ```
 
--- To verify constraint  
+To verify constraint  
 ``` EXEC sp_help 'Slspers_Backup' ```
-
 
 ``` sql
 INSERT INTO Slspers_Backup  
 VALUES (1, 'Raza', 'Tahir', 0.05)   
 ```
-
 
 ``` sql
 -- To Remove Constraint  
@@ -875,7 +871,7 @@ ALTER TABLE Slspers_Backup
 DROP CONSTRAINT pk_slspers;  
 ```
 
-How to AutoIncrement Primary Key Constraint  
+### How to AutoIncrement Primary Key Constraint  
 ``` sql
 -- Note: IDENTITY can only be set when the column is created  
 ALTER TABLE Slspers_Backup  
@@ -898,12 +894,12 @@ SELECT * FROM Slspers_Backup
 ## <p id = "databases"> BONUS LESSON: Working with Databases | [Back to ToC](#toc)</p>   
 ---------------------------------------------------------- */  
 
-### To create a new database  
-CREATE DATABASE MyDatabase;
+#### To create a new database  
+``` CREATE DATABASE MyDatabase ```
 
 We can also create databases from the Object Explorer.  
 1. In Object Explorer, right-click on Databases and click 'New Database'
-2. Enter a name (e.g., MyDatabase) and then click 'OK'
+2. Enter a name (e.g., `MyDatabase`) and then click 'OK'
 
 On the database, create a table called `People`.
 ```
@@ -926,20 +922,22 @@ Verify:
 To Empty/Truncate The Table:  
 ``` TRUNCATE TABLE People ```
 
-### Create a backup table 'Slsperson' from one database to another.  
-(Great for restoring old datas from backups, as what you'll soon see)
+### Create a backup table `Slsperson` from one database (`Pub1`) to another (`MyDatabase`).  
+This is a great method for restoring old datas from backups, as what will be shown shortly.
 
+``` sql
 SELECT *
 INTO MyDatabase.dbo.Slspers_Backup
 FROM Pub1.dbo.Slspers_Backup
+```
 
-
-### Insert one row from a table in one database to another table
+### Insert one row from a table in one database (`Pub1`) to another table in another database (`MyDatabase`)
+``` sql
 INSERT INTO MyDatabase.dbo.Slspers_Backup
 SELECT *
 FROM Pub1.dbo.Slspers_Backup
 WHERE fname = 'Fred'
-
+```
 
 ### Create a database backup  
 In Microsoft SQL Server, there are several ways to back up a database
@@ -975,8 +973,7 @@ With our newly created .BACPAC file, we'll now find that importing a .bacpac fil
 	- Recreates all tables, views, and other schema
 	- Import all data
 
-7. When the progress is complete, click Close.
-8. Verify by expanding Databases and checking your new database.
+7. When the progress is complete, click Close and then verify that the new database is added.
 
 ### To drop a database  
 ``` DROP DATABASE MyDatabase ```
