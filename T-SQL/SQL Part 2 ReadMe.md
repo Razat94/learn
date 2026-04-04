@@ -630,7 +630,7 @@ Fields marked as nullable means that the columns can contain NULL values i.e. va
 sp_help Slspers_Backup -- Check for nullable columns by looking at the table
 ```
 
-First, verify that we can enter a NULL (blank) value for the Fname field. 
+First, verify that we can enter a NULL (blank) value for the `Fname` field. 
 ``` sql 
 INSERT INTO Slspers_Backup  
 VALUES ('N01', NULL, 'Nguyen', 0.05)  
