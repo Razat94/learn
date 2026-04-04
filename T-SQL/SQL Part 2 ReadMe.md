@@ -754,8 +754,8 @@ VALUES (1, 'Finnie', 'Nguyen', 0.25);
 The DEFAULT keyword sets a value for future inserts only. 
 It does NOT change existing rows with a value (this applies for rows that contain NULL values too.)   
 
-
 ``` sql
+-- Whenever a new row is added, if no value is provided for commrate, then the value automatically defaults to 0.02.”
 ALTER TABLE Slspers_Backup  
 ADD CONSTRAINT df_commrate DEFAULT 0.02 FOR commrate;  
 ```
@@ -785,8 +785,7 @@ VALUES (1, 'Alice', 'Smith');
 -- Verify:  
 SELECT * FROM Slspers_Backup  
 
-
-#### Notice about DROPPING CONSTRAINT!  
+#### Notice about dropping a constraint!  
 If a column has a constraint, dropping the column won't work since the constraint is dependent on column 'commrate':
 ```sql
 -- will NOT work  
@@ -800,11 +799,9 @@ First we must drop the constraint, and then we can drop the column.
 ALTER TABLE Slspers_Backup  
 DROP CONSTRAINT df_commrate; -- remember to use 'sp_help YourTableName' if you forget the constraints name.  
 
-
 -- Step 2: Then drop the column  
 ALTER TABLE Slspers_Backup  
 DROP COLUMN commrate  
-
 
 -- Step 3: Verify  
 sp_help YourTableName   
@@ -844,14 +841,15 @@ DROP CONSTRAINT DF_Email;
  
 /* ------------ Primary KEY Constraint!!! ------------ */  
  
-A Primary Key is a unique identifier for each record in a table and cannot contain duplicates or NULL values! You can have only 1 primary key per table unless it's a composite i.e. a combination of columns.  
+A Primary Key is a unique identifier for each record in a table and cannot contain duplicates or NULL values!
+You can have only 1 primary key per table unless it's a composite i.e. a combination of columns.  
 
 > NOTE: Make sure that the following queries affect the DUPLICATE table.
 
-Warning: We can not make a column a primary key if it already contains duplicates.  
+Warning: We can not make a column a primary key if the column already contains duplicates.  
 ``` TRUNCATE TABLE Slspers_Backup  ```
 
-SQL Server refuses to make it a primary key because NULLs are allowed  
+NOTE: SQL Server refuses to make a primary key if NULLs are allowed on a column.  
 ``` sql
 ALTER TABLE Slspers_Backup  
 ALTER COLUMN repid varchar(6) NOT NULL;  
@@ -897,7 +895,6 @@ Check
 ``` sql
 SELECT * FROM Slspers_Backup
 ```
-
 
 /* -------------------------------------------------------  
 ## <p id = "databases"> BONUS LESSON: Working with Databases | [Back to ToC](#toc)</p>   
