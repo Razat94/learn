@@ -347,7 +347,11 @@ WHERE commrate = 0.03;  -- NOTE: Always include a WHERE clause, or else the UPDA
 -- Check:  
 ``` SELECT * FROM Slspers_Backup WHERE commrate = 0.06  ```
 
-Exercise: Fix the spelling mistake of 'Anne' (RepID 'W02') to 'Annie'    
+#### Exercise: Fix the spelling mistake of 'Anne' (RepID 'W02') to 'Annie'    
+
+> Note Best Practice:  
+> When updating a specific SQL record, use a unique identifier (ideally the Primary Key) to ensure only one row is affected. Using non-unique values (like names or dates) risk updating multiple unintended records.
+
 ``` sql
 -- Solution:  
 UPDATE Slspers_Backup  
