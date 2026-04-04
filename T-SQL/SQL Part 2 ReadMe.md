@@ -280,7 +280,7 @@ FROM Slspers;
 
 #### Optional Exercise: Insert data from one table `Potential_Customers` with a condition into another table `Customers`.  
 ``` sql
-INSERT INTO CustomersCA  -- Note: We have created this table prior.
+INSERT INTO CustomersCA  -- Note: Table has been created previously.
 SELECT *  
 FROM Potential_Customers  
 WHERE State = 'CA';  
@@ -341,7 +341,7 @@ ORDER BY commrate
 ```sql
 UPDATE Slspers_Backup
 SET commrate = 0.06
-WHERE commrate = 0.03;  -- NOTE: Always include a WHERE clause, or the UPDATE statement will affect all records!
+WHERE commrate = 0.03;  -- NOTE: Always include a WHERE clause, or else the UPDATE statement will affect all records!
 ```
 
 -- Check:  
@@ -382,7 +382,7 @@ SET 	bktitle = 'Alex loves Windsurfing',
 		devcost = 5000,  
 		slprice = 22,  
 		pubdate = '2017/11/01'  
-WHERE partnum='40123'  
+WHERE partnum = '40123'  
 ```
 
 Check Updated Row  
@@ -409,16 +409,17 @@ Check Updated Table
 ``` sql
 SELECT *  
 FROM Titles_Revised  
--- WHERE partnum = 40123  
+WHERE partnum = 40123  
 ```
 
 Below are a few additional examples for deletions:
 ``` sql
-DELETE FROM Customers  -- 'DELETE FROM' is standard syntax used in SQL.
+-- 'DELETE FROM' is standard syntax used in SQL.
+DELETE FROM CustomersCA  
 WHERE custnum = 31004;
 
 DELETE FROM Slspers_Backup
-WHERE repid = '1';
+WHERE repid = 'W02';
 ```
 
 (Option 1) We can delete all rows via `TRUNCATE` keyword:
