@@ -188,7 +188,7 @@ Alternatively, using the TRUNCATE statement will remove all the rows from a back
 Exercise #1 (Optional): Create an empty table called `Cust2025` based on the structure of the `Customers` table.
 ``` sql
 SELECT *  
-INTO Cust2025  
+INTO CustomersCA  
 FROM Customers  
 WHERE 1 = 0  -- always false
 ```
@@ -208,7 +208,9 @@ WHERE 1 = 0  -- always false
 
 ### <u> Aww, CRUD! </u>
 
-#### CRUD refers to the four basic operations you can perform on data in a database: <br> Create, Read, Update, & Delete.
+#### CRUD refers to the four basic operations you can perform on data in a database:  
+<br> 
+Create, Read, Update, & Delete.
 
 -- C -- Create  
 -- R -- Read  
@@ -230,7 +232,7 @@ WHERE 1 = 0  -- always false
 
 /* ------------ List of CRUD statements ------------ */  
 
->> Note: We will be modifying the backup tables.  
+>> Note: The following queries will modify the backup tables.  
 Make sure to apply all changes to the BACKUP table, not the original table! 
 
 <br>
@@ -258,7 +260,7 @@ VALUES
 ``` sql
 INSERT INTO Slspers_Backup    
 VALUES  
-('P01', 'Angie', 'Lopez' , 0.05),  -- Notice the comma on all lines except the last one.
+('P01', 'Angie', 'Lopez' , 0.05),  -- Notice the comma on all added rows except the last one.
 ('P01', 'Angel', 'Smith' , 0.05),  
 ('P01', 'Steven', 'Stone' , 0.05)  -- Duplicate REPID 'P01' is intentional as it is a setup for a deletion example.  
 ```
@@ -278,7 +280,7 @@ FROM Slspers;
 
 #### Optional Exercise: Insert data from one table `Potential_Customers` with a condition into another table `Customers`.  
 ``` sql
-INSERT INTO Customers  
+INSERT INTO CustomersCA  -- Note: We have created this table prior.
 SELECT *  
 FROM Potential_Customers  
 WHERE State = 'CA';  
