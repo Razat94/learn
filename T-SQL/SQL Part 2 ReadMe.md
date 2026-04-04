@@ -181,6 +181,10 @@ WHERE 1 = 0  -- always false
 -- So instead, we must use an expression that evaluates to false.
 ```
 
+Alternatively, using the TRUNCATE statement will remove all the rows from a backup table but keeps its structure:    
+``` TRUNCATE TABLE Slspers_Backup ```
+
+
 Exercise #1 (Optional): Create an empty table called `Cust2025` based on the structure of the `Customers` table.
 ``` sql
 SELECT *  
@@ -197,9 +201,6 @@ WHERE 1 = 0  -- always false
 	- In the Object Explorer pane, navigate to your database and find the table you wish to delete (e.g., `Customers2025`).
 	- Right-click the table and select Delete.
 	- When the Delete Object dialog box appears, verify the selection and click OK to drop the table
-
-(Jumping ahead) Optional Mention: The TRUNCATE statement removes all rows from a table but keeps the structure  
-``` TRUNCATE TABLE Slspers_Backup ```
 
 ---
 
