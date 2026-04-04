@@ -507,8 +507,9 @@ When creating a SQL table, the table’s structure is defined by specifying colu
 
 A SQL data type is an attribute of a column that determines the kind of values the column can store. SQL data types are a core rule of the SQL table structure that restricts & validates the type of data that a column allows, and is similar to the Data Validation tool in Excel.
 
-Learn more about field Data types by going to the [Learn Microsoft Page.](https://learn.microsoft.com/en-us/sql/t-sql/data-types/data-types-transact-sql?view=sql-server-ver17)  
+For more information on field data types, please refer to the [Learn Microsoft Page.](https://learn.microsoft.com/en-us/sql/t-sql/data-types/data-types-transact-sql?view=sql-server-ver17)  
 
+#### Task: Create a table to store produce items. After the table has been created, insert a few sample entries with their prices and availability and finally query the table to display all produce items.
 
 Step 1: Create the table  
 ``` sql
