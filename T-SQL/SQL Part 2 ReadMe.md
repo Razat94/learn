@@ -1002,7 +1002,7 @@ More formally, a SQL View is a virtual table and is essentially a saved query th
 
 > Note: A view does not store data on its own since it just stores the query.  
 > If the original data changes, then the view will automatically reflect it. 
-> Note that a user can also run DML statements against a view.
+> Note that a user can also insert data (via DML statements) against a view to modify the underlying base table.
 
 Views can be based on:  
 - One entire table  
@@ -1013,8 +1013,7 @@ Views can be based on:
 
 #### Why Views Matter  
 - Security  
-	- A view can expose only specific rows and columns.  
-	- So instead of giving users direct full access to a table, we can create a view and allow users to only see the data through that.
+	- A view can expose only specific rows and columns. So instead of giving users direct full access to a table, we can create a view and allow users to only see the data through that.
 	- DBAs can refuse/restrict access to tables but only grant access to views.  
 
 - Ease of access  
@@ -1072,9 +1071,7 @@ DELETE FROM CA_Cust
 WHERE custname LIKE 'Nickki%'
 ```
 
-> NOTE: A view will always show real-time data. 
-
-Since a view doesn’t store data itself and is just a saved query on a table:  
+Since a view doesn't store data itself and is just a saved query on a table, the view will always show real-time data.  
 - If we delete data through the view, we'll actually be deleting it from the underlying table, because that’s where the real data is stored.  
 - If we delete data on the original table, the view will update.
 
