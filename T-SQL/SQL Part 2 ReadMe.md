@@ -154,7 +154,9 @@ WHERE custnum IN (
 
 In this lesson, we'll cover how to insert, update, and delete records in a table.
 
-Create a backup table of `Titles` called `Titles_Revised`  
+Throughout these lessons, we'll create backup tables and make changes to those copies, ensuring that even if a backup is altered or corrupted, the original remains intact.
+
+Task: Create a backup table of `Titles` called `Titles_Revised`  
 ``` sql
 SELECT *  
 INTO Titles_Revised  
@@ -702,7 +704,7 @@ INSERT INTO Slspers_Backup
 VALUES (1, 'Finnie', 'Nguyen', 0.25);  
 ```
 
-NOTE: As seen before in the last example, please ensure that there are NO existing commrate values that can violate the new constraint to be added.
+NOTE: As seen before in the previous example, please ensure that there are NO existing commrate values that can violate the new constraint to be added.
 
 ``` sql
 DELETE FROM Slspers_Backup  
@@ -733,7 +735,7 @@ CHECK (commrate)       | chk_commrate    | N/A   | N/A      | Enabled | Is_For_R
 Having added the constraint, running the initial insertion will now fail   
 ``` sql
 INSERT INTO Slspers_Backup  
-VALUES (1, 'Finnie', 'Nguyen', 0.25); -- Invalid Insertion Data since 0.25 is greater than 0.1 (10%)  
+VALUES (1, 'Finnie', 'Nguyen', 0.25); -- Invalid insertion since 0.25 is greater than 0.1 (10%)  
 ```
 
 Use `DROP CONSTRAINT` to remove the constraint and allow all commission values:  
@@ -757,21 +759,20 @@ The DEFAULT keyword sets a value for future inserts only.
 It does NOT change existing rows with a value (this applies for rows that contain NULL values too.)   
 
 ``` sql
--- Whenever a new row is added, if no value is provided for commrate, then the value automatically defaults to 0.02.”
+-- Whenever a new row is added, if no value is provided for commrate, then the value automatically defaults to 0.02.
 ALTER TABLE Slspers_Backup  
 ADD CONSTRAINT df_commrate DEFAULT 0.02 FOR commrate;  
 ```
 
--- To verify constraint  
+Verify the constraint:  
 ``` EXEC sp_help 'Slspers_Backup';  ```
 
+Let's try adding values:
 ``` sql
 -- This works:   
 INSERT INTO Slspers_Backup   
 VALUES (1, 'Alice', 'Smith', 0.05);  
-```
 
-``` sql
 -- This also works since we added a DEFAULT constraint of 0.02:  
 INSERT INTO Slspers_Backup (repid, fname, lname)  
 VALUES (1, 'Alice', 'Smith');  
@@ -784,11 +785,11 @@ INSERT INTO Slspers_Backup
 VALUES (1, 'Alice', 'Smith');  
 ```
 
--- Verify:  
+Verify the insertions:  
 SELECT * FROM Slspers_Backup  
 
-#### Notice about dropping a constraint!  
-If a column has a constraint, dropping the column won't work since the constraint is dependent on column 'commrate':
+#### Notice about dropping a constraint  
+If a column has a constraint, dropping the column won't work since the constraint is dependent on the column (e.g. 'commrate')
 ```sql
 -- will NOT work  
 ALTER TABLE Slspers_Backup  
@@ -869,6 +870,7 @@ ADD CONSTRAINT pk_slspers PRIMARY KEY (repid);
 To verify constraint  
 ``` EXEC sp_help 'Slspers_Backup' ```
 
+Note that we cannot insert two records like the following because of the primary key constraint on REPID:
 ``` sql
 INSERT INTO Slspers_Backup  
 VALUES (1, 'Raza', 'Tahir', 0.05)   
