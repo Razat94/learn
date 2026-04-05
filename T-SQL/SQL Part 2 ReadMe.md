@@ -185,7 +185,7 @@ Alternatively, using the TRUNCATE statement will remove all the rows from a back
 ``` TRUNCATE TABLE Slspers_Backup ```
 
 
-Exercise #1 (Optional): Create an empty table called `Cust2025` based on the structure of the `Customers` table.
+Exercise #1 (Optional): Create an empty table called `CustomersCA` based on the structure of the `Customers` table.
 ``` sql
 SELECT *  
 INTO CustomersCA  
@@ -193,12 +193,14 @@ FROM Customers
 WHERE 1 = 0  -- always false
 ```
 
+> Additional Exercise: Create an empty table called `Cust2025`
+
 #### Different Ways to Delete a Table in SQL Server:
 - Using T-SQL Commands:
-	- DROP TABLE `Cust2025`  
-	- DROP TABLE IF EXISTS `Customers2025` -- avoid errors if the table has already been deleted.
+	- DROP TABLE `CustomersCA`  
+	- DROP TABLE IF EXISTS `CustomersCA` -- avoid errors if the table has already been deleted.
 - Using the SSMS Object Explorer (GUI):
-	- In the Object Explorer pane, navigate to your database and find the table you wish to delete (e.g., `Customers2025`).
+	- In the Object Explorer pane, navigate to your database and find the table you wish to delete (e.g., `CustomersCA`).
 	- Right-click the table and select Delete.
 	- When the Delete Object dialog box appears, verify the selection and click OK to drop the table
 
