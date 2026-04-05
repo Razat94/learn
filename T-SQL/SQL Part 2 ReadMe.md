@@ -955,35 +955,32 @@ In Microsoft SQL Server, there are several ways to back up a database
 One easy way is to create a .BACPAC file.
 [Reference Link](https://www.youtube.com/watch?v=XLzV_gagkZc)
 
-To create it, right click on a Database and then go to 
-Click 'Tasks' -> 'Export Data-tier Application'  
+Follow these steps to create a backup:
+1. In the Object Explorer, right click on a Database and then click 
+'Tasks' -> 'Export Data-tier Application'  
 
-The wizard alert will then pop up to help guide you through the steps.
+2. The wizard alert will then pop up to help guide you through the steps.
+	- On the 'Export Settings' screen, choose 'Save to local disk' and then select a file path and name (e.g., SampleDB.bacpac)
+	- Click Next to verify the specified settings & then click 'Finish'
 
-On the 'Export Settings' screen, choose 'Save to local disk' and then select a file path and name (e.g., YourDB.bacpac)
-
-Click Next to verify the specified settings & then click 'Finish'
-
-Voila, the backup file should be created.
+Voila, the backup file should now be created.
 
 ### To import a database backup
 With our newly created .BACPAC file, we'll now find that importing a .bacpac file in Microsoft SQL Server is basically the reverse of exporting
 
-1. In Object Explorer, right-click Databases.
-2. Click Import Data-tier Application to view the Wizard.
+1. Right-click Databases and click 'Import Data-tier Application' to view the Wizard.
 
-3. Click Next on the welcome screen.
-4. Choose Import from local disk & browse to select your .bacpac file (e.g., YourDB.bacpac).
-5. Click Next & then you'll be prompted to Enter a name for the new database.
+2. On the "Import Settings" tab, under 'Import from local disk', browse to select your .bacpac file (e.g. SampleDB.bacpac).
+
+3. On the "Database Settings" tab, you'll be prompted to enter a name for the new database.
 
 > Note: This is the database that will be created from the BACPAC. Specify the data and log file locations (optional, defaults are fine).
 
-6. Click Next and then click 'Finish'. You'll find that SSMS will show a progress bar as it:
+4. Click Next and then click 'Finish'. You'll find that SSMS will show a progress bar as it:
 	- Creates the database
 	- Recreates all tables, views, and other schema
-	- Import all data
-
-7. When the progress is complete, click Close and then verify that the new database is added.
+	- Import all data  
+- When the progress is complete, click 'Close' and then verify that the new database is added.
 
 ### To drop a database  
 ``` DROP DATABASE MyDatabase ```
@@ -1005,6 +1002,7 @@ More formally, a SQL View is a virtual table and is essentially a saved query th
 
 > Note: A view does not store data on its own since it just stores the query.  
 > If the original data changes, then the view will automatically reflect it. 
+> Note that a user can also run DML statements against a view.
 
 Views can be based on:  
 - One entire table  
@@ -1016,7 +1014,7 @@ Views can be based on:
 #### Why Views Matter  
 - Security  
 	- A view can expose only specific rows and columns.  
-	- So instead of giving users direct access to a table, we can create a view and allow users to only see the data through that.
+	- So instead of giving users direct full access to a table, we can create a view and allow users to only see the data through that.
 	- DBAs can refuse/restrict access to tables but only grant access to views.  
 
 - Ease of access  
@@ -1024,14 +1022,6 @@ Views can be based on:
 	- Ultimately, it helps when manipulating/joining large tables.  
 
 <br/>
-
-NOTE: The difference between VIEWS & PROCEDURES  
-- Views can't store/accept parameters (no input).  
-- Doesn't contain procedural logic (no IF, loops, etc.).  
-- A view definition can't use or contain DML statements such as INSERT, UPDATE, DROP and DELETE. 
-	- A View definition can only use a SELECT query since it doesn't data.
-
-> Note: While you cannot contain DML inside the view definition, you can use DML statements against a view. We will touch base with it here. 
 
 ---
 
@@ -1041,7 +1031,7 @@ CREATE VIEW CA_Cust AS
 SELECT custname, city, state  
 FROM Customers  
 WHERE state = 'CA'
-WITH CHECK OPTION -- This rule forces the view to reject any rows that don’t meet the view’s filter
+WITH CHECK OPTION -- This rule forces the view to reject any rows that don’t meet the view's filter
 -- Note: The ORDER BY clause is invalid in views.
 ```
 
@@ -1059,7 +1049,7 @@ SELECT * FROM CA_Cust  	-- The view will only return customers from California.
 ```
 
 
-We can insert data through the view, and it will update the original Customers table.
+Data can now be inserted through the view, and it will update the original Customers table.
 ``` sql
 -- Will work
 INSERT INTO CA_Cust
@@ -1076,7 +1066,6 @@ VALUES
 ('Nickkis Design', 'Brooklyn', 'NY')
 ```
 
-
 If needed, we can delete any customers from the view as well:  
 ``` sql
 DELETE FROM CA_Cust
@@ -1088,7 +1077,6 @@ WHERE custname LIKE 'Nickki%'
 Since a view doesn’t store data itself and is just a saved query on a table:  
 - If we delete data through the view, we'll actually be deleting it from the underlying table, because that’s where the real data is stored.  
 - If we delete data on the original table, the view will update.
-
 
 Syntax to Delete (Drop) a View  
 ``` DROP VIEW CA_Cust  ```
@@ -1108,7 +1096,7 @@ Step 3: Let's suppose the goal is for users to view some data from the `Titles_R
 
 Step 4: Once all the fields have been added, save the view. Click the save icon or just close the window and confirm the save. Give the view a name, like `TitlesInfo`.
 
-Result: Now the view is created. To run it, expand the Views folder, find the new view, right-click it, and select "Select Top 1000 Rows" or run a SELECT query. You’ll see the data returned just like in a standard  table.
+Result: Now the view is created. To run it, expand the Views folder, find the new view, right-click it, and select "Select Top 1000 Rows" or run a SELECT query. You'll see the data returns in a standard table.
 
 ---
 
@@ -1180,10 +1168,10 @@ SELECT * FROM mediumprice ORDER BY slprice
 -- NOTE: The View will not return any books outside of that range...
 SELECT *  
 FROM mediumprice
-WHERE partnum = '40121' -- This book title has a slprice of $36.50 
+WHERE partnum = '40121' -- This book title has a slprice of $36.50 & does not exist in the context of the view.
 
 
--- ...but the table will still hold the data.
+-- ...but of course the original table will still hold the data.
 SELECT *  
 FROM Titles_Revised
 WHERE partnum = '40121'
@@ -1339,7 +1327,15 @@ For instance, another built-in stored procedure we've seen before in the SQL Par
 
 > 1st NOTE:  
 
-A View:  
+NOTE: The difference between VIEWS & PROCEDURES  
+- Views can't store/accept parameters (no input).  
+- Doesn't contain procedural logic (no IF, loops, etc.).  
+- A view definition can't use or contain DML statements such as INSERT, UPDATE, DROP and DELETE. 
+	- A View definition can only use a SELECT query since it doesn't data.
+
+> Note: While you cannot contain DML inside the view definition, you can use DML statements against a view. We will touch base with it here. 
+
+So a View:  
 - Can't accept parameters (no input).  
 - Doesn't run conditional logic (e.g. no IFs)  
 - Can't use loops  
