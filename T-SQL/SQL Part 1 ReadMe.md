@@ -96,27 +96,24 @@ FROM slspers;
 > In SQL Server, you can generate a SELECT query from the Object Explorer:  
 > Right-click the table name and choose 'Select Top 1000 Rows'.
 
-
-#### Query that outputs only 2 columns  
-SELECT fname, lname
-FROM slspers;
-
-
--- Alternate way to retrieves two specific columns via table prefix  
-SELECT
-	Slspers.fname, Slspers.lname
-FROM Slspers;
-
-
 #### Table alias/prefix can be used before the wildcard asterisk (*) too.  
 SELECT Slspers.* FROM Slspers    
 -- Same as:  
 -- SELECT * FROM Slspers
 
+#### Query that outputs only 2 columns  
+SELECT fname, lname
+FROM slspers;
+
+-- Alternate way to retrieves two specific columns via table prefix  
+SELECT  
+	Slspers.fname, Slspers.lname  
+FROM Slspers;
 
 -- Alias 'AS' Keyword --  
-SELECT fname, lname AS 'Last Name' FROM Slspers;  
--- The keyword 'AS' is not needed since it's just a formality.  
+SELECT fname, lname AS 'Last Name' FROM Slspers; 
+
+-- NOTE: The keyword 'AS' is not needed since it's just a formality.  
 -- SELECT fname, lname 'Last Name' FROM Slspers;
 
 #### ...more to discuss in Chapter 5! [Link to Lesson 5](#5). 
@@ -177,7 +174,8 @@ WHERE TABLE_NAME = 'Slspers'
 > Note: Not good practice to create duplicate tables unless for sandboxes & backups
 
 -- Excercise: Please create TWO Backup tables to showcase the 2 different ways to delete a table:  
-SELECT * INTO Slspers202XBackup  
+SELECT *  
+INTO Slspers_Backup  
 FROM Slspers;  
 > After completion, make sure to select 'Refresh' on Object Explorer.
 
@@ -229,7 +227,6 @@ C:\Users\student> sqlcmd -S UT-LAPTOP\SQLEXPRESS -E
 
 
 
-
 /* -------------------------------------------------------
 ## <p id = "2"> LESSON 2: Performing a Conditional Search | [Back to ToC](#toc) </p>
 ---------------------------------------------------------- */
@@ -246,7 +243,7 @@ ORDER BY state ASC -- Sorts the table by state
 
 -- Multilevel Sort  
 SELECT *  
-FROM Titles  
+FROM Customers  
 ORDER BY State ASC, city DESC  
 
 #### To get top 5 rows  
@@ -268,7 +265,7 @@ WHERE state = 'NY'
 -- verify that 6 people are there.  
 
 -- NOTE: In SQL Server, use single quotation marks (' ') for string literals.  
--- Double quotation marks (" ") are not valid for this purpose.
+-- Double quotation marks (" ") are not valid for this purpose and will not work in a query.
 
 > Practice Exercise: Show all people from the city 'Houston'.
 
@@ -298,7 +295,6 @@ WHERE pubdate > '2017-01-01' -- Note: Actual date must be wrapped in ''
 ORDER BY pubdate
 
 
-
 #### BE CAREFUL: Computed or alias columns aren't part of the actual table, so they can't be used in the `WHERE` clause since WHERE is evaluated before SELECT.
 
 SELECT  
@@ -311,14 +307,12 @@ WHERE slprice - slprice * 0.07 >= 45
 ORDER BY discounted_price DESC  -- WILL WORK!  
 
 
-
 #### WHERE clause with NULL:  
 SELECT *  
 FROM Titles  
 WHERE devcost IS  
 -- NOT  
 NULL  
-
 
 
 #### ISNULL() is a function that replaces NULL values with an alternate value.
@@ -343,7 +337,7 @@ Alice	1000
 Bob		0  
 Charlie	500  
 
-> This function  againce replaces nulls; similar to the Excel function   
+> This function is similar to the Excel function   
 IF(ISBLANK())  
 Note: In MySQL, use the function IFNULL() instead.
 
@@ -371,11 +365,16 @@ WHERE commrate > 0.04;
 EVERY (All) condition MUST be true. [Similar to Excel Function]
 
 
-
 -- Exercise: Show only people from Houston, TX since there are multiple Houston cities in America.
 SELECT *  
 FROM customers  
 WHERE state = 'TX' AND city = 'Houston'  
+
+
+SELECT *  
+FROM sales  
+WHERE repid = 'N02' AND qty > 200  
+ORDER BY qty 
 
 
 Select *  
@@ -383,12 +382,6 @@ FROM Titles
 -- WHERE slprice >= 35 AND slprice <= 70  
 -- Also works: WHERE slprice BETWEEN 35 AND 70 -- does the same as above.  
 ORDER BY slprice ASC
-
-
-SELECT *  
-FROM sales  
-WHERE repid = 'N02' AND qty > 200  
-ORDER BY qty 
 
 
 ### OR  
@@ -408,6 +401,7 @@ FROM Customers
 WHERE Customers.state = 'NY' OR state='CA' AND zipcode = '92704'  
 ORDER BY zipcode  
 -- This will return multiple NY resident without the zipcode 92704  
+-- This is because in a SQL query, the AND operator has a higher precedence than the OR operator and is evaluated first
 -- Solution: -- WHERE (Customers.state = 'NY' OR state='CA') AND zipcode = '92704'  
 
 
@@ -422,7 +416,11 @@ SELECT *
 FROM Titles
 WHERE bktitle LIKE 'The%'
 
-## Exercise: Show all last names that end with 'an'
+## Exercise: Show all book titles that end with 'y'
+-- Solution:
+SELECT * 
+FROM Titles
+WHERE TRIM(bktitle) LIKE '%y';
 
 Another example:  
 -- SELECT title, director FROM movies   
@@ -452,8 +450,6 @@ FROM Titles
 ORDER BY bktitle ASC  
 
 > Ctrl + R -> Hide the Result Pane
-
-
 
 
 
@@ -557,8 +553,8 @@ WHERE YEAR(pubdate) = 2017
 
 ``` sql
 -- Notice the difference between answers
-SELECT AVG( CAST(commrate AS DECIMAL(10,1)) ) FROM Slspers
-SELECT AVG( CAST(commrate AS DECIMAL(10,2)) ) FROM Slspers
+SELECT AVG( CAST(commrate AS DECIMAL(10,1)) ) FROM Slspers  -- 0.030000
+SELECT AVG( CAST(commrate AS DECIMAL(10,2)) ) FROM Slspers  -- 0.037000
 ```
 
 > Side Note: If a SQL column is stored as TEXT but contains numbers, you must cast it to a numeric type before doing numeric operations or comparisons.
@@ -570,7 +566,7 @@ Short answer:
 No, you can't use `SUM()` to add values across columns like `Q1 + Q2` in a single total row.  
 `SUM()` works vertically by adding values in one column over many rows
 
-You can however do a row-wise sum across columns like Q1 + Q2:
+You can however do a row-wise sum across columns like Q1 + Q2 without the function:
 
 ``` sql
 SELECT 
@@ -839,7 +835,6 @@ PIVOT (
 ---------------------------------------------------------- */
 
 
-
 ### /* ------------ Unions Statement ------------ */
 SELECT *  
 FROM Titles  
@@ -872,14 +867,14 @@ ORDER BY bktitle
 
 ```sql
 -- Works:
-SELECT Sales.Ordnum, * -- Note: Ordnum would be outputted twice in this example.
+SELECT Sales.ORDNUM, * -- Note: Ordnum would be outputted twice in this example.
 FROM Sales
 WHERE Sales.qty > 300;
 ```
 
 ```sql
 -- Works:
-SELECT S.* -- Using an alias S  -- Outputting Individual Columns -- S.ordnum, S.ordnum
+SELECT S.* -- Using an alias S  -- Outputting Individual Columns -- S.ordnum, S.qty
 FROM Sales S
 WHERE S.qty > 300;
 ```
@@ -900,7 +895,6 @@ WHERE Sales.qty > 300; -- Must change to S.qty
 
 <br/>
 <br/>
-
 
 
 ### INNER JOIN
@@ -993,7 +987,7 @@ ON C.custnum = P.custnum
 -- Sample Exercise: Show all titles and display matching sales if they exist (Bonus: Add TotalSales).
 SELECT Titles.partnum,
        bktitle,
-       qty,
+       qty, -- Notice that qty doesn't exist on Titles table.
        Sales.qty * Titles.slprice AS total_amount
 FROM Titles
 LEFT JOIN Sales
@@ -1023,7 +1017,7 @@ JOIN Titles t
     ON s.partnum = t.partnum
 JOIN Customers c
     ON s.custnum = c.custnum
-WHERE s.qty > 500;
+WHERE s.qty >= 500;
 ```
 
 This query:  
@@ -1094,7 +1088,6 @@ GROUP BY pubdate
 /* -------------------------------------------------------
 ## <p id = "6"> LESSON 6: Exporting Query Results | [Back to ToC](#toc)</p> 
 ---------------------------------------------------------- */
-
 
 
 EXPORTING  
@@ -1195,6 +1188,9 @@ A: NO.
 
 Q: For string literals, can I use double quotes "" instead of single quotes ''?  
 A: NO  
+
+Q: Will ``` SELECT Fname Lname Commrate FROM Employee; ``` work?  
+A: NO since commas are needed.  
 
 Q: How to copy output into text file?  
 A:  
