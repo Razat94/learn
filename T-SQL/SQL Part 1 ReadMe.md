@@ -236,7 +236,7 @@ C:\Users\student> sqlcmd -S UT-LAPTOP\SQLEXPRESS -E
 
 <!-- SORTING & FILTERING CHAPTER -->
 
-In the last chapter, a connection to a server was made and a basic query was executed.  
+In the last chapter, a connection to a server was made and a few basic queries were executed.  
 This chapter will cover how to sort & filter results to reorganize and display only the data needed.
 
 ### Sorting
@@ -276,7 +276,7 @@ ORDER BY State ASC
 
 
 ### Where Clause
-The SQL WHERE clause filters results by applying one or more conditions, so only records that meet the criteria are returned or affected. A condition is a rule for finding specific data and consists of a column or expression, an operator, and a value to compare.
+The SQL WHERE clause filters results by applying one or more conditions so that only records that meet the criteria are returned or affected. A condition is a rule for finding specific data and consists of a column (or expression), an operator, and a value to compare.
 
 #### Example of Where Clause
 ``` sql
@@ -358,7 +358,7 @@ WHERE NOT state = 'NY'
 ```
 
 ### NULL Values
-In SQL, a NULL value represents void or empty data in a table field. Similar to a blank cell in Excel, in databases a NULL value is a placeholder that represents missing or blank data, and is different from a numeric zero or an empty string.
+In SQL, a `NULL` value represents void or empty data in a table field. Similar to a blank cell in Excel, in databases a `NULL` value is a placeholder that represents missing or blank data, and is different from a numeric zero or an empty string.
 
 #### Example of WHERE clause with NULL:  
 ``` sql
@@ -369,7 +369,7 @@ WHERE devcost IS
 NULL  
 ```
 
-Additionally, ISNULL() is a function that replaces NULL values with an alternate value. This function is similar to the Excel function ' IF( ISBLANK() ) '  
+Additionally, ISNULL() is a function that replaces `NULL` values with an alternate value. This function is similar to the Excel function ' IF( ISBLANK() ) '  
 > Note: In MySQL, use the function IFNULL() instead.
 
 For example, if a table looked like this:
@@ -446,7 +446,8 @@ AND devcost IS NOT NULL
 
 Exercise: Show all customers who are either in California or New York. 
 ``` sql
-SELECT custname, city, state FROM Customers    
+SELECT custname, city, state 
+FROM Customers    
 WHERE state = 'CA' OR state = 'NY'    
 -- Also works: -- WHERE state IN ('CA', 'NY', 'TX');  
 ```
@@ -485,7 +486,7 @@ FROM Titles
 WHERE TRIM(bktitle) LIKE '%y';
 ```
 
-Optional Example #1: Show all book titles that begin with 'The'
+Optional Example #1: Show all book titles that only begins with the word 'The'
 ``` sql
 -- Solution
 SELECT *
