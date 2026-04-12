@@ -96,10 +96,10 @@ FROM slspers;
 > In SQL Server, you can generate a SELECT query from the Object Explorer:  
 > Right-click the table name and choose 'Select Top 1000 Rows'.
 
-> Feel free to look at the other 3 tables:  
-> SELECT * FROM Customers  
-> SELECT * FROM Titles  
-> SELECT * FROM Sales  
+Optional Task: Retrieve the data from the other 3 tables:  
+- SELECT * FROM Customers  
+- SELECT * FROM Titles  
+- SELECT * FROM Sales  
 
 #### Table alias/prefix can be used before the wildcard asterisk (*) too.  
 SELECT Slspers.* FROM Slspers    
@@ -211,13 +211,14 @@ WHERE 1 = 0;
 -- use WHERE 1 = 0 or similar condition.
 
 
-> To delete a table:  
+To delete a table:  
 DROP TABLE IF EXISTS titles_backup  
--- (Note: This will PERMANENTLY delete the table unless you have a backup or haven’t committed the changes yet!)  
--- To drop a table, you can also do the following:  
--- Right-click the table name in Object Explorer and select Delete.
+-- (Note: This will PERMANENTLY delete the table unless you have a backup or haven’t committed the changes yet!) 
 
-> To truncate a table i.e. to remove all rows from table:   
+> To drop a table, you can also do the following:  
+Right-click the table name in Object Explorer and select Delete.
+
+To truncate a table i.e. to remove all rows from table:   
 TRUNCATE TABLE titles_backup  
 
 
