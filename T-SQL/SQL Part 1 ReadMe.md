@@ -545,7 +545,7 @@ There are many built-in SQL functions similar to Excel's `SUM` and `CONCATENATE`
 
 ### Date Functions
 ``` sql
-SELECT GETDATE();  
+SELECT GETDATE();  -- Similar to Excels TODAY() function
 SELECT CAST(GETDATE() AS DATE);  
 SELECT YEAR( GETDATE() ); 	-- like in Excel, the functions MONTH(date) and DAY(date) are available too.  
 -- Also works: -- SELECT DATEPART( year, GETDATE() )
