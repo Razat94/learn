@@ -146,6 +146,9 @@ FROM TITLES
 
 
 ### Keyboard Shortcuts:
+
+> Ctrl + R (Hide the Result Pane)
+
 > Ctrl+K; Ctrl+C (comment)  
 > Ctrl+K; Ctrl+U (uncomment)
 
@@ -226,97 +229,150 @@ C:\Users\student> sqlcmd -S UT-LAPTOP\SQLEXPRESS -E
 ```
 
 
-
 /* -------------------------------------------------------
 ## <p id = "2"> LESSON 2: Performing a Conditional Search | [Back to ToC](#toc) </p>
 ---------------------------------------------------------- */
 
 
-
 <!-- SORTING & FILTERING CHAPTER -->
 
-#### To sort data by a column  
+In the last chapter, a connection to a server was made and a basic query was executed.
+This chapter will cover how to sort & filter results to reorganize and display only the data needed.
+
+### Sorting
+Sorting organizes query results in ascending or descending order.
+
+#### To sort data by a single column  
+``` sql
 SELECT *  
 FROM Customers   
-ORDER BY state ASC -- Sorts the table by state  
--- IN SQL SERVER, ORDER BY does default to ASC.  
+ORDER BY state ASC -- Sorts the table by state column  
+-- IN SQL SERVER, ORDER BY defaults to ASC.  
+```
 
--- Multilevel Sort  
+A multi-level sort can be applied by listing column names in sequence and separating them with commas.
+
+#### Example of a Multi-Level Sort  
+``` sql
 SELECT *  
 FROM Customers  
 ORDER BY State ASC, city DESC  
+-- This means that the customer data is sorted first by State, and if some records share the same State, those records are then sorted by City.
+```
 
-#### To get top 5 rows  
+The SELECT TOP clause limits the number of records returned. It is especially useful for large tables, as retrieving too many records can slow performance.
+
+#### Select only the top 5 rows of the Customers Table:  
+``` sql
 SELECT  
 TOP 5  
 *  
 FROM Customers  
 ORDER BY State ASC
-
+```
 
 -- In SSMS, you can use the 'Query Options' command to set the ROWCOUNT value.  
 -- i.e. 'Specify the maxinum number of rows to return before the server stops processing'
 
 
-#### WHERE clause acts as a Filter 
+### Where Clause
+The SQL WHERE clause filters results by applying one or more conditions, so only records that meet the criteria are returned or affected. A condition is a rule for finding specific data and consists of a column or expression, an operator, and a value to compare.
+
+#### Example of Where Clause
+``` sql
 SELECT *  
 FROM Customers  
 WHERE state = 'NY'   
--- verify that 6 people are there.  
+-- The WHERE clause acts as a Filter. Verify that 6 people are returned.  
 
 -- NOTE: In SQL Server, use single quotation marks (' ') for string literals.  
 -- Double quotation marks (" ") are not valid for this purpose and will not work in a query.
+```
 
 > Practice Exercise: Show all people from the city 'Houston'.
 
+Below are more examples demonstrating various ways the WHERE clause can be used:  
+- WHERE clause with numbers:
+	``` sql
+	-- Another Example  
+	SELECT *  
+	FROM  titles  
+	WHERE  
+	-- NOT  
+	slprice      >            50  
+	column    operator       value
+	```
 
-#### NOT   
+- WHERE clause showing book titles with dates past 1/1/2017
+	``` sql 
+	SELECT 
+		bktitle, 
+		CAST(pubdate AS DATE) -- CAST is used to truncate the time portion  
+	FROM Titles  
+	WHERE pubdate > '2017-01-01' -- Note: Date must be wrapped in ''  
+	ORDER BY pubdate
+	```
+
+- BE CAREFUL: Computed or alias columns aren't part of the actual table, so they can't be used in the `WHERE` clause since WHERE is evaluated before SELECT.
+	``` sql
+	SELECT  
+		partnum,  
+		bktitle,  
+		slprice - slprice * 0.07 AS discounted_price  
+	FROM Titles  
+	WHERE slprice - slprice * 0.07 >= 45  
+	-- WHERE discounted_price >= 45 -- WON'T WORK!  
+	ORDER BY discounted_price DESC  -- WILL WORK!  
+	```
+
+- Create a new table from a filtered table:  
+	``` sql
+	SELECT   
+	*  
+	INTO CA_Customers  -- Creates a new table called 'CA_Customers'  
+	FROM Customers  
+	WHERE state = 'CA'  
+	ORDER BY custname
+	```
+
+	- TO DELETE:  
+	``` DROP TABLE CA_Customers ```  
+
+- Another Example  
+	``` sql
+	SELECT *  
+	INTO HighEarners  
+	FROM Slspers  
+	WHERE commrate > 0.04;  
+	```
+
+### SQL NOT Operator 
+The NOT operator is used in the WHERE clause to return records that do not match a specific condition.
+
+#### Example query that returns all customers that are NOT from NY:
+``` sql
 SELECT *  
 FROM Customers  
-WHERE NOT state = 'NY'  
+WHERE NOT state = 'NY'    
 -- ORDER BY state  
+```
 
+### NULL Values
+In SQL, a NULL value represents void or empty data in a table field. Similar to a blank cell in Excel, in databases a NULL value is a placeholder that represents missing or blank data, and is different from a numeric zero or an empty string.
 
-#### WHERE clause with numbers:
-> -- Another Example  
-SELECT *  
-FROM  titles  
-WHERE  
--- NOT  
-slprice      >            50  
-column    operator       value
-
-
-#### WHERE clause with dates:  
--- Show titles published past 1/1/2017  
-SELECT bktitle, CAST(pubdate AS DATE) -- CAST is used to truncate the time portion  
-FROM Titles  
-WHERE pubdate > '2017-01-01' -- Note: Actual date must be wrapped in ''  
-ORDER BY pubdate
-
-
-#### BE CAREFUL: Computed or alias columns aren't part of the actual table, so they can't be used in the `WHERE` clause since WHERE is evaluated before SELECT.
-
-SELECT  
-	partnum,  
-	bktitle,  
-	slprice - slprice * 0.07 AS discounted_price  
-FROM Titles  
-WHERE slprice - slprice * 0.07 >= 45  
--- WHERE discounted_price >= 45 -- WON'T WORK!  
-ORDER BY discounted_price DESC  -- WILL WORK!  
-
-
-#### WHERE clause with NULL:  
+#### Example of WHERE clause with NULL:  
+``` sql
 SELECT *  
 FROM Titles  
 WHERE devcost IS  
 -- NOT  
 NULL  
+```
 
+Additionally, ISNULL() is a function that replaces NULL values with an alternate value. This function is similar to the Excel function ' IF( ISBLANK() ) '  
+> Note: In MySQL, use the function IFNULL() instead.
 
-#### ISNULL() is a function that replaces NULL values with an alternate value.
-If I had a table that looked like this:
+For example, if a table looked like this:
 ```
 Name	Bonus  
 Alice	1000  
@@ -324,133 +380,153 @@ Bob		NULL
 Charlie	500  
 ```
 
-If I ran the query:  
+Running the following query will replace null values with 0:  
+``` sql
 SELECT Name, ISNULL(Bonus, 0) AS BonusAmount  
 FROM Employees;
+```
 
-
-This would be my result:  
-
+Result:
+```
 Result:  
 Name	BonusAmount  
 Alice	1000  
 Bob		0  
 Charlie	500  
+```
 
-> This function is similar to the Excel function   
-IF(ISBLANK())  
-Note: In MySQL, use the function IFNULL() instead.
+### AND Operator
+The AND operator displays a record if all the conditions are TRUE.
 
+> Remember: EVERY (All) condition MUST be true. [Similar to Excel Function]
 
-#### Create a new table from a filtered table:  
-SELECT   
-	*  
-	INTO CA_Customers  -- Creates a new table 'CA_Customers'  
-FROM Customers  
-WHERE state = 'CA'  
-ORDER BY custname
-
-> TO DELETE:  
--- DROP TABLE CA_Customers  
-
-
--- Another Example
-SELECT *  
-INTO HighEarners  
-FROM Slspers  
-WHERE commrate > 0.04;  
-
-
-### AND
-EVERY (All) condition MUST be true. [Similar to Excel Function]
-
-
--- Exercise: Show only people from Houston, TX since there are multiple Houston cities in America.
+Exercise: Show only customers from Denver, CO since there are multiple Denver cities in America.
+``` sql
 SELECT *  
 FROM customers  
-WHERE state = 'TX' AND city = 'Houston'  
+WHERE state = 'CO' AND city = 'Denver'  
+```
 
+Exercise: Show all customers that live in NY but not in the city of Buffalo.
+``` sql
+SELECT *  
+FROM customers  
+WHERE state = 'NY' AND NOT city = 'Buffalo'
+```
 
+Exercise: Show all sales records made by sales representative 'N02' where the quantity sold is greater than 200
+```
 SELECT *  
 FROM sales  
 WHERE repid = 'N02' AND qty > 200  
 ORDER BY qty 
+```
 
-
-Select *  
+Exercise: Show all book titles whose sales price is between 35 & 70.
+```
+SELECT *  
 FROM Titles  
 -- WHERE slprice >= 35 AND slprice <= 70  
 -- Also works: WHERE slprice BETWEEN 35 AND 70 -- does the same as above.  
 ORDER BY slprice ASC
+```
 
+Optional Exercise: Show all book titles that have a sales price between $30 and $40 and have a
+defined (a.k.a. known) development cost.
+``` sql
+SELECT *
+FROM Titles
+WHERE slprice BETWEEN 30 AND 40 
+AND devcost is NOT NULL
+```
 
 ### OR  
-ONE/ANY condition MUST be true. [Similar to Excel Function]
 
+> Remember: ONE/ANY condition MUST be true. [Similar to Excel Function]
+
+Exercise: Show all customers who are either in California or New York. 
+``` sql
 SELECT custname, city, state FROM Customers    
 WHERE state = 'CA' OR state = 'NY'    
 -- Also works: -- WHERE state IN ('CA', 'NY', 'TX');  
-
-
+```
 
 #### Activity 2.3: Find the Problem:
 Q: Show me people who live either in NY or CA. Amongst those people, they MUST have a zipcode of 92704.
 
+``` sql
 SELECT *  
 FROM Customers  
 WHERE Customers.state = 'NY' OR state='CA' AND zipcode = '92704'  
 ORDER BY zipcode  
 -- This will return multiple NY resident without the zipcode 92704  
 -- This is because in a SQL query, the AND operator has a higher precedence than the OR operator and is evaluated first
--- Solution: -- WHERE (Customers.state = 'NY' OR state='CA') AND zipcode = '92704'  
 
+-- Proper Solution: 
+-- WHERE (Customers.state = 'NY' OR state='CA') AND zipcode = '92704'  
+```
 
 #### omg LIKE Operator 
--- Get all people whose first name starts with the letter 'A'  
+The LIKE operator is used in a WHERE clause to search for data based on a string pattern.
+
+Exercise: Get all people whose first name starts with the letter 'A'  
+``` sql
+-- Solution
 SELECT *  
 FROM Slspers  
 WHERE fname LIKE 'A%';
+```
 
--- Another example
-SELECT *
-FROM Titles
-WHERE bktitle LIKE 'The%'
-
-## Exercise: Show all book titles that end with 'y'
+Optional Exercise: Show all book titles that end with 'y'
+``` sql
 -- Solution:
 SELECT * 
 FROM Titles
 WHERE TRIM(bktitle) LIKE '%y';
+```
 
-Another example:  
--- SELECT title, director FROM movies   
--- WHERE title LIKE 'Toy Story%';
+Optional Example #1: Show all book titles that begin with 'The'
+``` sql
+-- Solution
+SELECT *
+FROM Titles
+WHERE bktitle LIKE 'The%'
+```
 
+Optional Example #2: Show all book titles that contains the word 'The'
+``` sql
+-- Solution
+SELECT *
+FROM Titles
+WHERE bktitle LIKE '%The%' 
+```
 
-#### EXACT MATCH 
+#### EXACT MATCH  
+``` sql
 SELECT * FROM Titles  
 WHERE bktitle = 'Sailing' -- filters rows
+```
 
 VS.
  
 #### CONTAINS MATCH
+``` sql
 SELECT * FROM Titles  
-WHERE bktitle LIKE 'B%'  -- Show all books that begin with letter B
--- Also works: -- WHERE bktitle LIKE '[B]%'   
+WHERE bktitle LIKE '%B%'  -- Show all books that contain the letter B
+-- Also works: -- WHERE bktitle LIKE '%[B]%' 
+```
 
-
+The following 3 filters are all the same: 
+``` sql
 SELECT bktitle  
-FROM Titles  
--- WHERE bktitle LIKE '%The%'  
--- The following 3 are all the same:  
+FROM Titles   
+-- The following 3 filters are all the same:  
 -- WHERE bktitle LIKE '[ABC]%' -- Replacing '[ABC]%' with '[ABR]%' only shows titles beginning with A, B, or R  
 -- WHERE bktitle LIKE '[A-C]%' -- Brackets is a must; Returns titles with books that begin A-C  
 -- WHERE bktitle LIKE '[A]%' OR bktitle LIKE '[B]%' OR bktitle LIKE '[C]%'  
 -- WHERE partnum LIKE '401__' -- underscore represents 1 character  
 ORDER BY bktitle ASC  
-
-> Ctrl + R -> Hide the Result Pane
-
+```
 
 
 /* -------------------------------------------------------
