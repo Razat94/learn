@@ -276,7 +276,7 @@ ORDER BY State ASC
 
 
 ### Where Clause
-The SQL WHERE clause filters results by applying one or more conditions so that only records that meet the criteria are returned or affected. A condition is a rule for finding specific data and consists of a column (or expression), an operator, and a value to compare.
+The SQL WHERE clause filters results by applying one or more conditions so that only records that meet the criteria are returned (or affected). A condition is a rule for finding specific data and consists of a column (or expression), an operator, and a value to compare.
 
 #### Example of Where Clause
 ``` sql
@@ -292,7 +292,7 @@ WHERE state = 'NY'
 > Practice Exercise: Show all people from the city 'Houston'.
 
 Below are more examples demonstrating various ways the WHERE clause can be used:  
-- WHERE clause with numbers:
+- WHERE clause used with numbers:
 	``` sql
 	-- Another Example  
 	SELECT *  
@@ -303,7 +303,7 @@ Below are more examples demonstrating various ways the WHERE clause can be used:
 	column    operator       value
 	```
 
-- WHERE clause showing book titles with dates past 1/1/2017
+- WHERE clause used with showing book titles with dates past 1/1/2017
 	``` sql 
 	SELECT 
 		bktitle, 
@@ -325,7 +325,7 @@ Below are more examples demonstrating various ways the WHERE clause can be used:
 	ORDER BY discounted_price DESC  -- WILL WORK!  
 	```
 
-- Create a new table from a filtered table:  
+- WHERE Clause used with creating a new table from a filter:
 	``` sql
 	SELECT   
 	*  
