@@ -96,6 +96,11 @@ FROM slspers;
 > In SQL Server, you can generate a SELECT query from the Object Explorer:  
 > Right-click the table name and choose 'Select Top 1000 Rows'.
 
+> Feel free to look at the other 3 tables:  
+> SELECT * FROM Customers  
+> SELECT * FROM Titles  
+> SELECT * FROM Sales  
+
 #### Table alias/prefix can be used before the wildcard asterisk (*) too.  
 SELECT Slspers.* FROM Slspers    
 -- Same as:  
