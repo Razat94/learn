@@ -236,13 +236,13 @@ C:\Users\student> sqlcmd -S UT-LAPTOP\SQLEXPRESS -E
 
 <!-- SORTING & FILTERING CHAPTER -->
 
-In the last chapter, a connection to a server was made and a basic query was executed.
+In the last chapter, a connection to a server was made and a basic query was executed.  
 This chapter will cover how to sort & filter results to reorganize and display only the data needed.
 
 ### Sorting
 Sorting organizes query results in ascending or descending order.
 
-#### To sort data by a single column  
+#### Example: Sort data by a single column:  
 ``` sql
 SELECT *  
 FROM Customers   
@@ -252,7 +252,7 @@ ORDER BY state ASC -- Sorts the table by state column
 
 A multi-level sort can be applied by listing column names in sequence and separating them with commas.
 
-#### Example of a Multi-Level Sort  
+#### Example of a Multi-Level Sort:  
 ``` sql
 SELECT *  
 FROM Customers  
@@ -260,9 +260,9 @@ ORDER BY State ASC, city DESC
 -- This means that the customer data is sorted first by State, and if some records share the same State, those records are then sorted by City.
 ```
 
-The SELECT TOP clause limits the number of records returned. It is especially useful for large tables, as retrieving too many records can slow performance.
+The `SELECT TOP` clause limits the number of records returned. It is especially useful for large tables, as retrieving too many records can slow performance.
 
-#### Select only the top 5 rows of the Customers Table:  
+#### Example: Select only the top 5 rows of the Customers Table:  
 ``` sql
 SELECT  
 TOP 5  
@@ -349,7 +349,7 @@ Below are more examples demonstrating various ways the WHERE clause can be used:
 ### SQL NOT Operator 
 The NOT operator is used in the WHERE clause to return records that do not match a specific condition.
 
-#### Example query that returns all customers that are NOT from NY:
+#### Example: Returns all customers NOT from NY:
 ``` sql
 SELECT *  
 FROM Customers  
@@ -396,7 +396,7 @@ Charlie	500
 ```
 
 ### AND Operator
-The AND operator displays a record if all the conditions are TRUE.
+The AND operator displays a record if all the searched conditions are TRUE.
 
 > Remember: EVERY (All) condition MUST be true. [Similar to Excel Function]
 
@@ -415,19 +415,19 @@ WHERE state = 'NY' AND NOT city = 'Buffalo'
 ```
 
 Exercise: Show all sales records made by sales representative 'N02' where the quantity sold is greater than 200
-```
+``` sql
 SELECT *  
 FROM sales  
 WHERE repid = 'N02' AND qty > 200  
 ORDER BY qty 
 ```
 
-Exercise: Show all book titles whose sales price is between 35 & 70.
-```
+Exercise: Show all book titles whose sales price is between $30 & $40.
+``` sql
 SELECT *  
 FROM Titles  
--- WHERE slprice >= 35 AND slprice <= 70  
--- Also works: WHERE slprice BETWEEN 35 AND 70 -- does the same as above.  
+WHERE slprice >= 30 AND slprice <= 40  
+-- Also works: WHERE slprice BETWEEN 30 AND 40 -- does the same as above.  
 ORDER BY slprice ASC
 ```
 
@@ -437,7 +437,7 @@ defined (a.k.a. known) development cost.
 SELECT *
 FROM Titles
 WHERE slprice BETWEEN 30 AND 40 
-AND devcost is NOT NULL
+AND devcost IS NOT NULL
 ```
 
 ### OR  
