@@ -160,7 +160,7 @@ In SQL, aliases are used to give a table or a column a temporary name and are us
 
 ``` sql
 SELECT 
-	fname, 
+	fname AS [First Name], 
 	lname AS 'Last Name' 
 FROM Slspers; 
 ```
@@ -503,7 +503,7 @@ FROM customers
 WHERE state = 'CO' AND city = 'Denver'  
 ```
 
-Exercise: Show all customers that live in NY but NOT in the city of Buffalo.
+1 MIN Optional Exercise: Show all customers that live in NY but NOT in the city of Buffalo.
 ``` sql
 SELECT *  
 FROM customers  
@@ -527,7 +527,7 @@ WHERE slprice >= 30 AND slprice <= 40
 ORDER BY slprice ASC
 ```
 
-Optional Exercise: Show all book titles that have a sales price between $30 and $40 and have a
+1 MIN Optional Exercise: Show all book titles that have a sales price between $30 and $40 and have a
 defined (a.k.a. known) development cost.
 ``` sql
 SELECT *
@@ -634,12 +634,32 @@ Database functions are reusable expressions (blocks of code) used in SQL queries
 There are many built-in SQL functions similar to Excel's `SUM` and `CONCATENATE`, and you can also create your own custom functions.
 
 ### Date Functions
+
+To get todays date:
 ``` sql
-SELECT GETDATE();  -- Similar to Excels TODAY() function
-SELECT CAST(GETDATE() AS DATE);  
+SELECT GETDATE();  -- Similar to Excels NOW() function. 
+SELECT CAST(GETDATE() AS DATE);  -- Similar to TODAY() function
+```
+
+> Note: Please do not forget to include parentheses when working with functions.
+
+
+Column names can be wrapped in parentheses:
+``` sql
+SELECT
+	bktitle, 
+	(slprice * 0.9),  -- Column name works with or without () 
+	(pubdate),  
+	CAST(pubdate AS Date) AS 'New Pub Date'
+FROM titles
+```
+
+To ouput the current year:
+``` sql
 SELECT YEAR( GETDATE() ); 	-- like in Excel, the functions MONTH(date) and DAY(date) are available too.  
 -- Also works: -- SELECT DATEPART( year, GETDATE() )
 ```
+
 <br/>
 
 #### Filter By Year 2017
@@ -649,8 +669,8 @@ SELECT
 	bktitle,  
 	pubdate  
 FROM Titles  
-WHERE Year(pubdate) = 2017  -- Filter by 2017  
-ORDER BY YEAR(pubdate), Month(pubdate)
+WHERE YEAR(pubdate) = 2017  -- Filter by 2017  
+ORDER BY YEAR(pubdate), MONTH(pubdate)
 ```
 
 #### Recap:
@@ -664,16 +684,7 @@ WHERE YEAR(pubdate) = 2017  -- Filter by 2017
 -- Same as: -- WHERE DATEPART(year, pubdate) = 2017  
 ```
 
-#### Sidenote: Please note that columns can be wrapped in parenthesis ( ) 
-``` sql
-SELECT  
-	bktitle,   
-	(pubdate),  -- Column name works with or without ()  
-	(slprice * 0.9)  -- Similar to Excel Formula '=(A1*0.9)'  
-FROM Titles  
-```
-
-#### Filter for months between May & Oct  
+#### 1 Min Optional Exercise: Filter for months between May & Oct  
 ``` sql
 SELECT  
  	bktitle, CAST(pubdate AS DATE)  
@@ -681,7 +692,7 @@ FROM Titles
 WHERE MONTH(pubdate) BETWEEN 5 AND 10  
 ```
 
-#### Sample Exercise: Show booktitles published on July 2016
+#### 1 Min Optional Exercise: Show booktitles published on July 2016
 ``` sql
 -- Solution:  
 SELECT  
@@ -691,12 +702,29 @@ WHERE YEAR(pubdate) = 2016 AND MONTH(Pubdate) = 7
 ORDER BY pubdate
 ```
 
-#### This query lists publication date, and extra columns depicting the next day, and one year later.
+#### 1 Min Optional Exercise: Show titles published in 2016 or 2017
+``` sql
+-- Solution 1:
+SELECT
+	bktitle, CAST(pubdate AS Date) AS 'New Pub Date'
+FROM Titles
+WHERE YEAR(Pubdate) = 2017 OR YEAR(Pubdate) = 2016
+
+-- Solution 2:
+SELECT
+    bktitle,
+    CAST(pubdate AS DATE) AS [New Pub Date]
+FROM Titles
+WHERE YEAR(pubdate) IN (2016, 2017)
+ORDER BY pubdate
+```
+
+#### This query below lists publication date, and extra columns depicting the next day, and one year later.
 ``` sql
 SELECT  
 	pubdate,   
 	pubdate + 1 AS next_day,  
-	DATEADD(YEAR, 1, pubdate) AS Pub_Date_1_Year_Later -- Adds 1 year to the publication date  
+	DATEADD(YEAR, 1, pubdate) AS Pub_Deadline -- Adds 1 year later to the publication date.  
 FROM Titles  
 WHERE pubdate BETWEEN '1/1/1994' AND '12/31/2013'  
 ```
@@ -777,6 +805,16 @@ SELECT AVG(commrate) FROM Slspers -- RESULT: 0.037
 SELECT fname, commrate From Slspers  
 WHERE commrate > (SELECT AVG(commrate) From Slspers)  
 -- ORDER BY commrate DESC  
+```
+
+Optional Exercise: Show all books that are of the maximum salesprice:
+``` sql
+SELECT *
+FROM Titles
+WHERE slprice = (
+    SELECT MAX(slprice)
+    FROM Titles
+)
 ```
 
 ---
