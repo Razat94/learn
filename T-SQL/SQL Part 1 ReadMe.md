@@ -346,8 +346,9 @@ A multi-level sort can be applied by listing column names in sequence and separa
 ``` sql
 SELECT *  
 FROM Customers  
-ORDER BY State ASC, city DESC  
--- This means that the customer data is sorted first by State, and if some records share the same State, those records are then sorted by City.
+ORDER BY state ASC, city DESC, custname ASC    
+-- This means that the customer data is sorted first by State, and if some records share the same State, those records are then sorted by City.  
+-- For those customers in the same city, those records are then further sorted by name.
 ```
 
 The `SELECT TOP` clause limits the number of records returned. It is especially useful for large tables, as retrieving too many records can slow performance.
@@ -417,8 +418,7 @@ Below are more examples demonstrating various ways the WHERE clause can be used:
 
 - WHERE Clause used with creating a new table from a filter:
 	``` sql
-	SELECT   
-	*  
+	SELECT *  
 	INTO CA_Customers  -- Creates a new table called 'CA_Customers'  
 	FROM Customers  
 	WHERE state = 'CA'  
@@ -478,10 +478,17 @@ FROM Employees;
 Result:
 ```
 Result:  
-Name	BonusAmount  
+Name	Bonus  
 Alice	1000  
 Bob		0  
 Charlie	500  
+```
+
+Advanced: To permanently update all `NULL` values with a generic statement:
+``` sql
+UPDATE Employees
+SET Bonus = 0
+WHERE Bonus IS NULL;
 ```
 
 ### AND Operator
@@ -496,7 +503,7 @@ FROM customers
 WHERE state = 'CO' AND city = 'Denver'  
 ```
 
-Exercise: Show all customers that live in NY but not in the city of Buffalo.
+Exercise: Show all customers that live in NY but NOT in the city of Buffalo.
 ``` sql
 SELECT *  
 FROM customers  
