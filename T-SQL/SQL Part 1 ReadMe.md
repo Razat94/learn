@@ -52,18 +52,179 @@ Additional Note: Don’t use Windows Services to start SSMS.
 ## <p id = "1"> LESSON 1: Executing a Simple Query | [Back to ToC](#toc) </p>
 ---------------------------------------------------------- */
 
+### Our First Query
 
-To output simple text:
-```
-SELECT 'After Insertion:' 
-PRINT 'Hello World!'
-```
+Press `CTRL + N` to launch a new query.
 
-Different ways to run the query:  
+In SQL Server, we can run a simple statement:  
+``` SELECT 1+3 ``` 
+
+There are different ways to execute the query:  
 	- Shortcuts: F5, Ctrl + E, Alt + X  
 	- Click the green 'Execute' button on the toolbar.  
 	- Go to Query (tab) -> Execute.  
 	- Right-click anywhere in the query window and choose 'Execute SQL' from the context menu.  
+
+> NOTE: T-SQL is a Declarative language that supports some precedural syntax.
+
+### SQL Comments
+Comments are used explain SQL code or add notes for the reader. They are ignored by the database engine and are not executed.
+``` sql
+-- Two -'s are used to write a single-line comment.  
+-- Text after -- is ignored to the end of the line.
+SELECT 1+3 -- Output: 4
+```
+
+#### SQL Multi-line Comments
+Multi-line comments begin with /* and end with */. Any text between them is ignored.
+
+``` sql
+/*  
+	The 
+	query 
+	below 
+	outputs 
+	4.
+*/
+SELECT 1 + 3
+```
+
+---
+
+In SQL Server, you can include multiple SELECT statements in a single query batch and each will return its own result set.
+
+``` sql
+SELECT 1+3
+SELECT 'After Insertion:'	-- Outputs simple text
+PRINT 'Hello World! Bye!' 	-- Displays a message or a value in the 'Messages' tab and is mainly used for debugging
+```
+
+---
+
+SQL Server provides built-in functions that format how data is displayed and can perform calculations e.g. rounding values.
+``` sql
+SELECT FORMAT(123.490000000, '0.##')	-- Output: 123.49
+SELECT ROUND(235.415, 2) AS RoundValue;	-- Output: 235.420 
+-- Note: MS Excel has a round function too 
+-- = ROUND(D2,0) -- given that D2 = 235.415
+```
+
+---
+
+### Selecting data from a database.
+
+To return all data from the `Slspers` table:  
+``` sql
+USE Pub1  
+SELECT *  	 -- Selects ALL columns
+FROM slspers -- Note: Spelling matters. Typing 'slsperson' won't execute.
+```
+
+> In SQL Server, a SELECT query can be made from the Object Explorer:  
+> Right-click the table name and choose 'Select Top 1000 Rows'.
+
+Optional Exercise: Retrieve the data from the other 3 tables:  
+``` sql
+SELECT * FROM Customers  
+SELECT * FROM Titles  
+SELECT * FROM Sales  
+```
+
+Queries can be written to output individual columns.  
+
+Output the first and last names of everyone in the `Slspers` table.
+``` sql
+SELECT fname, lname
+FROM slspers;
+```
+
+#### SQL Prefix
+A prefix can be used in front of a column or even table name to specify its source and avoid ambiguity
+
+``` sql
+-- `Slspers` is a table prefix for the column `fname`
+SELECT  
+	Slspers.fname, Slspers.lname  
+FROM Slspers;
+```
+
+Table prefixes can also be used before the wildcard asterisk (*).
+``` sql
+SELECT Slspers.* FROM Slspers    
+-- Same as:  
+-- SELECT * FROM Slspers
+```
+
+#### Alias 'AS' Keyword 
+In SQL, aliases are used to give a table or a column a temporary name and are useful when renaming long or confusing column names
+
+``` sql
+SELECT 
+	fname, 
+	lname AS 'Last Name' 
+FROM Slspers; 
+```
+
+NOTE: The keyword 'AS' is not needed since it's just a formality.  
+``` sql 
+SELECT 
+	fname, 
+	lname 'Last Name' 
+FROM Slspers; 
+```
+
+#### ...more to discuss in Chapter 5! [Link to Lesson 5](#5). 
+
+---
+
+### Calculated/Derived columns
+In SQL, a new "calculated" column can be added to the query result by using a fixed value or calculation. This column appears ONLY in the results and is neither stored nor affect the actual table.
+
+``` sql
+SELECT 
+	fname, 
+	lname, 
+	'United States' AS Country, 
+	'21' AS Age  
+FROM Slspers
+```
+
+#### Round Function
+The ROUND() function rounds a number to however many decimal places needed.
+``` sql
+SELECT  
+	slprice,  
+	ROUND(slprice,0) -- Round to nearest number  
+FROM TITLES
+```
+
+> Remember: A calculated column doesn't exist in a table, yet SQL will calculates the function for each row when the query runs. 
+
+Another Example:
+``` sql
+SELECT  
+	partnum,   
+	bktitle,  
+	slprice,  
+	slprice * 1.2 AS slprice_inflation,       
+
+	-- To Remove trailing 0's without rounding:  
+	FORMAT(slprice * 1.2, '0.##') AS discounted_price, -- Good Solution:	0's removed, but some prices only have whole dollars   
+	CAST(slprice * 1.2 AS DECIMAL(10,2))  AS Inflation -- Better Solution:	Force two decimal places everywhere.
+FROM Titles
+```
+
+### Keyboard Shortcuts:
+
+> Ctrl + R (Hide the Result Pane)
+
+> Ctrl+K; Ctrl+C (comment)  
+> Ctrl+K; Ctrl+U (uncomment)
+
+> CTRL + Shift + U (Uppercase)  
+> CTRL + Shift + L (Lowercase)
+
+--- 
 
 To create custom keyboard shortcuts for useful commands e.g.  executing queries:
 1. 	Go to Tools -> Options
@@ -75,156 +236,66 @@ To create custom keyboard shortcuts for useful commands e.g.  executing queries:
 
 <img src = "./zz_add_shortcut.png" />
 
-In SQL Server, you can include multiple SELECT statements in a single query batch and each will return its own result set.
+---
 
+MS SQL Server holds many stored procedures that act as a saved set of SQL commands
+
+For instance, to display a table structure:  
 ```
-SELECT 1+3; -- T-SQL is a Declarative language that supports some precedural syntax.
-SELECT FORMAT(123.490000000, '0.##')	-- Output: 123.49
-SELECT ROUND(235.415, 2) AS RoundValue;	-- Output: 235.420 
--- Two -'s are used to write a comment:
-```
-
-> Note: In Excel, we also have a round function = ROUND(D2,0) -- given that D2 = 235.415
-
-### Our First Query  
-USE Pub1  
-SELECT *  
-FROM slspers;  
-
-> Note: Spelling matters. We can't type 'slsperson' or else the query won't work.
-
-> In SQL Server, you can generate a SELECT query from the Object Explorer:  
-> Right-click the table name and choose 'Select Top 1000 Rows'.
-
-Optional Task: Retrieve the data from the other 3 tables:  
-- SELECT * FROM Customers  
-- SELECT * FROM Titles  
-- SELECT * FROM Sales  
-
-#### Table alias/prefix can be used before the wildcard asterisk (*) too.  
-SELECT Slspers.* FROM Slspers    
--- Same as:  
--- SELECT * FROM Slspers
-
-#### Query that outputs only 2 columns  
-SELECT fname, lname
-FROM slspers;
-
--- Alternate way to retrieves two specific columns via table prefix  
-SELECT  
-	Slspers.fname, Slspers.lname  
-FROM Slspers;
-
--- Alias 'AS' Keyword --  
-SELECT fname, lname AS 'Last Name' FROM Slspers; 
-
--- NOTE: The keyword 'AS' is not needed since it's just a formality.  
--- SELECT fname, lname 'Last Name' FROM Slspers;
-
-#### ...more to discuss in Chapter 5! [Link to Lesson 5](#5). 
-
-
--- In SQL, a new column can be added to the query result by using a fixed value or calculation.  
--- This column exists ONLY in the results and does not affect the actual table data.  
-SELECT fname, lname, 'United States' AS Country, '21' AS Age  
-FROM Slspers
-
-
-### Calculated column
-A calculated column doesn't exist in the table, but SQL calculates it for each row when the query runs. 
-
-SELECT  
-	partnum,   
-	bktitle,  
-	slprice,  
-	-- slprice * 1.2 AS slprice_inflation,   
-	slprice - slprice * 0.07 AS discounted_price  
-FROM Titles
-
-
-SELECT  
-	slprice,  
-	ROUND(slprice,0) -- Round to nearest number  
-	-- Q: How to remove trailing 0's without rounding?   
-	-- FORMAT(slprice - slprice * 0.07, '0.##') AS discounted_price  
-FROM TITLES
-
-
-### Keyboard Shortcuts:
-
-> Ctrl + R (Hide the Result Pane)
-
-> Ctrl+K; Ctrl+C (comment)  
-> Ctrl+K; Ctrl+U (uncomment)
-
-
-> CTRL + Shift + U (Uppercase)  
-> CTRL + Shift + L (Lowercase)
-
-
-```
-Display the table structure  
 SP_HELP Slspers  
-
-/* Also works too */
-On the Object Explorer, right click on the table of your choice -> Click 'Design'
 ```
 
-``` 
+Additionally, in Object Explorer, right-click on the table of your choice and click “Design” to view and modify the table’s structure
+
+``` sql 
 -- Albeit advanced, the below command also outputs column names  
 SELECT COLUMN_NAME  
 FROM INFORMATION_SCHEMA.COLUMNS  
 WHERE TABLE_NAME = 'Slspers'
 ```
 
-
 ### Create a Backup Table
-> Note: Not good practice to create duplicate tables unless for sandboxes & backups
-
--- Excercise: Please create TWO Backup tables to showcase the 2 different ways to delete a table:  
+``` sql
+-- Excercise: Create a Backup table
 SELECT *  
 INTO Slspers_Backup  
 FROM Slspers;  
-> After completion, make sure to select 'Refresh' on Object Explorer.
+```
 
-
--- In SQL Server, once the command is executed, we will need to refresh the Object Explorer by clicking the button Refresh (F5)  
--- Then, we will need to hide the folder 'Tables' & expand the folder again.  
-
+- In SQL Server, once the command is executed, we will need to refresh the Object Explorer by clicking the button Refresh (F5)  
+- Then, we will need to hide the folder 'Tables' & expand the folder again.  
 
 -- When you create a new table in SQL, IntelliSense may not recognize it right away and can display a red squiggly line indicating an invalid object name.  
 -- To refresh IntelliSense cache, either press (Ctrl + Shift + R) or go to Edit -> IntelliSense -> Refresh Local Cache
 
+> Note: Not good practice to create duplicate tables unless for sandboxes & backups
 
--- Example from w3SCHOOLS  
-SELECT * INTO CustomersBackup2017  
-FROM Customers  
--- WHERE state = 'CA'  
-
-
--- Create 'NewCustomers' table but structure only  
+Albeit advanced, we can also create a 'NewCustomers' table but with structure only  
+``` sql
 SELECT *  
 INTO NewCustomers  
 FROM Customers  
 WHERE 1 = 0;  
--- If you want to create an empty table (structure only),   
+-- To create an empty table (structure only),   
 -- use WHERE 1 = 0 or similar condition.
-
+```
 
 To delete a table:  
+``` sql
 DROP TABLE IF EXISTS titles_backup  
 -- (Note: This will PERMANENTLY delete the table unless you have a backup or haven’t committed the changes yet!) 
+```  
 
-> To drop a table, you can also do the following:  
-Right-click the table name in Object Explorer and select Delete.
+To drop a table, you can also do the following:  
+- Right-click the table name in Object Explorer and select 'Delete'.
 
-To truncate a table i.e. to remove all rows from table:   
-TRUNCATE TABLE titles_backup  
+Lastly, to truncate a table i.e. to remove all rows from table:   
+``` TRUNCATE TABLE titles_backup  ```
 
+---
 
-```
 Note: To Run T-SQL via the command line:  
-
+```
 C:\Users\student> sqlcmd -S UT-LAPTOP\SQLEXPRESS -E  
 1> select 1 + 2;  
 2> GO  
@@ -234,6 +305,10 @@ C:\Users\student> sqlcmd -S UT-LAPTOP\SQLEXPRESS -E
 3> Go  
 ```
 
+If a SQL Script has been saved, it can also be executed from the command line:
+```
+sqlcmd -S UT-LAPTOP\SQLEXPRESS -E -i "C:\Users\student\Documents\SQL Script Command Line\SQLQuery.sql"
+```
 
 /* -------------------------------------------------------
 ## <p id = "2"> LESSON 2: Performing a Conditional Search | [Back to ToC](#toc) </p>
@@ -338,7 +413,6 @@ Below are more examples demonstrating various ways the WHERE clause can be used:
 	INTO CA_Customers  -- Creates a new table called 'CA_Customers'  
 	FROM Customers  
 	WHERE state = 'CA'  
-	ORDER BY custname
 	```
 
 	- TO DELETE:  
