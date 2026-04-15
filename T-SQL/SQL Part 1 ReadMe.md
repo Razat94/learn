@@ -111,7 +111,7 @@ SELECT ROUND(235.415, 2) AS RoundValue;	-- Output: 235.420
 
 ---
 
-### Selecting data from a database.
+### Selecting Data from a Database
 
 To return all data from the `Slspers` table:  
 ``` sql
@@ -120,7 +120,7 @@ SELECT *  	 -- Selects ALL columns
 FROM slspers -- Note: Spelling matters. Typing 'slsperson' won't execute.
 ```
 
-> In SQL Server, a SELECT query can be made from the Object Explorer:  
+> In SQL Server, a SELECT query can also be made from the Object Explorer:  
 > Right-click the table name and choose 'Select Top 1000 Rows'.
 
 Optional Exercise: Retrieve the data from the other 3 tables:  
@@ -132,8 +132,8 @@ SELECT * FROM Sales
 
 Queries can be written to output individual columns.  
 
-Output the first and last names of everyone in the `Slspers` table.
 ``` sql
+-- Output the first and last names of everyone in the `Slspers` table.
 SELECT fname, lname
 FROM slspers;
 ```
@@ -195,10 +195,19 @@ The ROUND() function rounds a number to however many decimal places needed.
 SELECT  
 	slprice,  
 	ROUND(slprice,0) -- Round to nearest number  
-FROM TITLES
+FROM Titles
 ```
 
-> Remember: A calculated column doesn't exist in a table, yet SQL will calculates the function for each row when the query runs. 
+ADVANCED: To create a new rounded column:
+``` sql
+ALTER TABLE Titles
+ADD RoundedPrice INT;
+
+UPDATE Titles
+SET RoundedPrice = ROUND(slprice, 0);
+```
+
+Remember: A calculated column doesn't exist in a table, yet SQL will calculates the function for each row when the query runs. 
 
 Another Example:
 ``` sql
