@@ -103,6 +103,7 @@ PRINT 'Hello World! Bye!' 	-- Displays a message or a value in the 'Messages' ta
 
 SQL Server provides built-in functions that format how data is displayed and can perform calculations e.g. rounding values.
 ``` sql
+SELECT FORMAT(1+3, 'C')  				-- FORMAT Function converts the number into a string, where 'C' stands for Currency.
 SELECT FORMAT(123.490000000, '0.##')	-- Output: 123.49
 SELECT ROUND(235.415, 2) AS RoundValue;	-- Output: 235.420 
 -- Note: MS Excel has a round function too 
