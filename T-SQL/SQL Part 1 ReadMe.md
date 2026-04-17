@@ -1226,7 +1226,6 @@ ON t.partnum = o.partnum;
 
 ```sql
 -- Sample Exercise: Show all Customers who are both in the Customers Table AND Potential Customers Table
-
 SELECT *
 FROM Customers C
 INNER JOIN Potential_Customers P
@@ -1238,13 +1237,14 @@ ON C.custnum = P.custnum
 
 ```sql
 -- Sample Exercise: For each sale, show the respective book title and quantities of books sold. (Bonus: Add TotalSales).
-SELECT Titles.partnum,
-       Titles.bktitle,
-       Sales.qty, -- Notice that qty doesn't exist on Titles table.
-       Sales.qty * Titles.slprice AS Total_amount
+SELECT 
+	Titles.partnum,
+    Titles.bktitle,
+    Sales.qty, -- Notice that qty doesn't exist on Titles table.
+    Sales.qty * Titles.slprice AS Total_amount
 FROM Sales
 LEFT JOIN Titles
-    ON Titles.partnum = Sales.partnum;
+	ON Titles.partnum = Sales.partnum;
 ```
 
 * Total_Amount is a calculated column where:  
@@ -1255,8 +1255,9 @@ LEFT JOIN Titles
 
 ### Optional Exercise #2B: From the last example, group rows by book.
 ``` sql
+-- Solution to Group By with Join Example:
 SELECT
-    Titles.partnum,
+	Titles.partnum,
     Titles.bktitle,
     SUM(Sales.qty) AS qty,
     SUM(Sales.qty * Titles.slprice) AS total_amount
@@ -1268,15 +1269,19 @@ GROUP BY Titles.partnum, Titles.bktitle
 
 ### Exercise #3: Multi-Join Example - Show which customers bought 500 copies of which books.
 
--- i.e. Find out for all sales where qty = 500, who was the customer and what did they buy.
-
+-- i.e. Find out for all sales where qty = 500, who was the customer and what book did they buy.
+``` sql
 -- To start off:  
-SELECT * FROM Sales WHERE qty = 500  
+SELECT S.* 
+FROM Sales S
+WHERE S.qty >= 500  
+```
 
 > NOTE - In this simplified example, every sale corresponds to a valid customer account and a valid purchased book.
 > Because of this, it doesn’t matter which JOIN type is used.
 
 ```sql
+-- Solution
 SELECT S.*, C.Custname, T.bktitle -- The order of the columns does not matter.
 FROM Sales s 
 JOIN Titles t
@@ -1293,7 +1298,6 @@ This query:
 	* Filters to only sales where book quantity = 500  
 
 ---
-
 
 ### Bonus Exercise: Count Sales Per Salesperson (Even if 0)
 
@@ -1341,13 +1345,6 @@ FULL OUTER JOIN slspers2 sp
 * Returns all rows from both tables.
 * Matches where keys align.
 * Does NOT create every possible combination (not a Cartesian product).
-
-#### Group By With Join Example
-SELECT pubdate, qty  
-FROM Titles  
-LEFT JOIN Sales  
-ON Titles.partnum = Sales.partnum  
-GROUP BY pubdate  
 
 ---
 
