@@ -1237,10 +1237,10 @@ ON C.custnum = P.custnum
 ### Exercise #2: Calculated Column with JOIN
 
 ```sql
--- Sample Exercise: For each sale, show the respective book title and the quantities of books sold. (Bonus: Add TotalSales).
+-- Sample Exercise: For each sale, show the respective book title and quantities of books sold. (Bonus: Add TotalSales).
 SELECT Titles.partnum,
-       bktitle,
-       qty, -- Notice that qty doesn't exist on Titles table.
+       Titles.bktitle,
+       Sales.qty, -- Notice that qty doesn't exist on Titles table.
        Sales.qty * Titles.slprice AS Total_amount
 FROM Sales
 LEFT JOIN Titles
@@ -1253,6 +1253,18 @@ LEFT JOIN Titles
 
 ---
 
+### Optional Exercise #2B: From the last example, group rows by book.
+``` sql
+SELECT
+    Titles.partnum,
+    Titles.bktitle,
+    SUM(Sales.qty) AS qty,
+    SUM(Sales.qty * Titles.slprice) AS total_amount
+FROM Sales
+LEFT JOIN Titles
+    ON Titles.partnum = Sales.partnum
+GROUP BY Titles.partnum, Titles.bktitle
+```
 
 ### Exercise #3: Multi-Join Example - Show which customers bought 500 copies of which books.
 
