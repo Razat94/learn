@@ -1120,7 +1120,7 @@ ORDER BY bktitle
 
 ```sql
 -- Works:
-SELECT Sales.ORDNUM, * -- Note: Ordnum would be outputted twice in this example.
+SELECT Sales.*, Sales.ORDNUM,  -- Note: Ordnum would be outputted twice in this example.
 FROM Sales
 WHERE Sales.qty > 300; -- Note the added prefix 'Sales' BEFORE column name.
 ```
@@ -1225,7 +1225,7 @@ ON t.partnum = o.partnum;
 ### Exercise #1: One-to-Many Example
 
 ```sql
--- Sample Exercise: Show all Customers who are in the Customers Table AND Potential Customers Table
+-- Sample Exercise: Show all Customers who are both in the Customers Table AND Potential Customers Table
 
 SELECT *
 FROM Customers C
@@ -1237,18 +1237,19 @@ ON C.custnum = P.custnum
 ### Exercise #2: Calculated Column with JOIN
 
 ```sql
--- Sample Exercise: Show all titles and display matching sales if they exist (Bonus: Add TotalSales).
+-- Sample Exercise: For each sale, show the respective book title and the quantities of books sold. (Bonus: Add TotalSales).
 SELECT Titles.partnum,
        bktitle,
        qty, -- Notice that qty doesn't exist on Titles table.
-       Sales.qty * Titles.slprice AS total_amount
-FROM Titles
-LEFT JOIN Sales
+       Sales.qty * Titles.slprice AS Total_amount
+FROM Sales
+LEFT JOIN Titles
     ON Titles.partnum = Sales.partnum;
 ```
 
-* Demonstrates calculated column inside SELECT.
+* Total_Amount is a calculated column where:  
 * `Total_amount` = Quantity × selling price.
+* Keep in mind that because we used a left join on the Sales table, the result will output 98 rows i.e. the same number of rows that 'Sales' table has
 
 ---
 
