@@ -146,7 +146,7 @@ A prefix can be used in front of a column or even table name to specify its sour
 -- `Slspers` is a table prefix for the column `fname`
 SELECT  
 	Slspers.fname, Slspers.lname  
-FROM Slspers;
+FROM Pub1.Slspers;
 ```
 
 Table prefixes can also be used before the wildcard asterisk (*).
@@ -878,8 +878,21 @@ FROM Slspers;
 ``` sql
 -- Solution:  
 SELECT  
-	TRIM(fname) + '.' + TRIM(lname) + '@outlook.com'  
+	LOWER(
+		TRIM(fname) + '.' + TRIM(lname) + '@outlook.com' 
+	) 
 FROM Slspers  
+```
+
+#### Exercise 3: Write a SQL query to create a lowercase email for each row in Slspers
+``` sql
+-- Returns the First Letter of First Name + Last name + '@outlook.com'
+SELECT 
+	fname, lname,
+	LOWER(
+		LEFT(fname, 1) + TRIM(lname) + '@outlook.com'
+	) AS email
+FROM Slspers
 ```
 
 /* -------------------------------------------------------
@@ -887,18 +900,15 @@ FROM Slspers
 ---------------------------------------------------------- */
 
 
-
 SELECT COUNT(*)  
 FROM Slspers;  
 -- in SSMS, Clicking on 'Messages' will display output of Count of Rows as well.
-
 
 -- Show Row #'s for each row  
 SELECT  
 	ROW_NUMBER() OVER (ORDER BY repid) AS row_num,  	
 	*  
 FROM Slspers
-
 
 > Remember if I want to show rows as a seperate column:
 
@@ -907,15 +917,15 @@ SELECT
     *  
 FROM Slspers;
 
- 
+DENSE_RANK() is a window function that assigns a unique rank to each row within a result set based on a specific ordering.
+
 SELECT  
   fname, 
   commrate,  
   DENSE_RANK() OVER (ORDER BY commrate DESC) AS SalaryRank  
   -- DENSE_RANK uses consecutive ranks that doesn't skip ranks after ties.  
-FROM Slspers
+FROM Slspers  
 ORDER BY commrate ASC;
-
 
 #### Unpreferred
 SELECT  
@@ -926,8 +936,6 @@ SELECT
   -- It skips ranks for ties (that's why there’s no rank 2,3).  
 FROM Slspers
 ORDER BY commrate ASC;
-
-
 
 > REMEMBER:  
 SELECT  
@@ -942,40 +950,78 @@ WHERE DATEPART(year, pubdate) = 2017
 
 
 ### Group By  
+The GROUP BY statement combines duplicates values into unique groups i.e. the GROUP BY statement creates a vertical list by turning every unique combination of the categories into its own unique row.
 
--- Output each distinct customer (like Excel's UNIQUE() function)  
+> In terms of logic, the GROUP BY clause is similar to what a Pivot Table does.
+
+Output each distinct customer (like Excel's UNIQUE() function)  
+``` sql
 SELECT DISTINCT City  
 FROM Customers  
+```
 
+> Notice in the above example the unique list of customers.
 
--- SAME AS ABOVE --  
+Use the GROUP BY statement to achieve the same results.  
+``` sql
 SELECT city  
 FROM Customers  
 GROUP BY city  
+```
 
+To add a column of the count of each state:
+``` sql  
+SELECT city, COUNT(city)  
+FROM Customers  
+GROUP BY city  
+```
 
--- List each commission rate along with the number of salespeople who have that rate.  
+#### Demo Exercise: For each sales person, show the number (qty) of books sold
+``` sql
+SELECT  
+	repid,  
+	SUM(qty) AS qty_Total   
+FROM sales  
+-- WHERE YEAR(sldate) = 2012  
+GROUP BY repid  
+```
+
+#### Demo Exercise: List each commission rate along with the number of salespeople who have that rate.  
+``` sql
 SELECT	
 	commrate,  
 	COUNT(commrate) AS number_salespeople,  
 	STRING_AGG(TRIM(fname), ', ') AS salespeople   
-	-- string aggregation creates a column that aggregates the first names of salespeople into a list or array  
+	-- A column that uses the string aggregation function aggregates the first names of salespeople into a list or array  
 FROM Slspers  
 GROUP BY commrate
+```
 
+#### HAVING
+The HAVING clause filters results after they have been grouped (not before!).
 
-#### For each sales person, show the number of books sold
-SELECT repid, SUM(qty) as qty_total  
-FROM SALES  
-WHERE YEAR(sldate) = 2017  
--- WHERE DATEPART(YEAR, sldate) = 2017  
-GROUP BY repid  
-ORDER BY qty_total
+```
+Remember the Acronym: (Huge Shoutout to Alice Zhao)  
+Start 	Fridays With 	Grandmas Homemade 	Oatmeal  
+SELECT 	FROM 	WHERE 	Group By Having 	Order By
+```
 
+Exercise: Show a count of titles released per year BUT only show years with more than 5 titles released.
 
+``` sql
+SELECT 
+	YEAR(pubdate), 
+	COUNT(*) -- Also works: -- COUNT(pubdate)  
+FROM Titles  
+GROUP BY YEAR(pubdate) --  WITH ROLLUP  
+HAVING COUNT(*) > 5  
+```
 
+---
+### Bonus Example 
+Please make sure to import 'Employees' Data Set first before executing:  
 
--- Please make sure to import 'Employees' Data Set first before executing:  
+Show All Positions:  
 SELECT 	
 	Position  
 	-- COUNT(*) AS NumEmployees  
@@ -986,33 +1032,19 @@ GROUP BY Position;
 SELECT  
 	Position,  
 	ROUND(AVG(Salary),0) AS AVGSALARY  
-	-- FORMAT(ROUND(AVG(Salary),0), '0') AS AVGSALARY -- Formatted  
+	-- FORMAT(ROUND(AVG(Salary),0), '0') AS AVGSALARY  
 FROM Employees  
 GROUP BY Position;
 
 
-
-
-
-#### HAVING
--- Acronym:   
-Start Fridays With Grandmas Homemade Oatmeal  
-SELECT FROM WHERE Group By Having Order By
-
--- Ex 1 --   
+Show positions with an average salary above 70000.   
+-- Having Example  
 SELECT Position, AVG(Salary) AS AVGSALARY  
 FROM Employees  
 GROUP BY Position  
-HAVING AVG(Salary) > 70000  
+HAVING AVG(Salary) > 70000 
 
-
--- Show me which years HAVE # of books released >5  
-SELECT YEAR(pubdate), COUNT(*) -- COUNT(pubdate)  
-FROM Titles  
-GROUP BY YEAR(pubdate) --  WITH ROLLUP  
-HAVING COUNT(*) > 5  
-
-
+---
 
 /*
 The ROLLUP operator in SQL is used to generate 
@@ -1022,12 +1054,12 @@ you want to see aggregates by category,
 as well as totals across all categories.
 */
 
+
 -- ROLLUP -- 
 SELECT Position, AVG(Salary) AS AverageSalary
 FROM Employees
 GROUP BY ROLLUP(Position);
 -- Also works: GROUP BY Position WITH ROLLUP;
-
 
 
 SELECT *
@@ -1039,7 +1071,6 @@ PIVOT (
     AVG(Salary)   -- Aggregate function
     FOR POSITION IN ([Web Designer], [UX Designer])  -- Column values to become new columns
 ) AS PivotTable;
-
 
 
 /* -------------------------------------------------------
@@ -1081,7 +1112,7 @@ ORDER BY bktitle
 -- Works:
 SELECT Sales.ORDNUM, * -- Note: Ordnum would be outputted twice in this example.
 FROM Sales
-WHERE Sales.qty > 300;
+WHERE Sales.qty > 300; -- Note the added prefix 'Sales' BEFORE column name.
 ```
 
 ```sql
