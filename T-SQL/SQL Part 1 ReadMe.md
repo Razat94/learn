@@ -950,7 +950,7 @@ WHERE DATEPART(year, pubdate) = 2017
 
 
 ### Group By  
-The GROUP BY statement combines duplicates values into unique groups i.e. the GROUP BY statement creates a vertical list by turning every unique combination of the categories into its own unique row.
+The GROUP BY statement combines duplicates values into unique groups i.e. the GROUP BY statement creates a vertical list of unique categories.
 
 > In terms of logic, the GROUP BY clause is similar to what a Pivot Table does.
 
@@ -984,6 +984,7 @@ SELECT
 FROM sales  
 -- WHERE YEAR(sldate) = 2012  
 GROUP BY repid  
+-- ORDER BY repid
 ```
 
 #### Demo Exercise: List each commission rate along with the number of salespeople who have that rate.  
@@ -1006,8 +1007,17 @@ Start 	Fridays With 	Grandmas Homemade 	Oatmeal
 SELECT 	FROM 	WHERE 	Group By Having 	Order By
 ```
 
-Exercise: Show a count of titles released per year BUT only show years with more than 5 titles released.
+#### Demo Exercise: Show all sales people who made sales that begin with the letter 'E'
+``` sql
+SELECT  
+	repid
+FROM sales  
+-- WHERE YEAR(sldate) = 2012  
+GROUP BY repid  
+HAVING repid LIKE 'E%'
+```
 
+Exercise: Show a count of titles released per year BUT only show years with more than 5 titles released.
 ``` sql
 SELECT 
 	YEAR(pubdate), 
