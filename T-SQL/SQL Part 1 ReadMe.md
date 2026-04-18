@@ -732,7 +732,6 @@ WHERE pubdate BETWEEN '1/1/1994' AND '12/31/2013'
 ```
 
 
-
 ### AGGREGATE FUNCTIONS  
 "An aggregate function in the Microsoft SQL Database Engine performs a calculation on a set of values, and returns a single value."  
 — [Microsoft Learn: Aggregate Functions](https://learn.microsoft.com/en-us/sql/t-sql/functions/aggregate-functions-transact-sql?view=sql-server-ver17)
@@ -780,8 +779,6 @@ SELECT
 FROM Titles  
 WHERE DATEPART(year, pubdate) = 2017  
 ```
-
-<br/>
 
 ---
 <br/>
@@ -986,9 +983,9 @@ FROM Slspers
 ORDER BY commrate ASC;
 ```
 
-<br/>
+<br /> 
 
----
+--- 
 
 ### Group By  
 The GROUP BY statement combines duplicates values into unique groups i.e. the GROUP BY statement creates a vertical list of unique categories.
