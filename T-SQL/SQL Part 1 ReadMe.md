@@ -828,15 +828,15 @@ WHERE slprice = (
 ---
 
 ### String Functions
-A `string` refers to text data in a SQL table. It's anything made of characters (e.g. letters, numbers, symbols) and are usually written inside single quotes. Below area few example:
+A `string` refers to text data in a SQL table. It's anything made of characters (e.g. letters, numbers, symbols) and are usually written inside single quotes. Below are some examples:
 
 ```
 'hello'
-'John123'
+'John  123'
 '2026-04-17'
 ```
 
-Therefore, SQL string functions are functions that work with text data. They help clean, format, compare, and extract information from strings like names and addresses, making data easier to organize and analyze.
+Therefore, SQL string functions are functions that work with text data. They help clean, format, and extract information from strings like names and addresses, making data easier to organize and analyze.
 
 #### TRIM Function  
 The TRIM Function removes trailing space. 
@@ -865,7 +865,7 @@ SELECT
 FROM Customers;
 ```
 
-#### Exercise #1: Create a 'Full Name' column by concatenating Last Name, First
+#### 2 MIN Exercise #1: Create a 'Full Name' column by concatenating Last Name, First
 
 ``` sql
 -- Solution:  
@@ -887,7 +887,7 @@ SELECT
 FROM Slspers;
 ```
 
-#### Exercise 2: Create a fake email for each salesperson by using the format: `fname.lname@outlook.com`
+#### 2 MIN Exercise: Exercise 2: Create a fake email for each salesperson by using the format: `fname.lname@outlook.com`
 
 ``` sql
 -- Solution:  
@@ -898,7 +898,7 @@ SELECT
 FROM Slspers  
 ```
 
-#### Exercise 3: Write a SQL query to create a lowercase email for each row in Slspers
+#### (DEMO) Exercise: Write a SQL query to create a lowercase email for each row in Slspers e.g. jsmith@outlook.com
 ``` sql
 -- Returns the First Letter of First Name + Last name + '@outlook.com'
 SELECT 
