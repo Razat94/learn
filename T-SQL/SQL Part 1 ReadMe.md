@@ -844,6 +844,7 @@ The TRIM Function removes trailing space.
 SELECT   
 	city + ', ' + state,  
 	-- Original Data: 	-- Rochester           , NY  
+	
 	TRIM(city) + ', ' + state  
 	-- Solution: 		-- Rochester, NY
 FROM CUSTOMERS
