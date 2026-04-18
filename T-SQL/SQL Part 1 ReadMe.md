@@ -844,7 +844,7 @@ The TRIM Function removes trailing space.
 SELECT   
 	city + ', ' + state,  
 	-- Original Data: 	-- Rochester           , NY  
-	
+
 	TRIM(city) + ', ' + state  
 	-- Solution: 		-- Rochester, NY
 FROM CUSTOMERS
@@ -917,26 +917,25 @@ FROM Slspers
 ## <p id = "4"> LESSON 4: Organizing Data | [Back to ToC](#toc)</p> 
 ---------------------------------------------------------- */
 
-
+Returns the total number of rows in a table:
+``` sql
 SELECT COUNT(*)  
 FROM Slspers;  
 -- in SSMS, Clicking on 'Messages' will display output of Count of Rows as well.
+```
 
--- Show Row #'s for each row  
+Show row #'s for each row i.e. show rows as a seperate column:
+``` sql
 SELECT  
 	ROW_NUMBER() OVER (ORDER BY repid) AS row_num,  	
 	*  
 FROM Slspers
+```
 
-> Remember if I want to show rows as a seperate column:
+DENSE_RANK() is a window function that assigns a unique rank to each row within a result set.
+[Source](https://learn.microsoft.com/en-us/sql/t-sql/functions/dense-rank-transact-sql?view=sql-server-ver17)
 
-SELECT 
-    ROW_NUMBER() OVER (ORDER BY repid) AS row_num,  
-    *  
-FROM Slspers;
-
-DENSE_RANK() is a window function that assigns a unique rank to each row within a result set based on a specific ordering.
-
+``` sql
 SELECT  
   fname, 
   commrate,  
@@ -944,16 +943,20 @@ SELECT
   -- DENSE_RANK uses consecutive ranks that doesn't skip ranks after ties.  
 FROM Slspers  
 ORDER BY commrate ASC;
+```
 
-#### Unpreferred
+#### ❌❌❌ Unpreferred ❌❌❌
+RANK() assigns the same rank to tied values.  
+It skips ranks for ties (that's why there’s no rank 2,3).  
+
+``` sql
 SELECT  
   fname,  
   commrate,  
   RANK() OVER (ORDER BY commrate DESC) AS SalaryRank  
-  -- RANK() assigns the same rank to tied values.  
-  -- It skips ranks for ties (that's why there’s no rank 2,3).  
 FROM Slspers
 ORDER BY commrate ASC;
+```
 
 > REMEMBER:  
 SELECT  
