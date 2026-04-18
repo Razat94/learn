@@ -1066,17 +1066,36 @@ HAVING COUNT(*) > 5
 ```
 
 ---
+
+The ROLLUP operator in SQL is used in conjunction  
+with the GROUP BY clause to generate  
+subtotals & grand totals for grouped data.  
+
+It's useful in reports when seeing aggregates  
+by category, as well as totals across all categories.  
+
+``` sql
+SELECT  
+	repid,  
+	SUM(qty) AS qty_Total   
+FROM sales  
+-- WHERE YEAR(sldate) = 2012  
+GROUP BY ROLLUP(repid);
+-- Also works: -- GROUP BY repid WITH ROLLUP;  
+```
+
+---
 ### Bonus Example 
 Please make sure to import 'Employees' Data Set first before executing:  
 
-Show All Positions:  
+-- Show All Positions:  
 SELECT 	
 	Position  
 	-- COUNT(*) AS NumEmployees  
 FROM Employees  
 GROUP BY Position;  
 
--- AVG Salary for each position:  
+-- Find AVG Salary for each position:  
 SELECT  
 	Position,  
 	ROUND(AVG(Salary),0) AS AVGSALARY  
@@ -1084,31 +1103,20 @@ SELECT
 FROM Employees  
 GROUP BY Position;
 
-
-Show positions with an average salary above 70000.   
--- Having Example  
+-- Having Example --  
+-- Show positions with an average salary above 70000.   
 SELECT Position, AVG(Salary) AS AVGSALARY  
 FROM Employees  
 GROUP BY Position  
 HAVING AVG(Salary) > 70000 
 
----
-
-/*
-The ROLLUP operator in SQL is used to generate 
-subtotals and grand totals for grouped data. 
-It's especially useful in reports where 
-you want to see aggregates by category, 
-as well as totals across all categories.
-*/
-
-
--- ROLLUP -- 
-SELECT Position, AVG(Salary) AS AverageSalary
-FROM Employees
-GROUP BY ROLLUP(Position);
--- Also works: GROUP BY Position WITH ROLLUP;
-
+-- ROLLUP Example --  
+SELECT  
+	Position,  
+	AVG(Salary) AS AverageSalary   
+FROM Employees  
+GROUP BY ROLLUP(Position);  
+-- Also works: GROUP BY Position WITH ROLLUP;  
 
 SELECT *
 FROM (
