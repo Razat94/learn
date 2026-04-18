@@ -170,7 +170,8 @@ NOTE: The keyword 'AS' is not needed since it's just a formality.
 ``` sql 
 SELECT 
 	fname, 
-	lname 'Last Name' 
+	lname 'Last Name',  -- Two-word Alias must still be wrapped in single quotes.
+	commrate Rate		-- One-word Alias do not need quotes.   
 FROM Slspers; 
 ```
 
@@ -733,7 +734,10 @@ WHERE pubdate BETWEEN '1/1/1994' AND '12/31/2013'
 
 
 ### AGGREGATE FUNCTIONS  
+"An aggregate function in the Microsoft SQL Database Engine performs a calculation on a set of values, and returns a single value."  
+— [Microsoft Learn: Aggregate Functions](https://learn.microsoft.com/en-us/sql/t-sql/functions/aggregate-functions-transact-sql?view=sql-server-ver17)
 
+The `COUNT` Function returns the total number of rows in a table, including those with NULL values.
 ``` sql
 SELECT	
 	COUNT(*),  
@@ -742,6 +746,7 @@ FROM	TITLES
 WHERE 	YEAR(pubdate) = 2017  
 ```
 
+Below is a query that uses a few common aggregate functions:
 ``` sql
 SELECT  
 	SUM(devcost),  
@@ -761,7 +766,9 @@ SELECT AVG( CAST(commrate AS DECIMAL(10,2)) ) FROM Slspers  -- 0.037000
 
 > Side Note: If a SQL column is stored as TEXT but contains numbers, you must cast it to a numeric type before doing numeric operations or comparisons.
 
---  
+---
+<br /> 
+
 Q: Can we use a sum function across a row?
 
 Short answer:  
@@ -783,7 +790,7 @@ FROM sales;
 
 --- 
 
-#### Note: Wrap `SELECT` Queries in parenthesis to form nested queries (Similar to Nested Functions in Excel)
+#### Note: Nested queries can be formed by wrapping `SELECT` Queries in parenthesis (Similar to Nested Functions in Excel)
 
 #### Query 1
 ``` sql
@@ -821,21 +828,28 @@ WHERE slprice = (
 ---
 
 ### String Functions
+A `string` refers to text data in a SQL table. It's anything made of characters (e.g. letters, numbers, symbols) and are usually written inside single quotes. Below area few example:
 
+```
+'hello'
+'John123'
+'2026-04-17'
+```
+
+Therefore, SQL string functions are functions that work with text data. They help clean, format, compare, and extract information from strings like names and addresses, making data easier to organize and analyze.
 
 #### TRIM Function  
-
+The TRIM Function removes trailing space. 
 ``` sql
-SELECT  
-	city + ', ' + state  
-	-- TRIM Function removes TRAILING SPACE  
-	-- Rochester           <- space ends here  
-	-- Solution: -- TRIM(city) + ', ' + state  
+SELECT   
+	city + ', ' + state,  
+	-- Original Data: 	-- Rochester           , NY  
+	TRIM(city) + ', ' + state  
+	-- Solution: 		-- Rochester, NY
 FROM CUSTOMERS
 ```
 
-> NOTE:  The TRIM function does not automatically apply to all columns in a table.  
-You must specify each column you want to trim.
+> NOTE:  The TRIM function does not automatically apply to all columns in a table i.e. you must specify each column  to trim.
 
 #### Optional Excercise: Create a column that contains the full address from the Customers table 
 
@@ -856,9 +870,9 @@ FROM Customers;
 ``` sql
 -- Solution:  
 SELECT   
-	TRIM(lname) + ', ' + fname AS 'Full Name'  -- Two-word Alias must be wrapped in single quotes.  
+	TRIM(lname) + ', ' + fname AS 'Full Name' 
 	-- Below Also Works:   
-	-- CONCAT(TRIM(fname), ' ', lname) AS full_name  -- One-word Alias does not need quotes.  
+	-- CONCAT(TRIM(fname), ' ', lname) AS full_name  
 FROM Slspers
 ```
 
