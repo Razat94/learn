@@ -1007,15 +1007,18 @@ FROM Customers
 GROUP BY city  
 ```
 
-To add a column of the count of each state:
+To add a column of the count of each city:
 ``` sql  
 SELECT city, COUNT(city)  
 FROM Customers  
 GROUP BY city  
 ```
 
+> Practice: Group the data by state & add a column of the count of each state,
+
 #### Demo Exercise: For each sales person, show the number (qty) of books sold
 ``` sql
+-- Solution (Keep this query since we'll build off this soon)
 SELECT  
 	repid,  
 	SUM(qty) AS qty_Total   
@@ -1045,17 +1048,7 @@ Start 	Fridays With 	Grandmas Homemade 	Oatmeal
 SELECT 	FROM 	WHERE 	Group By Having 	Order By
 ```
 
-#### Demo Exercise: Show all sales people who made sales that begin with the letter 'E'
-``` sql
-SELECT  
-	repid
-FROM sales  
--- WHERE YEAR(sldate) = 2012  
-GROUP BY repid  
-HAVING repid LIKE 'E%'
-```
-
-Exercise: Show a count of titles released per year BUT only show years with more than 5 titles released.
+#### Demo Exercise: Show a count of titles released per year BUT only show years with more than 5 titles released.
 ``` sql
 SELECT 
 	YEAR(pubdate), 
@@ -1063,6 +1056,17 @@ SELECT
 FROM Titles  
 GROUP BY YEAR(pubdate) --  WITH ROLLUP  
 HAVING COUNT(*) > 5  
+```
+
+#### Demo Exercise: Show all sales people who made sales that begin with the letter 'E'
+``` sql
+SELECT  
+	repid,
+	SUM(qty) AS qty_Total  
+FROM sales  
+-- WHERE YEAR(sldate) = 2012  
+GROUP BY repid  
+HAVING repid LIKE 'E%'
 ```
 
 ---
@@ -1118,6 +1122,7 @@ FROM Employees
 GROUP BY ROLLUP(Position);  
 -- Also works: GROUP BY Position WITH ROLLUP;  
 
+-- PIVOT Example --  
 SELECT *
 FROM (
     SELECT Position, Salary
