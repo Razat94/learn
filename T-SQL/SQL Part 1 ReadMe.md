@@ -758,6 +758,34 @@ FROM Titles
 WHERE YEAR(pubdate) = 2017  
 ```
 
+<br />
+
+```
+*** REMEMBER: ***  
+```
+
+If you only use aggregates, SQL produces one result row.
+Once a non-aggregated column is added in the `SELECT` query, a `GROUP BY` clause is required to define how rows are grouped (See Chapter 4).
+
+In other words, combining row-level fields (like `bktitle`) with aggregated values (such as `COUNT` or `AVG`) requires specifying how to group the rows in SQL; otherwise, it will produce an error.
+
+``` sql
+SELECT  
+	COUNT(*),   
+	SUM(devcost),  
+	AVG(slprice),  
+	MIN(slprice),  
+	MAX(slprice)  
+	-- bktitle -- will run an error because it's not an aggregate function  
+FROM Titles  
+WHERE DATEPART(year, pubdate) = 2017  
+```
+
+<br/>
+
+---
+<br/>
+
 ``` sql
 -- Notice the difference between answers
 SELECT AVG( CAST(commrate AS DECIMAL(10,1)) ) FROM Slspers  -- 0.030000
@@ -945,7 +973,7 @@ FROM Slspers
 ORDER BY commrate ASC;
 ```
 
-#### ❌❌❌ Unpreferred ❌❌❌
+#### X X X Unpreferred X X X
 RANK() assigns the same rank to tied values.  
 It skips ranks for ties (that's why there’s no rank 2,3).  
 
@@ -958,17 +986,9 @@ FROM Slspers
 ORDER BY commrate ASC;
 ```
 
-> REMEMBER:  
-SELECT  
-	COUNT(*),   
-	SUM(devcost),  
-	AVG(slprice),  
-	MIN(slprice),  
-	MAX(slprice)  
-	-- bktitle -- will run an error because it's not an aggregate function  
-FROM Titles  
-WHERE DATEPART(year, pubdate) = 2017  
+<br/>
 
+---
 
 ### Group By  
 The GROUP BY statement combines duplicates values into unique groups i.e. the GROUP BY statement creates a vertical list of unique categories.
