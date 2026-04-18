@@ -868,11 +868,14 @@ FROM Customers;
 #### 2 MIN Exercise #1: Create a 'Full Name' column by concatenating Last Name, First
 
 ``` sql
--- Solution:  
+-- Solution 1:
 SELECT   
 	TRIM(lname) + ', ' + fname AS 'Full Name' 
-	-- Below Also Works:   
-	-- CONCAT(TRIM(fname), ' ', lname) AS full_name  
+FROM Slspers
+
+-- Solution 2:
+SELECT   
+	CONCAT(TRIM(fname), ' ', lname) AS full_name  
 FROM Slspers
 ```
 
