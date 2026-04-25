@@ -13,21 +13,19 @@
 ## <p id = "0"> LESSON 0: Before We Begin </p>
 ---------------------------------------------------------- */
 
------ 
-
-You can download SQL Server Management Studio(SSMS) online [here](https://www.microsoft.com/en-us/sql-server/sql-server-downloads).
 
 ### About the Data:  
 We’ll be working with data from a publishing company that sells books to bookstores.
 
 Reach out to Razat51@gmail.com for the data.
 
+### SQL Server Management Studio(SSMS)
+You can download SQL Server Management Studio(SSMS) online [from Microsoft](https://www.microsoft.com/en-us/sql-server/sql-server-downloads).
+
 ---
 
-> NOTE:  
-> Suppose we use Task Manager to close SQL Server Management Studio (SSMS).
-Reopening SSMS could cause problems, so we’ll use SQL Server 20XX Configuration Manager to start the service.  
-Additional Note: Don’t use Windows Services to start SSMS.
+> Side Note:  
+> SSMS is a computer application like any other. Although Windows Task Manager can be used to close SQL Server Management Studio (SSMS), reopening SSMS may cause problems. Don’t use Windows Services to start SSMS but instead, use SQL Server 20XX Configuration Manager to start the service:
 
 1. Type in 'Configuration Manager' to launch the application
 2. Start the service for 'SQL Server' (SQL EXPRESS)
@@ -56,17 +54,19 @@ There are different ways to execute the query:
 
 > NOTE: T-SQL is a Declarative language that supports some precedural syntax.
 
-The main parts of the SSMS interface are the:
+### The main parts of the SSMS interface are the:
 - Object Explorer: Navigate through databases, tables, views, stored procedures, etc. 
     - We can hide/unhide this pane if needed.
 - Query Editor: Write and run SQL queries.
 - Results Pane: Ctrl + R - Toggles the results pane
 
+<br />
+
 ```
-	To Show Lines in the Query Editor:
-		1. Go to Tools > Options 
-		2. Expand 'Text Editor' -> Transact-SQL -> General. 
-		3. Check the Line numbers box and click OK
+To Show Lines in the Query Editor:
+	1. Go to Tools > Options 
+	2. Expand 'Text Editor' -> Transact-SQL -> General. 
+	3. Check the Line numbers box and click OK
 ```
 
 
