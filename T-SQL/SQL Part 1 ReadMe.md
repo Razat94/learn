@@ -27,7 +27,7 @@ You can download SQL Server Management Studio(SSMS) online [from Microsoft](http
 Side Note: 
 ```
 
-SSMS is a computer application like any other. Although Windows Task Manager can be used to close SQL Server Management Studio (SSMS), reopening SSMS may cause problems. Don’t use Windows Services to start SSMS but instead, use SQL Server 20XX Configuration Manager to start the service:
+> SSMS is a computer application like any other. Although Windows Task Manager can be used to close SQL Server Management Studio (SSMS), reopening SSMS may cause problems. Don’t use Windows Services to start SSMS but instead, use SQL Server 20XX Configuration Manager to start the service:
 
 1. Type in 'Configuration Manager' to launch the application
 2. Start the service for 'SQL Server' (SQL EXPRESS)
