@@ -23,15 +23,15 @@ Reach out to Razat51@gmail.com for the data.
 You can download SQL Server Management Studio(SSMS) online [from Microsoft](https://www.microsoft.com/en-us/sql-server/sql-server-downloads).
 
 
-``` 
-Side Note: 
-```
+> Side Note: 
 
-> SSMS is a computer application like any other. Although Windows Task Manager can be used to close SQL Server Management Studio (SSMS), reopening SSMS may cause problems. Don’t use Windows Services to start SSMS but instead, use SQL Server 20XX Configuration Manager to start the service: 
+```
+SSMS is a computer application like any other. Although Windows Task Manager can be used to close SQL Server Management Studio (SSMS), reopening SSMS may cause problems. Don’t use Windows Services to start SSMS but instead, use SQL Server 20XX Configuration Manager to start the service: 
 
 > 1. Type in 'Configuration Manager' to launch the application
 > 2. Start the service for 'SQL Server' (SQL EXPRESS)
 > 3. Relaunch SSMS normally.
+```
 
 [Stack Overflow Reference](https://stackoverflow.com/questions/35630344/unable-to-connect-to-local-sql-server-after-ending-tasks)
 
@@ -46,7 +46,9 @@ Press `CTRL + N` to launch a new query.
 In SQL Server, we can run a simple statement:  
 ``` SELECT 1+3 ``` 
 
-There are different ways to execute the query:  
+```
+Different ways to execute the query:  
+```
 	- Shortcuts: F5, Ctrl + E, Alt + X  
 	- Click the green 'Execute' button on the toolbar.  
 	- Go to Query (tab) -> Execute.  
