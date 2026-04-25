@@ -22,18 +22,18 @@ Reach out to Razat51@gmail.com for the data.
 ### SQL Server Management Studio(SSMS)
 You can download SQL Server Management Studio(SSMS) online [from Microsoft](https://www.microsoft.com/en-us/sql-server/sql-server-downloads).
 
----
 
-> Side Note:  
-> SSMS is a computer application like any other. Although Windows Task Manager can be used to close SQL Server Management Studio (SSMS), reopening SSMS may cause problems. Don’t use Windows Services to start SSMS but instead, use SQL Server 20XX Configuration Manager to start the service:
+``` 
+Side Note: 
+```
+
+SSMS is a computer application like any other. Although Windows Task Manager can be used to close SQL Server Management Studio (SSMS), reopening SSMS may cause problems. Don’t use Windows Services to start SSMS but instead, use SQL Server 20XX Configuration Manager to start the service:
 
 1. Type in 'Configuration Manager' to launch the application
 2. Start the service for 'SQL Server' (SQL EXPRESS)
 3. Relaunch SSMS normally.
 
 [Stack Overflow Reference](https://stackoverflow.com/questions/35630344/unable-to-connect-to-local-sql-server-after-ending-tasks)
-
----
 
 /* -------------------------------------------------------
 ## <p id = "1"> LESSON 1: Executing a Simple Query | [Back to ToC](#toc) </p>
