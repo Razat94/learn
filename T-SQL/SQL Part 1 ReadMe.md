@@ -1403,21 +1403,51 @@ FULL OUTER JOIN slspers2 sp
 ## <p id = "6"> LESSON 6: Exporting Query Results | [Back to ToC](#toc)</p> 
 ---------------------------------------------------------- */
 
+Since most users do not have access to SSMS, query results can be saved in formats that can easily be opened and used. This chapter explores how to export query results to various formats e.g. CSV, and XML. 
 
-EXPORTING  
-Ctrl + Shift + F (Results to File): Save the query results directly to a file, such as a CSV or text file.  
-You can then run the query again to save it to a file.
+### Saving Query Results as a Comma-Delimited (CSV) File 
+Once a query has been executed and results appear in the Results pane, right-click any blank area within the Results pane and select 'Save Results As'.
 
+<img src = "zz_save_results.png">
 
+Alternative Methods:
+* To select all data in the SSMS results pane, click the blank square in the top-left corner where the row numbers and column headers meet. Once that is selected, the data can be copied/pasted anywhere.
+
+<img src = "zz_select_data.jpg">
+
+#### Results to File
+When a SQL query is run in SSMS, the results do not always have to be displayed in the same way. The export destination can be changed by selecting a different Output Format. [More Information](https://learn.microsoft.com/en-us/ssms/quickstarts/work-with-query-results#:~:text=On%20the%20SQL%20Editor%20toolbar%2C%20select%20Results%20to%20File.,%3E%20General%20%3E%20Query%20results%20directory.).
+
+For instance, instead of showing the data results on the screen, SSMS can save the query results directly to a file, such as a CSV or text file.  
+
+- Click 'Results to File' or press 'Ctrl + Shift + F'
+- You can then run the query again to save it to a file.
+		
+<img src = "zz_results_to_file.png">
+
+---
+
+### Saving Query Results as a XML File
+XML is a way to organize and label data so different programs and websites can easily share and understand it. Its main goal is to help transfer structured data between applications over the Internet.
+
+> Before executing the following query, make sure to return back to the 'Results to Grid' mode.
+
+``` sql
 SELECT *  
-FROM dbo.Slspers  
-FOR XML AUTO, ROOT('Document')  
-FOR XML AUTO, TYPE, ELEMENTS  
+FROM Slspers  
+FOR XML AUTO, TYPE, ELEMENTS, ROOT('Document')  
+```
 
-FOR XML, MAKE SURE YOU WRAP INFORMATION IN  
-`<document>`
+Few things to note:
+* The `FOR XML` clause is used to return query results in XML format.
+* Since this will output an XML document, it's helpful to wrap the information in a   
+`<document>` tag
 
-</document>
+<br/>
+
+---
+
+<br/>
 
 -- BONUS --
 
