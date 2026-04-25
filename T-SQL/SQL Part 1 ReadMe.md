@@ -136,9 +136,19 @@ Queries can be written to output individual columns.
 
 ``` sql
 -- Output the first and last names of everyone in the `Slspers` table.
-SELECT fname, lname
+SELECT fname, lname  
 FROM slspers;
 ```
+
+SQL is generally whitespace-insensitive, meaning that extra spaces, tabs, or newlines between keywords and identifiers (names) are ignored by the parser.
+``` sql
+-- Output the first and last names of everyone in the `Slspers` table.
+SELECT 
+	fname, 
+	lname  -- Note there is no comma after "lname".
+FROM slspers;
+```
+
 
 #### SQL Prefix
 A prefix can be used in front of a column or even table name to specify its source and avoid ambiguity
@@ -146,11 +156,12 @@ A prefix can be used in front of a column or even table name to specify its sour
 ``` sql
 -- `Slspers` is a table prefix for the column `fname`
 SELECT  
-	Slspers.fname, Slspers.lname  
+	Slspers.fname, 
+	Slspers.lname  
 FROM Pub1.Slspers;
 ```
 
-Table prefixes can also be used before the wildcard asterisk (*).
+Note that table prefixes can also be used before the wildcard asterisk (*).
 ``` sql
 SELECT Slspers.* FROM Slspers    
 -- Same as:  
@@ -222,7 +233,7 @@ SELECT
 
 	-- To Remove trailing 0's without rounding:  
 	FORMAT(slprice * 1.2, '0.##') AS discounted_price, -- Good Solution:	0's removed, but some prices only have whole dollars   
-	CAST(slprice * 1.2 AS DECIMAL(10,2))  AS Inflation -- Better Solution:	Force two decimal places everywhere.
+	CAST(slprice * 1.2 AS DECIMAL(10,2)) AS Inflation -- Better Solution:	Force two decimal places everywhere.
 FROM Titles
 ```
 
