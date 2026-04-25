@@ -17,7 +17,7 @@
 ### About the Data:  
 We’ll be working with data from a publishing company that sells books to bookstores.
 
-Reach out to Razat51@gmail.com for the data.
+Reach out for the data.
 
 ### SQL Server Management Studio(SSMS)
 You can download SQL Server Management Studio(SSMS) online [from Microsoft](https://www.microsoft.com/en-us/sql-server/sql-server-downloads).
