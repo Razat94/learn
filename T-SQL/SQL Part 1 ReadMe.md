@@ -15,25 +15,14 @@
 
 ----- 
 
+You can download SQL Server Management Studio(SSMS) online [here](https://www.microsoft.com/en-us/sql-server/sql-server-downloads).
+
 ### About the Data:  
 We’ll be working with data from a publishing company that sells books to bookstores.
 
-You can download SQL Server Management Studio(SSMS) online [here](https://www.microsoft.com/en-us/sql-server/sql-server-downloads).
+Reach out to Razat51@gmail.com for the data.
 
-The main parts of the SSMS interface are the:
-- Object Explorer: Navigate through databases, tables, views, stored procedures, etc. 
-    - We can hide/unhide this pane if needed.
-- Query Editor: Write and run SQL queries.
-- Results Pane: Ctrl + R - Toggles the results pane
-
-```
-	To Show Lines in the Query Editor:
-		1. Go to Tools > Options 
-		2. Expand 'Text Editor' -> Transact-SQL -> General. 
-		3. Check the Line numbers box and click OK
-```
-
-
+---
 
 > NOTE:  
 > Suppose we use Task Manager to close SQL Server Management Studio (SSMS).
@@ -46,7 +35,7 @@ Additional Note: Don’t use Windows Services to start SSMS.
 
 [Stack Overflow Reference](https://stackoverflow.com/questions/35630344/unable-to-connect-to-local-sql-server-after-ending-tasks)
 
-
+---
 
 /* -------------------------------------------------------
 ## <p id = "1"> LESSON 1: Executing a Simple Query | [Back to ToC](#toc) </p>
@@ -66,6 +55,20 @@ There are different ways to execute the query:
 	- Right-click anywhere in the query window and choose 'Execute SQL' from the context menu.  
 
 > NOTE: T-SQL is a Declarative language that supports some precedural syntax.
+
+The main parts of the SSMS interface are the:
+- Object Explorer: Navigate through databases, tables, views, stored procedures, etc. 
+    - We can hide/unhide this pane if needed.
+- Query Editor: Write and run SQL queries.
+- Results Pane: Ctrl + R - Toggles the results pane
+
+```
+	To Show Lines in the Query Editor:
+		1. Go to Tools > Options 
+		2. Expand 'Text Editor' -> Transact-SQL -> General. 
+		3. Check the Line numbers box and click OK
+```
+
 
 ### SQL Comments
 Comments are used explain SQL code or add notes for the reader. They are ignored by the database engine and are not executed.
