@@ -17,10 +17,10 @@
 ### About the Data:  
 We’ll be working with data from a publishing company that sells books to bookstores.
 
-Reach out for the data.
+Please contact me to request the data.
 
 ### SQL Server Management Studio(SSMS)
-You can download SQL Server Management Studio(SSMS) online [from Microsoft](https://www.microsoft.com/en-us/sql-server/sql-server-downloads).
+SQL Server Management Studio (SSMS) is the software that lets users write and run SQL commands to talk to a SQL Server database. The tool that can be downloaded online [from Microsoft](https://www.microsoft.com/en-us/sql-server/sql-server-downloads).
 
 ```
 Side Note: 
@@ -92,12 +92,13 @@ SELECT 1 + 3
 
 ---
 
-In SQL Server, you can include multiple SELECT statements in a single query batch and each will return its own result set.
+In SQL Server, including multiple SELECT statements in a single query batch will return their own result sets.
 
 ``` sql
 SELECT 1+3
-SELECT 'After Insertion:'	-- Outputs simple text
-PRINT 'Hello World! Bye!' 	-- Displays a message or a value in the 'Messages' tab and is mainly used for debugging
+SELECT 'Have a nice day'  	-- Outputs simple text. 
+SELECT 'Thank you!'			-- Notice the use of single quotes, as the use of double quotes will result in an error.
+PRINT 'Good Bye!' 			-- Displays a message or a value in the 'Messages' tab and is mainly used for debugging.
 ```
 
 ---
@@ -122,7 +123,7 @@ SELECT *  	 -- Selects ALL columns
 FROM slspers -- Note: Spelling matters. Typing 'slsperson' won't execute.
 ```
 
-> In SQL Server, a SELECT query can also be made from the Object Explorer:  
+> In SQL Server, a SELECT query can <i>also</i> be made from the Object Explorer:  
 > Right-click the table name and choose 'Select Top 1000 Rows'.
 
 Optional Exercise: Retrieve the data from the other 3 tables:  
@@ -144,8 +145,10 @@ SQL is generally whitespace-insensitive, meaning that extra spaces, tabs, or new
 ``` sql
 -- Output the first and last names of everyone in the `Slspers` table.
 SELECT 
+
 	fname, 
 	lname  -- Note there is no comma after "lname".
+	
 FROM slspers;
 ```
 
@@ -1423,7 +1426,7 @@ Once a query has been executed and results appear in the Results pane, right-cli
 <img src = "zz_save_results.png">
 
 Alternative Methods:
-* To select all data in the SSMS results pane, click the blank square in the top-left corner where the row numbers and column headers meet. Once that is selected, the data can be copied/pasted anywhere.
+* To select all data in the SSMS results pane, click the blank square in the top-left corner where the row numbers and column headers meet. Once that is selected, press `Ctrl + Shift + C` to copy the data with the headers & then paste the data into another file.
 
 <img src = "zz_select_data.jpg">
 

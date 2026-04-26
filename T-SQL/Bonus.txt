@@ -57,6 +57,17 @@ CREATE TABLE Reviews (
 
 == FAQ's: ==  
 
+OG
+===
+How to get all columns?
+HOw to get count of rows returned?
+Q: Can I call a table titles? A: NO
+Q: Can I use "" instead of ''? A: NO
+Q: How to copy output into text file?
+	A: Ctrl + Shift + C
+===
+
+
 Q: How to return all columns?  
 A: 
 ```sql
