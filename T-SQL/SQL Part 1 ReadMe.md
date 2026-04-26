@@ -37,6 +37,8 @@ Side Note:
 ## <p id = "1"> LESSON 1: Executing a Simple Query | [Back to ToC](#toc) </p>
 ---------------------------------------------------------- */
 
+This chapter will cover how to use SQL Server to connect to a database and run simple queries.
+
 ### Our First Query
 
 Press `CTRL + N` to launch a new query.
@@ -148,7 +150,7 @@ SELECT
 
 	fname, 
 	lname  -- Note there is no comma after "lname".
-	
+
 FROM slspers;
 ```
 
@@ -957,14 +959,16 @@ FROM Slspers
 ## <p id = "4"> LESSON 4: Organizing Data | [Back to ToC](#toc)</p> 
 ---------------------------------------------------------- */
 
-Returns the total number of rows in a table:
+This lesson will cover how to group query results to better summarize and understand the data better.
+
+#### Recall that the COUNT() function returns the total number of rows in a table:
 ``` sql
 SELECT COUNT(*)  
 FROM Slspers;  
 -- in SSMS, Clicking on 'Messages' will display output of Count of Rows as well.
 ```
 
-Show row #'s for each row i.e. show rows as a seperate column:
+#### The query below shows row #'s for each row i.e. show rows as a seperate column:
 ``` sql
 SELECT  
 	ROW_NUMBER() OVER (ORDER BY repid) AS row_num,  	
@@ -1007,7 +1011,9 @@ The GROUP BY statement combines duplicates values into unique groups i.e. the GR
 
 > In terms of logic, the GROUP BY clause is similar to what a Pivot Table does.
 
-Output each distinct customer (like Excel's UNIQUE() function)  
+Grouping data helps summarize, analyze & understand data more easily, such as viewing total sales by region or city.
+
+#### Output each distinct customer (like Excel's UNIQUE() function)  
 ``` sql
 SELECT DISTINCT City  
 FROM Customers  
@@ -1022,7 +1028,7 @@ FROM Customers
 GROUP BY city  
 ```
 
-To add a column of the count of each city:
+#### To add a column of the count of each city:
 ``` sql  
 SELECT city, COUNT(city)  
 FROM Customers  
@@ -1054,7 +1060,7 @@ FROM Slspers
 GROUP BY commrate
 ```
 
-#### HAVING
+### HAVING Clause
 The HAVING clause filters results after they have been grouped (not before!).
 
 ```
@@ -1153,6 +1159,9 @@ PIVOT (
 ## <p id = "5"> Lesson 5: Retrieving Data from Multiple Tables | [Back to ToC](#toc)</p> 
 ---------------------------------------------------------- */
 
+In most databases, the information is spread across different tables. This chapter covers how to retrieve and combine data from multiple tables. 
+
+ This data can be brought together by joining tables or combining query results using SQL Server features such as JOIN, UNION, EXCEPT, and INTERSECT to retrieve and merge data into a single result set.
 
 ### /* ------------ Unions Statement ------------ */
 SELECT *  
@@ -1180,7 +1189,6 @@ ORDER BY bktitle
 
 --- 
 ## JOIN Statements
-### /* ------------ JOINS Statement ------------ */
 
 #### Recall: Table Aliases (Important Sidenote)
 
@@ -1210,14 +1218,19 @@ WHERE Sales.qty > 300; -- Must change to S.qty
 
 > Don't forget this! You must use the alias instead of the full table name! 
 
+<br/>
+
 ---
 
 <br/>
-<br/>
 
+### /* ------------ JOINS Statement ------------ */
+
+A join combines data from two or more tables based on a related column.
+
+It is used when tables share related data (often through a key) to retrieve matching records from each table.
 
 ### INNER JOIN
-
 
 Match rows where the key exists in both tables.
 [Link](https://www.w3schools.com/sql/sql_join_inner.asp)
@@ -1238,7 +1251,6 @@ FROM sales2 s
 INNER JOIN slspers2 sp
     ON s.repid = sp.repid;
 ```
-
 
 
 ### LEFT JOIN
