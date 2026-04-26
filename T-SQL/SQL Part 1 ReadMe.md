@@ -959,7 +959,7 @@ FROM Slspers
 ## <p id = "4"> LESSON 4: Organizing Data | [Back to ToC](#toc)</p> 
 ---------------------------------------------------------- */
 
-This lesson will cover how to group query results to better summarize and understand the data better.
+This lesson will cover how to group query results to better summarize and understand data better.
 
 #### Recall that the COUNT() function returns the total number of rows in a table:
 ``` sql
@@ -1159,9 +1159,9 @@ PIVOT (
 ## <p id = "5"> Lesson 5: Retrieving Data from Multiple Tables | [Back to ToC](#toc)</p> 
 ---------------------------------------------------------- */
 
-In most databases, the information is spread across different tables. This chapter covers how to retrieve and combine data from multiple tables. 
+In most databases, information is spread across different tables. This chapter covers how to retrieve and combine data from multiple tables. 
 
- This data can be brought together by joining tables or combining query results using SQL Server features such as JOIN, UNION, EXCEPT, and INTERSECT to retrieve and merge data into a single result set.
+Data can be brought together by joining tables or combining query results using SQL Server features such as JOIN, UNION, EXCEPT, and INTERSECT to retrieve and merge data into a single result set.
 
 ### /* ------------ Unions Statement ------------ */
 SELECT *  
