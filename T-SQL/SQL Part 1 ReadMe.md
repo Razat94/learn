@@ -880,14 +880,14 @@ A `string` refers to text data in a SQL table. It's anything made of characters 
 
 Therefore, SQL string functions are functions that work with text data. They help clean, format, and extract information from strings like names and addresses, making data easier to organize and analyze.
 
-#### TRIM Function  
+### TRIM Function  
 Similar to [the Excel Function](https://support.microsoft.com/en-us/office/trim-function-410388fa-c5df-49c6-b16c-9e5630b479f9), the TRIM Function removes trailing space. 
 
 ``` sql
 SELECT TRIM('  First Quarter Earnings ') -- Note the use of single quotes.
 ```
 
-### Exercise: Get the City, State from the Customers Table.
+#### Exercise: Get the City, State from the Customers Table.
 ``` sql
 SELECT   
 	city + ', ' + state,  
