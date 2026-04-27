@@ -915,7 +915,7 @@ FROM Customers;
 ```
 
 #### CONCAT Function
-Similar to [the Excel CONCAT() function](https://support.microsoft.com/en-us/office/concat-function-9b1a9a3f-94ff-41af-9736-694cbd6b4ca2), the CONCAT() functions combines two or more text values into one text string.
+Similar to [the Excel function](https://support.microsoft.com/en-us/office/concat-function-9b1a9a3f-94ff-41af-9736-694cbd6b4ca2), the CONCAT() functions combines two or more text values into one text string.
 
 Exercise: Use the CONCAT() function to combine the customer name and city into one column.
 ``` sql
@@ -938,8 +938,10 @@ SELECT
 FROM Slspers
 ```
 
-#### Bonus: Convert Concatenated Text to Lowercase 
+#### LOWER Function
+Similar to [the Excel function](https://support.microsoft.com/en-us/office/lower-function-3f21df02-a80c-44b2-afaf-81358f9fdeb4), the LOWER() function changes all uppercase letters in a text string to lowercase.
 
+#### Exercise: From the previous example, convert the concatenated text to lowercase 
 ``` sql
 -- Solution:  
 SELECT   
