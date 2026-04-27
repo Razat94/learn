@@ -920,7 +920,7 @@ Similar to [the Excel CONCAT() function](https://support.microsoft.com/en-us/off
 Exercise: Use the CONCAT() function to combine the customer name and city into one column.
 ``` sql
 SELECT 
-	CONCAT(CustomerName, ' lives in ', City) AS CustomerInfo
+	CONCAT(Custname, ' lives in ', City) AS CustomerInfo
 FROM Customers;
 ```
 
