@@ -914,6 +914,16 @@ SELECT
 FROM Customers;
 ```
 
+#### CONCAT Function
+Similar to [the Excel CONCAT() function](https://support.microsoft.com/en-us/office/concat-function-9b1a9a3f-94ff-41af-9736-694cbd6b4ca2), the CONCAT() functions combines two or more text values into one text string.
+
+Exercise: Use the CONCAT() function to combine the customer name and city into one column.
+``` sql
+SELECT 
+	CONCAT(CustomerName, ' lives in ', City) AS CustomerInfo
+FROM Customers;
+```
+
 #### 2 MIN Exercise #1: Create a 'Full Name' column by concatenating Last Name, First
 
 ``` sql
