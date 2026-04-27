@@ -881,7 +881,7 @@ A `string` refers to text data in a SQL table. It's anything made of characters 
 Therefore, SQL string functions are functions that work with text data. They help clean, format, and extract information from strings like names and addresses, making data easier to organize and analyze.
 
 #### TRIM Function  
-Similar to [the Excel Function](https://support.microsoft.com/en-us/office/trim-function-410388fa-c5df-49c6-b16c-9e5630b479f9), the TRIM Function removes leading & trailing spaces from text. 
+Similar to [the Excel Function](https://support.microsoft.com/en-us/office/trim-function-410388fa-c5df-49c6-b16c-9e5630b479f9), the TRIM() function removes leading & trailing spaces from text. 
 
 ``` sql
 SELECT TRIM('  First Quarter Earnings ') -- Note the use of single quotes.
@@ -915,7 +915,7 @@ FROM Customers;
 ```
 
 #### CONCAT Function
-Similar to [the Excel function](https://support.microsoft.com/en-us/office/concat-function-9b1a9a3f-94ff-41af-9736-694cbd6b4ca2), the CONCAT() functions combines two or more text values into one text string.
+Similar to [the Excel function](https://support.microsoft.com/en-us/office/concat-function-9b1a9a3f-94ff-41af-9736-694cbd6b4ca2), the CONCAT() function combines two or more text values into one text string.
 
 Exercise: Use the CONCAT() function to combine the customer name and city into one column.
 ``` sql
@@ -962,7 +962,19 @@ SELECT
 FROM Slspers  
 ```
 
-#### (DEMO) Exercise: Write a SQL query to create a lowercase email for each row in Slspers e.g. jsmith@outlook.com
+#### Left Function
+Similar to [the Excel function](https://support.microsoft.com/en-us/office/left-function-9203d2d2-7960-479b-84c6-1ea52b99640c), the LEFT() function returns a specified number of characters from the start of a text string.
+
+#### Exercise: Get the initials for each sales rep.
+``` sql
+SELECT 
+	fname,
+	lname,
+	LEFT(fname,1) + '.' + LEFT(lname,1) + '.' AS Initials
+FROM Slspers
+```
+
+#### (DEMO BONUS) Exercise: Write a SQL query to create a lowercase email for each row in Slspers e.g. jsmith@outlook.com
 ``` sql
 -- Returns the First Letter of First Name + Last name + '@outlook.com'
 SELECT 
