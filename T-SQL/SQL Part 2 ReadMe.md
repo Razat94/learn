@@ -26,7 +26,7 @@ Please be familiar with the following concepts:
 - Aggregate functions (`COUNT`, `SUM`, `AVG`) and `GROUP BY`
 - Basic joins (`INNER JOIN`)
 
-About the Data:
+### About the Data:
 We’ll continue using the data from the last part about the publishing company that sells books to bookstores.
 
 Please contact me to request the data.
