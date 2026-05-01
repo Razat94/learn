@@ -5,8 +5,9 @@
 1. [Lesson 1: Executing a Simple Query](#1)
 2. [Lesson 2: Performing a Conditional Search](#2)
 3. [Lesson 3: Working with Functions](#3)
-4. [Lesson 4: Organizing Data](#4)
-5. [Lesson 5: Retrieving Data from Multiple Tables](#5)
+4. [Lesson 4: Organizing Data](#4)  
+5. [Lesson 5: Retrieving Data from Multiple Tables](#5)  
+   [Extra Lesson: Using Nested Queries](#bonus)
 6. [Lesson 6: Exporting Query Results](#6)
 
 /* -------------------------------------------------------
@@ -832,17 +833,23 @@ FROM sales;
 
 --- 
 
-#### Note: Nested queries can be formed by wrapping `SELECT` Queries in parenthesis (Similar to Nested Functions in Excel)
+#### Nested Queries
 
-#### Query 1
+A nested query is a query placed inside another query. The inner query (subquery) provides data to the outer query, and can be used in the SELECT, FROM, or WHERE clauses. Subqueries are written in parentheses and can even contain additional nested queries i.e. nested queries can be formed by wrapping `SELECT` queries in parenthesis (Similar to a Nested Function in Excel)
+
+#### Task: Show all salespersons whose commission rate is above average
+
+#### Query 1 - Show all salespeople whose commission is higher than a fixed value.
 ``` sql
-SELECT fname, commrate From Slspers  
-WHERE commrate > 0.02  
+SELECT * From Slspers  
+WHERE commrate > 
+0.02  
 -- ORDER BY commrate DESC  
 ```
 
-#### Query 2  
+#### Query 2 - Show the average commission rate for all salespeople listed.
 ``` sql
+-- Remember: Extra Spaces are ignored.
 (  
 SELECT AVG(commrate) FROM Slspers -- RESULT: 0.037  
 )  
@@ -852,12 +859,15 @@ SELECT AVG(commrate) FROM Slspers -- RESULT: 0.037
 > Combining the last 2 queries together...  
 
 ``` sql
-SELECT fname, commrate From Slspers  
-WHERE commrate > (SELECT AVG(commrate) From Slspers)  
+-- Show all salespersons whose commission rate is above average.
+SELECT * FROM Slspers  
+WHERE commrate > 
+( SELECT AVG(commrate) From Slspers )  -- Inner query gets evaluated first.
 -- ORDER BY commrate DESC  
 ```
 
-Optional Exercise: Show all books that are of the maximum salesprice:
+#### Optional Subquery Demos
+Optional Demo #1: Show all books that are of the maximum salesprice:
 ``` sql
 SELECT *
 FROM Titles
@@ -866,6 +876,33 @@ WHERE slprice = (
     FROM Titles
 )
 ```
+
+Optional Demo #2: Show all titles that are cheaper to develop than the cheapest obsolete title
+
+```sql
+SELECT *
+FROM Titles
+WHERE devcost < (
+	SELECT MIN(devcost)
+	FROM Obsolete_Titles
+)
+ORDER BY devcost DESC
+```
+
+> Alternatively, we could have used the `ALL` modifier.  
+> Note: In SQL Server, using `MAX()` or `MIN()` is generally faster and more efficient than using `ALL`.
+
+```sql
+SELECT *
+FROM Titles
+WHERE devcost < ALL (
+	SELECT devcost
+	FROM Obsolete_Titles
+)
+```
+
+- `ALL` compares a value to every value returned by the subquery
+- In this case, it returns rows where `devcost` is less than *every* value (i.e., less than the minimum)
 
 ---
 
@@ -1455,6 +1492,92 @@ FULL OUTER JOIN slspers2 sp
 * Does NOT create every possible combination (not a Cartesian product).
 
 ---
+
+/* -------------------------------------------------------
+## <p id = "bonus"> LESSON: Using Nested Queries | [Back to ToC](#toc) </p>
+---------------------------------------------------------- */
+
+As seen previously, SQL allows us to go beyond basic SELECT statements by using advanced features such as nested queries (subqueries).
+
+#### Demo #1: 
+Show all salespersons who have never made a sale.
+```sql
+SELECT *
+FROM Slspers
+WHERE repid NOT IN (
+	-- Recall: The subquery gets executes first.
+	SELECT repid
+	FROM Sales
+	GROUP BY repid
+);
+```
+
+---
+
+### Using Subqueries vs Joins
+
+#### Demo #2: 
+Returns all rows from Titles where a matching partnum exists in Sales, using the `IN` keyword.
+
+```sql
+SELECT * FROM Titles  -- This statement alone will return 92 rows.  
+WHERE partnum IN (
+	SELECT partnum FROM Sales
+);
+```
+
+Alternate Solution: Use `INNER JOIN`
+
+```sql
+SELECT DISTINCT t.*
+FROM Titles t
+INNER JOIN Sales s
+	ON t.partnum = s.partnum
+ORDER BY t.partnum;
+```
+
+<br>
+
+#### Demo #3  
+For each row in `Titles`, check if a matching `partnum` exists in `Obsolete_Titles`, using the `EXISTS` keyword.
+
+```sql
+SELECT *
+FROM Titles
+WHERE EXISTS (
+	SELECT partnum
+	FROM Obsolete_Titles
+	WHERE partnum = Titles.partnum
+);
+```
+
+Alternate Solution: Use `INNER JOIN`
+
+```sql
+SELECT t.*
+FROM Titles t
+INNER JOIN Obsolete_Titles o
+	ON t.partnum = o.partnum;
+```
+
+<br />
+
+#### Demo #4  
+Show all customers who have purchased titles priced at $49 or higher.
+
+```sql
+SELECT *
+FROM Customers
+WHERE custnum IN (
+	SELECT custnum
+	FROM Sales
+	WHERE partnum IN (
+		SELECT partnum
+		FROM Titles
+		WHERE slprice >= 49
+	)
+);
+```
 
 /* -------------------------------------------------------
 ## <p id = "6"> LESSON 6: Exporting Query Results | [Back to ToC](#toc)</p> 
