@@ -140,7 +140,7 @@ SELECT ROUND(235.415, 2) AS RoundValue;	-- Output: 235.420
 
 ---
 
-### Lesson 1.2. Selecting Data from a Database
+## Lesson 1.2. Selecting Data from a Database
 
 #### Task 1.2.1: Return all data from the `Slspers` table:  
 ``` sql
@@ -610,8 +610,8 @@ ORDER BY zipcode
 -- WHERE (Customers.state = 'NY' OR state='CA') AND zipcode = '92704'  
 ```
 
-## Lesson 2.3. omg LIKE Operator 
-The LIKE operator is used in a WHERE clause to search for data based on a string pattern.
+## Lesson 2.3. omg LIKE finding data based on patterns
+The `LIKE` operator is used in a `WHERE` clause to search for data based on a string pattern.
 
 Exercise: Get all people whose first name starts with the letter 'A'  
 ``` sql
@@ -1285,9 +1285,9 @@ ORDER BY bktitle
 
 
 --- 
-## Lesson 5.2. Recap: Table Aliases.
+## Lesson 5.2. Recapping Table Aliases
 
-Before covering join statements, an important sidenote is to recall: Table Aliases.
+Before covering join statements, an important sidenote is to recall how to use table aliases.
 
 ```sql
 -- Works:
@@ -1368,7 +1368,6 @@ Note:
 * Matching rows from `slspers2` are included.
 * Non-matching rows show NULL values.
 
----
 
 ### Sample - Left Join Demo: Show All Customers with Their Salesperson
 
@@ -1383,8 +1382,45 @@ LEFT JOIN Slspers S
 > Remember if you're struggling to output the two tables, use the following:  
 > SELECT C.* FROM Customers C  
 > SELECT S.* FROM Slspers S  
+---
 
-### Sample - Inner Join Demo: Show All Matching Titles with Obsolete Titles
+
+### FULL OUTER JOIN
+
+The FULL OUTER JOIN statement is used infrequently compared to INNER JOIN and LEFT JOIN.
+
+Include all rows from both tables, matching where possible.
+
+Example forcing no matches:
+
+```sql
+SELECT s.*, sp.fname
+FROM sales2 s
+FULL OUTER JOIN slspers2 sp
+    ON 1 = 0;
+```
+
+* `ON 1 = 0` forces no match.
+* Returns all rows from both tables with NULLs where no match exists.
+
+Standard FULL OUTER JOIN:
+
+```sql
+SELECT *
+FROM sales2 s
+FULL OUTER JOIN slspers2 sp
+    ON s.repid = sp.repid;
+```
+
+* Returns all rows from both tables.
+* Matches where keys align.
+* Does NOT create every possible combination (not a Cartesian product).
+
+<br />
+---
+
+
+### Demo Sample - Inner Join Demo: Show All Matching Titles with Obsolete Titles
 
 ```sql
 -- Before attempting INNER JOIN, look at individual titles
@@ -1489,38 +1525,6 @@ GROUP BY sp.repid, sp.fname;
 
 * LEFT JOIN ensures reps with zero sales still appear.
 * `COUNT(s.ordnum)` counts only matching sales rows.
-
----
-
-
-### FULL OUTER JOIN
-
-Include all rows from both tables, matching where possible.
-
-Example forcing no matches:
-
-```sql
-SELECT s.*, sp.fname
-FROM sales2 s
-FULL OUTER JOIN slspers2 sp
-    ON 1 = 0;
-```
-
-* `ON 1 = 0` forces no match.
-* Returns all rows from both tables with NULLs where no match exists.
-
-Standard FULL OUTER JOIN:
-
-```sql
-SELECT *
-FROM sales2 s
-FULL OUTER JOIN slspers2 sp
-    ON s.repid = sp.repid;
-```
-
-* Returns all rows from both tables.
-* Matches where keys align.
-* Does NOT create every possible combination (not a Cartesian product).
 
 ---
 
