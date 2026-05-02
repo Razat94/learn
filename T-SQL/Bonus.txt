@@ -106,3 +106,69 @@ OR
 	press `Ctrl` + `Shift` + `C` to copy all data + column headers
 
 ---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+PART 2
+
+
+
+-- Bonus Chapter --  
+/* ------------ Check Tables ------------ */  
+SELECT *  
+FROM Pub2.INFORMATION_SCHEMA.TABLES  
+
+
+/* ------------ Drop Tables & Confirm ------------ */  
+DROP TABLE Obsolete_Titles1  
+DROP TABLE Potential_Customers1  
+
+SELECT *  
+FROM Pub2.INFORMATION_SCHEMA.TABLES  
+
+
+
+-- Bonus Comments --  
+In SQL Server, when you run a query like INSERT, UPDATE, or DELETE, SQL Server by default returns a message like:
+
+``` (3 rows affected) ```
+
+This message is informational, but in some scenarios (like stored procedures or loops), it can clutter the output.    
+Solution:  
+SET NOCOUNT ON -- WILL THEN SUPPRESS THE MESSAGE
+
+
+-- Example   
+SET NOCOUNT ON;   
+UPDATE Customers SET State = 'CA' WHERE State = 'California';
+
+
+
+— Additional —
+* Create a PivotTable from a SQL Server table  
+* Understand transaction logs  (backups?)
+* Hide a column but allow inserts (using trigger)  
+* Display SQL P2.txt file  ?

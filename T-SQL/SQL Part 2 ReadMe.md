@@ -1529,6 +1529,8 @@ Transactions protects your database from partial updates.
 For example, transactions are often used when multiple users need to modify a database at the same time.  
 In multi-user systems, different users may be viewing, adding, updating, or deleting data simultaneously and so SQL transactions ensure that these actions are done safely and correctly by keeping the data accurate and reliable.
 
+The point of a transaction is that no code will be finalized until everything (particularly the 3rd line) is correct. Either all or nothing becomes executed.  
+
 Some common examples of transactions could be:  
 
 	- Bank Transfers from Saving -> Checking  
@@ -1575,7 +1577,7 @@ BEGIN TRANSACTION;
 	('Lena', 'Duong')  
 
 	SELECT * FROM Slspers_Backup WHERE commrate IS NULL
-ROLLBACK TRANSACTION; -- Switch 'ROLLBACK' with 'COMMIT' TRANSACTION when ready to implement  
+ROLLBACK TRANSACTION; -- Switch keyword 'ROLLBACK' with 'COMMIT' when ready to implement   
 
 -- Since the transaction hasn't been committed, the actual table has not been altered.  
 SELECT * FROM Slspers_Backup WHERE commrate IS NULL 
@@ -1585,8 +1587,6 @@ SELECT * FROM Slspers_Backup WHERE commrate IS NULL
 -- Running the same SELECT query much later will still show the original data with no one added.
 SELECT * FROM Slspers_Backup
 ```
-
-
 
 
 #### Example #2
@@ -1615,25 +1615,25 @@ Alice
 Bob  
 ```  
 
+This can be frustrating since if we're adding a lot of data, we don't want to go back & forth and check which rows were inserted and which weren't. Instead, we can fix the original query and then execute the code all at once.
+
 To reset the table for the solution:  
 ``` TRUNCATE TABLE Person  ```
 
 Task: Create a transaction to ensures that if the third insert fails, no rows are saved.  
 
+Solution:
 ``` sql
--- Solution:
-BEGIN TRAN addPerson;  -- A transaction can be assigned a name so that developers can identify and distinguish between various transactions.
+BEGIN TRAN addPerson -- Transactions can have a name so that developers can identify and distinguish between various transactions.
 
 INSERT INTO person (name) VALUES ('Alice');  
 INSERT INTO person (name) VALUES ('Bob');  
-INSERT INTO person (name) VALUES ('Alice');  -- duplicate name (violates UNIQUE constraint)  -- fix later to 'Charles'
+INSERT INTO person (name) VALUES ('Alice');  -- duplicate name which violates UNIQUE constraint thus no rows are added  -- fix later to 'Charles'
 
-COMMIT TRAN addPerson;  
+ROLLBACK TRAN addPerson -- Once there are no errors, swap the keyword 'ROLLBACK' with 'COMMIT'
 ```
 
-The transaction will not execute any of the statements until everything (particularly the 3rd line) is correct. Either all or nothing becomes executed.  
-
-Notice that if we assign a transaction a name, that name exists only in memory for the duration of the current transaction.
+> Notice that if we assign a transaction a name, that name exists only in memory for the duration of the current transaction.
 The transaction is not saved in the database and can not be used later.
 
 #### Example #3  
@@ -1670,40 +1670,3 @@ To summarize, Transactions ensure that either all changes in a query are complet
 /* -------------------------------------------------------  
 ## <p id = "7"> LESSON 7: The End | [Back to ToC](#toc)</p>   
 ---------------------------------------------------------- */ 
-
--- Bonus Chapter --  
-/* ------------ Check Tables ------------ */  
-SELECT *  
-FROM Pub2.INFORMATION_SCHEMA.TABLES  
-
-
-/* ------------ Drop Tables & Confirm ------------ */  
-DROP TABLE Obsolete_Titles1  
-DROP TABLE Potential_Customers1  
-
-SELECT *  
-FROM Pub2.INFORMATION_SCHEMA.TABLES  
-
-
-
--- Bonus Comments --  
-In SQL Server, when you run a query like INSERT, UPDATE, or DELETE, SQL Server by default returns a message like:
-
-``` (3 rows affected) ```
-
-This message is informational, but in some scenarios (like stored procedures or loops), it can clutter the output.    
-Solution:  
-SET NOCOUNT ON -- WILL THEN SUPPRESS THE MESSAGE
-
-
--- Example   
-SET NOCOUNT ON;   
-UPDATE Customers SET State = 'CA' WHERE State = 'California';
-
-
-
-— Additional —
-* Create a PivotTable from a SQL Server table  
-* Understand transaction logs  (backups?)
-* Hide a column but allow inserts (using trigger)  
-* Display SQL P2.txt file  ?
