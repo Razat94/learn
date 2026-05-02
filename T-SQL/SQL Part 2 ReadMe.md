@@ -1529,26 +1529,26 @@ Transactions protects your database from partial updates.
 For example, transactions are often used when multiple users need to modify a database at the same time.  
 In multi-user systems, different users may be viewing, adding, updating, or deleting data simultaneously and so SQL transactions ensure that these actions are done safely and correctly by keeping the data accurate and reliable.
 
-The point of a transaction is that no code will be finalized until everything (particularly the 3rd line) is correct. Either all or nothing becomes executed.  
+The point of a transaction is that no code will be finalized until everything is correct. Either all or nothing becomes executed.  
 
 Some common examples of transactions could be:  
-
-	- Bank Transfers from Saving -> Checking  
-		Step 1: Subtract amount from Account A (Saving).  
-		Step 2: Add amount to Account B (Checking).  
-
+- Bank Transfers from Saving -> Checking  
+	- Step 1: Subtract amount from Account A (Saving).  
+	- Step 2: Add amount to Account B (Checking).  
+		``` sql
 		BEGIN TRANSACTION;  
 			UPDATE accounts SET savingBalance = savingBalance - 500 WHERE account_id = '123';  
 			... -- Some Code occurs that breaks the query.
 			UPDATE accounts SET checkingBalance = checkingBalance + 500 WHERE account_id = '123';  
 		COMMIT;  
+		```
 
-	- Inventory Management  
-		Step 1: Insert a new record into the Orders table.  
-		Step 2: Deduct items from Inventory table.  
-		Step 3: Update customer’s balance in Accounts table.  
+- Inventory Management  
+	Step 1: Insert a new record into the Orders table.  
+	Step 2: Deduct items from Inventory table.  
+	Step 3: Update customer’s balance in Accounts table.  
 
-	- HRIS Systems to manage employee records.
+- HRIS Systems to manage employee records.
 		Example: Have a procedure named DeleteEmployee that removes an employee record and includes TRY...CATCH blocks for robust error handling across different tables.
 
 To keep data accurate and reliable during database operations, experts follow four key principles known as ACID properties:
