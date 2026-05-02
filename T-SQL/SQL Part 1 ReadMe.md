@@ -20,7 +20,8 @@ We’ll be working with data from a publishing company that sells books to books
 
 Please contact me to request the data.
 
-## SQL Server Management Studio(SSMS)
+---
+### Download SQL Server Management Studio(SSMS)
 SQL Server Management Studio (SSMS) is the software that lets users write and run SQL commands to talk to a SQL Server database. The tool that can be downloaded online [from Microsoft](https://www.microsoft.com/en-us/sql-server/sql-server-downloads).
 
 ```
@@ -35,19 +36,36 @@ Side Note:
 [Stack Overflow Reference](https://stackoverflow.com/questions/35630344/unable-to-connect-to-local-sql-server-after-ending-tasks)
 
 /* -------------------------------------------------------
-# <p id = "1"> LESSON 1: Executing a Simple Query | [Back to ToC](#toc) </p>
+## <p id = "1"> LESSON 1: Executing a Simple Query | [Back to ToC](#toc) </p>
 ---------------------------------------------------------- */
 
 This chapter will cover how to use SQL Server to connect to a database and run simple queries.
 
-## Lesson 1.0 Our First Query
+## Lesson 1.0 Connecting to the SQL Database & Executing Our First Query
 
-Press `CTRL + N` to launch a new query.
+### To launch SQL Server Management Studio:
+- Click the Start button (bottom-left of your screen)
+- Type `SQL Server Management Studio`
+- Click on it when it appears in the list
+<img src = "./zz_open_ssms.png">
 
-In SQL Server, we can run a simple statement:  
+### Connect to the Default Server
+Once the application is opened, "... the 'Connect to Server' window opens. If it doesn't open, you can open it manually by selecting 'Object Explorer' > 'Connect' > 'Database Engine'." - [Source](https://learn.microsoft.com/en-us/ssms/quickstarts/ssms-connect-query-sql-server?tabs=modern)
+
+<img src = "zz_connect-to-sql-server.png">
+
+In the 'Connect to Server' alert, click 'Connect' to connect to the server.
+> Note: For local installations, typically we can sign into SQL Server with the default configuration. 
+
+#### Task 1.0.1: Create a new query and execute a statement.
+
+```
+1. Once authenticated in SQL Server, press `CTRL + N` to launch a new query. 
+2. In the query editor window, we can run a simple statement:  
 ``` SELECT 1+3 ``` 
+```
 
-Different ways to execute the query:  
+There are different ways to execute the query:  
 	- Shortcuts: F5, Ctrl + E, Alt + X  
 	- Click the green 'Execute' button on the toolbar.  
 	- Go to Query (tab) -> Execute.  
@@ -63,25 +81,29 @@ Different ways to execute the query:
 
 <br />
 
-```
-To Show Lines in the Query Editor:
+#### Task 1.0.2: To Show Lines in the Query Editor:
+``` 
 	1. Go to Tools > Options 
 	2. Expand 'Text Editor' -> Transact-SQL -> General. 
 	3. Check the Line numbers box and click OK
 ```
 
+## Lesson 1.1 Additional Simple Queries
 
 ### SQL Comments
 Comments are used explain SQL code or add notes for the reader. They are ignored by the database engine and are not executed.
+
+#### Example: Write a basic SQL query and include a comment via the use of -- 
 ``` sql
 -- Two -'s are used to write a single-line comment.  
 -- Text after -- is ignored to the end of the line.
 SELECT 1+3 -- Output: 4
 ```
 
-#### SQL Multi-line Comments
+### SQL Multi-line Comments
 Multi-line comments begin with /* and end with */. Any text between them is ignored.
 
+#### Example: Write a basic SQL query and include a comment via the use of -- 
 ``` sql
 /*  
 	The 
@@ -97,6 +119,7 @@ SELECT 1 + 3
 
 In SQL Server, including multiple SELECT statements in a single query batch will return their own result sets.
 
+#### Example: Write a batch of SQL statements: 
 ``` sql
 SELECT 1+3
 SELECT 'Have a nice day'  	-- Outputs simple text. 
@@ -107,6 +130,7 @@ PRINT 'Good Bye!' 			-- Displays a message or a value in the 'Messages' tab and 
 ---
 
 SQL Server provides built-in functions that format how data is displayed and can perform calculations e.g. rounding values.
+#### Example: Demonstrate the power of the functions.
 ``` sql
 SELECT FORMAT(1+3, 'C')  -- Output: $4.00, since FORMAT Function converts the number into a string. 'C' stands for Currency.
 SELECT FORMAT(123.490000000, '0.##')	-- Output: 123.49
@@ -117,9 +141,9 @@ SELECT ROUND(235.415, 2) AS RoundValue;	-- Output: 235.420
 
 ---
 
-### Selecting Data from a Database
+### Lesson 1.2. Selecting Data from a Database
 
-To return all data from the `Slspers` table:  
+#### Task 1.2.1: Return all data from the `Slspers` table:  
 ``` sql
 USE Pub1  
 SELECT *  	 -- Selects ALL columns
@@ -129,17 +153,17 @@ FROM slspers -- Note: Spelling matters. Typing 'slsperson' won't execute.
 > In SQL Server, a SELECT query can <i>also</i> be made from the Object Explorer:  
 > Right-click the table name and choose 'Select Top 1000 Rows'.
 
-Optional Exercise: Retrieve the data from the other 3 tables:  
+#### Optional Task 1.2.2: Retrieve the data from the other 3 tables:  
 ``` sql
 SELECT * FROM Customers  
 SELECT * FROM Titles  
 SELECT * FROM Sales  
 ```
 
-Queries can be written to output individual columns.  
+Queries can also be written to output individual columns.  
 
+#### Task 1.2.3 Output the first and last names of everyone in the `Slspers` table.
 ``` sql
--- Output the first and last names of everyone in the `Slspers` table.
 SELECT fname, lname  
 FROM slspers;
 ```
