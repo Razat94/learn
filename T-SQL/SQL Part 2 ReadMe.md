@@ -139,7 +139,7 @@ VALUES
 ``` sql
 INSERT INTO Slspers_Backup (repid, fname)    
 VALUES  
-('N01', 'Nickki')  
+('N01', 'Nick')  
 ```
 
 #### Insert MANY (2+) records at once.     
@@ -192,7 +192,7 @@ VALUES
 
 /* ------------ R: SELECT statement ------------ */  
 
-#### Output the table  
+#### Output a table  
 ``` sql
 SELECT *  
 FROM Slspers_Backup  
@@ -219,7 +219,7 @@ ORDER BY commrate
 
 /* ------------ U: Update Table ------------ */
 
-> *Note:* Before updating any rows with the `UPDATE` keyword, it's always a good idea to run a `SELECT` statement first to see exactly which rows will be updated. After knowing which rows the `SELECT` query returns, the conditions in the `WHERE` clause can then be reused in an `UPDATE` statement.
+> *Note:* Before updating any rows with the `UPDATE` keyword, it's always a good idea to run a `SELECT` statement first to see exactly which rows will be updated. After knowing the results of the `SELECT` query, the conditions in the `WHERE` clause can then be reused in an `UPDATE` statement.
 
 ---
 
@@ -230,10 +230,12 @@ SET commrate = 0.06
 WHERE commrate = 0.03;  -- NOTE: Always include a WHERE clause, or else the UPDATE statement will affect all records!
 ```
 
--- Check:  
-``` SELECT * FROM Slspers_Backup WHERE commrate = 0.06  ```
+Check:  
+``` 
+SELECT * FROM Slspers_Backup WHERE commrate = 0.06  
+```
 
-#### Exercise: Fix the spelling mistake of 'Anne' (RepID 'W02') to 'Annie'    
+#### Exercise #1: Fix the spelling mistake of 'Anne' (RepID 'W02') to 'Annie'    
 
 > Note Best Practice:  
 > When updating a specific SQL record, use a unique identifier (ideally the Primary Key) to ensure only one row is affected. Using non-unique values (like names or dates) risk updating multiple unintended records.
@@ -248,7 +250,7 @@ WHERE REPID = 'W02'
 -- This is not recommended since multiple records of 'Anne' could match
 ```
 
-#### From the newly created `Titles_Revised` table, update the `devcost` field for a range of part numbers between 40123 and 40125.
+#### Exercise #2: From the newly created `Titles_Revised` table, update the `devcost` field for a range of part numbers between 40123 and 40125.
 ``` sql
 -- Solution
 UPDATE Titles_Revised  
@@ -257,7 +259,7 @@ WHERE partnum BETWEEN 40123 AND 40125
 -- WHERE partnum BETWEEN 39904 AND 39906  
 ```
 
-Check the Updated Table 
+#### Check the Updated Table 
 ``` sql 
 SELECT *  
 FROM Titles_Revised  
@@ -265,7 +267,7 @@ WHERE partnum BETWEEN 40123 AND 40125
 -- WHERE partnum BETWEEN 39904 AND 39906  
 ```
 
-#### Update multiple columns in a single row of a table
+#### (Optional) Exercise: Update multiple columns in a single row of a table
 ``` sql
 UPDATE 	Titles_Revised  
 SET 	bktitle = 'Alex loves Windsurfing',  
@@ -291,7 +293,7 @@ WHERE partnum = 40123
 
 #### Delete all specified rows from `Titles_Revised` where `partnum` equals 40123.
 ``` sql
-DELETE Titles_Revised  -- Shorthand DELETE syntax (SQL Server only); equivalent to DELETE FROM
+DELETE FROM Titles_Revised
 WHERE partnum = 40123  
 ```
 
@@ -308,7 +310,8 @@ Below are a few additional examples for deletions:
 DELETE FROM CustomersCA  
 WHERE custnum = 31004;
 
-DELETE FROM Slspers_Backup
+-- (SQL Server only) The FROM keyword is optional and so the DELETE command is equivalent to DELETE FROM
+DELETE Slspers_Backup
 WHERE repid = 'W02';
 ```
 
@@ -317,7 +320,7 @@ WHERE repid = 'W02';
 TRUNCATE TABLE Titles_Revised  
 ```
 
-(Option 2) We can delete all rows via `DELETE` keyword:  
+(Option 2) We can delete all rows via `DELETE` keyword and not specify any condition:  
 ``` sql
 DELETE FROM Titles_Revised  
 ```
