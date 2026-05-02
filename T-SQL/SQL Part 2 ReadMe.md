@@ -37,9 +37,10 @@ Please contact me to request the data.
 
 In this lesson, we'll cover how to insert, update, and delete records in a table.
 
+### Lesson 2.0: Creating Backup Tables 
 Before modifying any data, we will first create backup tables to ensure that all changes throughout these lessons are made to copies and not the original data. This way, even if a backup is altered or corrupted, the original remains intact.
 
-Task: Create a backup table of `Titles` called `Titles_Revised`  
+#### Task 2.0.1: Create a backup table of `Titles` called `Titles_Revised`  
 ``` sql
 SELECT *  
 INTO Titles_Revised  
@@ -53,29 +54,31 @@ FROM Titles
 > Edit (Tab) -> IntelliSense -> Refresh Local Cache (Ctrl + Shift + R)  
 
 
-#### Useful Trick: Create an Empty table with the same structure  
-Create a new table `Slspers_Backup` with the same structure as `Slspers`, without copying any data.
+#### Task 2.0.2: Create an Empty Table `Slspers_Backup`  with the same structure as `Slspers`
+A useful trick is to create a new table with the same structure without copying any data.
 
 ``` sql
--- -- Create a backup copy of Slspers (no data or rows copied)
+-- Create a backup copy of Slspers (no data or rows copied)
 SELECT *  
 INTO Slspers_Backup    
 FROM Slspers  
 WHERE 1 = 0  -- always false
--- SQL Server does not support Boolean literals `TRUE` and `FALSE` in SQL queries. 
+-- Note: SQL Server does not support Boolean literals `TRUE` and `FALSE` in SQL queries. 
 -- So instead, we must use an expression that evaluates to false.
 ```
 
-Exercise #1 (Optional): Create an empty table called `CustomersCA` based on the structure of the `Customers` table.
+Alternatively, the TRUNCATE statement can be used to remove all the rows from a table but keeps its structure:    
+``` 
+TRUNCATE TABLE Slspers_Backup 
+```
+
+#### (Optional) Task 2.0.3: Create an empty table called `CustomersCA` based on the structure of the `Customers` table.
 ``` sql
 SELECT *  
 INTO CustomersCA  
 FROM Customers  
-WHERE 1 = 0  -- always false
+WHERE state = 'CA'
 ```
-
-Alternatively, the TRUNCATE statement can be used to remove all the rows from a table but keeps its structure:    
-``` TRUNCATE TABLE CustomersCA ```
 
 > Additional Exercise: Create an empty table called `Cust2025`
 
@@ -92,20 +95,17 @@ Alternatively, the TRUNCATE statement can be used to remove all the rows from a 
 
 <br/>
 
-### <u> Aww, CRUD! </u>
+### Lesson 2.1: CRUD Overview
 
-#### CRUD refers to the four basic operations you can perform on data in a database:  
-<br> 
-Create, Read, Update, & Delete.
-
+#### <u> Aww, CRUD! </u>
+CRUD refers to the four basic operations you can perform on data in a database:  Create, Read, Update, & Delete.
+<br>  
 -- C -- Create  
 -- R -- Read  
 -- U -- Update  
 -- D -- Delete	
 
---- 
-
-## CRUD Overview
+The below table lists out the four basic functions along with sample examples:
 
 | Operation | SQL Example |
 |-----------|-------------|
@@ -116,13 +116,17 @@ Create, Read, Update, & Delete.
 
 <br>
 
-/* ------------ List of CRUD statements ------------ */  
+The following subchapters will list out the common CRUD statements.
 
 >> Note: The following queries will modify the backup tables.  
 Make sure to apply all changes to the BACKUP table, not the original table! 
 
 <br>
 
+--- 
+
+### Lesson 2.2: 
+### C: INSERT INTO statement
 /* ------------ C: INSERT INTO statement ------------ */
 
 > *Note:* In SQL, the keyword `INTO` usually indicates that data is being written into something.
@@ -190,6 +194,8 @@ VALUES
 
 <br>
 
+### Lesson 2.3: 
+### R: SELECT statement
 /* ------------ R: SELECT statement ------------ */  
 
 #### Output a table  
@@ -217,6 +223,8 @@ ORDER BY commrate
 
 <br>
 
+### Lesson 2.4:
+### U: Update Table
 /* ------------ U: Update Table ------------ */
 
 > *Note:* Before updating any rows with the `UPDATE` keyword, it's always a good idea to run a `SELECT` statement first to see exactly which rows will be updated. After knowing the results of the `SELECT` query, the conditions in the `WHERE` clause can then be reused in an `UPDATE` statement.
@@ -286,6 +294,8 @@ WHERE partnum = 40123
 
 <br>
 
+### Lesson 2.5:
+### D: Delete Rows
 /* ------------ D: Delete Rows ------------ */  
 
 > Similar to the `UPDATE` statement, always verify which rows the `DELETE` query will remove by first running the `SELECT` query with the same `WHERE` clause.

@@ -11,16 +11,16 @@
 6. [Lesson 6: Exporting Query Results](#6)
 
 /* -------------------------------------------------------
-## <p id = "0"> LESSON 0: Before We Begin </p>
+# <p id = "0"> LESSON 0: Before We Begin </p>
 ---------------------------------------------------------- */
 
 
-### About the Data:  
+## About the Data:  
 We’ll be working with data from a publishing company that sells books to bookstores.
 
 Please contact me to request the data.
 
-### SQL Server Management Studio(SSMS)
+## SQL Server Management Studio(SSMS)
 SQL Server Management Studio (SSMS) is the software that lets users write and run SQL commands to talk to a SQL Server database. The tool that can be downloaded online [from Microsoft](https://www.microsoft.com/en-us/sql-server/sql-server-downloads).
 
 ```
@@ -35,12 +35,12 @@ Side Note:
 [Stack Overflow Reference](https://stackoverflow.com/questions/35630344/unable-to-connect-to-local-sql-server-after-ending-tasks)
 
 /* -------------------------------------------------------
-## <p id = "1"> LESSON 1: Executing a Simple Query | [Back to ToC](#toc) </p>
+# <p id = "1"> LESSON 1: Executing a Simple Query | [Back to ToC](#toc) </p>
 ---------------------------------------------------------- */
 
 This chapter will cover how to use SQL Server to connect to a database and run simple queries.
 
-### Our First Query
+## Lesson 1.0 Our First Query
 
 Press `CTRL + N` to launch a new query.
 
@@ -156,7 +156,7 @@ FROM slspers;
 ```
 
 
-#### SQL Prefix
+### SQL Prefix
 A prefix can be used in front of a column or even table name to specify its source and avoid ambiguity
 
 ``` sql
