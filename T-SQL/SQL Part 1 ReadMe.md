@@ -46,8 +46,7 @@ This chapter will cover how to use SQL Server to connect to a database and run s
 ### To launch SQL Server Management Studio:
 - Click the Start button (bottom-left of your screen)
 - Type `SQL Server Management Studio`
-- Click on it when it appears in the list
-<img src = "./zz_open_ssms.png">
+- Click on the application when it appears in the search list.
 
 ### Connect to the Default Server
 Once the application is opened, "... the 'Connect to Server' window opens. If it doesn't open, you can open it manually by selecting 'Object Explorer' > 'Connect' > 'Database Engine'." - [Source](https://learn.microsoft.com/en-us/ssms/quickstarts/ssms-connect-query-sql-server?tabs=modern)
@@ -180,7 +179,7 @@ FROM slspers;
 ```
 
 
-### SQL Prefix
+## Lesson 1.3. SQL Prefixes & Aliases
 A prefix can be used in front of a column or even table name to specify its source and avoid ambiguity
 
 ``` sql
@@ -221,7 +220,7 @@ FROM Slspers;
 
 ---
 
-### Calculated/Derived columns
+## Lesson 1.4. Calculated/Derived columns
 In SQL, a new "calculated" column can be added to the query result by using a fixed value or calculation. This column appears ONLY in the results and is neither stored nor affect the actual table.
 
 ``` sql
@@ -267,7 +266,7 @@ SELECT
 FROM Titles
 ```
 
-### Keyboard Shortcuts:
+## Lesson 1.5. Keyboard Shortcuts:
 
 > Ctrl + R (Hide the Result Pane)
 
@@ -291,6 +290,7 @@ To create custom keyboard shortcuts for useful commands e.g.  executing queries:
 
 ---
 
+## Lesson 1.6. Columns & Table Structures
 MS SQL Server holds many stored procedures that act as a saved set of SQL commands
 
 For instance, to display a table structure:  
@@ -307,7 +307,9 @@ FROM INFORMATION_SCHEMA.COLUMNS
 WHERE TABLE_NAME = 'Slspers'
 ```
 
-### Create a Backup Table
+## Lesson 1.7. Backup Tables
+A backup table can be useful for when we want to test out queries on sample data.
+
 ``` sql
 -- Excercise: Create a Backup table
 SELECT *  
@@ -347,6 +349,7 @@ Lastly, to truncate a table i.e. to remove all rows from table:
 
 ---
 
+## Lesson 1.8. The Command Line
 Note: To Run T-SQL via the command line:  
 ```
 C:\Users\student> sqlcmd -S UT-LAPTOP\SQLEXPRESS -E  
@@ -367,16 +370,15 @@ sqlcmd -S UT-LAPTOP\SQLEXPRESS -E -i "C:\Users\student\Documents\SQL Script Comm
 ## <p id = "2"> LESSON 2: Performing a Conditional Search | [Back to ToC](#toc) </p>
 ---------------------------------------------------------- */
 
-
-<!-- SORTING & FILTERING CHAPTER -->
-
 In the last chapter, a connection to a server was made and a few basic queries were executed.  
 This chapter will cover how to sort & filter results to reorganize and display only the data needed.
 
-### Sorting
+In other words, this chapter will cover sorting & filtering.
+
+## Lesson 2.1. Sorting
 Sorting organizes query results in ascending or descending order.
 
-#### Example: Sort data by a single column:  
+#### Task 2.1.1. Example: Sort data by a single column:  
 ``` sql
 SELECT *  
 FROM Customers   
@@ -386,7 +388,7 @@ ORDER BY state ASC -- Sorts the table by state column
 
 A multi-level sort can be applied by listing column names in sequence and separating them with commas.
 
-#### Example of a Multi-Level Sort:  
+#### Task 2.1.2. Example of a Multi-Level Sort:  
 ``` sql
 SELECT *  
 FROM Customers  
@@ -395,9 +397,10 @@ ORDER BY state ASC, city DESC, custname ASC
 -- For those customers in the same city, those records are then further sorted by name.
 ```
 
+### `SELECT TOP` clause
 The `SELECT TOP` clause limits the number of records returned. It is especially useful for large tables, as retrieving too many records can slow performance.
 
-#### Example: Select only the top 5 rows of the Customers Table:  
+#### Task 2.1.3.: Select only the top 5 rows of the Customers Table:  
 ``` sql
 SELECT  
 TOP 5  
@@ -410,10 +413,10 @@ ORDER BY State ASC
 -- i.e. 'Specify the maxinum number of rows to return before the server stops processing'
 
 
-### Where Clause
+## Lesson 2.2 Filtering with 'Where' Clause
 The SQL WHERE clause filters results by applying one or more conditions so that only records that meet the criteria are returned (or affected). A condition is a rule for finding specific data and consists of a column (or expression), an operator, and a value to compare.
 
-#### Example of Where Clause
+#### Task 2.2.1. Simple Example of Where Clause
 ``` sql
 SELECT *  
 FROM Customers  
@@ -607,7 +610,7 @@ ORDER BY zipcode
 -- WHERE (Customers.state = 'NY' OR state='CA') AND zipcode = '92704'  
 ```
 
-#### omg LIKE Operator 
+## Lesson 2.3. omg LIKE Operator 
 The LIKE operator is used in a WHERE clause to search for data based on a string pattern.
 
 Exercise: Get all people whose first name starts with the letter 'A'  
@@ -677,7 +680,7 @@ ORDER BY bktitle ASC
 Database functions are reusable expressions (blocks of code) used in SQL queries to compute and return values.  
 There are many built-in SQL functions similar to Excel's `SUM` and `CONCATENATE`, and you can also create your own custom functions.
 
-### Date Functions
+## Lesson 3.1 Date Functions
 
 To get todays date:
 ``` sql
@@ -774,7 +777,7 @@ WHERE pubdate BETWEEN '1/1/1994' AND '12/31/2013'
 ```
 
 
-### AGGREGATE FUNCTIONS  
+## Lesson 3.2. Aggregate Functions
 "An aggregate function in the Microsoft SQL Database Engine performs a calculation on a set of values, and returns a single value."  
 — [Microsoft Learn: Aggregate Functions](https://learn.microsoft.com/en-us/sql/t-sql/functions/aggregate-functions-transact-sql?view=sql-server-ver17)
 
@@ -857,7 +860,7 @@ FROM sales;
 
 --- 
 
-#### Nested Queries
+### Nested Queries
 
 A nested query is a query placed inside another query. The inner query (subquery) provides data to the outer query, and can be used in the SELECT, FROM, or WHERE clauses. Subqueries are written in parentheses and can even contain additional nested queries i.e. nested queries can be formed by wrapping `SELECT` queries in parenthesis (Similar to a Nested Function in Excel)
 
@@ -930,7 +933,7 @@ WHERE devcost < ALL (
 
 ---
 
-### String Functions
+## Lesson 3.3. String Functions
 A `string` refers to text data in a SQL table. It's anything made of characters (e.g. letters, numbers, symbols) and are usually written inside single quotes. Below are some examples:
 
 ```
@@ -1052,6 +1055,7 @@ FROM Slspers
 
 This lesson will cover how to group query results to better summarize and understand data better.
 
+## Lesson 4.1. Counting, Ordering & Ranking Data
 #### Recall that the COUNT() function returns the total number of rows in a table:
 ``` sql
 SELECT COUNT(*)  
@@ -1097,7 +1101,7 @@ ORDER BY commrate ASC;
 
 --- 
 
-### Group By  
+## Lesson 4.2. Group By  
 The GROUP BY statement combines duplicates values into unique groups i.e. the GROUP BY statement creates a vertical list of unique categories.
 
 > In terms of logic, the GROUP BY clause is similar to what a Pivot Table does.
@@ -1151,7 +1155,7 @@ FROM Slspers
 GROUP BY commrate
 ```
 
-### HAVING Clause
+## Lesson 4.3. HAVING Clause
 The HAVING clause filters results after they have been grouped (not before!).
 
 ```
@@ -1183,6 +1187,7 @@ HAVING repid LIKE 'E%'
 
 ---
 
+## Lesson 4.4. ROLLUP
 The ROLLUP operator in SQL is used in conjunction  
 with the GROUP BY clause to generate  
 subtotals & grand totals for grouped data.  
@@ -1201,7 +1206,7 @@ GROUP BY ROLLUP(repid);
 ```
 
 ---
-### Bonus Example 
+### Bonus Examples 
 Please make sure to import 'Employees' Data Set first before executing:  
 
 -- Show All Positions:  
@@ -1254,6 +1259,7 @@ In most databases, information is spread across different tables. This chapter c
 
 Data can be brought together by joining tables or combining query results using SQL Server features such as JOIN, UNION, EXCEPT, and INTERSECT to retrieve and merge data into a single result set.
 
+## Lesson 5.1. Union & Union All
 ### /* ------------ Unions Statement ------------ */
 SELECT *  
 FROM Titles  
@@ -1279,9 +1285,9 @@ ORDER BY bktitle
 
 
 --- 
-## JOIN Statements
+## Lesson 5.2. Recap: Table Aliases.
 
-#### Recall: Table Aliases (Important Sidenote)
+Before covering join statements, an important sidenote is to recall: Table Aliases.
 
 ```sql
 -- Works:
@@ -1315,6 +1321,7 @@ WHERE Sales.qty > 300; -- Must change to S.qty
 
 <br/>
 
+## Lesson 5.3. JOIN Statements
 ### /* ------------ JOINS Statement ------------ */
 
 A join combines data from two or more tables based on a related column.
@@ -1518,7 +1525,7 @@ FULL OUTER JOIN slspers2 sp
 ---
 
 /* -------------------------------------------------------
-## <p id = "bonus"> LESSON: Using Nested Queries | [Back to ToC](#toc) </p>
+## <p id = "bonus"> BONUS LESSON: Using Nested Queries | [Back to ToC](#toc) </p>
 ---------------------------------------------------------- */
 
 As seen previously, SQL allows us to go beyond basic SELECT statements by using advanced features such as nested queries (subqueries).
@@ -1609,17 +1616,17 @@ WHERE custnum IN (
 
 Since most users do not have access to SSMS, query results can be saved in formats that can easily be opened and used. This chapter explores how to export query results to various formats e.g. CSV, and XML. 
 
-### Saving Query Results as a Comma-Delimited (CSV) File 
+## Lesson 6.1. Saving Query Results as a Comma-Delimited (CSV) File 
 Once a query has been executed and results appear in the Results pane, right-click any blank area within the Results pane and select 'Save Results As'.
 
 <img src = "zz_save_results.png">
 
-Alternative Methods:
+#### Alternative Methods:
 * To select all data in the SSMS results pane, click the blank square in the top-left corner where the row numbers and column headers meet. Once that is selected, press `Ctrl + Shift + C` to copy the data with the headers & then paste the data into another file.
 
 <img src = "zz_select_data.jpg">
 
-#### Results to File
+### Results to File
 When a SQL query is run in SSMS, the results do not always have to be displayed in the same way. The export destination can be changed by selecting a different Output Format. [More Information](https://learn.microsoft.com/en-us/ssms/quickstarts/work-with-query-results#:~:text=On%20the%20SQL%20Editor%20toolbar%2C%20select%20Results%20to%20File.,%3E%20General%20%3E%20Query%20results%20directory.).
 
 For instance, instead of showing the data results on the screen, SSMS can save the query results directly to a file, such as a CSV or text file.  
@@ -1631,7 +1638,7 @@ For instance, instead of showing the data results on the screen, SSMS can save t
 
 ---
 
-### Saving Query Results as a XML File
+## Lesson 6.2. Saving Query Results as a XML File
 XML is a way to organize and label data so different programs and websites can easily share and understand it. Its main goal is to help transfer structured data between applications over the Internet.
 
 > Before executing the following query, make sure to return back to the 'Results to Grid' mode.
