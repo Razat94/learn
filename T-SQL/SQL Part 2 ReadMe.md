@@ -37,7 +37,7 @@ Please contact me to request the data.
 
 In this lesson, we'll cover how to insert, update, and delete records in a table.
 
-Throughout these lessons, we'll create backup tables and make changes to those copies, ensuring that even if a backup is altered or corrupted, the original remains intact.
+Before modifying any data, we will first create backup tables to ensure that all changes throughout these lessons are made to copies and not the original data. This way, even if a backup is altered or corrupted, the original remains intact.
 
 Task: Create a backup table of `Titles` called `Titles_Revised`  
 ``` sql
