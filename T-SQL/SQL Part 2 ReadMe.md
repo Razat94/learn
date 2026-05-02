@@ -1564,7 +1564,6 @@ Database systems provide tools to enforce these rules, but SQL users must also c
 
 
 #### Example #1
-
 Create a transaction that inserts two salesperson records.  
 This is a good way to test for errors before the code becomes implemented.  
 
@@ -1577,10 +1576,17 @@ BEGIN TRANSACTION;
 
 	SELECT * FROM Slspers_Backup WHERE commrate IS NULL
 ROLLBACK TRANSACTION; -- Switch 'ROLLBACK' with 'COMMIT' TRANSACTION when ready to implement  
+
+-- Since the transaction hasn't been committed, the actual table has not been altered.  
+SELECT * FROM Slspers_Backup WHERE commrate IS NULL 
 ```
 
-Notice that as long as the transaction hasn't been committed, the values will not have been implemented into the actual table.  
-``` SELECT * FROM Slspers_Backup WHERE commrate IS NULL ```
+``` sql
+-- Running the same SELECT query much later will still show the original data with no one added.
+SELECT * FROM Slspers_Backup
+```
+
+
 
 
 #### Example #2
