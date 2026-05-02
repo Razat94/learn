@@ -66,10 +66,6 @@ WHERE 1 = 0  -- always false
 -- So instead, we must use an expression that evaluates to false.
 ```
 
-Alternatively, using the TRUNCATE statement will remove all the rows from a backup table but keeps its structure:    
-``` TRUNCATE TABLE Slspers_Backup ```
-
-
 Exercise #1 (Optional): Create an empty table called `CustomersCA` based on the structure of the `Customers` table.
 ``` sql
 SELECT *  
@@ -77,6 +73,9 @@ INTO CustomersCA
 FROM Customers  
 WHERE 1 = 0  -- always false
 ```
+
+Alternatively, the TRUNCATE statement can be used to remove all the rows from a table but keeps its structure:    
+``` TRUNCATE TABLE CustomersCA ```
 
 > Additional Exercise: Create an empty table called `Cust2025`
 
