@@ -267,7 +267,7 @@ FROM Titles
 
 > Remember: A calculated column doesn't exist in a table, yet SQL will calculate the function for each row when the query runs. 
 
-## Lesson 1.5. Keyboard Shortcuts:
+## Lesson 1.5. Keyboard Shortcuts
 
 ### Below are some handy keyboard shortcuts:
 - Ctrl + R (Hide the Result Pane)
