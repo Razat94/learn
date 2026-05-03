@@ -11,7 +11,7 @@
 6. [Lesson 6: Exporting Query Results](#6)
 
 /* -------------------------------------------------------
-# <p id = "0"> LESSON 0: Before We Begin </p>
+## <p id = "0"> LESSON 0: Before We Begin </p>
 ---------------------------------------------------------- */
 
 
@@ -44,7 +44,7 @@ This chapter will cover how to use SQL Server to connect to a database and run s
 ## Lesson 1.0 Connecting to the SQL Database & Executing Our First Query
 
 ### To launch SQL Server Management Studio:
-- Click the Start button (bottom-left of your screen)
+- Click the Start button (bottom-left corner of the screen)
 - Type `SQL Server Management Studio`
 - Click on the application when it appears in the search list.
 
@@ -54,13 +54,13 @@ Once the application is opened, "... the 'Connect to Server' window opens. If it
 <img src = "zz_connect-to-sql-server.png">
 
 In the 'Connect to Server' alert, click 'Connect' to connect to the server.
-> Note: For local installations, typically we can sign into SQL Server with the default configuration. 
+> Note: For local installations, typically users can sign into SQL Server with the default configuration. 
 
 #### Task 1.0.1: Create a new query and execute a statement.
 
 ```
 1. Once authenticated in SQL Server, press `CTRL + N` to launch a new query. 
-2. In the query editor window, we can run a simple statement:  
+2. In the query editor window, type in a simple statement:  
 ``` SELECT 1+3 ``` 
 ```
 
@@ -74,7 +74,7 @@ There are different ways to execute the query:
 
 ### The main parts of the SSMS interface are the:
 - Object Explorer: Navigate through databases, tables, views, stored procedures, etc. 
-    - We can hide/unhide this pane if needed.
+    - This pane can be hidden/unhidden if needed.
 - Query Editor: Write and run SQL queries.
 - Results Pane: Ctrl + R - Toggles the results pane
 
@@ -232,8 +232,7 @@ SELECT
 FROM Slspers
 ```
 
-#### Round Function
-The ROUND() function rounds a number to however many decimal places needed.
+Additionally, the ROUND() function can be used to round a column of numbers to however many decimal places needed.
 ``` sql
 SELECT  
 	slprice,  
@@ -241,7 +240,7 @@ SELECT
 FROM Titles
 ```
 
-ADVANCED: To create a new rounded column:
+ADVANCED: To create a new rounded column stored in the table:
 ``` sql
 ALTER TABLE Titles
 ADD RoundedPrice INT;
@@ -249,8 +248,6 @@ ADD RoundedPrice INT;
 UPDATE Titles
 SET RoundedPrice = ROUND(slprice, 0);
 ```
-
-Remember: A calculated column doesn't exist in a table, yet SQL will calculates the function for each row when the query runs. 
 
 Another Example:
 ``` sql
@@ -265,6 +262,9 @@ SELECT
 	CAST(slprice * 1.2 AS DECIMAL(10,2)) AS Inflation -- Better Solution:	Force two decimal places everywhere.
 FROM Titles
 ```
+
+
+> Remember: A calculated column doesn't exist in a table, yet SQL will calculates the function for each row when the query runs. 
 
 ## Lesson 1.5. Keyboard Shortcuts:
 
@@ -283,14 +283,14 @@ To create custom keyboard shortcuts for useful commands e.g.  executing queries:
 2. 	Navigate to:
 	Environment → Keyboard
 3.  In 'Show commands containing', search for: `Query.Execute` & click on it
-4.  Under 'Press shortcut keys', press your desired combination (e.g., Ctrl + Shift + N)
+4.  Under 'Press shortcut keys', press the desired combination (e.g., Ctrl + Shift + N)
 5.  Click Assign, then OK
 
 <img src = "./zz_add_shortcut.png" />
 
 ---
 
-## Lesson 1.6. Columns & Table Structures
+## Lesson 1.6. Column Settings & Table Structures
 MS SQL Server holds many stored procedures that act as a saved set of SQL commands
 
 For instance, to display a table structure:  
@@ -298,7 +298,11 @@ For instance, to display a table structure:
 SP_HELP Slspers  
 ```
 
-Additionally, in Object Explorer, right-click on the table of your choice and click “Design” to view and modify the table’s structure
+For instance, you'll notice that columns have a data type which is is an attribute/definition of a column that determines the kind of values the column can hold. 
+- Data types are constraints that specifies what values a column can store and what it cannot. For example, a column defined as a decimal data type will contain only decimal numbers, so we wouldn't expect to see the column hold some other value e.g. a date.
+- This will be discussed more in Lesson 3 of SQL Part 2.
+
+Additionally, in the Object Explorer, right-click on the table of choice and click 'Design' to view and modify the table’s structure.
 
 ``` sql 
 -- Albeit advanced, the below command also outputs column names  
@@ -308,7 +312,7 @@ WHERE TABLE_NAME = 'Slspers'
 ```
 
 ## Lesson 1.7. Backup Tables
-A backup table can be useful for when we want to test out queries on sample data.
+A backup table is a copy of a table that’s useful for testing queries on sample data. It's important to note that it's not good practice to create duplicate tables unless for testing purposes, sandboxes & overall backups.
 
 ``` sql
 -- Excercise: Create a Backup table
@@ -317,15 +321,16 @@ INTO Slspers_Backup
 FROM Slspers;  
 ```
 
-- In SQL Server, once the command is executed, we will need to refresh the Object Explorer by clicking the button Refresh (F5)  
-- Then, we will need to hide the folder 'Tables' & expand the folder again.  
+Once the command is executed, the table can be viewed by:  
+1. First refreshing the Object Explorer by clicking the  'Refresh (F5)' button.  
+2. Hide the folder 'Tables' & expand the folder again.  
 
--- When you create a new table in SQL, IntelliSense may not recognize it right away and can display a red squiggly line indicating an invalid object name.  
--- To refresh IntelliSense cache, either press (Ctrl + Shift + R) or go to Edit -> IntelliSense -> Refresh Local Cache
+When creating a new table, IntelliSense may not recognize the table name right away and can display a red squiggly line which indicates that the name is an invalid object name. To refresh the IntelliSense cache, do one of the following:
 
-> Note: Not good practice to create duplicate tables unless for sandboxes & backups
+- Press 'Ctrl' + 'Shift' + 'R' OR
+- On the toolbar, navigate to 'Edit' -> 'IntelliSense' -> 'Refresh Local Cache'.
 
-Albeit advanced, we can also create a 'NewCustomers' table but with structure only  
+Albeit advanced, a 'NewCustomers' table can be created but with structure only  
 ``` sql
 SELECT *  
 INTO NewCustomers  
@@ -335,22 +340,43 @@ WHERE 1 = 0;
 -- use WHERE 1 = 0 or similar condition.
 ```
 
-To delete a table:  
-``` sql
-DROP TABLE IF EXISTS titles_backup  
--- (Note: This will PERMANENTLY delete the table unless you have a backup or haven’t committed the changes yet!) 
-```  
-
-To drop a table, you can also do the following:  
+To delete a table, either:  
 - Right-click the table name in Object Explorer and select 'Delete'.
+- Run the following code:
+	``` sql
+	DROP TABLE IF EXISTS Slspers_Backup 
+	-- Note: This will PERMANENTLY delete the table unless either a backup has been stored or the changes haven't been committed yet!  
+	```  
+ 
 
-Lastly, to truncate a table i.e. to remove all rows from table:   
-``` TRUNCATE TABLE titles_backup  ```
+
+Lastly, to truncate a table i.e. to remove all rows from a table:   
+``` TRUNCATE TABLE Slspers_Backup ```
+
+This content will be covered more extensively in the SQL Part 2 class.
 
 ---
 
 ## Lesson 1.8. The Command Line
-Note: To Run T-SQL via the command line:  
+The command line can be used to run T-SQL. 
+
+1. Open Command Prompt & type the following to connect to SQL Server: (Note: The server name will need to be changed)  
+
+		sqlcmd -S UT-LAPTOP\SQLEXPRESS -E
+
+2. Once connected, a prompt will show: 
+``` 1>.``` 
+
+3. Type in a SQL statement e.g. ``` SELECT 1 + 2 ```
+4. Type: `GO` which will tell SQL Server to run the command.
+5. BONUS: To use a database and see data:
+	```
+	USE Pub1;
+	SELECT * FROM Slspers;
+	GO
+	```
+
+Full Example:
 ```
 C:\Users\student> sqlcmd -S UT-LAPTOP\SQLEXPRESS -E  
 1> select 1 + 2;  
@@ -409,7 +435,7 @@ FROM Customers
 ORDER BY State ASC
 ```
 
--- In SSMS, you can use the 'Query Options' command to set the ROWCOUNT value.  
+-- In SSMS, the 'Query Options' command can be used to set the ROWCOUNT value.  
 -- i.e. 'Specify the maxinum number of rows to return before the server stops processing'
 
 
@@ -678,7 +704,7 @@ ORDER BY bktitle ASC
 ---------------------------------------------------------- */
 
 Database functions are reusable expressions (blocks of code) used in SQL queries to compute and return values.  
-There are many built-in SQL functions similar to Excel's `SUM` and `CONCATENATE`, and you can also create your own custom functions.
+There are many built-in SQL functions similar to Excel's `SUM` and `CONCATENATE`, and users can also create their  own custom functions.
 
 ## Lesson 3.1 Date Functions
 
@@ -808,7 +834,7 @@ WHERE YEAR(pubdate) = 2017
 *** REMEMBER: ***  
 ```
 
-If you only use aggregates, SQL produces one result row.
+If only aggregate functions are used, then only one resulting row will produce.
 Once a non-aggregated column is added in the `SELECT` query, a `GROUP BY` clause is required to define how rows are grouped (See Chapter 4).
 
 In other words, combining row-level fields (like `bktitle`) with aggregated values (such as `COUNT` or `AVG`) requires specifying how to group the rows in SQL; otherwise, it will produce an error.
@@ -834,18 +860,18 @@ SELECT AVG( CAST(commrate AS DECIMAL(10,1)) ) FROM Slspers  -- 0.030000
 SELECT AVG( CAST(commrate AS DECIMAL(10,2)) ) FROM Slspers  -- 0.037000
 ```
 
-> Side Note: If a SQL column is stored as TEXT but contains numbers, you must cast it to a numeric type before doing numeric operations or comparisons.
+> Side Note: If a SQL column is stored as a TEXT but contains numbers, the column must then be casted to a numeric type before doing numeric operations or comparisons.
 
 ---
 <br /> 
 
-Q: Can we use a sum function across a row?
+Q: Can a sum function be used across a row?
 
 Short answer:  
-No, you can't use `SUM()` to add values across columns like `Q1 + Q2` in a single total row.  
+No, the `SUM()` function can't be used to add values across columns like `Q1 + Q2` in a single total row.  
 `SUM()` works vertically by adding values in one column over many rows
 
-You can however do a row-wise sum across columns like Q1 + Q2 without the function:
+However, a calculated column can perform a row-wise sum across columns (e.g. manually adding columns Q1 + Q2) without using a specific function:
 
 ``` sql
 SELECT 
@@ -916,7 +942,7 @@ WHERE devcost < (
 ORDER BY devcost DESC
 ```
 
-> Alternatively, we could have used the `ALL` modifier.  
+> Alternatively, the `ALL` modifier could have been used.  
 > Note: In SQL Server, using `MAX()` or `MIN()` is generally faster and more efficient than using `ALL`.
 
 ```sql
@@ -1269,7 +1295,7 @@ FROM Obsolete_Titles
 -- Optional: -- ORDER BY bktitle
 
 -- note: when combining data, every SELECT statement within UNION must have the same number of columns in the right order!  
--- in short: -- YOU MUST OUTPUT SAME COLUMNS ON BOTH QUERIES
+-- in short: -- THE EXACT SAME COLUMNS MUST BE USED ON BOTH QUERIES TO CREATE AN OUTPUT!
 
 
 SELECT bktitle, slprice  
@@ -1311,9 +1337,13 @@ WHERE Sales.qty > 300; -- Must change to S.qty
 ```
 
 * `Sales S` assigns alias `S` to the `Sales` table.
-* Remember, once an alias is declared on a table (Sales S), you must reference it as `S`, not `Sales`.
+* Remember, in a query once an alias is declared on a table (e.g. Sales S), the query must then reference the table as `S`, not `Sales`.
 
-> Don't forget this! You must use the alias instead of the full table name! 
+<br/>
+
+```
+Don't forget this! The alias must be used instead of the full table name! 
+```
 
 <br/>
 
@@ -1461,7 +1491,7 @@ LEFT JOIN Titles
 
 * Total_Amount is a calculated column where:  
 * `Total_amount` = Quantity × selling price.
-* Keep in mind that because we used a left join on the Sales table, the result will output 98 rows i.e. the same number of rows that 'Sales' table has
+* Keep in mind that because a left join has been used on the Sales table, the result will output 98 rows i.e. the same number of rows that 'Sales' table has
 
 ---
 
@@ -1636,7 +1666,7 @@ When a SQL query is run in SSMS, the results do not always have to be displayed 
 For instance, instead of showing the data results on the screen, SSMS can save the query results directly to a file, such as a CSV or text file.  
 
 - Click 'Results to File' or press 'Ctrl + Shift + F'
-- You can then run the query again to save it to a file.
+- The query can then run again and the results will be saved to a file.
 		
 <img src = "zz_results_to_file.png">
 

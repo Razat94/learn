@@ -35,7 +35,7 @@ Please contact me to request the data.
 ## <p id = "2"> LESSON 2: Manipulating Table Data | [Back to ToC](#toc) </p>  
 ---------------------------------------------------------- */  
 
-In this lesson, we'll cover how to insert, update, and delete records in a table.
+This lesson will cover how to insert, update, and delete records in a table.
 
 ### Lesson 2.0: Creating Backup Tables 
 Before modifying any data, we will first create backup tables to ensure that all changes throughout these lessons are made to copies and not the original data. This way, even if a backup is altered or corrupted, the original remains intact.
@@ -64,7 +64,7 @@ INTO Slspers_Backup
 FROM Slspers  
 WHERE 1 = 0  -- always false
 -- Note: SQL Server does not support Boolean literals `TRUE` and `FALSE` in SQL queries. 
--- So instead, we must use an expression that evaluates to false.
+-- So instead, an expression can be used that evaluates to false.
 ```
 
 Alternatively, the TRUNCATE statement can be used to remove all the rows from a table but keeps its structure:    
@@ -87,7 +87,7 @@ WHERE state = 'CA'
 	- DROP TABLE `CustomersCA`  
 	- DROP TABLE IF EXISTS `CustomersCA` -- avoid errors if the table has already been deleted.
 - Using the SSMS Object Explorer (GUI):
-	- In the Object Explorer pane, navigate to your database and find the table you wish to delete (e.g., `CustomersCA`).
+	- In the Object Explorer pane, navigate to the database of choice and find the table to delete (e.g., `CustomersCA`).
 	- Right-click the table and select Delete.
 	- When the Delete Object dialog box appears, verify the selection and click OK to drop the table
 
@@ -98,12 +98,12 @@ WHERE state = 'CA'
 ### Lesson 2.1: CRUD Overview
 
 #### <u> Aww, CRUD! </u>
-CRUD refers to the four basic operations you can perform on data in a database:  Create, Read, Update, & Delete.
+In any database, CRUD refers to the four basic operations that can be performed on the data:  Create, Read, Update, & Delete.
 <br>  
--- C -- Create  
--- R -- Read  
--- U -- Update  
--- D -- Delete	
+C -- Create  
+R -- Read  
+U -- Update  
+D -- Delete	
 
 The below table lists out the four basic functions along with sample examples:
 
@@ -325,12 +325,12 @@ DELETE Slspers_Backup
 WHERE repid = 'W02';
 ```
 
-(Option 1) We can delete all rows via `TRUNCATE` keyword:
+(Option 1) All rows can be deleted via `TRUNCATE` keyword:
 ``` sql
 TRUNCATE TABLE Titles_Revised  
 ```
 
-(Option 2) We can delete all rows via `DELETE` keyword and not specify any condition:  
+(Option 2) All rows can be deleted via `DELETE` keyword and not specify any condition:  
 ``` sql
 DELETE FROM Titles_Revised  
 ```
@@ -399,8 +399,7 @@ WHERE partnum = '98765'
 ## <p id = "3"> LESSON 3: Manipulating Table Structure | [Back to ToC](#toc)</p>  
 ---------------------------------------------------------- */  
 
-
-SQL Server lets you manage and modify database structure directly. 
+This chapter will cover how to manage and modify database structure.
 
 When creating a SQL table, the table’s structure is defined by specifying column names and data types, and any optional constraints that enforce what data is valid. 
 
@@ -455,7 +454,7 @@ DROP TABLE ProduceInventory
 
 ### Let’s now review CRUD operations related to affecting columns in a table.
 
-In a previous section, we covered how to add and delete records (rows) in a table. In this subsection, we will cover how to add and remove columns on a duplicate table.
+The previous section covered how to add and delete records (rows) in a table. This subsection will cover how to add and remove columns on a duplicate table.
 
 #### Recall: To Create a Duplicate Table 
 ``` sql
@@ -529,13 +528,13 @@ Fields marked as nullable means that the columns can contain NULL values i.e. va
 sp_help Slspers_Backup -- Check for nullable columns by looking at the table
 ```
 
-First, verify that we can enter a NULL (blank) value for the `Fname` field. 
+First, verify that a NULL (blank) value for the `Fname` field can be entered. 
 ``` sql 
 INSERT INTO Slspers_Backup  
 VALUES ('N01', NULL, 'Nguyen', 0.05)  
 ```
 
-Ensure that we delete the added row.
+Before moving on, ensure that the added row is deleted.
 ``` sql
 DELETE Slspers_Backup  
 WHERE fname is NULL
@@ -585,10 +584,10 @@ ALTER COLUMN fname VARCHAR(40) NULL;
 
 /* ------------ CONSTRAINTS  ------------ */
 
-In this subchapter, we will be creating a constraint after a table is already created.
+This subchapter will cover how to create a constraint after a table is already created.
 
 Constraints are rules that limit data. If the constraint is active, then inserting invalid data will fail.  
-In SQL Server, constraints are separate objects, so we drop/remove the constraint to allow the user to enter invalid data again.  
+In SQL Server, constraints are separate objects that can be dropped/removed to allow the user to enter invalid data again.  
 
 #### Task: Add a rule (constraint) to make sure commission values are between 0 and 10% (0 to 0.1).  
 
@@ -625,7 +624,7 @@ Constraint Type        | Constraint Name | Table | Column   | Status  | Option  
 CHECK (commrate)       | chk_commrate    | N/A   | N/A      | Enabled | Is_For_Replication | ([commrate] >= 0 AND [commrate] <= 0.1)|
 
 
-> Note: Additionally, in SSMS Object Explorer, expand the `Tables` folder and then expand `Constraints` folder to view your constraints.
+> Note: Additionally, in SSMS Object Explorer, expand the `Tables` folder and then expand `Constraints` folder to view all corresponding constraints.
 
 Having added the constraint, running the initial insertion will now fail   
 ``` sql
@@ -668,7 +667,7 @@ Let's try adding values:
 INSERT INTO Slspers_Backup   
 VALUES (1, 'Alice', 'Smith', 0.05);  
 
--- This also works since we added a DEFAULT constraint of 0.02:  
+-- This also works since the DEFAULT constraint of 0.02 was added:  
 INSERT INTO Slspers_Backup (repid, fname, lname)  
 VALUES (1, 'Alice', 'Smith');  
 ```
@@ -691,11 +690,11 @@ ALTER TABLE Slspers_Backup
 DROP COLUMN commrate 
 ```
 
-First we must drop the constraint, and then we can drop the column.
+The column can only be dropped after the constraint is removed.
 ``` sql
 -- Step 1: First drop the default constraint  
 ALTER TABLE Slspers_Backup  
-DROP CONSTRAINT df_commrate; -- remember to use 'sp_help YourTableName' if you forget the constraints name.  
+DROP CONSTRAINT df_commrate; -- remember that 'sp_help YourTableName' can be used to view the the constraints name.  
 
 -- Step 2: Then drop the column  
 ALTER TABLE Slspers_Backup  
@@ -740,11 +739,11 @@ DROP CONSTRAINT DF_Email;
 /* ------------ Primary KEY Constraint!!! ------------ */  
  
 A Primary Key is a unique identifier for each record in a table and cannot contain duplicates or NULL values!
-You can have only 1 primary key per table unless it's a composite i.e. a combination of columns.  
+Only 1 primary key can be given per table unless it's a composite i.e. a combination of columns.  
 
 > NOTE: Make sure that the following queries affect the DUPLICATE table.
 
-Warning: We can not make a column a primary key if the column already contains duplicates.  
+Warning: A column can't be turned into a primary key if the column already contains duplicates.  
 ``` TRUNCATE TABLE Slspers_Backup  ```
 
 NOTE: SQL Server refuses to make a primary key if NULLs are allowed on a column.  
@@ -765,8 +764,9 @@ ADD CONSTRAINT pk_slspers PRIMARY KEY (repid);
 To verify constraint  
 ``` EXEC sp_help 'Slspers_Backup' ```
 
-Note that we cannot insert two records like the following because of the primary key constraint on REPID:
+Note that the following two records can not be added due to the primary key constraint on REPID:
 ``` sql
+-- Should not work.
 INSERT INTO Slspers_Backup  
 VALUES (1, 'Raza', 'Tahir', 0.05)   
 ```
@@ -799,21 +799,19 @@ SELECT * FROM Slspers_Backup
 ## <p id = "databases"> BONUS LESSON: Working with Databases | [Back to ToC](#toc)</p>   
 ---------------------------------------------------------- */  
 
-#### To create a new database  
+There are two ways to create a database: 
+- Via the command:
 ``` CREATE DATABASE MyDatabase ```
+- Via the Object Explorer by right-clicking on 'Databases' and click 'New Database'. Enter a name (e.g., `MyDatabase`) and then click 'OK'
 
-We can also create databases from the Object Explorer.  
-1. In Object Explorer, right-click on Databases and click 'New Database'
-2. Enter a name (e.g., `MyDatabase`) and then click 'OK'
-
-On the database, create a table called `People`.
+Once a database has been created, a table can be created  called `People`.
 ```
 CREATE TABLE MyDatabase.dbo.People (  
     name VARCHAR(100) 
 );  
 ```
 
-Insert Values:
+Values can then be inserted:
 ```
 INSERT INTO People VALUES 
 ('Raza'), 
@@ -854,7 +852,7 @@ Follow these steps to create a backup:
 1. In the Object Explorer, right click on a Database and then click 
 'Tasks' -> 'Export Data-tier Application'  
 
-2. The wizard alert will then pop up to help guide you through the steps.
+2. The wizard alert will then pop up to help guide us  through the steps.
 	- On the 'Export Settings' screen, choose 'Save to local disk' and then select a file path and name (e.g., SampleDB.bacpac)
 	- Click Next to verify the specified settings & then click 'Finish'
 
@@ -865,7 +863,7 @@ With our newly created .BACPAC file, we'll now find that importing a .bacpac fil
 
 1. Right-click Databases and click 'Import Data-tier Application' to view the Wizard.
 
-2. On the "Import Settings" tab, under 'Import from local disk', browse to select your .bacpac file (e.g. SampleDB.bacpac).
+2. On the "Import Settings" tab, under 'Import from local disk', browse to select the previously created .bacpac file (e.g. SampleDB.bacpac).
 
 3. On the "Database Settings" tab, you'll be prompted to enter a name for the new database.
 
@@ -888,7 +886,7 @@ With our newly created .BACPAC file, we'll now find that importing a .bacpac fil
 
 ### Views  
 A view gives the user a different way to look at data in a table (hence the name).  
-For example, if you have a table and you want to hide certain fields, a view would be a great way to do that.
+For example, a view is great for hiding certain fields in a table.
 
 More formally, a SQL View is a virtual table and is essentially a saved query that references a table.  So think of it like a query that pretends to be a table.  
  
@@ -908,11 +906,11 @@ Views can be based on:
 
 #### Why Views Matter  
 - Security  
-	- A view can expose only specific rows and columns. So instead of giving users direct full access to a table, we can create a view and allow users to only see the data through that.
+	- A view can expose only specific rows and columns. So instead of giving users direct full access to a table, a view can be created that allow users to only see the data through that.
 	- DBAs can refuse/restrict access to tables but only grant access to views.  
 
 - Ease of access  
-	- Views reduce complexity. Instead of loading all 100 columns of a table, you only retrieve the 3 columns you need.  
+	- Views reduce complexity. Instead of loading all 100 columns of a table, the user can then retrieve the 3 columns they need to work with.  
 	- Ultimately, it helps when manipulating/joining large tables.  
 
 <br/>
@@ -960,15 +958,15 @@ VALUES
 ('Nickkis Design', 'Brooklyn', 'NY')
 ```
 
-If needed, we can delete any customers from the view as well:  
+If needed, delete any customers from the view as well:  
 ``` sql
 DELETE FROM CA_Cust
 WHERE custname LIKE 'Nickki%'
 ```
 
 Since a view doesn't store data itself and is just a saved query on a table, the view will always show real-time data.  
-- If we delete data through the view, we'll actually be deleting it from the underlying table, because that’s where the real data is stored.  
-- If we delete data on the original table, the view will update.
+- Deleting data through the view will actually deleting it from the underlying table since that’s where the real data is stored.  
+- Deleting data on the original table will update the view.
 
 Syntax to Delete (Drop) a View  
 ``` DROP VIEW CA_Cust  ```
@@ -982,9 +980,9 @@ Step 1: Navigate to the database where the view will be created. Expand the data
 
 <img src = './Views_Folder.png'>
 
-Step 2: Right-click on the 'Views' folder and select "New View." On the alert, choose the table you want to base your view on. In this example, select the `Titles_Revised` table, click 'Add', and then close the dialog box.
+Step 2: Right-click on the 'Views' folder and select "New View." On the alert, choose the table to base the view on. In this example, select the `Titles_Revised` table, click 'Add', and then close the dialog box.
 
-Step 3: Let's suppose the goal is for users to view some data from the `Titles_Revised` table. To do that, simply select all the fields we'd like to include. As you click each field, the column gets added to the view.
+Step 3: Let's suppose the goal is for users to view some data from the `Titles_Revised` table. To do that, simply select all the fields we'd like to include. Clicking each field will add the column to the view.
 
 Step 4: Once all the fields have been added, save the view. Click the save icon or just close the window and confirm the save. Give the view a name, like `TitlesInfo`.
 
@@ -1031,14 +1029,15 @@ WITH CHECK OPTION
 Verify:  
 ``` SELECT * FROM Top_Salesperson ```
 
-NOTE: Once we drop the view...  
-``` DROP VIEW Top_Salesperson  ```
-
-...we won't be able to use the view:  
-``` SELECT * FROM Top_Salesperson -- Won't work ```
+NOTE: Once the view has been dropped, users won't be able to use the view:  
 
 
-> Bonus Option: We can grant users read only, but not insert/update/delete operations.
+``` sql
+DROP VIEW Top_Salesperson
+SELECT * FROM Top_Salesperson -- Won't work 
+```
+
+Bonus Option: Users can be Granted read only permissions, but not be given any permissions to perform insert/update/delete operations.
 ``` sql
 GRANT SELECT ON CA_Cust TO some_user;
 REVOKE INSERT, UPDATE, DELETE ON CA_Cust FROM some_user;
@@ -1115,8 +1114,7 @@ DROP VIEW mediumprice
 ## <p id = "procedure"> Bonus Lesson: Procedures | [Back to ToC](#toc)</p>   
 ---------------------------------------------------------- */  
 
-
-Before we understand what a Procedure is, let's first understand what is Conditional Logic.
+Before understanding what a procedure is, let's first understand what is conditional logic. Conditional logic makes specific actions occur only if certain conditions/criteria are met (e.g., "If it rains, bring an umbrella").
 
 > SQL can execute basic logic  
 
@@ -1146,7 +1144,7 @@ IF (3 + 3) != 6
 	PRINT 'Do more things here'; -- the second PRINT is not part of the IF, so it runs regardless of the condition. In other words, the statement becomes printed when it shouldn't i.e. it always runs
 ```
 
-In programming we can think  of it like this:
+In programming, it’s similar to the following code:
 ```
 IF condition
     statement1  <--  Only this line belongs to the IF
@@ -1162,7 +1160,7 @@ BEGIN
 END   
 ```
 
-In programming we can think of it like this:
+A good analogy in programming is what's shown below:
 ```
 IF condition {
     statement1
@@ -1199,7 +1197,7 @@ ELSE
 
 ___
 
-Now that we understand what is Conditional Logic, let's understand Procedures.
+Now that we understand what is conditional logic, let's understand procedures.
 
 In SQL, A stored procedure is a reusable block of code; it is a saved set of SQL commands to perform specific tasks that can be executed whenever needed.  
 
@@ -1225,7 +1223,7 @@ NOTE: The difference between VIEWS & PROCEDURES
 - A view definition can't use or contain DML statements such as INSERT, UPDATE, DROP and DELETE. 
 	- A View definition can only use a SELECT query since it doesn't data.
 
-> Note: While you cannot contain DML inside the view definition, you can use DML statements against a view. We will touch base with it here. 
+> Note: While you cannot contain DML inside the view definition, you can use DML statements against a view. This will be discussed later. 
 
 So a View:  
 - Can't accept parameters (no input).  
@@ -1236,14 +1234,14 @@ So a View:
 A view is a saved query with inline SQL so it doesn’t execute logic.  
 A stored procedure can run logic, like IF, SET, or UPDATE statements.  
 
-We shouldn't use a view solely for inserting data, but rather, a procedure is more effective when making insertions. 
+A view shouldn't solely be used for inserting data, but rather, a procedure is more effective when making insertions. 
 For example, adding/deleting users/orders to a database is often a routine task, so it makes sense to create a procedure to handle it.
 
 
 > 2nd NOTE: 
 
 Keep in mind that a Procedure is not a dataset; it cannot attach a WHERE clause directly to a stored procedure call.  
-When your procedure runs a SELECT, it outputs a <b> result set </b>.
+When the procedure runs a SELECT, it outputs a <b> result set </b>.
 
 ---
 
@@ -1319,7 +1317,7 @@ END;
 Run the Procedure:
 ``` sql
 EXEC GetTopSlspers 
--- NOTE: The EXEC keyword is optional; you can run the procedure simply by calling:
+-- NOTE: The EXEC keyword is optional; the procedure can be executed simply by calling:
 -- GetTopSlspers
 ```
 
@@ -1345,13 +1343,15 @@ END;
 Now to run the backup:  
 ``` EXEC GenerateSlsPersBackup ```
 
-Now suppose we somehow mess up the backup table:  
-``` UPDATE Slspers_Backup SET fname = 'Raza' ```
+Now suppose the backup table somehow gets messed up:  
+``` 
+UPDATE Slspers_Backup SET fname = 'Raza'
 
-You should be able to verify that all the names have been updated:  
-``` SELECT * FROM Slspers_Backup ```
+-- Verify that all the names have been falsely updated:  
+SELECT * FROM Slspers_Backup 
+```
 
-But now if you run the same backup command again to overwrite any previous backups:  
+So now running the same backup command again will overwrite any previous backups:  
 ``` EXEC GenerateSlsPersBackup ```
 
 Running the SELECT query should show all the original names:  
@@ -1366,7 +1366,7 @@ Create a backup database of 'Pub1'
 
 - Step #1: Create a folder 'SQLP2BackupFolder' in my documents.
 - Step #2: Open Folder Properties
-	- Go to the folder you created, e.g., C:\Backup
+	- Go to the folder that was created, e.g., C:\Backup
 	- Right-click the folder -> Properties -> Security tab  
 - Step 3: Add “Everyone” (Temporary Easy Fix)
 	- Click Edit…
@@ -1432,7 +1432,7 @@ CREATE PROCEDURE InsertPotentialCustomersByState
 AS  
 BEGIN  
    	-- Optional -- SET NOCOUNT ON;  
-	-- Always add SET NOCOUNT ON; at the top of your stored procedures unless you specifically need the row count messages.  
+	-- Always add SET NOCOUNT ON; at the top of the stored procedures unless there's a specific need to count the the row count messages.  
 
     INSERT INTO Customers  
     SELECT *  
@@ -1465,8 +1465,8 @@ WHERE STATE = 'NY'
 ---
 
 ```
-If a view is updateable, you can only insert into one underlying (base) table through it.  
-If you need to insert into multiple tables, the view alone won't handle that. You could use a trigger to do extra inserts automatically.  
+If a view is updateable, an insert can only be performed into one underlying (base) table through it.  
+The view alone won't handle insertions into multiple tables so therefore a trigger can be used to perform extra inserts automatically.  
 But it’s usually better to use a stored procedure, because a procedure can easily insert two rows — one in each table — in a clear and controlled way.  
 ```
 
@@ -1482,7 +1482,7 @@ When SQL Server looks for data, it usually checks every row in a table one by on
 
 To improve the efficiency of SQL Server, creating indexes can help specifically support your most frequent queries such as speeding up sorts & searches especially common ones.
 
-We can create indexes on table columns and drop indexes too but please note that the users cannot see the indexes since they're only used to speed up searches/queries.
+Indexes can be created and dropped on table columns but please note that the users cannot see the indexes since they're only used to speed up searches/queries.
 
 Indexes are similar to how you look through a book to find a certain part.
 
@@ -1491,18 +1491,21 @@ Imagine you’re trying to find the word “transactions” in a book. You could
 - Table of Indexes
 - Glossary of Terms, including the page number where the term was first used
 
-Books can have different indexes to help you find different things fast.  
+Books can have different indexes to help find different things quickly.  
 Since they are organized neatly, using an index can be much quicker than looking through every page.
 
-So just like how a book index helps you find things fast, a database index helps the server find information quickly. It makes searches faster and helps everything run better.
+So just like how a book index helps a reader find things quickly, a database index helps the server find information quickly. It makes searches faster and helps everything run better.
 
-You can make an index on a table using the `CREATE INDEX` command.  
-An index is made from one or more columns, called the index keys. You give the index a name, say which table it’s for, and list the column(s) in parentheses.
+An index on a table can be created using the `CREATE INDEX` command.  
+An index is made from one or more columns, called the index keys. The index can be given: 
+- a name, 
+- which table it’s for, 
+- and list the column(s) in parentheses.
 
-The index keeps the values from those columns and points to the original rows in the table. When you run a query, SQL Server can use the index to find the data faster. If the query needs other columns not in the index, it uses the pointers to get them from the table.
+The index keeps the values from those columns and points to the original rows in the table. When running a query, SQL Server can use the index to find the data faster. If the query needs other columns not in the index, it uses the pointers to get them from the table.
 
-> Note: Indexes in SQL can help you find things faster, but they also take up space.  
-> They can also slow things down when you add or change data, so you should only use indexes for things you search for a lot.
+> Note: Indexes in SQL can help find things faster, but they also take up space.  
+> Indexes can slow down data modification (e.g. when adding or change data), so only use indexes for things that get searched a lot.
 
 To summarize, an index can reduce the time needed to retrieve information & speed up data retrieval.
 
@@ -1513,7 +1516,7 @@ CREATE INDEX idx_lastname
 ON Persons (LastName);
 ```
 
-Now, if we search for all customers with a certain last name, SQL Server can use the index to find them faster:
+Now, to search for all customers with a certain last name, SQL Server can use the index to find them faster:
 
 ``` sql
 --  SQL Server looks up 'Smith' in the index instead of scanning every row in the table.
@@ -1522,11 +1525,10 @@ FROM Customers
 WHERE LastName = 'Smith';
 ```
 
-To see a list of all indexes on a table,  
-expand the database in the Object Explorer and go to Tables -> Your table -> Indexes
+In the Object Explorer, each table in the Tables folder has a list of indexes under: 
+Tables Folder -> Table -> Indexes
 
-
-If we no longer need the index, we can drop the index like so:
+To drop an index that is no longer needed:
 ``` sql
 -- Deletes the index and frees up the space it was using.
 DROP INDEX table_name.index_name;
@@ -1536,7 +1538,7 @@ DROP INDEX table_name.index_name;
 ## <p id = "6"> LESSON 6: Managing Transactions | [Back to ToC](#toc)</p>   
 ---------------------------------------------------------- */  
 
-Transactions protects your database from partial updates.  
+Transactions protects databases from partial updates.  
 
 For example, transactions are often used when multiple users need to modify a database at the same time.  
 In multi-user systems, different users may be viewing, adding, updating, or deleting data simultaneously and so SQL transactions ensure that these actions are done safely and correctly by keeping the data accurate and reliable.
@@ -1645,7 +1647,7 @@ INSERT INTO person (name) VALUES ('Alice');  -- duplicate name which violates UN
 ROLLBACK TRAN addPerson -- Once there are no errors, swap the keyword 'ROLLBACK' with 'COMMIT'
 ```
 
-> Notice that if we assign a transaction a name, that name exists only in memory for the duration of the current transaction.
+> Notice that if a transaction is assigned a name, that name exists only in memory for the duration of the current transaction.
 The transaction is not saved in the database and can not be used later.
 
 #### Example #3  
