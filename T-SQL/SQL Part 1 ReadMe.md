@@ -260,12 +260,12 @@ SELECT
 
 	-- To Remove trailing 0's without rounding:  
 	FORMAT(slprice * 1.2, '0.##') AS discounted_price, -- Good Solution:	0's removed, but some prices only have whole dollars   
-	CAST(slprice * 1.2 AS DECIMAL(10,2)) AS Inflation -- Better Solution:	Force two decimal places everywhere.
+	CAST(slprice * 1.2 AS DECIMAL(10,2)) AS Inflation  -- Better Solution:	Force two decimal places everywhere.
 FROM Titles
 ```
 
 
-> Remember: A calculated column doesn't exist in a table, yet SQL will calculates the function for each row when the query runs. 
+> Remember: A calculated column doesn't exist in a table, yet SQL will calculate the function for each row when the query runs. 
 
 ## Lesson 1.5. Keyboard Shortcuts:
 
@@ -704,7 +704,7 @@ ORDER BY bktitle ASC
 ---------------------------------------------------------- */
 
 Database functions are reusable expressions (blocks of code) used in SQL queries to compute and return values.
-  
+
 There are many built-in SQL functions similar to Excel's `SUM` and `CONCATENATE`, and users can also create their  own custom functions.
 
 ## Lesson 3.1 Date Functions
