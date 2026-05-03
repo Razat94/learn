@@ -397,12 +397,11 @@ sqlcmd -S UT-LAPTOP\SQLEXPRESS -E -i "C:\Users\student\Documents\SQL Script Comm
 ## <p id = "2"> LESSON 2: Performing a Conditional Search | [Back to ToC](#toc) </p>
 ---------------------------------------------------------- */
 
-In the last chapter, a connection to a server was made and a few basic queries were executed.  
-This chapter will cover how to sort & filter results to reorganize and display only the data needed.
+In the last chapter, a connection to a server was made and a few basic queries were executed.  This chapter will cover how to sort & filter results to reorganize and display only the data needed.
 
 In other words, this chapter will cover sorting & filtering.
 
-## Lesson 2.1. Sorting
+## Lesson 2.1. Sorting with 'ORDER BY' Clause
 Sorting organizes query results in ascending or descending order.
 
 #### Task 2.1.1. Example: Sort data by a single column:  
@@ -704,7 +703,8 @@ ORDER BY bktitle ASC
 ## <p id = "3"> LESSON 3: Working with Functions | [Back to ToC](#toc)</p>
 ---------------------------------------------------------- */
 
-Database functions are reusable expressions (blocks of code) used in SQL queries to compute and return values.  
+Database functions are reusable expressions (blocks of code) used in SQL queries to compute and return values.
+  
 There are many built-in SQL functions similar to Excel's `SUM` and `CONCATENATE`, and users can also create their  own custom functions.
 
 ## Lesson 3.1 Date Functions
