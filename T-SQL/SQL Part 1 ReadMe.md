@@ -1562,7 +1562,7 @@ GROUP BY sp.repid, sp.fname;
 ## <p id = "bonus"> BONUS LESSON: Using Nested Queries | [Back to ToC](#toc) </p>
 ---------------------------------------------------------- */
 
-As seen previously, SQL allows us to go beyond basic SELECT statements by using advanced features such as nested queries (subqueries).
+As seen previously, SQL provides options to go beyond basic SELECT statements by using advanced features such as nested queries (subqueries).
 
 #### Demo #1: 
 Show all salespersons who have never made a sale.
