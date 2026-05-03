@@ -300,7 +300,7 @@ SP_HELP Slspers
 ```
 
 For instance, you'll notice that columns have a data type which is is an attribute/definition of a column that determines the kind of values the column can hold. 
-- Data types are constraints that specifies what values a column can store and what it cannot. For example, a column defined as a decimal data type will contain only decimal numbers, so we wouldn't expect to see the column hold some other value e.g. a date.
+- Data types are constraints that specifies what values a column can store and what it cannot. For example, a column defined as a `DECIMAL` data type will contain only decimal numbers, so we wouldn't expect to see the column hold some other value e.g. a date.
 - This will be discussed more in Lesson 3 of SQL Part 2.
 
 Additionally, in the Object Explorer, right-click on the table of choice and click 'Design' to view and modify the table’s structure.
