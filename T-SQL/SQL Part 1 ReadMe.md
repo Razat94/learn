@@ -269,17 +269,22 @@ FROM Titles
 
 ## Lesson 1.5. Keyboard Shortcuts:
 
-> Ctrl + R (Hide the Result Pane)
+### Below are some handy keyboard shortcuts:
+- Ctrl + R (Hide the Result Pane)
 
-> Ctrl+K; Ctrl+C (comment)  
-> Ctrl+K; Ctrl+U (uncomment)
+<br/>  
 
-> CTRL + Shift + U (Uppercase)  
-> CTRL + Shift + L (Lowercase)
+- Ctrl+K; Ctrl+C (comment)  
+- Ctrl+K; Ctrl+U (uncomment)  
+
+<br/>
+
+- CTRL + Shift + U (Uppercase)  
+- CTRL + Shift + L (Lowercase)
 
 --- 
 
-### Shortcut Keys
+### Customized Shortcut Keys
 Custom keyboard shortcuts can be created for useful commands e.g. executing queries. To create a custom shortcut:  
 1. 	Go to Tools -> Options
 2. 	Navigate to:
