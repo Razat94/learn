@@ -31,6 +31,8 @@ We’ll continue using the data from the last part about the publishing company 
 
 Please contact me to request the data.
 
+This book will be utilizing SQL Server Management Studio as the primary graphical interface for writing, testing, and executing Transact-SQL (T-SQL) queries. [Link](https://learn.microsoft.com/en-us/ssms/sql-server-management-studio-ssms#:~:text=SQL%20Server%20Management%20Studio%20(SSMS)%20is%20an%20integrated%20environment%20for,in%20SQL%20Server%20Management%20Studio.)
+
 /* -------------------------------------------------------  
 ## <p id = "2"> LESSON 2: Manipulating Table Row Data | [Back to ToC](#toc) </p>  
 ---------------------------------------------------------- */  
