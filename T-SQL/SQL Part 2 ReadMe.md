@@ -32,7 +32,7 @@ We’ll continue using the data from the last part about the publishing company 
 Please contact me to request the data.
 
 /* -------------------------------------------------------  
-## <p id = "2"> LESSON 2: Manipulating Table Data | [Back to ToC](#toc) </p>  
+## <p id = "2"> LESSON 2: Manipulating Table Row Data | [Back to ToC](#toc) </p>  
 ---------------------------------------------------------- */  
 
 This lesson will cover how to insert, update, and delete records in a table.
@@ -407,6 +407,9 @@ A SQL data type is an attribute of a column that determines the kind of values t
 
 For more information on field data types, please refer to the [Learn Microsoft Page.](https://learn.microsoft.com/en-us/sql/t-sql/data-types/data-types-transact-sql?view=sql-server-ver17)  
 
+## Lesson 3.1. Creating and Deleting Tables
+Before covering the various CRUD operations related to affecting columns in a table in the next lesson, it's first important to understand how to create, delete & truncate tables as a whole.
+
 #### Task: Create a table to store produce items. After the table has been created, insert a few sample entries with their prices and availability and finally query the table to display all produce items.
 
 Step 1: Create the table  
@@ -439,22 +442,19 @@ Ginger		$0.99 			FALSE
 /* End of Output */  
 ```
 
+Recall the following queries:
+``` sql
+sp_help ProduceInventory  			-- used to check info
+TRUNCATE TABLE ProduceInventory  	-- used to truncate the table
+DROP TABLE ProduceInventory  		-- used to drop/delete the table.
+```
 
-/* ------------ Check Info ------------ */  
-sp_help ProduceInventory  
+/* ------------ ------------ */  
 
+With that out of the way, the next topic will cover how to use CRUD operations related to affecting columns in a table.
 
-/* ------------ Truncate Table ------------ */  
-TRUNCATE TABLE ProduceInventory  
-
-
-/* ------------ DROP (Delete) Table ------------ */  
-DROP TABLE ProduceInventory  
-
-
-### Let’s now review CRUD operations related to affecting columns in a table.
-
-The previous section covered how to add and delete records (rows) in a table. This subsection will cover how to add and remove columns on a duplicate table.
+## 3.2. Using CRUD operations to affect columns.
+The previous Lesson 2 covered how to add and delete records (rows) in a table. This subsection will cover how to add and remove columns on a duplicate table.
 
 #### Recall: To Create a Duplicate Table 
 ``` sql
@@ -581,7 +581,7 @@ ALTER TABLE Slspers_Backup
 ALTER COLUMN fname VARCHAR(40) NULL;  
 ```
 
-
+## Lesson 3.3. Numeric Constraints
 /* ------------ CONSTRAINTS  ------------ */
 
 This subchapter will cover how to create a constraint after a table is already created.
@@ -646,7 +646,7 @@ VALUES (1, 'Finnie', 'Nguyen', 0.25);
 ```
 
 
-
+## Lesson 3.4. Default Constraints
 /* ------------ ADDING A DEFAULT CONSTRAINT ------------ */
 
 The DEFAULT keyword sets a value for future inserts only. 
@@ -736,6 +736,7 @@ ALTER TABLE Slspers_Backup
 DROP CONSTRAINT DF_Email;
 ```
  
+## Lesson 3.5. Primary Key Constraint
 /* ------------ Primary KEY Constraint!!! ------------ */  
  
 A Primary Key is a unique identifier for each record in a table and cannot contain duplicates or NULL values!
@@ -884,7 +885,7 @@ With our newly created .BACPAC file, we'll now find that importing a .bacpac fil
 ---------------------------------------------------------- */  
 
 
-### Views  
+## Lesson 4.1. Explanation of Views  
 A view gives the user a different way to look at data in a table (hence the name).  
 For example, a view is great for hiding certain fields in a table.
 
@@ -915,9 +916,28 @@ Views can be based on:
 
 <br/>
 
+
+## Lesson 4.2. Create a View via the Object Explorer Interface
+As we've seen, views can be created using raw SQL code, but here's how to access & create views via the Object Explorer in SSMS.
+
+Step 1: Navigate to the database where the view will be created. Expand the database, and notice the "Views" folder.
+
+<img src = './Views_Folder.png'>
+
+Step 2: Right-click on the 'Views' folder and select "New View." On the alert, choose the table to base the view on. In this example, select the `Titles_Revised` table, click 'Add', and then close the dialog box.
+
+Step 3: Let's suppose the goal is for users to view some data from the `Titles_Revised` table. To do that, simply select all the fields we'd like to include. Clicking each field will add the column to the view.
+
+Step 4: Once all the fields have been added, save the view. Click the save icon or just close the window and confirm the save. Give the view a name, like `TitlesInfo`.
+
+Result: Now the view is created. To run it, expand the Views folder, find the new view, right-click it, and select "Select Top 1000 Rows" or run a SELECT query. You'll see the data returns in a standard table.
+
 ---
 
-#### Task #1: Create a view to show only people from state 'CA'  
+## Lesson 4.3. Sample Exercises with Views
+In this sublesson, we'll understand views by going through some examples.
+
+### Example #1: Create a view to show only people from state 'CA'  
 ``` sql
 CREATE VIEW CA_Cust AS  
 SELECT custname, city, state  
@@ -939,7 +959,6 @@ Now that a view is created, that view can be queried like a table.
 SELECT * FROM Customers	-- Original Query still works
 SELECT * FROM CA_Cust  	-- The view will only return customers from California.
 ```
-
 
 Data can now be inserted through the view, and it will update the original Customers table.
 ``` sql
@@ -973,25 +992,8 @@ Syntax to Delete (Drop) a View
 
 --- 
 
-#### Bonus Example: Create a View via the Object Explorer Interface.
-As we've seen, views can be created using raw SQL code, but here's how to access & create views via the Object Explorer in SSMS.
-
-Step 1: Navigate to the database where the view will be created. Expand the database, and notice the "Views" folder.
-
-<img src = './Views_Folder.png'>
-
-Step 2: Right-click on the 'Views' folder and select "New View." On the alert, choose the table to base the view on. In this example, select the `Titles_Revised` table, click 'Add', and then close the dialog box.
-
-Step 3: Let's suppose the goal is for users to view some data from the `Titles_Revised` table. To do that, simply select all the fields we'd like to include. Clicking each field will add the column to the view.
-
-Step 4: Once all the fields have been added, save the view. Click the save icon or just close the window and confirm the save. Give the view a name, like `TitlesInfo`.
-
-Result: Now the view is created. To run it, expand the Views folder, find the new view, right-click it, and select "Select Top 1000 Rows" or run a SELECT query. You'll see the data returns in a standard table.
-
----
-
-#### Task: #2  
-Create a virtual table called 'Top_Salesperson' that shows repid, fname & commrate.  
+### Example #2  
+Create a virtual table called 'Top_Salesperson' that shows repid, fname & commrate whose commrate > 0.04.  
 
 ``` sql
 CREATE VIEW Top_Salesperson AS  
@@ -1043,6 +1045,7 @@ GRANT SELECT ON CA_Cust TO some_user;
 REVOKE INSERT, UPDATE, DELETE ON CA_Cust FROM some_user;
 ```
 
+## Lesson 4.4 Sample Bonus Exercise
 /* ------------ EXERCISE SNIPPET: Activity 4-1 Step 3B ------------ */  
 
 ``` sql
