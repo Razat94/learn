@@ -1475,60 +1475,55 @@ But it’s usually better to use a stored procedure, because a procedure can eas
 ## <p id = "5"> Lesson 5: Indexing Data | [Back to ToC](#toc)</p>   
 ---------------------------------------------------------- */  
 
+## Lesson 5.1. Introductory Discussion on Indexing
 [w3Schools Reference](https://www.w3schools.com/sql/sql_create_index.asp)
 
-Usually, a database server spends a lot of time looking for particular information.
-When SQL Server looks for data, it usually checks every row in a table one by one. This is fast, but if there’s a huge amount of data, it can still take a long time.
+When SQL Server looks for data, it usually checks every row in a table one by one. This is fast, but if there’s a huge amount of data, it can still take a long time looking for that particular information. 
 
-To improve the efficiency of SQL Server, creating indexes can help specifically support your most frequent queries such as speeding up sorts & searches especially common ones.
+Creating indexes helps improve efficiency by specifically supporting your most frequent queries. Indexes can be created and dropped on table columns and are often used when speeding up sorts & finding common searches. 
 
-Indexes can be created and dropped on table columns but please note that the users cannot see the indexes since they're only used to speed up searches/queries.
+> Please note that since indexes are added in the back-end, typically users aren't aware of it's existance. For instance, creating a UNIQUE constraint in SQL Server automatically creates a unique index in the background to enforce it.
 
 Indexes are similar to how you look through a book to find a certain part.
 
-Imagine you’re trying to find the word “transactions” in a book. You could look at every page one by one, or you could use the book’s index to go straight to the page where the word is. For example:  
+Imagine you’re trying to find the word “transactions” in a book. You could look at every page one by one, or you could use the book’s index to quickly go straight to the page where the word is. For example:  
 - Table of Contents
 - Table of Indexes
 - Glossary of Terms, including the page number where the term was first used
 
-Books can have different indexes to help find different things quickly.  
-Since they are organized neatly, using an index can be much quicker than looking through every page.
+So just like how books can have different indexes to help find different things quickly, a database index helps the server find information quickly. Overall, it makes searches faster and helps everything run better.
 
-So just like how a book index helps a reader find things quickly, a database index helps the server find information quickly. It makes searches faster and helps everything run better.
+## Lesson 5.2. Index Example
+To summarize, indexes are sorted data structures build on table columns and are used to to quickly find & lookup data.
 
-An index on a table can be created using the `CREATE INDEX` command.  
-An index is made from one or more columns, called the index keys. The index can be given: 
+An Index can be created on a table by using the `CREATE INDEX` command. An index is made from one or more columns, called the index keys. The index can be given: 
 - a name, 
 - which table it’s for, 
 - and list the column(s) in parentheses.
 
-The index keeps the values from those columns and points to the original rows in the table. When running a query, SQL Server can use the index to find the data faster. If the query needs other columns not in the index, it uses the pointers to get them from the table.
-
 > Note: Indexes in SQL can help find things faster, but they also take up space.  
 > Indexes can slow down data modification (e.g. when adding or change data), so only use indexes for things that get searched a lot.
 
-To summarize, an index can reduce the time needed to retrieve information & speed up data retrieval.
-
 (Taken from w3Schools:)
-Suppose we have a table called Customers with a column LastName. We can make an index on LastName like this:  
+Suppose we have a table called Slspers with a column LastName. We can make an index on LastName like this:  
 ``` sql
 CREATE INDEX idx_lastname
-ON Persons (LastName);
+ON Slspers (LastName);
 ```
 
-Now, to search for all customers with a certain last name, SQL Server can use the index to find them faster:
+Now, to search for all Slspers with a certain last name, SQL Server can use the index to find them faster:
 
 ``` sql
 --  SQL Server looks up 'Smith' in the index instead of scanning every row in the table.
 SELECT * 
-FROM Customers
+FROM Slspers
 WHERE LastName = 'Smith';
 ```
 
 In the Object Explorer, each table in the Tables folder has a list of indexes under: 
 Tables Folder -> Table -> Indexes
 
-To drop an index that is no longer needed:
+#### Use DROP INDEX to remove any unnecessary indexes:
 ``` sql
 -- Deletes the index and frees up the space it was using.
 DROP INDEX table_name.index_name;
@@ -1538,6 +1533,7 @@ DROP INDEX table_name.index_name;
 ## <p id = "6"> LESSON 6: Managing Transactions | [Back to ToC](#toc)</p>   
 ---------------------------------------------------------- */  
 
+## Lesson 6.1. Introductory Discussion on Transactions
 Transactions protects databases from partial updates.  
 
 For example, transactions are often used when multiple users need to modify a database at the same time.  
@@ -1578,7 +1574,7 @@ To keep data accurate and reliable during database operations, experts follow fo
 
 Database systems provide tools to enforce these rules, but SQL users must also carefully manage transactions to maintain data integrity.
 
-
+## Lesson 6.2 Examples of Transactions
 #### Example #1
 Create a transaction that inserts two salesperson records.  
 This is a good way to test for errors before the code becomes implemented.  
@@ -1602,8 +1598,7 @@ SELECT * FROM Slspers_Backup WHERE commrate IS NULL
 SELECT * FROM Slspers_Backup
 ```
 
-
-#### Example #2
+#### Example #2A
 
 To start off this example, first create the following table: 
 
@@ -1634,6 +1629,7 @@ This can be frustrating since if we're adding a lot of data, we don't want to go
 To reset the table for the solution:  
 ``` TRUNCATE TABLE Person  ```
 
+#### Example #2B
 Task: Create a transaction to ensures that if the third insert fails, no rows are saved.  
 
 Solution:
@@ -1650,36 +1646,44 @@ ROLLBACK TRAN addPerson -- Once there are no errors, swap the keyword 'ROLLBACK'
 > Notice that if a transaction is assigned a name, that name exists only in memory for the duration of the current transaction.
 The transaction is not saved in the database and can not be used later.
 
-#### Example #3  
+## Lesson 6.3. Try/Catch Block   
 
-A TRY/CATCH block can be used as a way of Exception Handling.  
+A `TRY/CATCH` block can be used as a way of Exception Handling.  
 
-How it works:  
-If all operations in the TRY block succeed, then the COMMIT block is then executed.    
-If any error occurs, control moves to the CATCH block and ROLLBACK TRAN is executed instead.  
+#### How it works:  
+If all operations in the `TRY` block succeed, then the `COMMIT` block is then executed.    
+If any error occurs, control moves to the `CATCH` block and `ROLLBACK TRAN` is executed instead.  
 
-First confirm that a table has been created.  
+Before First confirm that a table has been created.  
 ```
 CREATE TABLE person (  
 	name VARCHAR(100) UNIQUE  
 );  
 ```
 
-Create the Transaction:
+#### Exercise: Add a TRY/CATCH block within a Transaction:
 ``` sql
-BEGIN TRANSACTION;  
+BEGIN TRANSACTION;
 BEGIN TRY  
 	-- Some SQL statements  
-	INSERT INTO perso VALUES ('Alice'); -- Table 'Person' misspelled on purpose.  
+
+	 EXEC('
+	 INSERT INTO perso VALUES ('Alice')  
+	 ');
+	-- Wrapping the below code with EXEC statement so that the statement is compiled at runtime & the error is catchable.
+	-- It’s not required, but it helps to avoid running the query twice to view the output e.g. when mispelling a table name.
+	-- INSERT INTO perso VALUES ('Alice')  -- Table 'Person' misspelled on purpose.  
+	COMMIT
 END TRY  
 BEGIN CATCH  
 	ROLLBACK TRANSACTION;  
+	SELECT 'Output has not worked. Showing old list'
 	SELECT * FROM Person  
 	PRINT('Log Error')  
 END CATCH  
 ```
 
-To summarize, Transactions ensure that either all changes in a query are completed successfully, or all changes are undone if something goes wrong.
+To summarize, transactions ensure that either all changes in a query are completed successfully, or all changes are undone if something goes wrong.
 
 /* -------------------------------------------------------  
 ## <p id = "7"> LESSON 7: The End | [Back to ToC](#toc)</p>   
