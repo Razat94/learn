@@ -279,7 +279,8 @@ FROM Titles
 
 --- 
 
-To create custom keyboard shortcuts for useful commands e.g.  executing queries:
+### Shortcut Keys
+Custom keyboard shortcuts can be created for useful commands e.g. executing queries. To create a custom shortcut:  
 1. 	Go to Tools -> Options
 2. 	Navigate to:
 	Environment → Keyboard
