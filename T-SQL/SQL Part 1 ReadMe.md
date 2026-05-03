@@ -56,21 +56,19 @@ Once the application is opened, "... the 'Connect to Server' window opens. If it
 In the 'Connect to Server' alert, click 'Connect' to connect to the server.
 > Note: For local installations, typically users can sign into SQL Server with the default configuration. 
 
-#### Task 1.0.1: Create a new query and execute a statement.
+### Creating a new query and execute a statement.
 
-```
+
 1. Once authenticated in SQL Server, press `CTRL + N` to launch a new query. 
 2. In the query editor window, type in a simple statement:  
 ``` SELECT 1+3 ``` 
-```
-
-There are different ways to execute the query:  
+3. Below are different ways to execute the query:  
 	- Shortcuts: F5, Ctrl + E, Alt + X  
 	- Click the green 'Execute' button on the toolbar.  
 	- Go to Query (tab) -> Execute.  
 	- Right-click anywhere in the query window and choose 'Execute SQL' from the context menu.  
 
-> NOTE: T-SQL is a Declarative language that supports some precedural syntax.
+> NOTE: T-SQL is a Declarative language (i.e. the user defines the result) that also supports some precedural syntax, which will be discussed in SQL Part 2.
 
 ### The main parts of the SSMS interface are the:
 - Object Explorer: Navigate through databases, tables, views, stored procedures, etc. 
@@ -78,14 +76,17 @@ There are different ways to execute the query:
 - Query Editor: Write and run SQL queries.
 - Results Pane: Ctrl + R - Toggles the results pane
 
-<br />
+### Show Lines in the Query Editor
+Displaying line numbers in the query editor makes it easier to pinpoint and debug errors, which can lead to improved collaboration in code reviews and screen sharing. 
 
-#### Task 1.0.2: To Show Lines in the Query Editor:
+To show line numbers:
 ``` 
 	1. Go to Tools > Options 
 	2. Expand 'Text Editor' -> Transact-SQL -> General. 
 	3. Check the Line numbers box and click OK
 ```
+
+<br />
 
 ## Lesson 1.1 Additional Simple Queries
 
