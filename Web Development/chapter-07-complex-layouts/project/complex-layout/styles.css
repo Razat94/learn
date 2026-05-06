@@ -1,0 +1,23 @@
+body { margin:0; font-family:Arial; }
+
+header, footer {
+  background:#222;
+  color:white;
+  padding:20px;
+  text-align:center;
+}
+
+.container {
+  display:flex;
+}
+
+aside {
+  width:200px;
+  background:#eee;
+  padding:20px;
+}
+
+main {
+  flex:1;
+  padding:20px;
+}

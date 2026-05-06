@@ -1,0 +1,112 @@
+<!-- 
+	Code Written On Thu, Jun 22, 2017, 11:09 PM
+-->
+
+<!DOCTYPE html>
+<html>
+	
+	<style>
+
+	html, body {
+		margin: 0;
+		padding: 0;
+		background-color: #e6f2ff;
+	}
+
+	#header {
+		width: 100%;
+		border-collapse: collapse;
+		height: 50px;
+		border-bottom: 1px solid #02487e;
+		background-color: #e6f2ff;
+	}
+	
+	#header th:first-child, th:nth-child(3) {
+		width: 20%;
+		padding: 0;
+	}
+	
+	#header button, table form {
+		margin: 0;
+		border: none;
+		width: 100%;
+		height: 100%;
+		outline: none;
+		padding: 0;
+		background-color: #e6f2ff; //#e6e6f2;
+	}
+	
+	#header th:first-child button, #header th:nth-child(3) button  {
+		font-size: 20px;
+		color: #025697;
+		cursor: pointer;
+		padding-top: 10%;
+	}
+	
+	#header th:first-child button:hover, #header th:nth-child(3) button:hover  {
+		color: #e6e6dd;
+	}
+	
+	#header th:nth-child(2) {
+		font-size: 50px;
+		color: #02487e;
+		//border: 1px solid red;
+	}
+	
+	#header #icon {
+		display: none;
+	}
+	
+	@media screen and (max-width: 600px) {
+		
+		#header th:first-child, th:nth-child(3) {
+			display: none;
+		}
+		
+		#header #icon {
+			float: right;
+			display: inline-block;
+			font-size: 30px;
+			line-height: 200%;	
+			margin-right: 20%;
+			border: 1px solid green;
+		}
+		
+		#header #icon:hover {
+			color: #e6e6dd;
+			cursor: pointer;
+		}
+	}
+	
+	</style>
+
+	<body>
+	
+		<table id = "header">
+			<tr>
+				<th>
+					<form action = "">
+						<button> <strong>Projects</strong> </button>
+					</form>
+				</th>
+				
+				<th> Raza Tahir </th> 
+				<th>
+					<button> <strong>About Me</strong> </button>
+				</th>
+				<th>
+					<div id = "icon" onclick = "openNav()"> &#9776; </div>
+				</th>
+			</tr>
+		</table>
+		
+	<script>
+		function openNav() {
+			document.getElementById("icon").innerHTML = "&times;";
+			document.getElementById("icon").style.width = "150%";
+		}
+	</script>
+	
+	</body>
+	
+</html>
