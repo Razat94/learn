@@ -1,0 +1,102 @@
+- Try not using inline css or inpage css.
+- Make sure each ID is unique i.e. Don't have multiple non unique or common IDs
+- Make sure each link (even CSS/JS pages) properly work & dont show 404
+- Use section tags to divide section instead of divs
+- 
+
+
+
+
+
+
+			<section class="row mt-5 animation">
+				<div class="col-md-8">
+					<div class="card">
+						<h5 class="card-header dark-col-background" style="">Featured Recent Uploads</h5>
+						<div class="card-body" style="text-align: center;">
+							<h5 class="card-title"> </h5>
+							<p class="card-text">
+								<!-- 4:3 aspect ratio -->
+								<div class="embed-responsive embed-responsive-4by3">
+									<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/35QEU09XHxU"></iframe>
+								</div>
+								<div class="row mt-5 animation">
+									<div class="col-lg-6">
+										<!-- Button trigger modal -->
+										<button type="button" class="btn w-100 moveOnHover" data-toggle="modal" data-target="#exampleModalCenter" style="background-color: white; padding: 0rem;"> <img class="img-fluid" style="height: 15rem; width: 100%;" src="./public/img/Unsplash/4-glacier.jpg" /> </button>
+										<!-- Modal -->
+										<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+											<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+												<div class="modal-content">
+													<div class="modal-header">
+														<h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
+														<button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
+													</div>
+													<div class="modal-body">
+														<div class="embed-responsive embed-responsive-16by9 z-depth-1-half">
+															<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/GbpMa5cXjp8" allowfullscreen></iframe>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div> <!-- End of 1st Modal Image -->
+									</div>
+									<div class="col-lg-6">
+										<!-- Button trigger modal -->
+										<button type="button" class="btn w-100 moveOnHover" data-toggle="modal" data-target="#exampleModalCenter" style="background-color: white; padding: 0rem;" ;> <img class="" style="height: 15rem; width: 100%;" src="./public/img/Unsplash/5-glacier.jpg" /> </button>
+										<!-- Modal -->
+										<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+											<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+												<div class="modal-content">
+													<div class="modal-header">
+														<h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
+														<button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
+													</div>
+													<div class="modal-body">
+														<div class="embed-responsive embed-responsive-16by9 z-depth-1-half">
+															<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/GbpMa5cXjp8" allowfullscreen></iframe>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div> <!-- End of 2nd Modal Image -->
+									</div>
+								</div>
+							</p> <a href="#" class="btn mt-3 dark-col-background">Check out other videos</a> </div>
+					</div>
+				</div> <!-- End of Column -->
+				<div class="col-md-4 two-rem-mobile-space">
+					<div class="card">
+						<h5 class="card-header dark-col-background" style="">Featured</h5>
+						<div class="card-body">
+							<h5 class="card-title">Special title treatment</h5>
+							<p class="card-text">With supporting text below as a natural lead-in to additional content.</p> <a href="#" class="btn dark-col-background">Go somewhere</a> </div>
+					</div>
+					<div class="card mt-5">
+						<h5 class="card-header dark-col-background">Featured</h5>
+						<div class="card-body">
+							<h5 class="card-title">Sign up for Spring 2022 Trip</h5>
+							<p class="card-text">The first step is to fill out the application!</p> <a href="#" class="btn dark-col-background" style="">Go somewhere</a> 
+						</div>
+					</div>
+				</div>
+			</section>
+			<!-- End of 3rd Row -->
+
+
+
+
+
+
+
+<!-- Empty Row Section-->
+			<!-- <section class="row mt-5 animation">
+					<div class="col-md-8">
+						<p>Hello</p>
+					</div>
+					<div class="col-md-4">
+						<p>World</p>
+					</div>
+				</section>  -->
+			<!-- End of Row-->
+			

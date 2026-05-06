@@ -1,0 +1,38 @@
+Code Check
+
+Proper Code Indentation: (#5 in SOP)
+	[] Through Edit -> Code -> Apply Source Formatting on DW (Tab indentations should include 2 spaces)
+
+Removal of unnecessary tags and/or attributes (#6 in SOP)
+	[] Take out extra <body><html> tabs: Beginning of file: <body> <html> <head> </head>  & at end of file: <body><html> 
+	[] In anchor tag, Remove all instances of attribute target="_self" & target="_new"
+	[] Remove all inline styling.  Remove: style= &&  style="text-align: left;" 
+	[] Remove empty <p>, <strong> elements & unnecessary data- type attributes (due to D2L)
+	[] Remove aria-level="1" unnecessary ids like id="z_r" and role="presentation"
+
+Code errors (#4 in SOP)
+	[] missing closing tags?
+	[] improper nesting?
+	[] improper use of HTML?
+
+Website Check
+
+Accessibility check: (#1 in SOP) 
+	[] Are Headings used semantically, and are used in a descending fashion e.g. every heading-3 should be a child of its nearest-top heading-2, etc.
+	[] Does every image have an alt tag & a proper description?
+
+Broken hyperlinks: (#2 in SOP)
+	[] Any missing/broken links?
+	[] Any broken/missing images? Any broken/missing videos?
+	[] Any weird 301 redirects?
+
+External link icon: (#3 in SOP)
+	[] All hyperlinks that lead to external sites (anything outside of D2L) should display an icon that informs the user they are clicking out of D2L. Our templating system includes this feature, to include an external site icon the class ext may be used on the opening anchor tag, example: <a class=“ext”>.   
+
+Visibility Check (Added)
+	[] Does the color scheme match the theme of the website? https://color.adobe.com/create
+	[] Check to see if the foreground color doesn’t blend with the background color.
+	[] Make sure web pages in the module do not share the same theme! You don’t want people using 3 different templates for the same module. Consistency matters
+	
+--- List Any Issues To Bring Up During Code Review Here --- 
+------------------------  -----------------------  -----------------------

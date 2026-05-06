@@ -7,7 +7,6 @@ Websites are built using three main languages:
 - CSS (design/style), and 
 - JavaScript (interactivity) 
 
-
 Websites are delivered by remote computers called servers and viewed on devices called clients (like phones or laptops) through web browsers (e.g. Chrome or Firefox). Because users access websites on many different devices and browsers, sites need to work across all of them. We'll come back to this later, but first it helps to understand how a simple HTML website works so those ideas make more sense afterward.
 
 ### HTML
