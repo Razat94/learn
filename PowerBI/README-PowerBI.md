@@ -49,99 +49,95 @@ Day Two centers more heavily on analyzing & visualizing data through:
 ### /* ------------ Lesson 0 - What is Power BI?  ------------ */
 Please refer to the [PowerPoint](https://docs.google.com/presentation/d/1q2-8hYULWp8ouBpQMGMV_SMCWjE6Rphl/edit?usp=sharing&ouid=113396737692127154003&rtpof=true&sd=true)
 
+General Overview:  
+	1. We create a report in Power BI Desktop  
+	2. Share it to the Power BI service  
+	3. Interact with reports in the service and Power BI Mobile.
+
 /* -------------------------------------------------------
 ## <p id = "1"> Lesson 1: General Structure | [Back to ToC](#toc)</p> 
 ---------------------------------------------------------- */
 
-Task: Let's open "MyFootprintSports_1.pbix"
+#### Task: Open "MyFootprintSports_1.pbix"
 
-	NOTE: 	The entire power bi file is referred to as a "Report" & saved as a .PBIX file.
-		Note: Power BI files are considered reports, even if they don’t contain any visuals.
-		The "semantic model" is tied into that report.	
+> NOTE: 	
+The entire power bi file is referred to as a "Report" & saved as a .PBIX file.  
+In other words, Power BI files are treated as reports, even when they contain no visuals and only include a semantic model associated with the report.
 		
-	First enable the settings:
-		Files -> Settings -> Preview Features:
-			- Shape Map Visual
-			- Modern Visual Tips
-			- 'On Object Interaction' - handy feature
-				- Be careful: This changes the view and adds a 'pain' manager. 
-				- Instead of large sections, this option creates a condensed area to switch back and forth from.
+Upon opening the report, enable the following settings in the Backstage View:
+	
+	Under Files -> Settings -> Preview Features, check off:
+		- Shape Map Visual
+		- Modern Visual Tips
+		- 'On Object Interaction' - handy feature
+			- Be careful: This changes the view and adds a 'pain' (pun) manager. 
+			- Instead of large sections, this option creates a condensed area to switch back and forth from.
 		
-		NOTE: To set up dark mode:
-			File → 'Options and Settings' → Options.	
-			On the left panel, select Report Settings -> Customize Appearance (preview)
+	To set up dark mode: 
+		1. Go to File -> 'Options and Settings' -> Options 
+		2. On the left panel, select 'Report Settings' -> 'Customize Appearance' (preview)
 
+### Power BI Interface
+The Left Navigation Bar in Power BI Desktop shows different views:  
+[MS Learn Article: Power BI Desktop Overview](https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-query-overview?utm_source=chatgpt.com)
 
-	Discuss Structure:
-		- Ribbon
-		- Backstage View
-		- Structure
+- Report View  
+	- This is a view is where Data is turned into visuals reports. The center area is the "report canvas" where visuals are added.
+	- Similar to MS Excel, there is a status bar where pages can get added/removed and each page portrays a different story!  
+	> Note: On Power BI Service, a dashboard is just 1 page.
+
+	- This view contains three panes on the right (Each pane can be minimized or maximized as needed):
 		
+			- Filter Pane: By dragging a field, we can filter: 
+				- a single visual 
+				- the entire page, 
+				- or the whole report 
+
+			- Visualization Pane: 
+				- Lets us add new charts/graphs and modify existing visuals.
+			
+			- Data pane: 
+				- Lets us view all the tables and columns that are imported or set up
+					- Similar to the Pivot Table Fields pane in Excel.
+					- NOTE: Data Pane shows fields in A-Z ORDER
+				- We can create & work with different types of data.	
 		
--- Subsection : Left Nav Bar --  
-	The Left Nav Bar in Power BI Desktop shows the different views:  
-	[MS Learn Article: Power BI Desktop Overview](https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-query-overview?utm_source=chatgpt.com)
+		<b>Exercise:</b> 
+			Click on a chart to display several sections (in the pane) specifically related to that chart.
+			For the chart itself, we can allow focus mode:
+				- Focus Mode lets you expand a single visual (like a chart, table, or map) 
+				so it takes up the full page (the entirety of the canvas).
 
-		~ Report View - Where data turns into visuals reports
-			- Our "report canvas" (center area) is where we add visuals 
-			- At the bottom status bar, we can add multiple pages
-				Each canvas portrays a different story!
-				Note: On Power BI Service, a dashboard is just 1 page.
-			- Three right panes (we can minimize or maximize the pane as needed):
-				- Filter Pane: By dragging a field, we can filter: 
-					- a single visual 
-					- the entire page, 
-					- or the whole report 
-				- Visualization Pane: 
-					- Lets us add new charts/graphs and modify existing visuals.
-				- Data pane: 
-					- Lets us view all the tables and columns that are imported or set up
-						- Similar to the Pivot Table Fields pane in Excel.
-						- NOTE: Data Pane shows fields in A-Z ORDER
-					- We can create & work with different types of data.	
-			<b>Exercise:<b> 
-				Click on a chart to display several sections (in the pane) specifically related to that chart.
-				For the chart itself, we can allow focus mode:
-					- Focus Mode lets you expand a single visual (like a chart, table, or map) 
-					so it takes up the full page (the entirety of the canvas).
-
-				We can resize  v
+			We can resize  v
 				
-				Note: When a chart is selected, the chart will show <b>Visual Headers</b>. Similar to Excel Chart Tools.
-				https://learn.microsoft.com/en-us/training/modules/power-bi-effective-user-experience/6-visual-headers
+			Note: When a chart is selected, the chart will show <b>Visual Headers</b>. Similar to Excel Chart Tools.		
+			https://learn.microsoft.com/en-us/training/modules/power-bi-effective-user-experience/6-visual-headers
 
-		~ Table View - Shows Raw Data Records
-			- Revisit the familiar Data Pane on the right that shows us tables and columns.
-			- Data is read-only; 	we edit in Power Query via Home → Transform data 
-						to change, replace, or create new values in your dataset.
+	- Table View - Shows Raw Data Records
+		- Revisit the familiar Data Pane on the right that shows us tables and columns.
+		- Data is read-only; we edit in Power Query via Home → Transform data 
+		to change, replace, or create new values in your dataset.
 
-		~ Model View - Properties & Relationships with Tables.
-			View the complete data model to design its structure.
-				
-			- "Semantic Model" includes:
-				- actual data
-				- Metadata is information that describes how data is organized, connected, and understood
-					- Tables and columns
-					- Relationships between tables
-					- Measures (calculations using DAX)
-					- Hierarchies (like Year → Month → Day)
-					- Metadata like names, data types, and descriptions
+	- Model View - Properties & Relationships with Tables.
+		View the complete data model to design its structure.				
+		- "Semantic Model" includes:
+			- actual data
+			- Metadata is information that describes how data is organized, connected, and understood
+				- Tables and columns
+				- Relationships between tables
+				- Measures (calculations using DAX)
+				- Hierarchies (like Year → Month → Day)
+				- Metadata like names, data types, and descriptions
 
-		~ Dax Query (relatively newer) - Here we can run DAX & see exactly what a measure will show.
-			EVALUATE
-    			TOPN(5, 'Products')
+	~ Dax Query (relatively newer) - Here we can run DAX & see exactly what a measure will show.
+		EVALUATE
+    		TOPN(5, 'Products')
 
 
 	Q: What are the building blocks of Power BI?
 	A: Semantic Models & Visualizations.
 		Without a semantic model, you can't create visualizations, and reports are made up of visualizations
 					
-	General Overview:
-		1. We create a report in Power BI Desktop 
-		2. Share it to the Power BI service
-		3. Interact with reports in the service and Power BI Mobile.
-
-
 /* -------------------------------------------------------
 ## <p id = "2"> Lesson 2: Connecting to Data | [Back to ToC](#toc)</p> 
 ---------------------------------------------------------- */
