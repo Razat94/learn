@@ -58,11 +58,11 @@ General Overview:
 ## <p id = "1"> Lesson 1: General Structure | [Back to ToC](#toc)</p> 
 ---------------------------------------------------------- */
 
-#### Task: Open "MyFootprintSports_1.pbix"
+#### Task: Open "Getting_Started.pbix"
 
 > NOTE: 	
-The entire power bi file is referred to as a "Report" & saved as a .PBIX file.  
-In other words, Power BI files are treated as reports, even when they contain no visuals and only include a semantic model associated with the report.
+The entire power bi file is referred to as a "Report" & is a file saved with a '.PBIX' extension.  
+In other words, Power BI files are treated as reports, even if they contain no visuals and only include a semantic model associated with the report.
 		
 Upon opening the report, enable the following settings in the Backstage View:
 	
@@ -102,20 +102,16 @@ The Left Navigation Bar in Power BI Desktop shows different views:
 					- NOTE: Data Pane shows fields in A-Z ORDER
 				- We can create & work with different types of data.	
 		
-		<b>Exercise:</b> 
+		<b>Exercise:</b>  
 			Click on a chart to display several sections (in the pane) specifically related to that chart.
-			For the chart itself, we can allow focus mode:
-				- Focus Mode lets you expand a single visual (like a chart, table, or map) 
-				so it takes up the full page (the entirety of the canvas).
-
-			We can resize  v
-				
+			For the chart itself, we can allow focus mode which lets you expand a single visual (like a chart, table, or map) so that it takes up the full page (the entirety of the canvas).
+			
 			Note: When a chart is selected, the chart will show <b>Visual Headers</b>. Similar to Excel Chart Tools.		
 			https://learn.microsoft.com/en-us/training/modules/power-bi-effective-user-experience/6-visual-headers
 
 	- Table View - Shows Raw Data Records
 		- Revisit the familiar Data Pane on the right that shows us tables and columns.
-		- Data is read-only; we edit in Power Query via Home → Transform data 
+		- Data is read-only; we edit in Power Query via Home -> Transform data 
 		to change, replace, or create new values in your dataset.
 
 	- Model View - Properties & Relationships with Tables.
@@ -134,7 +130,7 @@ The Left Navigation Bar in Power BI Desktop shows different views:
     		TOPN(5, 'Products')
 
 
-	Q: What are the building blocks of Power BI?
+Q: What are the building blocks of Power BI?
 	A: Semantic Models & Visualizations.
 		Without a semantic model, you can't create visualizations, and reports are made up of visualizations
 					
@@ -145,14 +141,14 @@ The Left Navigation Bar in Power BI Desktop shows different views:
 
 -- Subsection : Importing .txt file --  
 
-	Task: Create a blank report & import the bonus text file "People1.txt" (show them what/where it is)
+Task: Create a blank report & import the bonus text file "People1.txt" located in the  "People" folder.
 
-	Verify that data has been imported by going to Table View to see the table.
+Click on "Import from Text". The file preview will lists out record of people and contains 3 columns. Once imported, verify that data has been imported by going to Table View to see the table.
 
 	Data imported into Power BI is organized as tables.
 	A table is a grid similar to a spreadsheet, where data attributes as columns and records as rows.
 
-		NOTE: Data is imported, but Report View shows no visuals built yet from our data.
+		NOTE: Data can be imported and stored, but Report View shows no visuals built yet from our data.
 		Recall: A .pbix file is still considered a report file, even if you haven’t built any visuals yet. 
 		
 
@@ -182,20 +178,21 @@ The Left Navigation Bar in Power BI Desktop shows different views:
 	
 
 	Q:	What if I move/delete the data file?
-	A: 	You’ll still have the report and your visuals.
+	A: 	The report and the visuals will still be there, but refreshing the data will no longer work.
 
-		Summary: 
+
+Summary: 
 		Importing data into Power BI stores a snapshot of the data in the .pbix file.
 		This means that even if the original .txt file is deleted later, 
 		the report and all its visuals will still work because the data is already embedded.
 
-		Think of it like embedding a file in Word or attaching a PDF to an Outlook email. 
+	Think of it like embedding a file in Word or attaching a PDF to an Outlook email. 
 		It doesn't matter if the original file is deleted since a copy is already stored within the document or email.
 
 		NOTE: 	We can't refresh or update the data without restoring the .txt file (or pointing to a new one).
 
 
-	Exercise: Entering/changing data is rough. We'll need to use PowerQuery
+Exercise: Entering/changing data is not ideal with Power BI. PowerQuery can be used to update the naming.
 
 		1. In Power BI Desktop, go to Home (Tab) -> Data (Group) -> Enter Data.
 		Create a small table with the new row(s) you want 
@@ -257,8 +254,9 @@ The Left Navigation Bar in Power BI Desktop shows different views:
 	Power BI includes over 30 core visuals, which are built in and available to all reports. 
 	You can access the core visuals in the first section of the Visualizations pane.
 
-	Task: Create a page & name it "Performance Highlights"
-		- Make a very simple chart of sales person vs amount of sales.
+Task: On the report, create a page & name it "Performance Highlights"
+
+		 Make a very simple chart of sales person vs amount of sales.
 			Select the visual type "Clustered Column" in the Visualizations pane 
 			and then position and size it to 1/2 the canvas page.
 		- Create 2 cards: One showing the name of Salesperson & the other showing Total Amount.
@@ -277,7 +275,7 @@ The Left Navigation Bar in Power BI Desktop shows different views:
 
 
 	-- Review Q: --
-	Q: When importing data from an Excel workbook into Power BI, you receive the error message: 
+	Q: When importing data from an Excel workbook into Power BI, if you receive the error message: 
 	“We couldn't find any data formatted as a table.”
 	What should you do to resolve the error?
 
@@ -468,8 +466,8 @@ Useful Links:
 
  	
 
-	- (Optional More practice) -
-	Optional Excercise #1:
+(Optional More practice) -  
+	Optional Excercise #1:  
 	Import "MyFootprintSports.xlsx" to form 1xmany cardiniality.
 			- Discuss how Products & Employee tables connect to the Sales Orders
 
