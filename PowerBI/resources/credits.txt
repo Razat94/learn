@@ -1,0 +1,3 @@
+https://learn.microsoft.com/en-us/training/modules/power-bi-effective-reports/1-introduction?ns-enrollment-type=learningpath&ns-enrollment-id=learn-bizapps.power-bi-effective
+
+https://learn.microsoft.com/en-us/training/modules/intro-power-bi/tour

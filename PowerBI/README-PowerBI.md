@@ -60,11 +60,11 @@ General Overview:
 
 #### Task: Open "Getting_Started.pbix"
 
-> NOTE: 	
-The entire power bi file is referred to as a "Report" & is a file saved with a '.PBIX' extension.  
-In other words, Power BI files are treated as reports, even if they contain no visuals and only include a semantic model associated with the report.
+"At the top of the window within the ribbon, you'll see the Home tab where the most common operations you perform are available" [MS Learn Resource](https://learn.microsoft.com/en-us/training/modules/intro-power-bi/tour).
+
+<img src = './resources/home-ribbon.png'>
 		
-Upon opening the report, enable the following settings in the Backstage View:
+Upon opening the file, the Backstage View can be used to enable the following settings:
 	
 	Under Files -> Settings -> Preview Features, check off:
 		- Shape Map Visual
@@ -78,6 +78,12 @@ Upon opening the report, enable the following settings in the Backstage View:
 		2. On the left panel, select 'Report Settings' -> 'Customize Appearance' (preview)
 
 ### Power BI Interface
+
+NOTE:	
+The entire power bi file is referred to as a "Report" & is a file saved with a '.PBIX' extension. In other words, Power BI files are treated as reports, even if they contain no visuals and only include a semantic model associated with the report.
+
+<img src = './resources/1-1-report-structure.png'>
+
 The Left Navigation Bar in Power BI Desktop shows different views:  
 [MS Learn Article: Power BI Desktop Overview](https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-query-overview?utm_source=chatgpt.com)
 
@@ -95,6 +101,7 @@ The Left Navigation Bar in Power BI Desktop shows different views:
 
 			- Visualization Pane: 
 				- Lets us add new charts/graphs and modify existing visuals.
+				- Notice that a selected chart will  display several sections (in the pane) specifically related to that chart (e.g. X-Axis & Y-Axis).
 			
 			- Data pane: 
 				- Lets us view all the tables and columns that are imported or set up
@@ -102,15 +109,19 @@ The Left Navigation Bar in Power BI Desktop shows different views:
 					- NOTE: Data Pane shows fields in A-Z ORDER
 				- We can create & work with different types of data.	
 		
-		<b>Exercise:</b>  
-			Click on a chart to display several sections (in the pane) specifically related to that chart.
-			For the chart itself, we can allow focus mode which lets you expand a single visual (like a chart, table, or map) so that it takes up the full page (the entirety of the canvas).
-			
-			Note: When a chart is selected, the chart will show <b>Visual Headers</b>. Similar to Excel Chart Tools.		
+		---
+
+		Clicking on the chart itself will display <b>Visual Headers</b> which are similar to Excel Chart Tools.		
 			https://learn.microsoft.com/en-us/training/modules/power-bi-effective-user-experience/6-visual-headers
 
+		<img src = "./resources/visual-headers.png">
+
+			For instance, each individual visual allows for focus mode which expands the single visual (like a chart, table, or map) so that it takes up the full page (the entirety of the canvas).
+			
+			
 	- Table View - Shows Raw Data Records
-		- Revisit the familiar Data Pane on the right that shows us tables and columns.
+		- Notice that each view has a slightly different ribbon but you can still import data on any view.
+		- Notice that on the Table View, the familiar Data Pane on the right will still be there to show the various tables and columns.
 		- Data is read-only; we edit in Power Query via Home -> Transform data 
 		to change, replace, or create new values in your dataset.
 
@@ -170,6 +181,8 @@ Click on "Import from Text". The file preview will lists out record of people an
 		3. Make sure to save the changes on .txt file.
 		4. Reload the data again by going to 
 			Table View -> Home -> Queries -> Refresh
+
+		NOTE: We don't always have to refresh all the tables. We can refresh 1 table only.
 	
 	Note:
 	Paid version does a Scheduled refresh up to 8 times/day
@@ -179,6 +192,8 @@ Click on "Import from Text". The file preview will lists out record of people an
 
 	Q:	What if I move/delete the data file?
 	A: 	The report and the visuals will still be there, but refreshing the data will no longer work.
+
+	The connection link needs to be updated if the file is broken/moved. Make sure that the connection is transformed.
 
 
 Summary: 
@@ -303,6 +318,7 @@ https://learn.microsoft.com/en-us/power-bi/connect-data/desktop-use-onedrive-bus
 	It allows you to select from the list of tables, sheets, and ranges found in the Excel workbook.
 	From there, you can use the OneDrive for work or school file just like any other Excel file.
 
+If the file is open on the desktop app, the file can be imported by copiying the file path in File -> Info -> Copy path. Ensure that the extension ends with `.xlsx`
 
 -- Optional Subsection: Importing SharePoint list data into OneDrive --
 [Youtube Tutorial](https://www.youtube.com/watch?v=eyUwG2tlWn4)
