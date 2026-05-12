@@ -583,13 +583,14 @@ Links:
 
 With your data prepped & ready, we can now build visuals in Power BI Desktop to explore trends, patterns, and connections.
 If you’re familiar with PivotTables and PivotCharts, you’ll notice some similarities with Power BI’s charts.
-
---- Subsection: Simple Chart/Element Creations ---
 		
-	Excercise: Create a blank report, import "Sales Data" & name the page "Sales per Rep"
-	- Note: Fields in Data Pane (on far right side) are sorted A-Z 
+Excercise: Create a blank report, import "Sales Data" & name the page "Sales per Rep"  
+	- Note: Fields in Data Pane (on far right side) are sorted A-Z  
 	- Note: Fit to Page icon (bottom-right corner of PowerBI next to Zoom bar) resets zoom to standard fit if zoomed in/out.
-		
+
+### Our First Page
+--- Subsection: Simple Chart/Element Creations ---
+
 	Quadrant 1 (1/4 page): 
 	Create a simple column chart showing sum of total sales per Salesperson
 	Recall: Focus Mode lets you expand a single visual (like a chart, table, or map) so it takes up the full page (the entirety of the canvas).
@@ -637,20 +638,31 @@ If you’re familiar with PivotTables and PivotCharts, you’ll notice some simi
 	Quadrant 3 (1/4 page)
 	- Add the Skillable Office image to your report (Insert tab -> Image)
 
+### Adding Elements
+Pictures are apart of elements. Let's create a new page to discuss more about elements.
+
+<img src = './resources/1-1-report-structure.png'>
+
 	Visuals - Visualizations of semantic model data.
 	Elements - Provide visual interest but don't use semantic model data. 
 		Elements include text boxes, buttons, shapes, and images.
 
-	Task: Different ways to add text to a canvas page:
+	Task: On the new page, let's cover the different ways to add text to a canvas page:
 		1. (Not recommended) Create a textbox:
 			- (Similar to PowerPoint)	Insert -> Textbox
+		3. (Preferred) Insert Shape: 	Insert -> Shapes -> Rectangle
+			(Result: A blue box has been added)
 		2. Create a card & then:
 			1. Add a measure that says: 	msg = "Hello World!"
 			2. Add the measure under the "Fields" section of a card.
-		3. (Preferred) Insert Shape: 	Insert -> Shapes -> Rectangle
-			(Result: A blue box has been added)
 
-		Task: Add text/background styles:
+			Subtask:
+			Add a salesmessage:
+
+			SalesMsg = "The total sales is: " &
+			SUM(Data[Total Sales])
+
+		Task: Add text/background styles to a card:
 		Format Shape Pane -> Shape -> Style:
 			- Text: (Under same style category) Make sure to turn "ON" 
 				Add your text, change font size to 30
@@ -661,14 +673,18 @@ If you’re familiar with PivotTables and PivotCharts, you’ll notice some simi
 			 	would work like what we've seen before w/ shapes)
 
 
-	The Selection Pane (under the View tab) works like in PowerPoint, 
-	which lets us reorder layers and toggle (show/hide) element visibility.
+### The Selection Pane
+The Selection Pane (under the View tab) works like in PowerPoint, which lets us reorder layers and toggle (show/hide) element visibility.
+
+	Task: 	Group all cards together.
+			Group all shapes together
+			Group all textboxes together.
 
 	Q: How to align our shapes, like in PowerPoint?
 	A: Select All > Format Tab > Align
 
-	
 
+### Background Formatting
 --- Subsection: Background Formatting ---
 
 	Create a new page called "Formats". 
@@ -696,6 +712,7 @@ If you’re familiar with PivotTables and PivotCharts, you’ll notice some simi
 		Optional: EXPORT A THEME (Design your own filter, background, etc. in POWERBI & then export)
 			Once exported, try importing your theme into PowerBI. 	
 
+### More Formats
 --- Subsection: Bar Chart Formatting ---
 
 	Create a new page called 'Product/Quarterly Sales'
