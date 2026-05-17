@@ -88,7 +88,7 @@ The Left Navigation Bar in Power BI Desktop shows different views:
 [MS Learn Article: Power BI Desktop Overview](https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-query-overview?utm_source=chatgpt.com)
 
 - Report View  
-	- This is a view is where Data is turned into visuals reports. The center area is the "report canvas" where visuals are added.
+	- The Report View is where data can be turned into visuals. The center area of the view is the "report canvas" where visuals are added.
 	- Similar to MS Excel, there is a status bar where pages can get added/removed and each page portrays a different story!  
 	> Note: On Power BI Service, a dashboard is just 1 page.
 
@@ -101,8 +101,10 @@ The Left Navigation Bar in Power BI Desktop shows different views:
 
 			- Visualization Pane: 
 				- Lets us add new charts/graphs and modify existing visuals.
+				- If a chart has been selected,
+				clicking a chart icon will replace the currently selected chart.
 				- Notice that a selected chart will  display several sections (in the pane) specifically related to that chart (e.g. X-Axis & Y-Axis).
-			
+				
 			- Data pane: 
 				- Lets us view all the tables and columns that are imported or set up
 					- Similar to the Pivot Table Fields pane in Excel.
@@ -111,37 +113,44 @@ The Left Navigation Bar in Power BI Desktop shows different views:
 		
 		---
 
-		Clicking on the chart itself will display <b>Visual Headers</b> which are similar to Excel Chart Tools.		
-			https://learn.microsoft.com/en-us/training/modules/power-bi-effective-user-experience/6-visual-headers
+		Clicking on the chart itself will display <b>Visual Headers</b> which are similar to Excel Chart Tools.  
+		https://learn.microsoft.com/en-us/training/modules/power-bi-effective-user-experience/6-visual-headers
 
 		<img src = "./resources/visual-headers.png">
 
 			For instance, each individual visual allows for focus mode which expands the single visual (like a chart, table, or map) so that it takes up the full page (the entirety of the canvas).
 			
-			
 	- Table View - Shows Raw Data Records
 		- Notice that each view has a slightly different ribbon but you can still import data on any view.
 		- Notice that on the Table View, the familiar Data Pane on the right will still be there to show the various tables and columns.
-		- Data is read-only; we edit in Power Query via Home -> Transform data 
-		to change, replace, or create new values in your dataset.
+		- Data is read-only; we edit in Power Query via Home -> Transform data to change, replace, or create new values in your dataset.
 
-	- Model View - Properties & Relationships with Tables.
-		View the complete data model to design its structure.				
-		- "Semantic Model" includes:
-			- actual data
-			- Metadata is information that describes how data is organized, connected, and understood
-				- Tables and columns
+	- Model View - Properties & Relationships with Tables.		
+		- This view displays the 'Semantic Model', which contains:
+			- Actual data from tables and columns.
+			- Metadata that defines how the data is organized and interpreted including: 
 				- Relationships between tables
 				- Measures (calculations using DAX)
-				- Hierarchies (like Year → Month → Day)
-				- Metadata like names, data types, and descriptions
+				- Hierarchies (e.g., Year → Month → Day)
+				- Additional metadata (e.g., names, data types, and descriptions).
 
-	~ Dax Query (relatively newer) - Here we can run DAX & see exactly what a measure will show.
-		EVALUATE
-    		TOPN(5, 'Products')
+	- Dax Query (relatively newer) - Here we can run DAX & see exactly what a measure will show.
 
+	This DAX query uses `TOPN` to retrieve the top 5 rows based on a specific column, with `ORDER BY` defining the final display.
+	```
+	EVALUATE
+		TOPN(5, Table, Table[Column], DESC)
+		ORDER BY Table[Column] ASC
+	```
 
-Q: What are the building blocks of Power BI?
+	Example using a sales table:
+	``` DAX
+	EVALUATE
+    	TOPN(5, 'Sales_Excel', Sales_Excel[Sales Amount])
+    	ORDER BY Sales_Excel[Sales Amount] DESC
+	```
+
+Q: What are the building blocks of Power BI?  
 	A: Semantic Models & Visualizations.
 		Without a semantic model, you can't create visualizations, and reports are made up of visualizations
 					
@@ -149,65 +158,62 @@ Q: What are the building blocks of Power BI?
 ## <p id = "2"> Lesson 2: Connecting to Data | [Back to ToC](#toc)</p> 
 ---------------------------------------------------------- */
 
+In Power BI, data can be pulled from a file, a database or an online portal. Before loading data into Power BI, the #1 top priority is ensuring that the data is thoroughly cleansed and formatted as a tabular dataset.
 
--- Subsection : Importing .txt file --  
+According to one article,  
+"You can use hundreds of different data sources with Power BI. The data must be in a format consumable by the Power BI Service." [Source](https://learn.microsoft.com/en-us/power-bi/connect-data/service-get-data)
 
-Task: Create a blank report & import the bonus text file "People1.txt" located in the  "People" folder.
+### 2.1. Importing a .txt file
 
-Click on "Import from Text". The file preview will lists out record of people and contains 3 columns. Once imported, verify that data has been imported by going to Table View to see the table.
+Power BI can transform text-based data into clear visualizations and interactive dashboards.
 
-	Data imported into Power BI is organized as tables.
-	A table is a grid similar to a spreadsheet, where data attributes as columns and records as rows.
+#### Task 2.1A: Import the text file "People1.txt" located in the  "text-files" folder.
 
-		NOTE: Data can be imported and stored, but Report View shows no visuals built yet from our data.
-		Recall: A .pbix file is still considered a report file, even if you haven’t built any visuals yet. 
-		
+#### Solution 2.1A:
+- On the Power BI Desktop, click `Home` -> `Get Data`.
+- Select `Text/CSV` as the data source & choose the .txt or .csv file to import.
+- The file preview displays the data so that users can quickly check if their data is correct. 
+	- Click `Load` to import the file, or `Transform Data` to clean and edit it first.
+- Once imported, verify that data has been imported by going to `Table View` to view the table `People1`.
+	- All data imported into Power BI is structured as tables consisting of rows (records) and columns (attributes), similar to a grid or a spreadsheet.
 
-	--
-	If the following error shows up: 
-		'MSOffice.PowerBi.OleDb' is not registered
-		https://www.reddit.com/r/PowerBI/comments/wkzmj8/error_connecting_to_sharepoint_online_list_the/
-	We recommend to uninstall & install Power BI again.
-	--
+NOTE: Although no visuals have been created yet in Report View, the data is still stored and can be viewed
+> Note that a .pbix file is still considered a report file, even if there aren't any visuals created yet. 
 
-	Optional Task: Delete the table & reimport it.
-		Under Table View, delete the table by right clicking table on Data Model pane -> Delete from Model.
+> Optional Task: Create a chart that displays the number of people living in each location.
 
-	Task: Update Data Source & Refresh data:
-		1. Confirm that the data is loaded in Power BI. 
-		2. On the .txt file, make the following changes:
-			- Change the row 'Justine' to 'Justin'
-			- Add a row "Carl"
-		3. Make sure to save the changes on .txt file.
-		4. Reload the data again by going to 
-			Table View -> Home -> Queries -> Refresh
+Importing data into Power BI stores a snapshot of the data in the .pbix file. This means that even if the original .txt file is later deleted, the report and its visuals will still work since the data is already embedded.  
+- Think of it like embedding a file in PowerPoint or attaching a PDF to an Outlook email. It doesn't matter if the original file is deleted since a copy is already stored within the document or email.
 
-		NOTE: We don't always have to refresh all the tables. We can refresh 1 table only.
-	
-	Note:
-	Paid version does a Scheduled refresh up to 8 times/day
-	You can use Live Connection for example with SQL Server that automatically updates the data in Power BI.
+#### Task 2.1B: Delete the imported table (that has been loaded into the semantic model) & reimport it.  
+#### Solution 2.1B:
+- Go to Table View (Model View also works).  
+- Right-click the table name in the Fields pane.  
+- Click 'Delete from model'.  
+
+#### Task 2.1C: Update the data in the source file & refresh it in Power BI:
+#### Solution 2.1C:
+1. Confirm that the data is already loaded in Power BI. 
+2. On the .txt file, make the following changes:
+	- Change the row 'Justine' to 'Justin'
+	- Add a row "Carl"
+3. Make sure to save the changes on .txt file.
+4. In Power BI, data can be reloaded in two main ways:
+- Refresh all tables at once:  
+On any view, go to Home (Tab) -> Queries (Group) -> Refresh to update every table in the model.
+- Refresh a single table:  
+From the Data pane on the right, right-click the table name, and choose 'Refresh' to update only that specific table.
+
+		Note:
+		Paid version does a Scheduled refresh up to 8 times/day
+		You can use Live Connection for example with SQL Server that automatically updates the data in Power BI.
 		Every time you interact with a visual (filter, slice, drill down), Power BI queries the SQL Server in real time
 	
+> Please note that if the source data file is moved or deleted, the report and visuals will still remain intact, but the data refresh will stop working. In the data source settings, the connection path to the file must be updated to reconnect the link.
 
-	Q:	What if I move/delete the data file?
-	A: 	The report and the visuals will still be there, but refreshing the data will no longer work.
+---
 
-	The connection link needs to be updated if the file is broken/moved. Make sure that the connection is transformed.
-
-
-Summary: 
-		Importing data into Power BI stores a snapshot of the data in the .pbix file.
-		This means that even if the original .txt file is deleted later, 
-		the report and all its visuals will still work because the data is already embedded.
-
-	Think of it like embedding a file in Word or attaching a PDF to an Outlook email. 
-		It doesn't matter if the original file is deleted since a copy is already stored within the document or email.
-
-		NOTE: 	We can't refresh or update the data without restoring the .txt file (or pointing to a new one).
-
-
-Exercise: Entering/changing data is not ideal with Power BI. PowerQuery can be used to update the naming.
+Optional Exercise: Entering/changing data is not ideal with Power BI. PowerQuery can be used to update the naming.
 
 		1. In Power BI Desktop, go to Home (Tab) -> Data (Group) -> Enter Data.
 		Create a small table with the new row(s) you want 
@@ -225,12 +231,9 @@ Exercise: Entering/changing data is not ideal with Power BI. PowerQuery can be u
 			2.3. In PowerQuery, we should see now that new row added. 
 			2.4. Finally to load it into PowerBI, click Home -> Close & Apply
 
-
-	Real Life Example: A student mentioned they work with contractor information.
-	They append the data by month to build a yearly aggregate.
-
-
--- Subsection: Importing a folder of .txt files --
+---
+	
+### -- 2.2. Importing a folder of .txt files --
 	
 	We can import files from a folder since Power Query has a built-in folder connector. 
 
@@ -238,6 +241,9 @@ Exercise: Entering/changing data is not ideal with Power BI. PowerQuery can be u
   		├─ People1.txt
   		├─ People2.txt
   		└─ People3.txt
+
+	Real Life Example: A student mentioned they work with contractor information.
+	They append the data by month to build a yearly aggregate.
 
 	Exercise: We want Power Query to automatically combine all files into one table.
 
@@ -351,6 +357,14 @@ Step 4: Select Your Lists
 	You can reshape it before loading if you'd like via PowerQuery otherwise press "Load"
 	
 Result: Once loaded, you'll see your SharePoint data available in Power BI.
+
+
+	--
+	If the following error shows up: 
+		'MSOffice.PowerBi.OleDb' is not registered
+		https://www.reddit.com/r/PowerBI/comments/wkzmj8/error_connecting_to_sharepoint_online_list_the/
+	We recommend to uninstall & install Power BI again.
+	--
 
 
 
