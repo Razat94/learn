@@ -10,11 +10,12 @@
 0. [Lesson 0: What is Power BI?](#0)
 1. [Lesson 1: General Structure](#1)
 2. [Lesson 2: Connecting to Data](#2)
-3. [Lesson 3: PowerQuery = Data Transformation](#3)
-4. [Lesson 4: Visualizations](#4)
-5. [Lesson 5: Creating Interactive Visualizations - Filtering, Controls & Navigation](#5)
-6. [Lesson 6: Enhancing Data Analysis](#6)
-7. [Lesson 7: Data Modeling w/Calculated Columns & Measures](#7)
+3. [Lesson 3: Cardinality](#3)
+3. [Lesson 4: PowerQuery = Data Transformation](#4)
+4. [Lesson 5: Visualizations](#5)
+5. [Lesson 6: Creating Interactive Visualizations - Filtering, Controls & Navigation](#6)
+6. [Lesson 7: Enhancing Data Analysis](#7)
+7. [Lesson 8: Data Modeling w/Calculated Columns & Measures](#8)
 
 
 ## Welcome! 
@@ -235,17 +236,25 @@ Optional Exercise: Entering/changing data is not ideal with Power BI. PowerQuery
 	
 ### -- 2.2. Importing a folder of .txt files --
 	
-	We can import files from a folder since Power Query has a built-in folder connector. 
+We can import files from a folder since Power Query has a built-in folder connector. 
 
-	[Folder] Text Files
+Real life examples of combining multiple files:
+- Real Life Example 1: A student mentioned they work with contractor information.
+	They append the data by month to build a yearly aggregate.
+- Real Life Example 2: You receive monthly sales data as separate CSV files stored in the same SharePoint folder. 
+		Each file has the same schema.
+
+Exercise: We want Power Query to automatically combine all files into one table.
+
+```
+	This is how the folder is structured:
+		[Folder] Text Files
   		├─ People1.txt
   		├─ People2.txt
   		└─ People3.txt
+```
 
-	Real Life Example: A student mentioned they work with contractor information.
-	They append the data by month to build a yearly aggregate.
-
-	Exercise: We want Power Query to automatically combine all files into one table.
+Solution:
 
 	Click Home -> Get Data -> Folder 
 	Point to the 'Text-Files' folder (or point it to a folder (SharePoint/OneDrive/local))
@@ -261,12 +270,7 @@ Optional Exercise: Entering/changing data is not ideal with Power BI. PowerQuery
 	Any new file dropped into this folder is then picked up at the next refresh.
 		EX: If a new People4.txt is created, clicking Home -> Refresh will load its records into the table.
 		
-	Real life example of combining multiple files:
-		You receive monthly sales data as separate CSV files stored in the same SharePoint folder. 
-		Each file has the same schema.
-
-	
--- Subsection: Importing Excel Files  --
+### -- 2.3: Importing Excel Files  --
 
 	Task: On the same report, Import 'Pivot your table like a champ.xlsx'
 	Verify that the data has been imported.
@@ -285,15 +289,15 @@ Task: On the report, create a page & name it "Performance Highlights"
 		Note: After selecting a visual, changing the chart type will modify the existing chart rather than creating a new one.
 		
 	
-	Task: Exporting How-Tos
-		- Export report as PDF
-		- Export data from a chart
-			- Take a screenshot  either with snipping tool or Win + Shift + S
-			(Click on chart  -> Ellipses (on the Visual Header e.g. charts tools button) -> Export Data)
+Task: Exporting How-Tos
+	
+	- Export report as PDF
+	- Export data from a chart
+		- Take a screenshot  either with snipping tool or Win + Shift + S
+		(Click on chart  -> Ellipses (on the Visual Header e.g. charts tools button) -> Export Data)
 			
 	
-	Optional Task: Try importing the table from "Data-Pub1.xlsx" 
-
+Optional Task: Try importing the table from "Data-Pub1.xlsx" 
 
 	-- Review Q: --
 	Q: When importing data from an Excel workbook into Power BI, if you receive the error message: 
@@ -304,8 +308,8 @@ Task: On the report, create a page & name it "Performance Highlights"
 	-- 
 
 
--- Optional Subsection: Importing Excel File located on a OneDrive/SharePoint --
-https://learn.microsoft.com/en-us/power-bi/connect-data/desktop-use-onedrive-business-links
+### 2.4: Importing an Excel File located on a OneDrive/SharePoint --
+[Source](https://learn.microsoft.com/en-us/power-bi/connect-data/desktop-use-onedrive-business-links)
 
 1. 	Using a browser, navigate to your OneDrive for work or school location 
 	Select the ellipses (...) to open the More menu, then select Details.
@@ -326,7 +330,7 @@ https://learn.microsoft.com/en-us/power-bi/connect-data/desktop-use-onedrive-bus
 
 If the file is open on the desktop app, the file can be imported by copiying the file path in File -> Info -> Copy path. Ensure that the extension ends with `.xlsx`
 
--- Optional Subsection: Importing SharePoint list data into OneDrive --
+### 2.5 Optional Subsection: Importing SharePoint list data into OneDrive --
 [Youtube Tutorial](https://www.youtube.com/watch?v=eyUwG2tlWn4)
 
 Step 1: On Power BI Desktop, click on Get Data in the top-left corner. Since SharePoint might not appear in the initial list, click on More.
@@ -366,13 +370,13 @@ Result: Once loaded, you'll see your SharePoint data available in Power BI.
 	We recommend to uninstall & install Power BI again.
 	--
 
+### 2.6 Optional Subsection: Importing a table from SQL Server to Power BI --
+Feel free to read the guide 
+[here](https://github.com/Razat94/learn/blob/master/PowerBI/Guide%20-%20Conenct%20SQL%20Server%20to%20MS%20Power%20BI_compressed.pdf).
 
-
--- Optional Subsection: Importing a table from SQL Server to Power BI --
-Feel free to read the guide (here)[https://github.com/Razat94/learn/blob/master/PowerBI/Guide%20-%20Conenct%20SQL%20Server%20to%20MS%20Power%20BI_compressed.pdf]
-
-
-### /* ------------ Lesson 2B - Cardinality ------------ */
+/* -------------------------------------------------------
+## <p id = "3"> Lesson 3: Cardinality | [Back to ToC](#toc)</p> 
+---------------------------------------------------------- */
 
 Useful Links:  
 	[Module: Configure Semantic Model](https://learn.microsoft.com/en-us/training/modules/configure-semantic-model-power-bi/)  
@@ -571,7 +575,7 @@ Useful Links:
 	
 
 /* -------------------------------------------------------
-## <p id = "3"> Lesson 3: PowerQuery| [Back to ToC](#toc)</p> 
+## <p id = "4"> Lesson 4: PowerQuery | [Back to ToC](#toc)</p> 
 ---------------------------------------------------------- */
 
 
@@ -579,8 +583,9 @@ Chapter 3 -
 Power Query Editor provides the ability to transform and analyze data.  
 Remember: Power Query = Data Transformation
 
+
 /* -------------------------------------------------------
-## <p id = "1"> DAY 2 | [Back to ToC](#toc) </p>
+## <p id = "Day2"> DAY 2 | [Back to ToC](#toc) </p>
 ---------------------------------------------------------- */	
 
 
@@ -591,7 +596,7 @@ Links:
 
 
 /* -------------------------------------------------------
-## <p id = "4"> Lesson 4: Visuals & Analyzing such Visuals | [Back to ToC](#toc)</p> 
+## <p id = "5"> Lesson 5: Visuals & Analyzing such Visuals | [Back to ToC](#toc)</p> 
 ---------------------------------------------------------- */
 
 
@@ -822,7 +827,7 @@ The Selection Pane (under the View tab) works like in PowerPoint, which lets us 
 		
 
 /* -------------------------------------------------------
-## <p id = "5"> Lesson 5: Creating Interactive Visualizations - Filtering, Controls & Navigation | [Back to ToC](#toc)</p>
+## <p id = "6"> Lesson 6: Creating Interactive Visualizations - Filtering, Controls & Navigation | [Back to ToC](#toc)</p>
 ---------------------------------------------------------- */
 
 To customize & filter reports, in this chapter we will touch base on:  
@@ -1149,7 +1154,7 @@ Helpful Links:
 
 
 /* -------------------------------------------------------
-## <p id = "6"> Lesson 6: Enhancing Data Analysis | [Back to ToC](#toc)</p> 
+## <p id = "7"> Lesson 7: Enhancing Data Analysis | [Back to ToC](#toc)</p> 
 ---------------------------------------------------------- */
 
 [Reference Link](https://learn.microsoft.com/en-us/training/modules/power-bi-effective-reports/)
@@ -1300,7 +1305,7 @@ As you know, Tooltips are pop ups that display extra details about a data point 
 === Break ==
 
 /* -------------------------------------------------------
-## <p id = "7"> Lesson 7: Data Modeling w/Calculated Columns & Measures | [Back to ToC](#toc)</p> 
+## <p id = "8"> Lesson 8: Data Modeling w/Calculated Columns & Measures | [Back to ToC](#toc)</p> 
 ---------------------------------------------------------- */
 
 
