@@ -21,7 +21,10 @@
 ## Welcome! 
 This document outlines the two-day Power BI workshop curriculum, focusing on data transformation and visualization.
 
-This course is designed to guide you through the essential components of Power BI, from importing raw data to building insightful and interactive dashboards.
+This course is designed to guide you through the essential components of Power BI, from importing raw data to building insightful and interactive dashboards. After reviewing this guide, I chose to use GitHub as the platform for presenting the material:
+https://microsoftlearning.github.io/MCT-User-Guide/
+
+
 
 ### Day 1: Data Fundamentals & Transformation
 Day One focuses on the foundations:
@@ -126,7 +129,8 @@ The Left Navigation Bar in Power BI Desktop shows different views:
 		- Notice that on the Table View, the familiar Data Pane on the right will still be there to show the various tables and columns.
 		- Data is read-only; we edit in Power Query via Home -> Transform data to change, replace, or create new values in your dataset.
 
-	- Model View - Properties & Relationships with Tables.		
+	- Model View - Properties & Relationships with Tables.	
+	[Source](https://learn.microsoft.com/en-us/power-bi/transform-model/model-explorer)	
 		- This view displays the 'Semantic Model', which contains:
 			- Actual data from tables and columns.
 			- Metadata that defines how the data is organized and interpreted including: 
@@ -286,14 +290,21 @@ Task: On the report, create a page & name it "Performance Highlights"
 			and then position and size it to 1/2 the canvas page.
 		- Create 2 cards: One showing the name of Salesperson & the other showing Total Amount.
 			Remember:  A card visualization displays a single data point.
+
+			If you don't see the card element, open the Visualizations pane, click the three dots (...) in the "Get more visuals" section, and choose "Restore default visuals" to bring back the default card (and other items).
+
+
 		Note: After selecting a visual, changing the chart type will modify the existing chart rather than creating a new one.
 		
 	
 Task: Exporting How-Tos
 	
 	- Export report as PDF
-	- Export data from a chart
-		- Take a screenshot  either with snipping tool or Win + Shift + S
+	- Charts
+		- A Chart can be copied and pasted within Power BI by right clicking on chart -> Copy chart 
+		- Take a screenshot of a chart either with snipping tool or Win + Shift + S
+		
+		- To Export data from a chart
 		(Click on chart  -> Ellipses (on the Visual Header e.g. charts tools button) -> Export Data)
 			
 	
@@ -316,6 +327,9 @@ Optional Task: Try importing the table from "Data-Pub1.xlsx"
 
 2. 	In the More details pane that appears, select the copy icon next to Path.
 
+> Note that if the file is open on the desktop Excel app, the file path can be copied (for importing) by going to File -> Info -> Copy path. Ensure that the extension ends with `.xlsx`
+
+
 3. 	In Power BI Desktop, select Get data > Web
 
 4. 	With the Basic option selected, paste the link into the From Web dialog.
@@ -328,7 +342,7 @@ Optional Task: Try importing the table from "Data-Pub1.xlsx"
 	It allows you to select from the list of tables, sheets, and ranges found in the Excel workbook.
 	From there, you can use the OneDrive for work or school file just like any other Excel file.
 
-If the file is open on the desktop app, the file can be imported by copiying the file path in File -> Info -> Copy path. Ensure that the extension ends with `.xlsx`
+
 
 ### 2.5 Optional Subsection: Importing SharePoint list data into OneDrive --
 [Youtube Tutorial](https://www.youtube.com/watch?v=eyUwG2tlWn4)
@@ -671,6 +685,7 @@ Pictures are apart of elements. Let's create a new page to discuss more about el
 			- (Similar to PowerPoint)	Insert -> Textbox
 		3. (Preferred) Insert Shape: 	Insert -> Shapes -> Rectangle
 			(Result: A blue box has been added)
+			A simple background can always be added to a card/shape. 
 		2. Create a card & then:
 			1. Add a measure that says: 	msg = "Hello World!"
 			2. Add the measure under the "Fields" section of a card.
@@ -692,6 +707,68 @@ Pictures are apart of elements. Let's create a new page to discuss more about el
 			 	would work like what we've seen before w/ shapes)
 
 
+-- Subsection: Buttons --
+
+	Recall:
+	Visuals - Visualizations of semantic model data.
+	Elements - Provide visual interest but don't use semantic model data. 
+		Elements include text boxes, buttons, shapes, and images.
+
+
+	Task: On a new page, add the following buttons under Insert -> Buttons:
+		- Back Button (Once placed on canvas, Press Ctrl + Click to activate)
+		- Page navigation! (Just like in PowerPoint)
+			First create a page named "Home" or "Main Hub".
+			Create button (e.g. a Circle shape) 
+			Under the Shape tab in the Visual Pane, set Action -> Type -> Navigation, and link it to the previously created pages
+			'Products/Region' and 'Products/Quarter'."
+		- Bookmark Button
+			- Under Button (Visual Pane Tab) -> Action -> 
+				Type = "Bookmark" & BookMark = "Page 1" 
+		- Insert a PANDA pic & add a link to the LA ZOO via "lazoo.org"
+			Q: Does the 'panda' link work when you export to PDF?
+			A: NO!!
+		- Information Button
+			- Add a Tool Tip [Under Visual Pane -> Button -> Actions -> Tooltip]
+				Add text: "Please make sure to see the pages for the ENTIRE report"
+			- Set it so nothing happens if the user accidently clicks it by mistake:
+				Button (Visual Pane Tab) -> Actions -> Type = "Bookmark" & BookMark = "None" 
+			- Give your tooltip a background color so people see easily via 
+				Visual Pane -> Button -> Button -> Style -> Fill <OR> Style -> Glow 
+				OR 
+				General -> Effects -> Background
+		- Optional: Create a button that's clears all slicers
+			Remember: To activate the effect, we must Ctrl + Click the button.
+		- Optional: A button on the report page could have the text 'Reset slicers', and when invoked, it uses the bookmark.
+		Additional Info on Bookmark Buttons Settings:
+			https://www.youtube.com/watch?v=rgKtgQhPPrg
+			Data -> Reset data
+			Display -> Spotlight, Showing/Highlighting
+			Current Page -> Deselecting means we don't jump to that page, but that those settings are applied.
+		- Q&A
+		If a page contains data, 
+		we can have Q&A access that data by going to said page and without selecting anything, click
+		the Visual Pane -> "Format Your Page" -> Page Information -> Allow Q & A
+
+		Sample Q's to ask:
+			- count products
+			- what are all the salespeople?
+			- what are all the regions?
+			- what are total sales / Get overall sales
+
+		After we have our Q&A result, 	
+		click on the "Turn this Q&A result into a standard visual" at the top right of visual to turn it into a standard visual 
+
+		Q:	You added the Q&A feature to let users find answers on their own. 
+			Which two configurations can you add to improve the search capabilities for them[end users]?"
+		A:	- Add a linguistic relationship schema to the dataset.
+				A linguistic schema describes terms and phrases that Q&A should understand for objects within a dataset, 
+				including parts of speech, synonyms, and phrasings that relate to that dataset.
+			- Add synonyms to model fields will help users search for them. 
+				For example, you can give a synonym of (Actuals) for the (Sales) measure. 
+
+
+
 ### The Selection Pane
 The Selection Pane (under the View tab) works like in PowerPoint, which lets us reorder layers and toggle (show/hide) element visibility.
 
@@ -706,30 +783,43 @@ The Selection Pane (under the View tab) works like in PowerPoint, which lets us 
 ### Background Formatting
 --- Subsection: Background Formatting ---
 
-	Create a new page called "Formats". 
-	Click the background of your page, then go to Visualizations -> "Format your report page" on the sidebar
+Create a new page called "Formats". 
+Click the background of your page, then go to Visualizations -> "Format your report page" on the sidebar
 
-		Q: "Can you make the canvas taller so you can scroll to more visuals rather than change pages"
-		A: Yes, under 'Canvas Settings' -> 'Type' = Custom
-
-		Task: Change background color of Canvas 
-			'Canvas Background' applies color only to the main page canvas
-			Note: We MUST change the transparency color to not be 100%.
+TASK: CHANGE THE PAGE TO 1000 by 500 px  
 	
-		Task: Change color of Wallpaper
-			Wallpaper -> Color
-			Observe: Wallpaper effects foreground & background, whereas page background effects only background
+	Q: "Can you make the canvas taller so you can scroll to more visuals rather than change pages"  
+	A: Yes, under 'Canvas Settings' -> 'Type' = Custom & Height = "1000px"
 
-		Task: Choose a report theme, which applies across the entire report (similar to themes in MS Excel & MS Word)
-			View -> Themes & then pick your fav theme! (E.g. Choose Accessible Orchid)
+Task: Change background color of Canvas 
+	
+	'Canvas Background' applies color only to the main page canvas
+	Note: We MUST change the transparency color to not be 100%.
+	
+Task: Change color of Wallpaper
+	
+	Wallpaper -> Color
+	Observe: Wallpaper effects foreground & background, whereas page background effects only background
+
+### Themes
+Themes are similar to themes in MS Excel & MS Word, which applies across the entire report.
+
+Task: Choose a report theme
+
+	View -> Themes & then pick your fav theme! (E.g. Choose Accessible Orchid)
 			
-			To change the default Settings (e.g. set a default wallpaper color for all pages)
-				View -> Themes-> Customize Theme -> Page -> Wallpaper -> Color 
-				(Feel free to change Page Background as well)
+Task: Change the default Settings (e.g. set a default wallpaper color for all pages)
+	
+	View -> Themes-> Customize Theme -> Page -> Wallpaper -> Color 
+	(Feel free to change Page Background as well)
 							
-		Optional: Create a background in PowerPoint & then upload the theme into PowerBI.
-		Optional: EXPORT A THEME (Design your own filter, background, etc. in POWERBI & then export)
-			Once exported, try importing your theme into PowerBI. 	
+Optional: Create a background in PowerPoint & then upload the theme into PowerBI.
+
+Overview 2 Min Task: Take a moment to design your own filters, background, etc. in POWERBI. Be ready to then export
+
+#### EXPORT A THEME 
+	Once exported, try importing your theme into PowerBI. 	
+
 
 ### More Formats
 --- Subsection: Bar Chart Formatting ---
@@ -771,9 +861,11 @@ The Selection Pane (under the View tab) works like in PowerPoint, which lets us 
 				
 
 	Quadrant 2 (1/4 page): 
-		Create a 'WATERFALL' chart mapping Quarter Earnings (Map Quarter & Total Sales) 
+		Create a 'WATERFALL'/FUNNEL chart mapping Regional Earnings (Map Regional & Total Sales) 
 		A waterfall visualization displays a running total as values are added or subtracted.
 			(Note: the chart doesn't look good when mapping regions)
+
+		Perhaps this will be swapped for FUNNEL 
 
 
 		Click on visual & then:
@@ -852,16 +944,21 @@ Helpful Links:
 		- Cross-highlighting = Visual emphasis ACROSS DIFFERENT visuals
 			"Select a data point or a bar or a shape and watch the impact on the other visualizations." 
 				[Source](https://learn.microsoft.com/en-us/power-bi/create-reports/service-reports-visual-interactions?tabs=powerbi-desktop#change-the-interaction-behavior)
-			EX: Clicking/Selecting data in one visual highlights related data segments in another and fades the rest.
-			Cross-highlighting is when one visual affects another by highlighting portions of the data(subsets) but doesn't filter it completely.
-				e.g. Selecting a bar on a bar chart can affect a pie chart.
+		
+
+
+			
 			
 		When selecting an Interaction forms a new table, one student said: 
 			Figured out my issue - click on the graph, then "Data/Drill" tab, then unclick "Data Point Table" - all good!
 
 		NOTICE:
 			Hover over a data point to see a tooltip with extra details about that data point pop up.
-			Cross-highlighting a chart means that the tooltip now displays an added "Highlighted: field with extra info 		
+			Cross-highlighting a chart means that the tooltip now displays an added "Highlighted: field with extra info 	
+
+			EX: Clicking/Selecting data in one visual highlights related data segments in another and fades the rest.
+			Cross-highlighting is when one visual affects another by highlighting portions of the data(subsets) but doesn't filter it completely.
+				e.g. Selecting a bar on a bar chart can affect a pie chart.	
 
 		To turn off interactions, go to: 
 			File>Options>Query Reduction 
@@ -877,6 +974,13 @@ Helpful Links:
 				- Highlight aka Cross Highlight - Default
 				- None
 	
+		Task:
+			For the Previous Page that was recently created,
+			apply interactions for the bar chart representing product sales.
+
+			Have the TOP FUNNEL/WATERFAL CHART be A FILTER
+			Have the BOTTOM QUARTERLY SALES CHARTS have NO INTERACTIONS
+
 	
 -- Subsection: Filtering Excercise --  
 	[MS Learn Article: Adding Filters to Reports](https://learn.microsoft.com/en-us/power-bi/create-reports/power-bi-report-add-filter?tabs=powerbi-desktop)
@@ -888,6 +992,8 @@ Helpful Links:
 		- The visual level.
 		- The page level.	
 		- The report level.
+
+	Task: Filter Excercise: Show all salepeople starting M
 
 	Task: Create a new page called 'Product/Regional Sales'
 		Quadrant 1 (1/4 page): 
@@ -948,6 +1054,9 @@ Helpful Links:
 			It’s a good best practice to clear all filters first before deleting synced slicers.
  			Otherwise, it can be annoying/difficult to remove its effect from the other charts.
 
+	Since we're talking about slicers, talk about treemaps as well as clear slicers button
+
+
 
 -- Subsection: Bookmarks --  
 	[MS Article about Bookmarks](https://learn.microsoft.com/en-us/power-bi/create-reports/desktop-bookmarks)  
@@ -955,11 +1064,15 @@ Helpful Links:
 
 	Bookmarks work are similar to MS Word bookmarks; Think of them as snapshots of your report you can quickly revisit or share.
 
+	Bookmarks are the same as saved states in a video game
+
 	Bookmarks save the current state of a report(including filters, slicers, and visuals) so that you can:
 		- Return to that view anytime.
 		- Navigate between pages or sections.
 		- Make interactive reports with clickable buttons or images.
 				
+		Task: Add a bookmark to go to page 1
+
 		Task: Make a simple bookmark for the 'Product/Regional Sales' page
 			
 			Note: First assure that we are on the 'Product/Regional Sales' page.
@@ -967,70 +1080,12 @@ Helpful Links:
 			From the Bookmarks pane, select 'Add' to add a bookmark.
 			Test: If we go to a different page and click that bookmark, it will take us to the saved page.
 		
-		Task: Create a bookmark that filters Quarter
+		Task: Create a bookmark that filters either:
+			Regional Sales [iPhones]
+			Regional Sales [Laptops]
+			Regional Sales [Quarter]
+
 			Remember: Bookmarks saves other settings too like filters, etc.
-
-
--- Subsection: Buttons --
-
-	Recall:
-	Visuals - Visualizations of semantic model data.
-	Elements - Provide visual interest but don't use semantic model data. 
-		Elements include text boxes, buttons, shapes, and images.
-
-
-	Task: On a new page, add the following buttons under Insert -> Buttons:
-		- Back Button (Once placed on canvas, Press Ctrl + Click to activate)
-		- Page navigation! (Just like in PowerPoint)
-			First create a page named "Home" or "Main Hub".
-			Create button (e.g. a Circle shape) 
-			Under the Shape tab in the Visual Pane, set Action -> Type -> Navigation, and link it to the previously created pages
-			'Products/Region' and 'Products/Quarter'."
-		- Bookmark Button
-			- Under Button (Visual Pane Tab) -> Action -> 
-				Type = "Bookmark" & BookMark = "Page 1" 
-		- Insert a PANDA pic & add a link to the LA ZOO via "lazoo.org"
-			Q: Does the 'panda' link work when you export to PDF?
-			A: NO!!
-		- Information Button
-			- Add a Tool Tip [Under Visual Pane -> Button -> Actions -> Tooltip]
-				Add text: "Please make sure to see the pages for the ENTIRE report"
-			- Set it so nothing happens if the user accidently clicks it by mistake:
-				Button (Visual Pane Tab) -> Actions -> Type = "Bookmark" & BookMark = "None" 
-			- Give your tooltip a background color so people see easily via 
-				Visual Pane -> Button -> Button -> Style -> Fill <OR> Style -> Glow 
-				OR 
-				General -> Effects -> Background
-		- Optional: Create a button that's clears all slicers
-			Remember: To activate the effect, we must Ctrl + Click the button.
-		- Optional: A button on the report page could have the text 'Reset slicers', and when invoked, it uses the bookmark.
-		Additional Info on Bookmark Buttons Settings:
-			https://www.youtube.com/watch?v=rgKtgQhPPrg
-			Data -> Reset data
-			Display -> Spotlight, Showing/Highlighting
-			Current Page -> Deselecting means we don't jump to that page, but that those settings are applied.
-		- Q&A
-		If a page contains data, 
-		we can have Q&A access that data by going to said page and without selecting anything, click
-		the Visual Pane -> "Format Your Page" -> Page Information -> Allow Q & A
-
-		Sample Q's to ask:
-			- count products
-			- what are all the salespeople?
-			- what are all the regions?
-			- what are total sales / Get overall sales
-
-		After we have our Q&A result, 	
-		click on the "Turn this Q&A result into a standard visual" at the top right of visual to turn it into a standard visual 
-
-		Q:	You added the Q&A feature to let users find answers on their own. 
-			Which two configurations can you add to improve the search capabilities for them[end users]?"
-		A:	- Add a linguistic relationship schema to the dataset.
-				A linguistic schema describes terms and phrases that Q&A should understand for objects within a dataset, 
-				including parts of speech, synonyms, and phrasings that relate to that dataset.
-			- Add synonyms to model fields will help users search for them. 
-				For example, you can give a synonym of (Actuals) for the (Sales) measure. 
-
 
 -- Subsection: Groups --  
 	[MS Article explaining Groups](https://learn.microsoft.com/en-us/power-bi/create-reports/desktop-grouping-and-binning)
@@ -1590,6 +1645,11 @@ Notes / Limitations
 -----------------
 
 
+https://learn.microsoft.com/en-us/power-bi/collaborate-share/office-integration/service-embed-report-spo
+
+Steps on how to add a Power BI report to a SharePoint page.
+
+-----------------
 
 
 	Q:
@@ -1632,8 +1692,49 @@ Notes / Limitations
 
 
 
-=== Bonus Links: ===  
-	- https://github.com/MicrosoftLearning/PL-300-Microsoft-Power-BI-Data-Analyst  
-	- https://microsoftlearning.github.io/PL-300-Microsoft-Power-BI-Data-Analyst/  
-	- https://www.reddit.com/r/PowerBI/comments/15js89a/guide_i_passed_the_two_official_power_bi/     
-	- [Bonus: Models](https://learn.microsoft.com/en-us/power-bi/transform-model/model-explorer)
+=====
+
+### Further reading
+
+Below is the copied text of bonus links provided in the "Additional Learning Resources.txt" file.
+
+=====
+
+My notes:
+https://itsraza.com/learn/
+
+Power BI Sample Datasets:
+https://learn.microsoft.com/en-us/power-bi/create-reports/sample-datasets
+
+Microsoft Learn Course Dashboard in a Day - Online workshop
+https://learn.microsoft.com/en-us/training/paths/dashboard-in-a-day/
+
+Importing Excel File located on a OneDrive/SharePoint:
+https://learn.microsoft.com/en-us/power-bi/connect-data/desktop-use-onedrive-business-links
+
+Importing SharePoint list data into OneDrive (Youtube Tutorial)
+https://www.youtube.com/watch?v=eyUwG2tlWn4
+
+Embed a Power BI Report onto a SharePoint Page
+https://learn.microsoft.com/en-us/power-bi/collaborate-share/office-integration/service-embed-report-spo
+
+Treemaps can be made with SankeyMATIC:
+https://sankeymatic.com/
+   
+---
+
+Helpful links if you are planning to take PL-300:
+
+Microsoft Learn Course PL-300T00-A: Design and manage analytics solutions using Power BI
+https://learn.microsoft.com/en-us/training/courses/pl-300t00
+
+Microsoft Learning provides a Content Directory with hyperlinks to each of their lab exercises and demos to practice Power BI skills:
+https://microsoftlearning.github.io/PL-300-Microsoft-Power-BI-Data-Analyst/
+
+^ The above page is hosted on GitHub:
+https://github.com/MicrosoftLearning/PL-300-Microsoft-Power-BI-Data-Analyst/tree/Main
+
+Reddit Guide:
+https://www.reddit.com/r/PowerBI/comments/15js89a/guide_i_passed_the_two_official_power_bi/  
+
+---
