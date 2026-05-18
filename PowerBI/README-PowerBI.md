@@ -14,7 +14,7 @@
 3. [Lesson 4: PowerQuery = Data Transformation](#4)
 4. [Lesson 5: Visualizations](#5)
 5. [Lesson 6: Creating Interactive Visualizations - Filtering, Controls & Navigation](#6)
-6. [Lesson 7: Enhancing Data Analysis](#7)
+6. [Lesson 7: Additional Features + Charts](#7)
 7. [Lesson 8: Data Modeling w/Calculated Columns & Measures](#8)
 
 
@@ -190,13 +190,19 @@ NOTE: Although no visuals have been created yet in Report View, the data is stil
 Importing data into Power BI stores a snapshot of the data in the .pbix file. This means that even if the original .txt file is later deleted, the report and its visuals will still work since the data is already embedded.  
 - Think of it like embedding a file in PowerPoint or attaching a PDF to an Outlook email. It doesn't matter if the original file is deleted since a copy is already stored within the document or email.
 
-#### Task 2.1B: Delete the imported table (that has been loaded into the semantic model) & reimport it.  
+```
+Task 2.1B: Delete the imported table (that has been loaded into the semantic model) & reimport it.  
+```
+
 #### Solution 2.1B:
 - Go to Table View (Model View also works).  
 - Right-click the table name in the Fields pane.  
 - Click 'Delete from model'.  
 
-#### Task 2.1C: Update the data in the source file & refresh it in Power BI:
+```
+Task 2.1C: Update the data in the source file & refresh it in Power BI:
+```
+
 #### Solution 2.1C:
 1. Confirm that the data is already loaded in Power BI. 
 2. On the .txt file, make the following changes:
@@ -238,17 +244,18 @@ Optional Exercise: Entering/changing data is not ideal with Power BI. PowerQuery
 
 ---
 	
-### -- 2.2. Importing a folder of .txt files --
+### 2.2. Importing a folder of .txt files
 	
-We can import files from a folder since Power Query has a built-in folder connector. 
+In Power BI, the 'Folder' import option can be used to combine multiple data files into a single dataset
 
-Real life examples of combining multiple files:
-- Real Life Example 1: A student mentioned they work with contractor information.
-	They append the data by month to build a yearly aggregate.
-- Real Life Example 2: You receive monthly sales data as separate CSV files stored in the same SharePoint folder. 
-		Each file has the same schema.
+Real-life examples of combining multiple files:
 
-Exercise: We want Power Query to automatically combine all files into one table.
+Example 1: A student mentioned aggregating monthly contractor data into a single, yearly report.  
+Example 2: Monthly sales data stored as CSV files in a SharePoint folder can be appended provided that all files share the same schema.
+
+```
+Task: Since Power Query has a built-in folder connector, use Power Query to automatically combine all files into one table.
+```
 
 ```
 	This is how the folder is structured:
@@ -258,26 +265,45 @@ Exercise: We want Power Query to automatically combine all files into one table.
   		└─ People3.txt
 ```
 
-Solution:
+```
+Solution  
+```
 
-	Click Home -> Get Data -> Folder 
-	Point to the 'Text-Files' folder (or point it to a folder (SharePoint/OneDrive/local))
-		C:\Users\student\Desktop\notes\powerBI\2025 PowerBI Courseware\1- Connecting to Data\Custom-Connections\text-files
-		
-	On the pop up, 
-		Don't press 'Load' because then it will load the metadata!
-		Click 'Combine' -> 'Combine & Load'.
-		On the final "Combine Files" pop up window, we're asked about the structure & settings of the resulting table. 
-			Press 'OK' & as a result, the data is then imported as a table.
+1. Select Home -> Get Data -> Folder.
+2. Locate the folder path containing the files to import (e.g. the 'Text-Files' folder)  
+Example path:  
+C:\Users\student\Desktop\notes\powerBI\2025 PowerBI Courseware\1- Connecting to Data\Custom-Connections\text-files
+3. In the pop-up, avoid selecting "Load" as this imports only the metadata.
+4. Select Combine -> Combine & Load.
+5. In the Combine Files window, review the table structure and settings, then select OK to import the data as a table.
 
-	BEST PART: This creates an efficient, automated solution.
-	Any new file dropped into this folder is then picked up at the next refresh.
-		EX: If a new People4.txt is created, clicking Home -> Refresh will load its records into the table.
+Result
+All of the data has been appended into 1 table. This additionally creates an automated append process; <b> any new files added will automatically append during the refresh!! </b>
+
+Sample Example: If a 'People4.txt' has been added, then selecting 'Home' -> 'Refresh' will load its records into the table.
 		
+
+### 2.2 Bonus: Import only 2 .txt files
+[Source](https://www.youtube.com/watch?v=vewFUbW7jaQ&t=202s)
+
+1. Repeat Steps 1 & 2: 
+	- Import a folder by selecting 'Folder' as the data source under:  
+	Home (Tab) -> Get Data (Group) -> 'Folder'  
+		- Make sure to find the file path to the 'Text-Files' folder.
+2. After the files have been loaded on the pop-up, click 'Transform Data' to open the Power Query Editor.
+3. In Power Query, start by filtering the `Name` column to keep only the files you want to append.
+4. Afterwards, remove unnecessary columns by right-clicking the 'Content' column & selecting 'Remove Other Columns'
+5. Finally, use the 'Combine Files' button (i.e. the icon with two arrows) to merge all files into one dataset.
+
 ### -- 2.3: Importing Excel Files  --
 
-	Task: On the same report, Import 'Pivot your table like a champ.xlsx'
-	Verify that the data has been imported.
+This subsection will cover how to import data in Excel into Power BI.
+
+```
+Task: On the same report, Import 'Pivot your table like a champ.xlsx'
+```
+
+	Viewing the table in the Data Pane is a way to verify that the data has been imported.
 	
 	Visuals are visualizations of semantic model data (e.g. charts, graphs). 
 	Power BI includes over 30 core visuals, which are built in and available to all reports. 
@@ -1209,39 +1235,26 @@ Helpful Links:
 
 
 /* -------------------------------------------------------
-## <p id = "7"> Lesson 7: Enhancing Data Analysis | [Back to ToC](#toc)</p> 
+## <p id = "7"> Lesson 7: Additional Features + Charts | [Back to ToC](#toc)</p> 
 ---------------------------------------------------------- */
 
 [Reference Link](https://learn.microsoft.com/en-us/training/modules/power-bi-effective-reports/)
 
 In this chapter, we will discuss more about charts & chart options.
 
-As you know, Tooltips are pop ups that display extra details about a data point in a visual when you hover over it. 
-
-
-		Under Sales Data, date categories are commonly mapped out via 
-			Line Charts, Area Charts, Column Charts
-
-		When we hover over the chart, we will see tooltip.
-
- 		Let's say we want to compare quantity with total sales
-		Sales is in millions, quantity is in thousands.
-		We can do a compbo chart but make sure quantity is mapped in column legend
-
-
-	
--- Fun Activity: Custom Tooltip Based on Report Pages --  
+### 7.1 Fun Activity: Custom Tooltip Based on Report Pages --  
 [Example of creating a chart as a tooltip](https://www.youtube.com/watch?v=cGpBUJpFWrM)
 
-	By default, Tooltips show the value and category, but they can be customized to include more information.
+	As you know, Tooltips are pop ups that display extra details about a data point in a visual when you hover over it. When we hover over the chart, we will see tooltip.
+
+	So by default, Tooltips show the value and category, but they can be customized to include more information.
 		We can enhance tooltips by embedding full visuals from a separate report page. 
 		These visuals, such as cards, gauges, or charts, are filtered based on the data point being hovered over, adding context to the main visual.
 
 	Q: WHY ADD A CUSTOM TOOLTIP WHEN A DEFAULT ONE IS AlREADY ON THE CHART?
-		A: Save space & change the default tooltip!
+	A: Save space & change the default tooltip!
 
-		
-		Task: Use the 'Shape Maps' visual to map out State (Location) vs Total sales (Color Saturation)
+Task: Use the 'Shape Maps' visual to map out State (Location) vs Total sales (Color Saturation)
 		
 		Why we only see the Map Tooltip page under the Page dropdown? Why we can't see other pages?
 		
@@ -1296,6 +1309,12 @@ As you know, Tooltips are pop ups that display extra details about a data point 
 					- If the table doesn’t update, click outside the field or make a small change on the table.
 
 
+We can do a compbo chart under Sales Data for date categories that are commonly mapped out via 
+			Line Charts, Area Charts, Column Charts
+Let's say we want to compare quantity with total sales.  
+Sales is in millions, quantity is in thousands.  
+but make sure quantity is mapped in column legend  
+		
 
 	Key Influencers		
 		identifies biggest factors influencing a metric
