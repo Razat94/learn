@@ -104,6 +104,11 @@ The Left Navigation Bar in Power BI Desktop shows different views:
 				- or the whole report 
 
 			- Visualization Pane: 
+
+				- Power BI includes over 30 core visuals, which are built in and available to all reports. 
+				- =You can access the core visuals in the first section of the Visualizations pane.
+
+
 				- Lets us add new charts/graphs and modify existing visuals.
 				- If a chart has been selected,
 				clicking a chart icon will replace the currently selected chart.
@@ -254,12 +259,14 @@ Example 1: A student mentioned aggregating monthly contractor data into a single
 Example 2: Monthly sales data stored as CSV files in a SharePoint folder can be appended provided that all files share the same schema.
 
 ```
-Task: Since Power Query has a built-in folder connector, use Power Query to automatically combine all files into one table.
+Task: 
 ```
+Since Power Query has a built-in folder connector, use Power Query to automatically combine all files into one table.
+
 
 ```
 	This is how the folder is structured:
-		[Folder] Text Files
+		Text Files [Folder]
   		├─ People1.txt
   		├─ People2.txt
   		└─ People3.txt
@@ -278,14 +285,20 @@ C:\Users\student\Desktop\notes\powerBI\2025 PowerBI Courseware\1- Connecting to 
 5. In the Combine Files window, review the table structure and settings, then select OK to import the data as a table.
 
 Result
-All of the data has been appended into 1 table. This additionally creates an automated append process; <b> any new files added will automatically append during the refresh!! </b>
+Just like in the previous section, viewing the table in the Data Pane verifies that the data has been import.
 
-Sample Example: If a 'People4.txt' has been added, then selecting 'Home' -> 'Refresh' will load its records into the table.
+The table should an appended singular table that contains all of the data. This additionally creates an automated append process; <b> any new files added will automatically append during the refresh!! </b>
+
+Sample Example: If a `People4.txt` has been added, then selecting 'Home' -> 'Refresh' will load its records into the table.
 		
 
-### 2.2 Bonus: Import only 2 .txt files
+### 2.2 Bonus: Import only 2 .txt files in a folder
 [Source](https://www.youtube.com/watch?v=vewFUbW7jaQ&t=202s)
 
+`Task:` Import data from only `People2.txt` and `People3.txt` into the appended table.
+```
+Solution  
+```
 1. Repeat Steps 1 & 2: 
 	- Import a folder by selecting 'Folder' as the data source under:  
 	Home (Tab) -> Get Data (Group) -> 'Folder'  
@@ -295,34 +308,28 @@ Sample Example: If a 'People4.txt' has been added, then selecting 'Home' -> 'Ref
 4. Afterwards, remove unnecessary columns by right-clicking the 'Content' column & selecting 'Remove Other Columns'
 5. Finally, use the 'Combine Files' button (i.e. the icon with two arrows) to merge all files into one dataset.
 
-### -- 2.3: Importing Excel Files  --
+### 2.3: Importing Excel Files
 
-This subsection will cover how to import data in Excel into Power BI.
+This subsection will cover how to import data in MS Excel into Power BI.
 
 ```
-Task: On the same report, Import 'Pivot your table like a champ.xlsx'
+Task: On the same report, import a spreadsheet from the file 'Pivot your table like a champ.xlsx'
 ```
 
-	Viewing the table in the Data Pane is a way to verify that the data has been imported.
-	
-	Visuals are visualizations of semantic model data (e.g. charts, graphs). 
-	Power BI includes over 30 core visuals, which are built in and available to all reports. 
-	You can access the core visuals in the first section of the Visualizations pane.
+Once the data has been imported, we can create visuals. Visuals are visualizations of the semantic model data (e.g. charts, graphs). 
 
 Task: On the report, create a page & name it "Performance Highlights"
 
-		 Make a very simple chart of sales person vs amount of sales.
-			Select the visual type "Clustered Column" in the Visualizations pane 
-			and then position and size it to 1/2 the canvas page.
+		Make a very simple chart of sales person vs amount of sales.
+		From the Visualizations pane, select the visual type "Clustered Column" and then position and size it to 1/2 the canvas page.
+		
 		- Create 2 cards: One showing the name of Salesperson & the other showing Total Amount.
-			Remember:  A card visualization displays a single data point.
+		- Remember:  A card visualization displays a single data point.
 
-			If you don't see the card element, open the Visualizations pane, click the three dots (...) in the "Get more visuals" section, and choose "Restore default visuals" to bring back the default card (and other items).
-
+		> NOTE: If you don't see the card element, open the Visualizations pane, click the three dots (...) in the "Get more visuals" section, and choose "Restore default visuals" to bring back the default card (and other items).
 
 		Note: After selecting a visual, changing the chart type will modify the existing chart rather than creating a new one.
 		
-	
 Task: Exporting How-Tos
 	
 	- Export report as PDF
@@ -334,7 +341,7 @@ Task: Exporting How-Tos
 		(Click on chart  -> Ellipses (on the Visual Header e.g. charts tools button) -> Export Data)
 			
 	
-Optional Task: Try importing the table from "Data-Pub1.xlsx" 
+Optional Task: Importing the table from "Data-Pub1.xlsx" 
 
 	-- Review Q: --
 	Q: When importing data from an Excel workbook into Power BI, if you receive the error message: 
@@ -345,8 +352,12 @@ Optional Task: Try importing the table from "Data-Pub1.xlsx"
 	-- 
 
 
-### 2.4: Importing an Excel File located on a OneDrive/SharePoint --
+### 2.4: Importing an Excel File located on a OneDrive/SharePoint
 [Source](https://learn.microsoft.com/en-us/power-bi/connect-data/desktop-use-onedrive-business-links)
+
+```
+The following solution is taken from the above link:
+```
 
 1. 	Using a browser, navigate to your OneDrive for work or school location 
 	Select the ellipses (...) to open the More menu, then select Details.
@@ -361,7 +372,7 @@ Optional Task: Try importing the table from "Data-Pub1.xlsx"
 4. 	With the Basic option selected, paste the link into the From Web dialog.
 
 5. 	If Power BI Desktop prompts you for credentials, 
-	choose either Windows for on-premises SharePoint sites or Organizational Account for Microsoft 365 or OneDrive for work or school sites.
+	choose either `Windows for on-premises SharePoint sites` or `Organizational Account for Microsoft 365` or `OneDrive for work or school sites`.
 
 6. 	RESULT:
 	A Navigator dialog appears. 
@@ -375,33 +386,38 @@ Optional Task: Try importing the table from "Data-Pub1.xlsx"
 
 Step 1: On Power BI Desktop, click on Get Data in the top-left corner. Since SharePoint might not appear in the initial list, click on More.
 
-	In the Get Data window, search for “SharePoint”.
-	You’ll see a few options: SharePoint Folder, SharePoint Online List, and SharePoint List.
+- From the Get Data window, search for "SharePoint".
+You’ll see a few options: 
+	- SharePoint Folder, 
+	- SharePoint Online List, 
+	- and SharePoint List.
 
-	I usually go with SharePoint List since:
-		The SharePoint List connector works with both SharePoint On-Premises and SharePoint Online. 
-		The SharePoint Online List connector only works with SharePoint Online.
+	<br/>
 
+	- The SharePoint Online List connector only works with SharePoint Online (preferred choice if you use SP Online).
+	- The SharePoint List connector works with both SharePoint On-Premises and SharePoint Online. 
+	
 
 Step 2: Enter the SharePoint Site URL and copy the root site URL (not a link to the SharePoint start page, or a specific file/folder).
 
-Example: 	https://yourdomain/sites/yourSharePointName
-		https://viltclasses.sharepoint.com/sites/MS-Power-BI
+
+	Example: 	
+		- https://yourdomain/sites/yourSharePointName
+		- https://viltclasses.sharepoint.com/sites/MS-Power-BI
 
 Paste the URL into Power BI and click OK.
 
-Step 3: Sign In to SharePoint
-	You'll need to connect your Microsoft account.
-	Avoid using "Anonymous" or "Windows" authentication—those typically won't work unless you're on a corporate domain setup.
-	Choose Microsoft Account, and sign in with the account that has access to your SharePoint site.
+Step 3: Connect your Microsoft account to Sign In to SharePoint
+	
+	- Avoid using "Anonymous" or "Windows" authentication since those typically won't work unless you're on a corporate domain setup.
+	- Choose 'Microsoft Account', and sign in with the account that has access to your SharePoint site.
 
-Step 4: Select Your Lists
-	Once connected, you'll see a list of all available SharePoint lists.
-	Select the ones you want but note: You'll notice some extra columns that are metadata fields automatically added by SharePoint.
-	You can reshape it before loading if you'd like via PowerQuery otherwise press "Load"
+Step 4: 
+	Once connected, you'll see a list of all available SharePoint lists. 
+	Select the list you want but note: you might notice some extra columns that are metadata fields automatically added by SharePoint.
+	You can reshape it before loading if you'd like via PowerQuery otherwise press "Load" and deleting the extra columns.
 	
 Result: Once loaded, you'll see your SharePoint data available in Power BI.
-
 
 	--
 	If the following error shows up: 
@@ -425,27 +441,26 @@ Useful Links:
 
 -- Subsection: Forming 1x1 cardinality --  
 
-	Task: Open "Employees.pbix" or Import data from "Employees.xlsx" 
+```
+Task: Open "Employees.pbix" or Import data from "Employees.xlsx" 
+```
+
+Recap:
+Data imported into Power BI is organized as tables.
+A table is a grid similar to a spreadsheet, where data attributes as columns and records as rows.
 	
-	Recap:
-	Data imported into Power BI is organized as tables.
-	A table is a grid similar to a spreadsheet, where data attributes as columns and records as rows.
+Data is often divided across multiple sources or tables.
+For instance, we can import:
+- a Sales Orders table which contains data about orders placed, 
+- a Products table that lists out each product’s details, like name, price, and category.
+- a Customers table that lists out their name.
+
+Relationships show how data in one table connects to data in another.
 	
-
-	Data is often divided across multiple sources or tables.
-	For instance, we can import:
-		- a Sales Orders table which contains data about orders placed, 
-		- a Products table that lists out each product’s details, like name, price, and category.
-		- a Customers table that lists out their name.
-
-
-	Relationships show how data in one table connects to data in another.
-	Once a relationship is formed (usually it's done automatically),
-	we can reference data from separate tables & create visuals from them.
+	Once a relationship is formed (usually it's done automatically), we can reference data from separate tables & create visuals from them.
 		For example, VLOOKUP can use/reference the Product table to find details for products in the Orders table.
 
-
-	In this example, this relationship we have is a 1:1 relationship with the key being on EID.
+In this example, this relationship we have is a 1:1 relationship with the key being on EID.
 	Each employee has a respective salary.
 	We can create a chart that shows average salary per region. 
 
@@ -457,12 +472,11 @@ Useful Links:
 			Dimension tables have the key you “look up” (like the first column in a VLOOKUP table).
 			Fact tables have the foreign key that points to the dimension table (like the value you pass into VLOOKUP).
 
-		Relationships in Power BI are basically automatic VLOOKUPs behind the scenes, 
-		connecting the keys so you can pull related attributes or measures.
+Relationships in Power BI are basically automatic VLOOKUPs behind the scenes, connecting the keys so you can pull related attributes or measures.
 
+3 purposes why we should normalize data:
 
-	3 purposes: 
-		- Usually data is spread out into various tables; Data is seldom combined into one big table.
+		- Usually data is spread out into various tables; Data is seldom combined into one big table anyway.
 		- Normalizing our data avoids redundancy 
 		- We can "Hide table from report view" by right clicking on table.
 			- The principle of least privilege (PoLP) is a security practice,
@@ -472,10 +486,11 @@ Useful Links:
 	
 	
 -- Subsection: Forming 1xMany Cardinality --  
+```
+Task: Open 'Example-Star-Schema.pbix'
+```
 
-	Task: Open 'Example-Star-Schema.pbix'
-
-	Let's look at the following data:
+Let's look at the following data:
 		
 	1. Fact-SalesOrders (Fact Table)
 	SaleID	CustomerID	ProductID	Quantity	SalesAmount
@@ -498,15 +513,15 @@ Useful Links:
 	102		Mug		Accessories
 	103		Notebook	Stationery
 
-	
 
 	When your data model has multiple tables, make sure the tables are properly related so that we can use them in visualizations.
-	
-	
-	== STAR SCHEMA ==	
-	Useful Links:
-	[Star Schema Link #1](https://learn.microsoft.com/en-us/training/modules/choose-power-bi-model-framework/2-describe-power-bi-model-fundamentals#star-schema-design)
-	[Star Schema Link #2](https://learn.microsoft.com/en-us/power-bi/guidance/star-schema)
+
+
+== STAR SCHEMA ==  
+
+Useful Links:
+- [Star Schema Link #1](https://learn.microsoft.com/en-us/training/modules/choose-power-bi-model-framework/2-describe-power-bi-model-fundamentals#star-schema-design)
+- [Star Schema Link #2](https://learn.microsoft.com/en-us/power-bi/guidance/star-schema)
 	
 		A Star Schema is a schema design/data modeling approach. 
 		It is a way to organize your data in Power BI (or any data warehouse). 
@@ -514,7 +529,8 @@ Useful Links:
 	
 		Ultimately, its used to organize your data since it's a design for that structure.
 
-		It consists of:
+Star Schema consists of:
+			
 			One Central Fact table — contains measurable RAW transactional data (e.g., sales, revenue, quantities).
 				The CENTER event that contains quantitative data.
 				In Star Schema, we should only have one FACT table of ONE object
