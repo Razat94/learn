@@ -317,6 +317,9 @@ This subsection will cover how to import data in MS Excel into Power BI.
 Task: On the same report, import a spreadsheet from the file 'Pivot your table like a champ.xlsx'
 ```
 
+When importing spreadsheets that have data, notice that sources with table icons will have a blue header, while 
+sheets are tabs that use the 'Navigator' settings.
+
 Once the data has been imported, we can create visuals. Visuals are visualizations of the semantic model data (e.g. charts, graphs). 
 
 Task: On the report, create a page & name it "Performance Highlights"
