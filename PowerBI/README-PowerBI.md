@@ -64,11 +64,14 @@ General Overview:
 
 #### Task: Open "Getting_Started.pbix"
 
+We have opened up a Power BI file which are referred to as a "Report" & has a file extension '.PBIX'.  
+In other words, Power BI files are treated as reports, even if they contain no visuals and only include a semantic model associated with the report.
+
 "At the top of the window within the ribbon, you'll see the Home tab where the most common operations you perform are available" [MS Learn Resource](https://learn.microsoft.com/en-us/training/modules/intro-power-bi/tour).
 
 <img src = './resources/home-ribbon.png'>
 		
-Upon opening the file, the Backstage View can be used to enable the following settings:
+Clicking on the "File" tab will display the Backstage View which can be used to enable the following settings:
 	
 	Under Files -> Settings -> Preview Features, check off:
 		- Shape Map Visual
@@ -83,20 +86,17 @@ Upon opening the file, the Backstage View can be used to enable the following se
 
 ### Power BI Interface
 
-NOTE:	
-The entire power bi file is referred to as a "Report" & is a file saved with a '.PBIX' extension. In other words, Power BI files are treated as reports, even if they contain no visuals and only include a semantic model associated with the report.
-
-<img src = './resources/1-1-report-structure.png'>
-
 The Left Navigation Bar in Power BI Desktop shows different views:  
 [MS Learn Article: Power BI Desktop Overview](https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-query-overview?utm_source=chatgpt.com)
 
 - Report View  
 	- The Report View is where data can be turned into visuals. The center area of the view is the "report canvas" where visuals are added.
-	- Similar to MS Excel, there is a status bar where pages can get added/removed and each page portrays a different story!  
+	- Similar to MS Excel, there is a status bar where pages can get added/removed where each page portrays a different story!  
 	> Note: On Power BI Service, a dashboard is just 1 page.
 
-	- This view contains three panes on the right (Each pane can be minimized or maximized as needed):
+	<img src = './resources/1-1-report-structure.png'>
+
+	- This Report View contains three panes on the right (Each pane can be minimized or maximized as needed):
 		
 			- Filter Pane: By dragging a field, we can filter: 
 				- a single visual 
@@ -105,14 +105,12 @@ The Left Navigation Bar in Power BI Desktop shows different views:
 
 			- Visualization Pane: 
 
-				- Power BI includes over 30 core visuals, which are built in and available to all reports. 
-				- =You can access the core visuals in the first section of the Visualizations pane.
-
-
-				- Lets us add new charts/graphs and modify existing visuals.
-				- If a chart has been selected,
-				clicking a chart icon will replace the currently selected chart.
-				- Notice that a selected chart will  display several sections (in the pane) specifically related to that chart (e.g. X-Axis & Y-Axis).
+				- The first section of the Visualizations pane will display the core visuals; Power BI includes over 30 core visuals, which are built in and available to all reports. 
+				
+				- Notice that if a chart has been selected,
+				notice that:
+					-  a selected chart will  display several sections (in the same pane) specifically related to that chart (e.g. X-Axis & Y-Axis).
+					- clicking a chart icon will replace the currently selected chart.
 				
 			- Data pane: 
 				- Lets us view all the tables and columns that are imported or set up
@@ -127,7 +125,8 @@ The Left Navigation Bar in Power BI Desktop shows different views:
 
 		<img src = "./resources/visual-headers.png">
 
-			For instance, each individual visual allows for focus mode which expands the single visual (like a chart, table, or map) so that it takes up the full page (the entirety of the canvas).
+		#### Focus Mode
+			Viewing the visual healders of a selected visual displays focus mode, which expands the single visual (like a chart, table, or map) so that it takes up the full page (the entirety of the canvas).
 			
 	- Table View - Shows Raw Data Records
 		- Notice that each view has a slightly different ribbon but you can still import data on any view.
@@ -179,15 +178,17 @@ Power BI can transform text-based data into clear visualizations and interactive
 
 #### Task 2.1A: Import the text file "People1.txt" located in the  "text-files" folder.
 
+> Note: Before doing the exercise, ensure that the data has been extracted from the .zip folder.
+
 #### Solution 2.1A:
 - On the Power BI Desktop, click `Home` -> `Get Data`.
-- Select `Text/CSV` as the data source & choose the .txt or .csv file to import.
+- Select `Text/CSV` as the data source & choose the .txt or .csv file to import (e.g. `R-People1.txt`).
 - The file preview displays the data so that users can quickly check if their data is correct. 
 	- Click `Load` to import the file, or `Transform Data` to clean and edit it first.
 - Once imported, verify that data has been imported by going to `Table View` to view the table `People1`.
 	- All data imported into Power BI is structured as tables consisting of rows (records) and columns (attributes), similar to a grid or a spreadsheet.
 
-NOTE: Although no visuals have been created yet in Report View, the data is still stored and can be viewed
+Note: Although no visuals have been created yet in Report View, the data is still stored and can be viewed in the Data View.
 > Note that a .pbix file is still considered a report file, even if there aren't any visuals created yet. 
 
 > Optional Task: Create a chart that displays the number of people living in each location.
