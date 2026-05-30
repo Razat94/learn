@@ -64,25 +64,33 @@ General Overview:
 
 #### Task: Open "Getting_Started.pbix"
 
-We have opened up a Power BI file which are referred to as a "Report" & has a file extension '.PBIX'.  
-In other words, Power BI files are treated as reports, even if they contain no visuals and only include a semantic model associated with the report.
+We have opened up a Power BI file which are referred to as a "Report" & has a file extension '.PBIX'. Power BI files are treated as reports, even if they contain no visuals and only include a semantic model associated with the report.
 
 "At the top of the window within the ribbon, you'll see the Home tab where the most common operations you perform are available" [MS Learn Resource](https://learn.microsoft.com/en-us/training/modules/intro-power-bi/tour).
 
 <img src = './resources/home-ribbon.png'>
 		
-Clicking on the "File" tab will display the Backstage View which can be used to enable the following settings:
-	
-	Under Files -> Settings -> Preview Features, check off:
-		- Shape Map Visual
-		- Modern Visual Tips
-		- 'On Object Interaction' - handy feature
-			- Be careful: This changes the view and adds a 'pain' (pun) manager. 
-			- Instead of large sections, this option creates a condensed area to switch back and forth from.
+On the ribbon, the 'File' tab provides access to the Backstage View, which contains application settings and configuration options.
+
+For instance, "Preview Features" is a setting that lets users try new features before they're officially released. These features can be turned on or off by going to:
+	```
+	Files -> Settings -> Preview Features.
+	```
+
+For instance, the Shape Map visual can be available in the report-building tools by going to 'Preview Features' and checking off:
+- Shape Map Visual
+
+> Note: Make sure to close the file and reopen it to see the affects.
 		
-	To set up dark mode: 
-		1. Go to File -> 'Options and Settings' -> Options 
-		2. On the left panel, select 'Report Settings' -> 'Customize Appearance' (preview)
+Additional Recommended Settings are:
+- Modern Visual Tips		
+	- Modern Visual Tooltips improves the pop-up information users see when hovering over charts and other visuals.
+- On Object Interaction
+	- When enabled, this feature replaces the traditional side-panel panes with a more compact view that groups options to save space, making it easier to switch between panes. [Source](https://learn.microsoft.com/en-us/power-bi/create-reports/power-bi-on-object-interaction)
+- To enable Dark Mode: 
+	1. Select File -> 'Options and Settings' -> Options 
+	2. Choose 'Report Settings' from the left pane.
+	2. Under 'Customize Appearance' (preview), select your preferred theme.
 
 ### Power BI Interface
 
@@ -226,7 +234,10 @@ From the Data pane on the right, right-click the table name, and choose 'Refresh
 		You can use Live Connection for example with SQL Server that automatically updates the data in Power BI.
 		Every time you interact with a visual (filter, slice, drill down), Power BI queries the SQL Server in real time
 	
-> Please note that if the source data file is moved or deleted, the report and visuals will still remain intact, but the data refresh will stop working. In the data source settings, the connection path to the file must be updated to reconnect the link.
+> Please note that if the source data file is moved or deleted, the report and visuals will still remain intact, but the data refresh will stop working. 
+
+To update the connection link if the file is broken/moved:
+- Under data source settings, the connection path to the file must be updated to reconnect the link.
 
 ---
 
@@ -368,7 +379,7 @@ The following solution is taken from the above link:
 
 2. 	In the More details pane that appears, select the copy icon next to Path.
 
-> Note that if the file is open on the desktop Excel app, the file path can be copied (for importing) by going to File -> Info -> Copy path. Ensure that the extension ends with `.xlsx`
+> Note that if the OneDrive file is open on the desktop Excel app, the file path can be copied (for importing) by going to File -> Info -> Copy path. Ensure that the extension ends with `.xlsx`
 
 
 3. 	In Power BI Desktop, select Get data > Web
@@ -648,56 +659,68 @@ Remember: Power Query = Data Transformation
 ## <p id = "Day2"> DAY 2 | [Back to ToC](#toc) </p>
 ---------------------------------------------------------- */	
 
-
 Links:  
 	- [Add visuals](https://learn.microsoft.com/en-us/power-bi/visuals/power-bi-report-add-visualizations-i?tabs=powerbi-desktop)  
 	- [Design Power BI reports](https://learn.microsoft.com/en-us/training/modules/power-bi-effective-reports/1-introduction)  
 	- [Design effective reports in Power BI](https://learn.microsoft.com/en-us/training/paths/power-bi-effective/)
 
-
 /* -------------------------------------------------------
 ## <p id = "5"> Lesson 5: Visuals & Analyzing such Visuals | [Back to ToC](#toc)</p> 
 ---------------------------------------------------------- */
 
+Once the data is imported, we can now build visuals in Power BI Desktop to explore trends, patterns, and connections.
 
-With your data prepped & ready, we can now build visuals in Power BI Desktop to explore trends, patterns, and connections.
-If you’re familiar with PivotTables and PivotCharts, you’ll notice some similarities with Power BI’s charts.
+> Note: Users familiar with PivotTables and PivotCharts in Microsoft Excel will notice similarities with Power BI visuals!
 		
-Excercise: Create a blank report, import "Sales Data" & name the page "Sales per Rep"  
-	- Note: Fields in Data Pane (on far right side) are sorted A-Z  
-	- Note: Fit to Page icon (bottom-right corner of PowerBI next to Zoom bar) resets zoom to standard fit if zoomed in/out.
+Task: Create a blank report.  
+Import "Sales Data". Once the data has been imported, verify that the Fields in Data Pane (on far right side) appear & are sorted A-Z.
 
-### Our First Page
---- Subsection: Simple Chart/Element Creations ---
+### 5.1. Using Our First Page
 
-	Quadrant 1 (1/4 page): 
-	Create a simple column chart showing sum of total sales per Salesperson
-	Recall: Focus Mode lets you expand a single visual (like a chart, table, or map) so it takes up the full page (the entirety of the canvas).
+Power BI helps turn data into clear, interactive charts and visuals.
 
-		Tasks:	
-			- For 'Total sales' field, change from SUM to AVERAGE. 
-			
-			- Sort axis by 'Salesperson', not by 'Sum of Total Sales':
-				clicking on 3 dots of the chart (More Options) -> Sort Axis -> Quarter
-				[Learn more about sorting](https://learn.microsoft.com/en-us/power-bi/consumer/end-user-change-sort)
+```
+Task: Name the page "Sales per Rep" and perform the following subtasks:
+```
 
-			- Change interval of y-axis: 
+Subtask 1:  
+In Quadrant 1 (1/4 page), create a simple column chart that displays the total sales by salesperson.
+
+	Tasks:	
+		- Apply settings for changing X AXIS
+
+		- In the Visualizations Pane, change the 'Total sales' field from SUM to AVERAGE. 	
+		- Change the chart's sort order by clicking the three dots (More Options) in the Visual Header Icons -> Select Sort Axis, and choose Ascending (Lowest to Highest) instead of Descending.
+			[Learn more about sorting](https://learn.microsoft.com/en-us/power-bi/consumer/end-user-change-sort)
+			- Optional Task: Sort axis by 'Salesperson', not by 'Sum of Total Sales'
+
+		- Change interval of y-axis: 
 				Select the Visual -> "Format Your Visual" pane -> Visual -> Y-Axis -> "Maximum" to 5000 (or similar).
 					Q: Can we set the interval in sets of 25000?
 			 		A: No. No direct setting to force specific intervals (like strictly every 1000 units) 
-			- Make Gridlines more noticeable:
-				Format Visuals -> Gridlines 
-					-> Change Color
-					-> Change Width
+			- Update Gridlines:
+				Make the gridline more noticeable via Format Visuals -> Gridlines 
+					-> Change Color to black
+					-> Change Width 
 			- Add Legend:
 				Drag the 'Salesperson' field to Legend Area (observe color change).	
 				Then under Visual Pane -> Visuals -> Legend ->
 					Customize: Text: Bigger, Position: Center Right 
 				If we click on the legend, it forms a highlight
-	
-		
+			- Update Gridline : 
+				- Changed color to black
+				- Changed the width
 
-	Quadrant 2 (1/4 page):
+Two things to note:
+
+	> Note: The Fit to Page icon (bottom-right corner of PowerBI next to Zoom bar) resets zoom to standard fit if zoomed in/out.
+
+	--- 
+
+	> Recall: Focus Mode lets you expand a single visual (like a chart, table, or map) so it takes up the full page (the entirety of the canvas).
+
+Quadrant 2 (1/4 page):
+
 	Note: When we start adding Visuals, visuals can be COPIED + PASTED	
 	- Create 2 cards: One showing the name of Salesperson & the other showing Total Amount.
 		Remember:  A card visualization displays a single data point.
@@ -714,27 +737,54 @@ Excercise: Create a blank report, import "Sales Data" & name the page "Sales per
 				Color Options: Black background with White text color.
 				Note: Backgrounds change when the theme is changed too.
 	
-	Quadrant 3 (1/4 page)
+Quadrant 3 (1/4 page)
+	
 	- Add the Skillable Office image to your report (Insert tab -> Image)
 
-### Adding Elements
-Pictures are apart of elements. Let's create a new page to discuss more about elements.
+	Note that large pictures will fail to display in Power BI
+
+<img src = "./resources/large-file.jpg"/>
+
+### 5.2. The Selection Pane
+The Selection Pane (under the View tab) works similar to PowerPoint (even has the same icon!) which allows the user to reorder layers and toggle (show/hide) elements. [Source](https://learn.microsoft.com/en-us/power-bi/create-reports/power-bi-create-mobile-optimized-report-order-layers)
+
+The Selection Pane can be accessed by going to View(Tab) -> Selection Pane.
+
+<img src = "./resources/MS-selection-pane.jpg"/>
+
+#### Grouping
+Similar to PowerPoint, Power BI Desktop can combine visuals, buttons, and text all into a single group. This lets users select multiple elements all at once rather than selecting each item individually.
+
+[Source](https://learn.microsoft.com/en-us/power-bi/create-reports/desktop-grouping-visuals)
+
+Task: 	Group all cards together.  
+Task: 	Group elements on the right and label it 'RHS'.
+
+Q: How to align shapes, like in PowerPoint?  
+A: Select All > Format Tab > Align
+ 
+### 5.3. Adding Elements
+Pictures are apart of elements. 
+
+Task: Create a new page titled 'Elements' to discuss more about elements.
 
 <img src = './resources/1-1-report-structure.png'>
 
+	Recall:
 	Visuals - Visualizations of semantic model data.
 	Elements - Provide visual interest but don't use semantic model data. 
 		Elements include text boxes, buttons, shapes, and images.
 
-	Task: On the new page, let's cover the different ways to add text to a canvas page:
-		1. (Not recommended) Create a textbox:
-			- (Similar to PowerPoint)	Insert -> Textbox
-		3. (Preferred) Insert Shape: 	Insert -> Shapes -> Rectangle
-			(Result: A blue box has been added)
-			A simple background can always be added to a card/shape. 
-		2. Create a card & then:
-			1. Add a measure that says: 	msg = "Hello World!"
-			2. Add the measure under the "Fields" section of a card.
+Task: On the new page, let's cover the different ways to add text to a canvas page:  
+	1. (Not recommended) Create a textbox:
+		- (Similar to PowerPoint)	Insert -> Textbox  
+	2. (Preferred) Insert Shape: 	Insert -> Shapes -> Rectangle
+		(Result: A blue box has been added)
+		A simple background can always be added to a card/shape. 
+			Add text by accessing the settings in the pane.  
+	3. Create a card & then:  
+		1. Add a measure that says: 	msg = "Hello World!"
+		2. Add the measure under the "Fields" section of a card.
 
 			Subtask:
 			Add a salesmessage:
@@ -742,7 +792,7 @@ Pictures are apart of elements. Let's create a new page to discuss more about el
 			SalesMsg = "The total sales is: " &
 			SUM(Data[Total Sales])
 
-		Task: Add text/background styles to a card:
+		Subtask: Add text/background styles to a card:
 		Format Shape Pane -> Shape -> Style:
 			- Text: (Under same style category) Make sure to turn "ON" 
 				Add your text, change font size to 30
@@ -754,12 +804,6 @@ Pictures are apart of elements. Let's create a new page to discuss more about el
 
 
 -- Subsection: Buttons --
-
-	Recall:
-	Visuals - Visualizations of semantic model data.
-	Elements - Provide visual interest but don't use semantic model data. 
-		Elements include text boxes, buttons, shapes, and images.
-
 
 	Task: On a new page, add the following buttons under Insert -> Buttons:
 		- Back Button (Once placed on canvas, Press Ctrl + Click to activate)
@@ -814,19 +858,7 @@ Pictures are apart of elements. Let's create a new page to discuss more about el
 				For example, you can give a synonym of (Actuals) for the (Sales) measure. 
 
 
-
-### The Selection Pane
-The Selection Pane (under the View tab) works like in PowerPoint, which lets us reorder layers and toggle (show/hide) element visibility.
-
-	Task: 	Group all cards together.
-			Group all shapes together
-			Group all textboxes together.
-
-	Q: How to align our shapes, like in PowerPoint?
-	A: Select All > Format Tab > Align
-
-
-### Background Formatting
+### 5.4. Background Formatting
 --- Subsection: Background Formatting ---
 
 Create a new page called "Formats". 
@@ -867,26 +899,21 @@ Overview 2 Min Task: Take a moment to design your own filters, background, etc. 
 	Once exported, try importing your theme into PowerBI. 	
 
 
-### More Formats
+### 5.5. Additional Chart Formats
 --- Subsection: Bar Chart Formatting ---
 
-	Create a new page called 'Product/Quarterly Sales'
+Create a new page called 'Product/Quarterly Sales'
 	
-	Quadrant 1 (1/2 page): 
-		Create a 'BAR' chart mapping Product vs Sales (check off 2 fields: Product & Total Sales)
-		Recommend: Turn Focus Mode On.
+Quadrant 1 (1/2 page):  
 
-		NOTICE: 
+	Create a 'BAR' chart mapping Product vs Sales (check off 2 fields: Product & Total Sales)
+	Recommend: Turn Focus Mode On.
+
+	NOTICE: 
 			When we select a visual & open the Format Visual pane, 
 			the pane shows formatting sections/options SPECIFIC to that visual
 			e.g. 	For a bar chart, you won’t see a 'Columns' section because it doesn’t use columns; 
 				instead, you’ll see a 'Bars' section to format the bars.
-
-
-		Optional Task: Change your bar chart into a Funnel Chart!
-			A funnel visualization displays a linear process with sequentially connected stages, 
-			with one stage transitioning to the next.
-
 
 		Click on the chart & go to Format Visuals -> Bars (Remember: We have a bar chart, not column chart!)
 
@@ -906,10 +933,14 @@ Overview 2 Min Task: Take a moment to design your own filters, background, etc. 
 				[Learn more about conditional formatting](https://learn.microsoft.com/en-us/power-bi/create-reports/desktop-conditional-table-formatting)
 				
 
-	Quadrant 2 (1/4 page): 
-		Create a 'WATERFALL'/FUNNEL chart mapping Regional Earnings (Map Regional & Total Sales) 
+Quadrant 2 (1/4 page): 
+
+	Create a 'WATERFALL'/FUNNEL chart mapping Regional Sales (Map Regional & Total Sales) 
 		A waterfall visualization displays a running total as values are added or subtracted.
 			(Note: the chart doesn't look good when mapping regions)
+		A Funnel Chart
+			A funnel visualization displays a linear process with sequentially connected stages, 
+			with one stage transitioning to the next.
 
 		Perhaps this will be swapped for FUNNEL 
 
@@ -957,10 +988,11 @@ Overview 2 Min Task: Take a moment to design your own filters, background, etc. 
 				[Learn More via this video](https://www.youtube.com/watch?v=Eop1HsBjWwo)
 				
 
-	Quadrant 3 (1/4 page):
-		Add a 'LINE CHART' below the previous column chart to display quarterly earnings.
-			Instead of sorting x-axis of the line chart by highest to lowest, 
-			- Sort X-Axis by "Quarter" so it goes (Q1->Q4)
+Quadrant 3 (1/4 page):
+
+	Add a 'LINE CHART' below the previous column chart to display quarterly earnings.
+		Instead of sorting x-axis of the line chart by highest to lowest, 
+		- Sort X-Axis by "Quarter" so it goes (Q1->Q4)
 					
 		
 
@@ -972,72 +1004,73 @@ To customize & filter reports, in this chapter we will touch base on:
 	- Interactions/Filtering/Slicers  
 	- Add Button  
 	- Groups/Drill Downs  
-	- Create Tooltips -> Hover mouse over chart
 
 Helpful Links:  
 	- [Visual Interactions](https://learn.microsoft.com/en-us/power-bi/create-reports/service-reports-visual-interactions?tabs=powerbi-desktop)  
 	- [Turn OFF all the Visual INTERACTIONS](https://www.youtube.com/watch?v=9eEk2ct2QCI)  
 
 
--- Subsection: Highlights/Interactions (On the Same Page) --  
+### 6.1.: Highlights/Interactions (On the Same Page) 
+Visuals in a report update dynamically based on user selections.  
+
+- Tooltips: Hover over a data point to see a tooltip with extra details about that data point pop up.
+
+- Highlighting = Visual emphasis WITHIN THE SAME visual.  
+	- EX: For example, on a page with a single column chart,  clicking one bar highlights (colored fully) that bar while dimming the other bars.
+		
+- Cross-highlighting = Visual emphasis ACROSS DIFFERENT visuals
 	
-	Visuals in a report update dynamically based on user selections.  
+	"Select a data point or a bar or a shape and watch the impact on the other visualizations." 
+	[Source](https://learn.microsoft.com/en-us/power-bi/create-reports/service-reports-visual-interactions?tabs=powerbi-desktop#change-the-interaction-behavior)
 
-		- Highlighting = Visual emphasis WITHIN THE SAME visual.
-			EX: For example, on a page with a single column chart, 
-			clicking one bar highlights (colored fully) that bar while dimming the other bars.
-		
-		- Cross-highlighting = Visual emphasis ACROSS DIFFERENT visuals
-			"Select a data point or a bar or a shape and watch the impact on the other visualizations." 
-				[Source](https://learn.microsoft.com/en-us/power-bi/create-reports/service-reports-visual-interactions?tabs=powerbi-desktop#change-the-interaction-behavior)
-		
+	Cross-highlighting is when one visual affects another by highlighting portions of the data(subsets) but doesn't filter it completely.
+	e.g. Selecting a bar on a bar chart can affect a pie chart.	
 
+		Task: Clicking/Selecting data in one visual highlights related data segments in another and fades the rest.
 
-			
-			
+		NOTICE:
+			Cross-highlighting a chart means that the tooltip has changed & now displays an added "Highlighted:" field with extra info 	
+
 		When selecting an Interaction forms a new table, one student said: 
 			Figured out my issue - click on the graph, then "Data/Drill" tab, then unclick "Data Point Table" - all good!
 
-		NOTICE:
-			Hover over a data point to see a tooltip with extra details about that data point pop up.
-			Cross-highlighting a chart means that the tooltip now displays an added "Highlighted: field with extra info 	
-
-			EX: Clicking/Selecting data in one visual highlights related data segments in another and fades the rest.
-			Cross-highlighting is when one visual affects another by highlighting portions of the data(subsets) but doesn't filter it completely.
-				e.g. Selecting a bar on a bar chart can affect a pie chart.	
-
-		To turn off interactions, go to: 
-			File>Options>Query Reduction 
-			& Select "Disabling cross highlighting/filtering by default".
-			[More Info](https://www.reddit.com/r/PowerBI/comments/tfjig4/default_to_no_interactions_with_other/)
+> Note: Turn off interactions by going to: 
+``` File>Options>Query Reduction ```
+& select "Disabling cross highlighting/filtering by default".
+[More Info](https://www.reddit.com/r/PowerBI/comments/tfjig4/default_to_no_interactions_with_other/)
 		
-		If a visual isn’t behaving as you want, we can adjust interactions behaviors.
-		Task: Edit how the visuals interact with each other:
-			Select a visual to make it active (for e.g. Quarterly Sales Column Chart)
-			On the ribbon in Power BI Desktop, select Format > Edit interactions.
-			Pick how other visuals react by selecting one of these three interaction behaviours:
-				- Filter aka Cross Filter -> Only the filtered data remain
-				- Highlight aka Cross Highlight - Default
-				- None
-	
-		Task:
-			For the Previous Page that was recently created,
-			apply interactions for the bar chart representing product sales.
+Task:
+For the Previous Page that was recently created, apply interactions on the bar chart representing product sales to edit how this visuals interacts other visuals by:
 
-			Have the TOP FUNNEL/WATERFAL CHART be A FILTER
-			Have the BOTTOM QUARTERLY SALES CHARTS have NO INTERACTIONS
+	First select a visual to make it active (for e.g. Quarterly Sales Column Chart)
+	
+	On the ribbon in Power BI Desktop, select Format > Edit interactions.
+	
+	Now pick how other visuals react by selecting one of these three interaction behaviours:
+		- Filter aka Cross Filter -> Only the filtered data remain
+		- Highlight aka Cross Highlight - Default
+		- None
+
+	- Applying a filter interaction on the FUNNEL/WATERFAL CHART
+	- Apply NO INTERACTIONS on the BOTTOM QUARTERLY SALES CHART
 
 	
--- Subsection: Filtering Excercise --  
-	[MS Learn Article: Adding Filters to Reports](https://learn.microsoft.com/en-us/power-bi/create-reports/power-bi-report-add-filter?tabs=powerbi-desktop)
+### 6.2. Filtering Excercise  
+[MS Learn Article: Adding Filters to Reports](https://learn.microsoft.com/en-us/power-bi/create-reports/power-bi-report-add-filter?tabs=powerbi-desktop)
 
-	We can filter our data to see only what we're interested in.
+Data can be filtered to show only what the user is interested in.
 	
-	The Filters pane displays along the right side of the report canvas. 	
-	We can set filters at three different levels for the report.
-		- The visual level.
-		- The page level.	
-		- The report level.
+The Filters pane displays along the right side of the report canvas. 	
+
+We can set filters at three different levels for the report.  
+	- The visual level.  
+	- The page level.  
+	- The report level.
+
+
+
+	Task: Create a filter on page for SALESPERSON EMMA
+	Task: Make a DUPLICATE page & then apply a filter on that page for salesperson LSIA
 
 	Task: Filter Excercise: Show all salepeople starting M
 
@@ -1076,11 +1109,14 @@ Helpful Links:
 			Top 3 items By Value: (Field goes Here) Sum of Total Sales
 	
 
--- Subsection: Slicers Excercise --
+### 6.3. Slicers
 
-	The slicer visualization can be used to filter the other visuals on the page. 
+The slicer visualization can be used to filter the other visuals on the page. 
 	
 	Quadrant 3 (1/4 page) On the same 'Product/Regional Sales' page: 
+	Task: Create a slicer for each sales person.
+
+
 	Task: Create a slicer for Region & make it a tile.
 
 		Change text of headers to make it big!:  			Visual -> Values -> Font Size
@@ -1104,36 +1140,37 @@ Helpful Links:
 
 
 
--- Subsection: Bookmarks --  
-	[MS Article about Bookmarks](https://learn.microsoft.com/en-us/power-bi/create-reports/desktop-bookmarks)  
-	[Video: Use bookmarks to change chart or visual with Button Click](https://youtu.be/EMfqGiFr6Y4?si=UGZle2pfMQKZmiJw)
+### 6.4. Bookmarks  
+[MS Article about Bookmarks](https://learn.microsoft.com/en-us/power-bi/create-reports/desktop-bookmarks)  
+[Video: Use bookmarks to change chart or visual with Button Click](https://youtu.be/EMfqGiFr6Y4?si=UGZle2pfMQKZmiJw)
 
-	Bookmarks work are similar to MS Word bookmarks; Think of them as snapshots of your report you can quickly revisit or share.
+Bookmarks work are similar to MS Word bookmarks; Think of them as snapshots of your report you can quickly revisit or share.
 
-	Bookmarks are the same as saved states in a video game
+Bookmarks are the same as saved states in a video game  
+Bookmarks save the current state of a report(including filters, slicers, and visuals) so that you can:
 
-	Bookmarks save the current state of a report(including filters, slicers, and visuals) so that you can:
-		- Return to that view anytime.
-		- Navigate between pages or sections.
-		- Make interactive reports with clickable buttons or images.
+	- Return to that view anytime.
+	- Navigate between pages or sections.
+	- Make interactive reports with clickable buttons or images.
 				
-		Task: Add a bookmark to go to page 1
+Task: Add a bookmark to go to page 1
 
-		Task: Make a simple bookmark for the 'Product/Regional Sales' page
+Task: Make a simple bookmark for the 'Product/Regional Sales' page
 			
-			Note: First assure that we are on the 'Product/Regional Sales' page.
-			Enable bookmarks pane via View tab -> Bookmarks
-			From the Bookmarks pane, select 'Add' to add a bookmark.
-			Test: If we go to a different page and click that bookmark, it will take us to the saved page.
+	Note: First assure that we are on the 'Product/Regional Sales' page.
+	Enable bookmarks pane via View tab -> Bookmarks
+	From the Bookmarks pane, select 'Add' to add a bookmark.
+	Test: If we go to a different page and click that bookmark, it will take us to the saved page.
 		
-		Task: Create a bookmark that filters either:
-			Regional Sales [iPhones]
-			Regional Sales [Laptops]
-			Regional Sales [Quarter]
+Task: Create a bookmark that filters either:
+	
+	- Regional Sales [iPhones]
+	- Regional Sales [Laptops]
+	- Regional Sales [Quarter]
 
-			Remember: Bookmarks saves other settings too like filters, etc.
+	Remember: Bookmarks saves other settings too like filters, etc.
 
--- Subsection: Groups --  
+6.5. Groups
 	[MS Article explaining Groups](https://learn.microsoft.com/en-us/power-bi/create-reports/desktop-grouping-and-binning)
 	
 	When Power BI Desktop creates visuals, 
@@ -1157,7 +1194,7 @@ Helpful Links:
 		Note: The Bin group type is an auto grouping of items into bucketed bins (groups).
 
 
--- Subsection: Drill Down --  
+### 6.6. Drill Down
 	[MS Article Reference](https://learn.microsoft.com/en-us/training/modules/configure-semantic-model-power-bi/5-hierarchies)  
 	[Test Your Knowledge](https://learn.microsoft.com/en-us/training/modules/configure-semantic-model-power-bi/9-check)
 
@@ -1260,7 +1297,7 @@ Helpful Links:
 
 [Reference Link](https://learn.microsoft.com/en-us/training/modules/power-bi-effective-reports/)
 
-In this chapter, we will discuss more about charts & chart options.
+In this chapter, we will discuss more about charts & chart options such as creating Tooltips when users hover their mouse over a chart.
 
 ### 7.1 Fun Activity: Custom Tooltip Based on Report Pages --  
 [Example of creating a chart as a tooltip](https://www.youtube.com/watch?v=cGpBUJpFWrM)
@@ -1373,17 +1410,19 @@ but make sure quantity is mapped in column legend
 	Create a multirow card.
 		We can increase the text size if we'd like..
 
-	Decomposition Tree
-		This visual lets you visualize data between multiple dimensions and drill down in any order.
-		Analyze Total Sales
+Decomposition Tree  
+This visual lets you visualize data between multiple dimensions and drill down in any order.
+
+		Analyze: 
+			Total Sales
 		Explain By:	
-			Quarter
+			Product
+			Then by Quarter
 			Then by Region
-		Visual Pane -> Under Category Labels -> Change Font Size.
+			
+> Note: Make it bigger by going to Visual Pane -> Under Category Labels -> Change Font Size.
 	
-
-	The Smart Narrative visual lets you combine natural language text with metrics from your model in sentence forms.
-
+The Smart Narrative visual lets you combine natural language text with metrics from your model in sentence forms.
 
 	You need to create a custom Python visual by using Power BI Desktop.
 	What do you need to do first?
@@ -1683,10 +1722,9 @@ Notes / Limitations
 - Some organizations disable this feature for security reasons. If you don’t see “Publish to web,” check with your Power BI admin.
 -----------------
 
+Steps on how to add a Power BI report to a SharePoint page:
 
-https://learn.microsoft.com/en-us/power-bi/collaborate-share/office-integration/service-embed-report-spo
-
-Steps on how to add a Power BI report to a SharePoint page.
+[Source](https://learn.microsoft.com/en-us/power-bi/collaborate-share/office-integration/service-embed-report-spo)
 
 -----------------
 
