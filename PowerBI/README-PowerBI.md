@@ -393,7 +393,6 @@ The following solution is taken from the above link:
 	From there, you can use the OneDrive for work or school file just like any other Excel file.
 
 
-
 ## 2.5 Optional Subsection: Importing SharePoint list data into OneDrive --
 [Youtube Tutorial](https://www.youtube.com/watch?v=eyUwG2tlWn4)
 
@@ -641,17 +640,14 @@ Star Schema consists of:
 	A: Many to Many
 	-- --
 
-	
 
 /* -------------------------------------------------------
 ## <p id = "4"> Lesson 4: PowerQuery | [Back to ToC](#toc)</p> 
 ---------------------------------------------------------- */
 
-
 Chapter 3 -  
 Power Query Editor provides the ability to transform and analyze data.  
 Remember: Power Query = Data Transformation
-
 
 /* -------------------------------------------------------
 ## <p id = "Day2"> DAY 2 | [Back to ToC](#toc) </p>
@@ -1403,9 +1399,9 @@ This visual lets you combine natural language text with metrics from your model 
 ### 7.2 Fun Activity: Custom Tooltip Based on Report Pages --  
 [Example of creating a chart as a tooltip](https://www.youtube.com/watch?v=cGpBUJpFWrM)
 
-To recap, tooltips are pop ups that display extra details about a data point. So when users hover their mouse over a chart, they will see tooltip.
+To recap, tooltips are pop ups that display extra details about a data point. When users hover their mouse over a chart, they will see a default tooltip displaying the value and category.
 
-By default, Tooltips show the value and category, but can be customized and enhanced by embedding full visuals from a separate report page. These visuals, such as cards, gauges, or charts, are filtered based on the data point being hovered over and add context to the main visual.
+Tooltips can be customized and enhanced by embedding full visuals from a separate report page. These visuals, such as cards, gauges, or charts, are filtered based on the data point being hovered over and add context to the main visual.
 
 	Q: WHY ADD A CUSTOM TOOLTIP WHEN A DEFAULT ONE IS AlREADY ON THE CHART?
 	A: Save space & customize the default tooltip!
