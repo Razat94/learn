@@ -1408,10 +1408,10 @@ This visual lets you combine natural language text with metrics from your model 
 
 	So by default, Tooltips show the value and category, but they can be customized to include more information.
 		We can enhance tooltips by embedding full visuals from a separate report page. 
-		These visuals, such as cards, gauges, or charts, are filtered based on the data point being hovered over, adding context to the main visual.
+		These visuals, such as cards, gauges, or charts, are filtered based on the data point being hovered over,adding context to the main visual.
 
 	Q: WHY ADD A CUSTOM TOOLTIP WHEN A DEFAULT ONE IS AlREADY ON THE CHART?
-	A: Save space & change the default tooltip!
+	A: Save space & customize the default tooltip!
 
 Task: Use the 'Shape Maps' visual to map out State (Location) vs Total sales (Color Saturation)
 		
@@ -1422,7 +1422,8 @@ Task: Use the 'Shape Maps' visual to map out State (Location) vs Total sales (Co
 		https://community.fabric.microsoft.com/t5/Desktop/Map-and-filled-map-visuals-are-disabled/td-p/3116218
 
 
-		Steps:			
+Solution:
+
 		1. Create a new page & name it "Map-Tooltip". This will be our tooltip page.
 		2. Under Visualizations side bar -> Format your report page -> 
 			- Page Information -> Check off "Allow Use as tooltip"
@@ -1437,11 +1438,12 @@ Task: Use the 'Shape Maps' visual to map out State (Location) vs Total sales (Co
 				Type -> Report Page
 				Page -> "Razatooltips"
 
+Some common examples:  
 
-	Real Life Example:
+	- Example #1:
 	Healthcare by state, showing regions that are most developed vs. those needing improvement
 
-	ANOTHER EXAMPLE:
+	- Example #2:
 		Add a bar chart for product sales 
 			Create a tooltip for quarterly sales so when we hover over a bar (e.g. laptops)
 			we see just Laptops sales for each quarter.		
