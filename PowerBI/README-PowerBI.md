@@ -995,7 +995,8 @@ Quadrant 3 (1/4 page):
 		Create a a line graph that maps Monthly total sales.
 
 		Do a filter for Q2
-			let's analyze the top point by right clicking on the point -> Analyze !!!!
+			let's analyze the top point by right clicking on the point -> Analyze !!!
+
 
 
 /* -------------------------------------------------------
@@ -1402,22 +1403,17 @@ This visual lets you combine natural language text with metrics from your model 
 ### 7.2 Fun Activity: Custom Tooltip Based on Report Pages --  
 [Example of creating a chart as a tooltip](https://www.youtube.com/watch?v=cGpBUJpFWrM)
 
-	As you know, Tooltips are pop ups that display extra details about a data point in a visual when you hover over it. When users hover their mouse over a chart, they will see tooltip.
+To recap, tooltips are pop ups that display extra details about a data point. So when users hover their mouse over a chart, they will see tooltip.
 
-	So by default, Tooltips show the value and category, but they can be customized to include more information.
-		We can enhance tooltips by embedding full visuals from a separate report page. 
-		These visuals, such as cards, gauges, or charts, are filtered based on the data point being hovered over,adding context to the main visual.
+By default, Tooltips show the value and category, but can be customized and enhanced by embedding full visuals from a separate report page. These visuals, such as cards, gauges, or charts, are filtered based on the data point being hovered over and add context to the main visual.
 
 	Q: WHY ADD A CUSTOM TOOLTIP WHEN A DEFAULT ONE IS AlREADY ON THE CHART?
 	A: Save space & customize the default tooltip!
 
-Task: Add the 'Shape Maps' visual to map out State (Location) vs Total sales (Color Saturation)
+Task: Add the 'Shape Maps' visual to map out the field 'State' (Location) vs Total Sales (Color Saturation).
 		
-		Why we only see the Map Tooltip page under the Page dropdown? Why we can't see other pages?
-		
-		? MUST FIRST BE ENABLED TO MIGHT NEED TO MAP TOOLTIP
-		FYI: You might need to enable:
-		https://community.fabric.microsoft.com/t5/Desktop/Map-and-filled-map-visuals-are-disabled/td-p/3116218
+	FYI: You might need to enable MAP TOOLTIP:
+	https://community.fabric.microsoft.com/t5/Desktop/Map-and-filled-map-visuals-are-disabled/td-p/3116218
 
 Task: Add the custom tooltip:
 
