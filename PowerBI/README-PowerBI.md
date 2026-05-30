@@ -1323,7 +1323,6 @@ Notice the difference between visuals:
 				that the dropdown for the added field (e.g. Product/State field) shows "Don’t summarize"
 					- If the table doesn’t update, click outside the field or make a small change on the table.
 
-
 ### Combo chart 
 Combo charts can be used with date categories that are commonly mapped out via  
 	- Line Charts, Area Charts, Column Charts
@@ -1348,7 +1347,6 @@ but make sure quantity is mapped in column legend
 	Q? Which native AI visual helps explain correlations for a metric within the dataset?
 	A: The Key influencers visual helps you understand correlated factors impacting a particular metric.
 
-
 ### Tree map	
 
 [Helpful Source](https://learn.microsoft.com/en-us/power-bi/visuals/power-bi-visualization-treemaps?tabs=powerbi-desktop)
@@ -1372,7 +1370,7 @@ but make sure quantity is mapped in column legend
 	We can increase the text size if we'd like..
 
 ### Decomposition Tree  
-This visual lets you visualize data between multiple dimensions and drill down in any order.
+Similar to a Sankey diagram, a decomposition tree let's users perform root-cause analysis and drill down information in any order.
 
 		Analyze: 
 			Total Sales
@@ -1401,7 +1399,7 @@ This visual lets you combine natural language text with metrics from your model 
 
 === Break ==
 
-### 7.1 Fun Activity: Custom Tooltip Based on Report Pages --  
+### 7.2 Fun Activity: Custom Tooltip Based on Report Pages --  
 [Example of creating a chart as a tooltip](https://www.youtube.com/watch?v=cGpBUJpFWrM)
 
 	As you know, Tooltips are pop ups that display extra details about a data point in a visual when you hover over it. When users hover their mouse over a chart, they will see tooltip.
@@ -1413,7 +1411,7 @@ This visual lets you combine natural language text with metrics from your model 
 	Q: WHY ADD A CUSTOM TOOLTIP WHEN A DEFAULT ONE IS AlREADY ON THE CHART?
 	A: Save space & customize the default tooltip!
 
-Task: Use the 'Shape Maps' visual to map out State (Location) vs Total sales (Color Saturation)
+Task: Add the 'Shape Maps' visual to map out State (Location) vs Total sales (Color Saturation)
 		
 		Why we only see the Map Tooltip page under the Page dropdown? Why we can't see other pages?
 		
@@ -1421,8 +1419,7 @@ Task: Use the 'Shape Maps' visual to map out State (Location) vs Total sales (Co
 		FYI: You might need to enable:
 		https://community.fabric.microsoft.com/t5/Desktop/Map-and-filled-map-visuals-are-disabled/td-p/3116218
 
-
-Solution:
+Task: Add the custom tooltip:
 
 		1. Create a new page & name it "Map-Tooltip". This will be our tooltip page.
 		2. Under Visualizations side bar -> Format your report page -> 
