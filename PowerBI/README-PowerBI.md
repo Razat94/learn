@@ -1171,17 +1171,15 @@ Remember: Bookmarks saves other settings as well such as like filters, etc.
 
 
 ## 6.5. Groups
-	[MS Article explaining Groups](https://learn.microsoft.com/en-us/power-bi/create-reports/desktop-grouping-and-binning)
+[MS Article explaining Groups](https://learn.microsoft.com/en-us/power-bi/create-reports/desktop-grouping-and-binning)
 	
-	When Power BI Desktop creates visuals, 
-	it aggregates or groups your data into chunks based on the values it finds.
-	Usually this is fine, but sometimes you may want to control how the data is grouped. 
-	Like Excel PivotTables, you can group columns in Power BI which makes large charts or histograms that have many columns easier to read.
+Power BI Desktop creates visuals by aggregating or grouping data into chunks based on the values it finds. While this is standard behavior, users have the option to control how the data is grouped. Similar to Excel PivotTables, users can group columns in Power BI, thereby making large charts or histograms easier to read.
 
+Situation: 	Confirm there is a Quarterly Sales column chart showing 'Total sales' by 'Quarter'.
 
-	Situation: 	Confirm there is a Quarterly Sales column chart showing 'Total sales' by 'Quarter'.
-	Task: 		Form 2 groups: 1st half of year vs 2nd half of year.
-	Action: 	
+Task: Form 2 groups: 1st half of year vs 2nd half of year.
+	
+	Solution: 	
 			On the far right data pane, right click on the field "Quarter" -> New Group
 		
 			On the pop up, name the group "First Half / Second Half"
@@ -1547,9 +1545,9 @@ Note: Measures are explicit.
 	If an axis is displaying "average" of sales, then we can't change the field to display "sum" in the pane field; we'll need to change the formula.
 			
 Recap of Measures:
-			
+
 	- Calculated only when needed (mainly when you use them in a visual or report).
-	- Don't take up extra space in your data model.
+	- Doesn't take up extra space in the data model.
 	- Measures are most efficient for larger data sets when calculations don’t need to be stored row by row.
 
 Calculated Columns:
@@ -1558,7 +1556,6 @@ Calculated Columns:
 	- Always calculated, even if not used in your report.
 		- link two tables based on a calculated value,
 	- Unlike a measure, a calculated column can be used in a slicer to filter on the report page.
-
 
 ## 8.3. The Display Folder   
 In Power BI, a Display Folder is a way to organize fields (columns, measures, hierarchies) in the Fields pane without changing the underlying data model.  
@@ -1578,7 +1575,6 @@ Task: Create a display folder named 'Calculated Columns' for each of the columns
 	Step 2: Select the desired measures or columns
 	Step 3: In the Properties pane, in the 'Display folder' field, type the folder name & then press Enter. 
 	
-	
 -- Additional Q's & Notes: --  
 
 	-- 
@@ -1589,7 +1585,6 @@ Task: Create a display folder named 'Calculated Columns' for each of the columns
 
 	You decide to remove unnecessary columns from your data model.
 	What are two potential performance benefits of doing this? Each correct answer presents a complete solution.
-
 
 
 	OPTIONAL EXCERCISE:
