@@ -1189,24 +1189,20 @@ Task: Form 2 groups: 1st half of year vs 2nd half of year.
 		Note: The Bin group type is an auto grouping of items into bucketed bins (groups).
 
 ## 6.6. Drill Down
-	[MS Article Reference](https://learn.microsoft.com/en-us/training/modules/configure-semantic-model-power-bi/5-hierarchies)  
-	[Test Your Knowledge](https://learn.microsoft.com/en-us/training/modules/configure-semantic-model-power-bi/9-check)
 
+Helpful Resources:
+- [MS Article Reference](https://learn.microsoft.com/en-us/training/modules/configure-semantic-model-power-bi/5-hierarchies)  
+- [Test Your Knowledge](https://learn.microsoft.com/en-us/training/modules/configure-semantic-model-power-bi/9-check)
 
-	We've covered interactions and highlights but to recap:
-	Up to this point, when we create a chart and we click on it, it creates a highlight. 
-	That highlight stands out from other elements within the chart or a cross-highlight/affect other charts as an interaction.
+Up to this point, click on a chart causes a highlight, which makes it stand out from other elements within the chart. A cross-highlight by contrast affects other charts as an interaction.
 		
-	With most datasets however, there are usually complex groups or subsets of data. 
-	To manage this, we can create a hierarchy that by default gives the user a high-level overview of your data, 
-		and it can drill down into more detailed levels as needed.
+Most datasets contain groups or subsets of data. Creating a hierarchy helps users start with a high-level overview and lets them drill down into more detailed information when needed.  
 	i.e. Hierarchy = GROUPING/AGGREGATE
 
-	Microsoft article: "Levels of a hierarchy are always based on columns from the same model table"
-	In short: we're grouping a set of related fields together under a hierarchy.
-		Whole Point: Improves organization & no need to make potential duplicate charts thereby saving space.
-		
+Microsoft article: "Levels of a hierarchy are always based on columns from the same model table"
+In short: we're grouping a set of related fields together under a hierarchy.
 
+Overall Whole Point: Hierarchies improves organization & no need to make potential duplicate charts thereby saving space.
 
 	Quadrant 1 (Use Focus Mode so that size of the chart doesn't matter):
 	Scenario: We'll create a hierarchy of sales for 'Region' -> 'State' 
@@ -1232,7 +1228,7 @@ Task: Form 2 groups: 1st half of year vs 2nd half of year.
 	
 	By default, clicking a region bar displays the table data for that region.
 	
-	Task: 	Turn this drilldown feature off by going to Data/Drill contextual tab, & deselect the option 'Data point table'
+Task: 	Turn this drilldown feature off by going to Data/Drill contextual tab, & deselect the option 'Data point table'
 	Result: We've enabled drill-down mode so that clicking a bar no longer shows a table or standard highlight.
 	
 	Task: 	Enable Drill Down Mode to expand regional sales:
