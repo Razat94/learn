@@ -1441,126 +1441,140 @@ Some common examples:
 ## <p id = "8"> Lesson 8: Data Modeling w/Calculated Columns & Measures | [Back to ToC](#toc)</p> 
 ---------------------------------------------------------- */
 
+## 8.1. Calculated Columns
+In Power BI, a calculated column is a new column added to a table by using a DAX formula.  
 
--- Subsection: Calculated Columns --  
-	In Power BI, a calculated column is a new column that you create using a formula.  
-	This new column:  
-		- is a custom field that was created by using DAX  
-		- calculates a value for every row in that table.  
-		- this custom field doesn't come from the raw data source & we can use it in visuals, filters, or slicers just like any other field.  
-	Note: To create a formula in Power BI (Calculated Column):  
-		Option 1: In Power Query, use Custom Column  
-		Option 2: In Table View within Power BI, click New Column to add it directly in the data model.  
-		⚠️ Note: Columns created in Table View will not appear in Power Query.  
-			Power Query is mainly for initial data transformations i.e. Power Query runs before the data is loaded into the model.
+This new column:  
+- uses DAX to calculate a value for every row in that table.  
+- is a custom field that doesn't originally come from the raw data source & can be used in visuals, filters, or slicers (just like any other field).  
 	
-	Task: Create simple text calculated columns.
-	Go to Table View (You can also make a calculated column in Report View, but Table View shows results)
-	3 ways to create a new column:
+Note: There are various ways to create a calculated column in Power BI:  
+- Option 1: Add a Custom Column via PowerQuery  
+- Option 2: In Table View (within Power BI Desktop), click 'New Column' to add it directly in the data model.  
+- ⚠️ Note: Columns created in Table View will not appear in Power Query since Power Query is mainly used for initial data transformations i.e. Power Query runs before the data is loaded into the model.
+	
+Task: Create a static calculated column w/ the text value "Hello World!" for every row.
+
+Solution:
+
+	Go to Table View (Calculated columns can also be made in the Report View, but Table View will show the results).
+
+	There are 3 ways to create a new column:
 		Tables Tools (Contextual Tab) -> New Column 
 		OR
 		Home Tab -> New Column 
 		OR
 		In the data pane, right clicking the table name -> New Column
- 
 
-		- Task: Create a static calculated column w/ the same value (“Hello World!”) for every row.
-			firstNewColumn = "Hello World"
-			NOTICE: Calculated columns generate row-level values to all rows, so every row will show “Hello World!”
-					
-		Optional Task: Try changing the value of 'firstNewColumn' to "I love PowerBI"
-		
+	Once the column has been created, type:
 
-		- Task: Use ROUND() function to create 'Rounded Total Sales' Column
-			Under the same Table View, click New Column & enter the formula:
- 				Rounded Total Sales = ROUND(SalesData[Total Sales], 0)
+	firstNewColumn = "Hello World"
 	
-		Optional Task:
-			- Create a column joining the region & state. Solution:  
-				ConcatColumn = SalesData[Region] & "-" & SalesData[State]
-			- Create a tax related column.
+	Since Calculated columns generate row-level values to all rows, once created, every row will display "Hello World!"
+					
+Optional Task: Try changing the value of 'firstNewColumn' to "I love PowerBI"
+		
+Task: Use the ROUND() function to create 'Rounded Total Sales' Column
+		
+	Under the same Table View, click New Column & enter the formula:
 
+ 	Rounded Total Sales = ROUND(SalesData[Total Sales], 0)
+	
+Optional Task: Create a column joining the region & state. 
 
-		- Task: 
-			Create a 'Duration' column to calculate the difference between Ship Date and Order Date. Solution: 
-				Duration = SalesData[Shipped Date] - SalesData[Order Date]
-				Afterwards, go to Column Tools (Tab) and change column data type to WHOLE NUMBER	
-			
-
-		- Task:
-			Create a "Duration-Status-Message" column. 
-			Using an IF Statement, if the duration is <3 then the value is "acceptable" else it's "late". Solution: 
-				Duration-Status-Message = IF(SalesData[Duration] < 3, "Acceptable", "Late")
+	Solution:  
+	ConcatColumn = SalesData[Region] & "-" & SalesData[State]
+	
+Task: Create a tax related column.  
+Task: 
+	Create a 'Duration' column to calculate the difference between Ship Date and Order Date. 
 				
+	Solution:  
+	Duration = SalesData[Shipped Date] - SalesData[Order Date]
+
+	Once created, go to Column Tools (Tab) and change column data type to 'WHOLE NUMBER'	
+
+Task: Create a "Duration-Status-Message" column.  
+If the duration is <3, then the value is "acceptable" else otherwise it's "late". 
 		
-			Subtask: Let's create a visual.		
-			Create a bar chart that counts "Acceptable" & "late" 
-				Drag the "Duration-Status-Message" field for BOTH X & Y Axis 
-				Optional: Create 1 card that outputs the earlier Message measure, & another with the Count.
+	Solution:
+	Duration-Status-Message = IF(SalesData[Duration] < 3, "Acceptable", "Late")
+				
+Subtask: Create a visual that utilizes the measure		
+			
+	- Create a bar chart that counts "Acceptable" & "late" 
+	- Drag the "Duration-Status-Message" field for BOTH X & Y Axis 
+	- Optional: Create 1 card that outputs the earlier Message measure, & another with the Count.
 
-
-		Optional IF Task: 	NewColumn = IF(SalesData[Total Sales] > 1000, "Big Sale","Not Big Sale")		
+Optional IF Task:  
+NewColumn = IF(SalesData[Total Sales] > 1000, "Big Sale","Not Big Sale")		
 	
-
-	NOTE:
-		Calculated columns are computed row by row
-		Values are stored in the data model => memory being taken up => increase file size and slow refreshes for large tables
-		Overall: Good but inefficient.
+NOTE:  
+- Calculated columns are computed row by row  
+- Values are stored in the data model => memory being taken up => increase file size and slow refreshes for large tables  
+- Overall: Custom Columns can get the job done but are inefficient.
 	 
+## 8.2. Measures
 
--- Subsection: Measures --
+Measures are similar to formulas.
 
-	Measures are similar to formulas.
+Things to note:  
+- When used in a visual, Measures are calculated on the fly so they don’t consume extra storage.  
+- Measures don't create new columns of values for each row (i.e. No per-row calculation) 
+- They operate on entire fields and only appear in the Fields pane; they show calculations only when used in visuals.  
+Recap: You can create and name measures just like calculated columns, BUT no calculation occur UNTIL the measure is added to a visual.  
+	- For instance, Power BI can’t create relationships using measures - can only use columns. 
+	- Although they exist in the semantic model, bogus results are returned when we attempt something.
+
+Situation: Measures can be used when we need a summary value (like average, comission)				
+
+Task: Create a measure named "Commission". 
+
+Solution:
+ 	
+	Commission = SUM(SalesData[Total Sales]) * 0.02
+			
+- After creating a measure, no new column is added so thus there's no new value added for each row.
+
+- The measure applies to the whole field and appears in the side pane, showing values only when used in visuals.
+		
+TASK: Create a new page for Salespeople.
 	
-	- When used in a visual, Measures are calculated on the fly so they don’t consume extra storage.
-	- Measures don't create new columns of values for each row (i.e. No per-row calculation) 
-	- They operate on entire fields and only appear in the Fields pane; they show calculations only when used in visuals.
-	Recap: You can create and name measures just like calculated columns, BUT no calculation occur UNTIL the measure is added to a visual.
-		- For instance, Power BI can’t create relationships using measures - can only use columns. 
-			- Although they exist in the semantic model, bogus results are returned when we attempt something.
-
-
-	Situation: We use a measure when we need a summary value (like average, comission)				
-	Task: Create a measure named "Commission". Solution:
- 		Commission = SUM(SalesData[Total Sales]) * 0.02
-			
-		- After creating a measure, no new column is added so thus there's no new value added for each row.
-		- The measure applies to the whole field and appears in the side pane, showing values only when used in visuals.
-		
-		TASK: Create a new page for Salespeople.
-			Create a bar chart that maps out SalesPeople Total Sales
-			Create a GAGE CHART out of Measure Commission
-			(Optional) Create a card showing sales person name/sales
+	Create a bar chart that maps out SalesPeople Total Sales
+	Create a GAGE CHART out of Measure Commission
+	(Optional) Create a card showing sales person name/sales
 					
-
-			Note: Measures are explicit. 
-			If an axis is displaying "average" of sales, then we can't change the field to display "sum" in the pane field! 
-			We'll have to change the formula.
+	Note: Measures are explicit. 
+		If an axis is displaying "average" of sales, then we can't change the field to display "sum" in the pane field! 
+		We'll have to change the formula.
 			
-	Recap:
-		Measures:
-			Calculated only when needed (mainly when you use them in a visual or report).
-			Don't take up extra space in your data model.
-			Measures are most efficient for larger data sets when calculations don’t need to be stored row by row.
+Recap of Measures:
+			
+	- Calculated only when needed (mainly when you use them in a visual or report).
+	- Don't take up extra space in your data model.
+	- Measures are most efficient for larger data sets when calculations don’t need to be stored row by row.
 
-		Calculated Columns:
-			Stored in memory for every row in your table, increasing the size of your model.
-			Always calculated, even if not used in your report.
-				link two tables based on a calculated value,
-			- Unlike a measure, a calculated column can be used in a slicer to filter on the report page.
+Calculated Columns:
+	
+	- Stored in memory for every row in your table, increasing the size of your model.
+	- Always calculated, even if not used in your report.
+		- link two tables based on a calculated value,
+	- Unlike a measure, a calculated column can be used in a slicer to filter on the report page.
 
 
--- Subsection: Display Folder --  
-	In Power BI, a Display Folder is a way to organize fields (columns, measures, hierarchies) in the Fields pane 
-	without changing the underlying data model.  
-		Purpose: Makes the Fields pane cleaner and easier to navigate.  
-		- It’s purely for presentation and usability, especially in large models.
+## 8.3. The Display Folder   
+In Power BI, a Display Folder is a way to organize fields (columns, measures, hierarchies) in the Fields pane without changing the underlying data model.  
+
+Purpose:  
+	- Makes the Fields pane cleaner and easier to navigate.  
+	- It’s purely for presentation and usability, especially in large models.
 		
-	Task: Create a display folder named 'Calculated Columns' for each of the columns we made.
-		Calcualted Columns
-  		├─ 'firstNewColumn'
-  		├─ 'Rounded Total Sales'
-  		└─ 'Duration-Status-Message'
+Task: Create a display folder named 'Calculated Columns' for each of the columns that were made.
+
+	Calcualted Columns  
+  	├─ 'firstNewColumn'  
+  	├─ 'Rounded Total Sales'  
+  	└─ 'Duration-Status-Message'
 
 	Step 1: Go to the Model view
 	Step 2: Select the desired measures or columns
@@ -1599,7 +1613,6 @@ Some common examples:
 	Wrong: No bookmarks are necessary.
 	It is not necessary to set the destination to a specific page since conditional formatting is used to specify the destination.
 	
-
 /* -------------------------------------------------------
 ## <p id = "7"> Lesson 8: Sharing & POWERBI SERVICE (PowerBI Online) | [Back to ToC](#toc)</p> 
 ---------------------------------------------------------- */
@@ -1628,7 +1641,7 @@ For the web version, Reports are more like an online object rather than a tradit
 	The Power BI service is composed of many building blocks, including workspaces, reports, semantic models, dashboards, and apps. 
 	Each of these components play a unique role in the Power BI ecosystem.
 
--- Workspaces -- 
+-- Subsection: Workspaces -- 
 
 	Workspaces are the foundation of the Power BI service. 	
 
@@ -1653,7 +1666,7 @@ For the web version, Reports are more like an online object rather than a tradit
 	Task: Upload a report to PowerBI Service 	
 
 
--- Dashboards --  
+-- Subsection: Dashboards --  
 	Links:  
 	- [Create dashboards in Power BI](https://learn.microsoft.com/en-us/training/modules/create-dashboards-power-bi/)  
 	- [MS Article on Dashboards](https://learn.microsoft.com/en-us/power-bi/consumer/end-user-dashboards)
