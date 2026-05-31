@@ -1530,23 +1530,21 @@ Situation: Measures can be used when we need a summary value (like average, comi
 
 Task: Create a measure named "Commission". 
 
-Solution:
- 	
+	Solution:  
 	Commission = SUM(SalesData[Total Sales]) * 0.02
 			
-- After creating a measure, no new column is added so thus there's no new value added for each row.
+- After creating a measure, note that no new column has been added for each row.
 
 - The measure applies to the whole field and appears in the side pane, showing values only when used in visuals.
 		
 TASK: Create a new page for Salespeople.
 	
-	Create a bar chart that maps out SalesPeople Total Sales
+	Create a bar chart that maps out SalesPeople vs. Total Sales
 	Create a GAGE CHART out of Measure Commission
 	(Optional) Create a card showing sales person name/sales
 					
-	Note: Measures are explicit. 
-		If an axis is displaying "average" of sales, then we can't change the field to display "sum" in the pane field! 
-		We'll have to change the formula.
+Note: Measures are explicit.  
+	If an axis is displaying "average" of sales, then we can't change the field to display "sum" in the pane field; we'll need to change the formula.
 			
 Recap of Measures:
 			
