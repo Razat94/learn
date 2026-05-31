@@ -1102,7 +1102,7 @@ Few things to note:
 	
 ## 6.3. Slicers
 
-The slicer visualization can be used to filter the other visuals on the page. 
+The slicer visualization can be used to filter other visuals on the page. 
 
 #### Task: Create a new page called 'Salesperson/Regional Sales'
 		
@@ -1146,13 +1146,9 @@ Helpful Resources:
 - [MS Article about Bookmarks](https://learn.microsoft.com/en-us/power-bi/create-reports/desktop-bookmarks)  
 - [Video: Use bookmarks to change chart or visual with Button Click](https://youtu.be/EMfqGiFr6Y4?si=UGZle2pfMQKZmiJw)
 
-Bookmarks are similar to MS Word bookmarks; Think of them as snapshots of a report that you can quickly revisit or share.
-
-Similar to saved states in a video game, bookmarks save the current state of a report(including filters, slicers, and visuals) so that you can:  
-
-	- Return to that view anytime.
-	- Navigate between pages or sections.
-	- Make interactive reports with clickable buttons or images.
+Similar to saved states in a video game, report bookmarks act as snapshots of a report's view and act similar to MS Word bookmarks; they capture all of the settings of the current state (including filters, slicers, and visuals) so that users can:
+- Return to that view instantly.
+- Create interactive reports by adding clickable buttons or images that improve navigation between pages or sections.
 				
 #### Task: Add a bookmark to go to page 1  
 	1. Assure that we are on the page to bookmark (i.e. Page 1).  
@@ -1169,7 +1165,6 @@ Remember: Bookmarks saves other settings as well such as like filters, etc.
 	- Regional Sales [Laptops]
 	- Regional Sales [Quarter]
 
-
 ## 6.5. Groups
 [MS Article explaining Groups](https://learn.microsoft.com/en-us/power-bi/create-reports/desktop-grouping-and-binning)
 	
@@ -1180,17 +1175,18 @@ Situation: 	Confirm there is a Quarterly Sales column chart showing 'Total sales
 Task: Form 2 groups: 1st half of year vs 2nd half of year.
 	
 	Solution: 	
-			On the far right data pane, right click on the field "Quarter" -> New Group
+		On the far right data pane, right click on the field "Quarter" -> New Group
 		
-			On the pop up, name the group "First Half / Second Half"
-			Now under 'Ungrouped Values' section -> 
-				Using Ctrl+Select, select the elements "Quarter 1" & "Quarter 2" & then press "Group". Double click to rename the group to "H1"
-				Using Ctrl+Select, select the elements "Quarter 3" & "Quarter 4" & then press "Group". Double click to rename the group to "H2"
+		On the pop up, name the group "First Half / Second Half"
+		
+		Now under 'Ungrouped Values' section -> 
+			Using Ctrl+Select, select the elements "Quarter 1" & "Quarter 2" & then press "Group". Double click to rename the group to "H1"
+			
+			Using Ctrl+Select, select the elements "Quarter 3" & "Quarter 4" & then press "Group". Double click to rename the group to "H2"
 			Press "Ok"
 	Result: The group is created against a numerical column using bins.
 		Create a bar chart that maps out "Total Sales" vs. group "First Half / Second Half"
 		Note: The Bin group type is an auto grouping of items into bucketed bins (groups).
-
 
 ## 6.6. Drill Down
 	[MS Article Reference](https://learn.microsoft.com/en-us/training/modules/configure-semantic-model-power-bi/5-hierarchies)  
@@ -1211,8 +1207,7 @@ Task: Form 2 groups: 1st half of year vs 2nd half of year.
 		Whole Point: Improves organization & no need to make potential duplicate charts thereby saving space.
 		
 
-	
-		
+
 	Quadrant 1 (Use Focus Mode so that size of the chart doesn't matter):
 	Scenario: We'll create a hierarchy of sales for 'Region' -> 'State' 
 
