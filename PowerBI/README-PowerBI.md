@@ -1009,7 +1009,7 @@ Helpful Links:
 	- [Turn OFF all the Visual INTERACTIONS](https://www.youtube.com/watch?v=9eEk2ct2QCI)  
 
 
-## 6.1.: Highlights/Interactions 
+## 6.1. Highlights/Interactions 
 > Note: We will continue to work off the Same Page  
 
 Visuals in a report update dynamically based on user selections.  Power BI provides various ways to interact with visuals:
@@ -1521,7 +1521,7 @@ Things to note:
 	Solution:  
 	Commission = SUM(SalesData[Total Sales]) * 0.02
 			
-- After creating a measure, note that no new column has been added for each row and that this measure applies to the whole field.
+- After creating a measure, note that no new column has been added for each row since this measure applies to the whole field.
 		
 #### Task: Create a new page for Salespeople & add a bar chart that maps out SalesPeople vs. Total Sales
 	
@@ -1553,11 +1553,10 @@ Calculated Columns:
 ## 8.3. The Display Folder   
 In Power BI, a Display Folder is a way to organize fields (columns, measures, hierarchies) in the Fields pane without changing the underlying data model.  
 
-Purpose:  
-	- Makes the Fields pane cleaner and easier to navigate.  
-	- It’s purely for presentation and usability, especially in large models.
+Purpose:    
+- It’s purely for presentation and usability, especially in large models since it makes the Fields pane cleaner and easier to navigate.
 		
-Task: Create a display folder named 'Calculated Columns' for each of the columns that were made.
+Task: Create a display folder named 'Customized Calculated Columns' for each of the columns that were made.
 
 	Calcualted Columns  
   	├─ 'firstNewColumn'  
