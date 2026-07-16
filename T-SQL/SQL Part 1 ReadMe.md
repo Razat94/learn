@@ -41,23 +41,23 @@ Side Note:
 
 This chapter will cover how to use SQL Server to connect to a database and run simple queries.
 
-## Lesson 1.0 Connecting to the SQL Database & Executing Our First Query
+### Task 1.0.1 Connecting to the SQL Database & Executing Our First Query
 
-### To launch SQL Server Management Studio:
+### 1. Launch SQL Server Management Studio:
 - Click the Start button (bottom-left corner of the screen)
 - Type `SQL Server Management Studio`
 - Click on the application when it appears in the search list.
 
-### Connect to the Default Server
-Once the application is opened, "... the 'Connect to Server' window opens. If it doesn't open, you can open it manually by selecting 'Object Explorer' > 'Connect' > 'Database Engine'." - [Source](https://learn.microsoft.com/en-us/ssms/quickstarts/ssms-connect-query-sql-server?tabs=modern)
+### 2. Connect to the Default Server
+Once the application is opened, "... the 'Connect to Server' window opens. If it doesn't open, open it manually by selecting:  
+'Object Explorer' > 'Connect' > 'Database Engine'." - [Source](https://learn.microsoft.com/en-us/ssms/quickstarts/ssms-connect-query-sql-server?tabs=modern)
 
 <img src = "zz_connect-to-sql-server.png">
 
 In the 'Connect to Server' alert, click 'Connect' to connect to the server.
 > Note: For local installations, typically users can sign into SQL Server with the default configuration. 
 
-### Creating a new query and execute a statement.
-
+### 3. Creating a new query and execute a statement.
 
 1. Once authenticated in SQL Server, press `CTRL + N` to launch a new query. 
 2. In the query editor window, type in a simple statement:  
@@ -76,7 +76,7 @@ In the 'Connect to Server' alert, click 'Connect' to connect to the server.
 - Query Editor: Write and run SQL queries.
 - Results Pane: Ctrl + R - Toggles the results pane
 
-### Show Lines in the Query Editor
+### Task 1.0.2 Show Lines in the Query Editor
 Displaying line numbers in the query editor makes it easier to pinpoint and debug errors, which can lead to improved collaboration in code reviews and screen sharing. 
 
 To show line numbers:
@@ -119,9 +119,14 @@ SELECT 1 + 3
 
 In SQL Server, including multiple SELECT statements in a single query batch will return their own result sets.
 
+Note that the SQL parser ignores extra whitespace, tabs, and line breaks.
+
 #### Example: Write a batch of SQL statements: 
 ``` sql
 SELECT 1+3
+
+-- extra spaces can be used as long as they doesn't break any words.
+
 SELECT 'Have a nice day'  	-- Outputs simple text. 
 SELECT 'Thank you!'			-- Notice the use of single quotes, as the use of double quotes will result in an error.
 PRINT 'Good Bye!' 			-- Displays a message or a value in the 'Messages' tab and is mainly used for debugging.
@@ -306,6 +311,7 @@ SP_HELP Slspers
 ```
 
 Upon running the above procedure, notice that each column has a data type. Data Types are Column Types which are a columns attribute/definition that determines the kind of values the column can hold. Every column in a SQL table is required to have a specific Data Type assigned to it.
+
 - Data types are constraints that specifies what kind of values a column can store and more importantly, what it cannot! For example, a column defined as a `DECIMAL` data type will contain only decimal numbers, so it enforces data validation since we wouldn't expect to see that column to hold some other value e.g. a date.
 - This will be discussed more in Lesson 3 of SQL Part 2.
 
@@ -514,10 +520,12 @@ Below are more examples demonstrating various ways the WHERE clause can be used:
 	WHERE commrate > 0.04;  
 	```
 
+### 2.3. Additional Keywords
+
 ### SQL NOT Operator 
 The NOT operator is used in the WHERE clause to return records that do not match a specific condition.
 
-#### Example: Returns all customers NOT from NY:
+#### Exercise: Returns all customers NOT from NY:
 ``` sql
 SELECT *  
 FROM Customers  
@@ -525,10 +533,19 @@ WHERE NOT state = 'NY'
 -- ORDER BY state  
 ```
 
+The <> operator can be used in lieu of the `NOT` keyword. 
+#### Task 2.3.1: Using `<>`, returns all customers NOT from NY:
+``` sql
+SELECT *  
+FROM Customers  
+WHERE state <> 'NY'
+-- ORDER BY state   
+```
+
 ### NULL Values
 In SQL, a `NULL` value represents void or empty data in a table field. Similar to a blank cell in Excel, in databases a `NULL` value is a placeholder that represents missing or blank data, and is different from a numeric zero or an empty string.
 
-#### Example of WHERE clause with NULL:  
+#### Task 2.3.2 Example of WHERE clause with NULL:  
 ``` sql
 SELECT *  
 FROM Titles  
@@ -536,6 +553,8 @@ WHERE devcost IS
 -- NOT  
 NULL  
 ```
+
+### Below is a bonus exercise using ISNULL():
 
 Additionally, ISNULL() is a function that replaces `NULL` values with an alternate value. This function is similar to the Excel function ' IF( ISBLANK() ) '  
 > Note: In MySQL, use the function IFNULL() instead.
@@ -642,34 +661,34 @@ ORDER BY zipcode
 -- WHERE (Customers.state = 'NY' OR state='CA') AND zipcode = '92704'  
 ```
 
-## Lesson 2.3. omg LIKE finding data based on patterns
+## Lesson 2.4. omg LIKE finding data based on patterns
 The `LIKE` operator is used in a `WHERE` clause to search for data based on a string pattern.
 
-Exercise: Get all people whose first name starts with the letter 'A'  
+Exercise: Get all customers whose name starts with the letter 'A'  
 ``` sql
 -- Solution
 SELECT *  
-FROM Slspers  
-WHERE fname LIKE 'A%';
+FROM Customers  
+WHERE custname LIKE 'A%';
 ```
 
-Optional Exercise: Show all book titles that end with 'y'
+Optional Exercise: Show all customers that end with the letter 's'
 ``` sql
 -- Solution:
 SELECT * 
-FROM Titles
-WHERE TRIM(bktitle) LIKE '%y';
+FROM Customers
+WHERE custname LIKE '%s';
 ```
 
-Optional Example #1: Show all book titles that only begins with the word 'The'
+Optional Example #1: Show all customers that only begins with the word 'The'
 ``` sql
 -- Solution
 SELECT *
-FROM Titles
-WHERE bktitle LIKE 'The%'
+FROM Customers
+WHERE custname LIKE 'The%'
 ```
 
-Optional Example #2: Show all book titles that contains the word 'The'
+Optional Example #1: Show all book titles that contains the word 'The'
 ``` sql
 -- Solution
 SELECT *
