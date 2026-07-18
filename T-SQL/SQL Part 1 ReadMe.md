@@ -743,11 +743,15 @@ SELECT CAST(GETDATE() AS DATE);  -- Similar to TODAY() function
 
 > Note: Please do not forget to include parentheses when working with functions.
 
-Column names can be wrapped in parentheses:
+Please note that column names can be wrapped in parentheses. This is similar to referencing a cell in Excel using `=A1` or `=(A1)`
+
+Exercise: Column Names Using Parenthesis:
 ``` sql
 SELECT
 	bktitle, 
-	(slprice * 0.9),  -- Column name works with or without () 
+	(bktitle), -- Column name works with or without ()
+	(slprice * 0.9),  -- Formulas may or may not use ()
+
 	(pubdate),  
 	CAST(pubdate AS Date) AS 'New Pub Date'
 FROM titles
