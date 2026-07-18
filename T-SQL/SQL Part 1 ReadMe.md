@@ -730,7 +730,8 @@ ORDER BY bktitle ASC
 
 Database functions are reusable expressions (blocks of code) used in SQL queries to compute and return values.
 
-There are many built-in SQL functions similar to Excel's `SUM` and `CONCATENATE`, and users can also create their  own custom functions.
+There are many built-in SQL functions that are similar to Excel functions (e.g., `SUM` and `CONCATENATE`), and users can also create their own custom functions (which will be discussed in Part 2).
+
 
 ## Lesson 3.1 Date Functions
 
@@ -742,7 +743,6 @@ SELECT CAST(GETDATE() AS DATE);  -- Similar to TODAY() function
 
 > Note: Please do not forget to include parentheses when working with functions.
 
-
 Column names can be wrapped in parentheses:
 ``` sql
 SELECT
@@ -753,15 +753,24 @@ SELECT
 FROM titles
 ```
 
-To ouput the current year:
+Similar to Excel, SQL can use:  
+* the `YEAR` function to ouput the current year:
+
 ``` sql
-SELECT YEAR( GETDATE() ); 	-- like in Excel, the functions MONTH(date) and DAY(date) are available too.  
--- Also works: -- SELECT DATEPART( year, GETDATE() )
+	SELECT YEAR( GETDATE() );  -- Excel Equivalent Function: = YEAR ( TODAY() )  
+	-- in SQL, this also works: 
+	-- SELECT DATEPART( year, GETDATE() )	
+```
+
+* the `MONTH` and `DAY` functions too.
+``` sql
+	SELECT MONTH( GETDATE() )
+	SELECT DAY( GETDATE() )
 ```
 
 <br/>
 
-#### Filter By Year 2017
+#### Exercise: Filter By The Year 2017
 ``` sql
 -- Example: Filter by 2017  
 SELECT  
@@ -783,7 +792,7 @@ WHERE YEAR(pubdate) = 2017  -- Filter by 2017
 -- Same as: -- WHERE DATEPART(year, pubdate) = 2017  
 ```
 
-#### 1 Min Optional Exercise: Filter for months between May & Oct  
+#### 1 Min Optional Exercise: Filter for months between May through Oct  
 ``` sql
 SELECT  
  	bktitle, CAST(pubdate AS DATE)  
@@ -1099,6 +1108,19 @@ SELECT
 		LEFT(fname, 1) + TRIM(lname) + '@outlook.com'
 	) AS email
 FROM Slspers
+```
+
+#### Optional Bonus: Substring Function
+SQL Servers SUBSTRING() function extracts a specific number of characters from a text string. Similar to Excels `MID` function, it contains three input arguments:
+* The text string containing the characters to extract
+* Starting_Position which is the position of the first character to extract
+* Length which specifies the number of characters to return.
+
+Optional Task: Output the term 'qpp' from the text 'Pineapple'
+``` sql
+	SELECT SUBSTRING('Pineapple',5,3)
+	-- Excel Equivalent Function: 
+	-- = MID("Pineapple",5,3)
 ```
 
 /* -------------------------------------------------------
