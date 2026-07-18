@@ -750,7 +750,7 @@ Exercise: Column Names Using Parenthesis:
 SELECT
 	bktitle, 
 	(bktitle), -- Column name works with or without ()
-	(slprice * 0.9),  -- Formulas may or may not use ()
+	(slprice * 0.9),  -- Formulas can use () but are not required.
 
 	(pubdate),  
 	CAST(pubdate AS Date) AS 'New Pub Date'
