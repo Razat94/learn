@@ -1013,9 +1013,15 @@ Therefore, SQL string functions are functions that work with text data. They hel
 Similar to [the Excel Function](https://support.microsoft.com/en-us/office/trim-function-410388fa-c5df-49c6-b16c-9e5630b479f9), the TRIM() function removes leading & trailing spaces from text. 
 
 ``` sql
-SELECT TRIM('      First  Quarter  Earnings   ')  -- Output: First Quarter Earnings (No Spaces)
+SELECT TRIM('      I love SQL   ') AS Result  -- Output: I love SQL (No Spaces)
 -- Note the use of single quotes above.
 ```
+
+Use the `REPLACE` function to swap every space character with an empty string
+``` sql
+SELECT REPLACE('   I   love   SQL   ', ' ', '') AS Result; -- Output: IloveSQL
+```
+
 
 #### Exercise: Output the City, State from the Customers Table as a single column.
 ``` sql
