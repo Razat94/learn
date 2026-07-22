@@ -1100,7 +1100,7 @@ FROM Slspers
 ### LEFT Function
 Similar to [the Excel function](https://support.microsoft.com/en-us/office/left-function-9203d2d2-7960-479b-84c6-1ea52b99640c), the LEFT() function returns a specified number of characters from the start of a text string.
 
-#### Demo: Output the word 'pine' from 'pineapple'
+#### Demo: Output the word 'Pine' from 'Pineapple'
 ``` sql
 SELECT LEFT('Pineapple',4) AS Result
 ```
