@@ -1076,6 +1076,10 @@ FROM Slspers
 ### LOWER Function
 Similar to [the Excel function](https://support.microsoft.com/en-us/office/lower-function-3f21df02-a80c-44b2-afaf-81358f9fdeb4), the LOWER() function changes all uppercase letters in a text string to lowercase.
 
+``` sql
+SELECT LOWER('RaZA') AS Result -- Output: raza
+```
+
 #### Exercise: From the previous example, convert the concatenated text to lowercase 
 ``` sql
 -- Solution:  
