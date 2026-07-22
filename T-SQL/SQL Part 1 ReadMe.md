@@ -1076,11 +1076,6 @@ FROM Slspers
 #### LOWER Function
 Similar to [the Excel function](https://support.microsoft.com/en-us/office/lower-function-3f21df02-a80c-44b2-afaf-81358f9fdeb4), the LOWER() function changes all uppercase letters in a text string to lowercase.
 
-### Demo: Output the word 'pine' from 'pineapple'
-``` sql
-SELECT LEFT('Pineapple',4) AS Result
-```
-
 #### Exercise: From the previous example, convert the concatenated text to lowercase 
 ``` sql
 -- Solution:  
@@ -1102,8 +1097,13 @@ SELECT
 FROM Slspers  
 ```
 
-#### Left Function
+#### LEFT Function
 Similar to [the Excel function](https://support.microsoft.com/en-us/office/left-function-9203d2d2-7960-479b-84c6-1ea52b99640c), the LEFT() function returns a specified number of characters from the start of a text string.
+
+### Demo: Output the word 'pine' from 'pineapple'
+``` sql
+SELECT LEFT('Pineapple',4) AS Result
+```
 
 #### Exercise: Get the initials for each sales rep.
 ``` sql
