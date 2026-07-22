@@ -662,7 +662,7 @@ Links:
 ## <p id = "5"> Lesson 5: Visuals & Analyzing such Visuals | [Back to ToC](#toc)</p> 
 ---------------------------------------------------------- */
 
-Once the data is imported, we can now build visuals in Power BI Desktop to explore trends, patterns, and connections.
+Once the data is imported, visuals can be built in Power BI Desktop to explore trends, patterns, and connections.
 
 > Note: Users familiar with PivotTables and PivotCharts in Microsoft Excel will notice similarities with Power BI visuals!
 		
@@ -677,63 +677,85 @@ Power BI helps turn data into clear, interactive charts and visuals.
 Task: Name the page "Sales per Rep" and perform the following subtasks:
 ```
 
-Subtask 1:  
-In Quadrant 1 (1/4 page), create a simple column chart that displays the total sales by salesperson.
+ Quadrant 1 (1/4 page):  
+ Create a simple column chart that displays the total sales by salesperson.
 
-	Tasks:	
-		- Apply settings for changing X AXIS
-
-		- In the Visualizations Pane, change the 'Total sales' field from SUM to AVERAGE. 	
-		- Change the chart's sort order by clicking the three dots (More Options) in the Visual Header Icons -> Select Sort Axis, and choose Ascending (Lowest to Highest) instead of Descending.
-			[Learn more about sorting](https://learn.microsoft.com/en-us/power-bi/consumer/end-user-change-sort)
-			- Optional Task: Sort axis by 'Salesperson', not by 'Sum of Total Sales'
-
-		- Change interval of y-axis: 
-				Select the Visual -> "Format Your Visual" pane -> Visual -> Y-Axis -> "Maximum" to 5000 (or similar).
-					Q: Can we set the interval in sets of 25000?
-			 		A: No. No direct setting to force specific intervals (like strictly every 1000 units) 
-			- Update Gridlines:
-				Make the gridline more noticeable via Format Visuals -> Gridlines 
-					-> Change Color to black
-					-> Change Width 
-			- Add Legend:
-				Drag the 'Salesperson' field to Legend Area (observe color change).	
-				Then under Visual Pane -> Visuals -> Legend ->
-					Customize: Text: Bigger, Position: Center Right 
-				If we click on the legend, it forms a highlight
-			- Update Gridline : 
-				- Changed color to black
-				- Changed the width
-
+ 		
 Two things to note:
 
-	> Note: The Fit to Page icon (bottom-right corner of PowerBI next to Zoom bar) resets zoom to standard fit if zoomed in/out.
+* Note: The Fit to Page icon (bottom-right corner of PowerBI next to Zoom bar) resets zoom to standard fit if zoomed in/out.
 
-	--- 
+* Recall: Focus Mode lets you expand a single visual (like a chart, table, or map) so it takes up the full page (the entirety of the canvas).
 
-	> Recall: Focus Mode lets you expand a single visual (like a chart, table, or map) so it takes up the full page (the entirety of the canvas).
+Perform the following tasks:
+
+	- In the Visualizations Pane, change the 'Total sales' field from SUM to AVERAGE. 	
+		
+	- Change the chart's sort order by clicking the three dots (More Options) in the Visual Header Icons -> Select Sort Axis, and choose Ascending (Lowest to Highest) instead of Descending.
+		[Learn more about sorting](https://learn.microsoft.com/en-us/power-bi/consumer/end-user-change-sort)
+
+		- Optional Task: Sort axis by 'Salesperson',  
+		not by 'Sum of Total Sales'
+
+	- Change interval of y-axis: 
+		Select the Visual ->  
+		"Format Your Visual" pane -> Visual -> Y-Axis -> "Maximum" to 5000 (or similar).
+			Q: Can we set the interval in sets of 25000?
+			A: No. No direct setting to force specific intervals (like strictly every 1000 units) 
+		
+	- Update Gridlines:
+		Make the gridline more noticeable via  
+		Format Visuals -> Gridlines 
+				-> Change Color to black
+				-> Change Width 
+		
+	- Add Legend:
+		Drag the 'Salesperson' field to Legend Area (observe color change).	
+		Then under Visual Pane -> Visuals -> Legend ->
+			Customize: Text: Bigger, Position: Center Right 
+		If we click on the legend, it forms a highlight
+		
+	- Update Gridline : 
+		- Changed color to black
+		- Changed the width
+
+	- Change the X AXIS
 
 Quadrant 2 (1/4 page):
 
-	Note: When we start adding Visuals, visuals can be COPIED + PASTED	
-	- Create 2 cards: One showing the name of Salesperson & the other showing Total Amount.
-		Remember:  A card visualization displays a single data point.
+Create 2 cards: One showing the name of Salesperson & the other showing Total Amount. 
 
-		Task: 
-			Add Title. One for "Sales" & other for "Salesperson".
-				Optional: Turn on "Divider" 	
-			Change/modify chart title:		Click on chart -> Visualizations Pane -> General -> Title				
-			Change font size:			Visual Pane -> Visual -> Call Out Value -> Font = 45
-			ROUND Decimal Places:			Visual Pane -> Visual -> Call Out Value -> 'Value Decimal Places' = 2
-			Set up a border: 			Visual Pane -> General -> Effects -> Visual Border (10px black)
-			Change text color: 			Visual Pane -> Visual -> Call Out Value -> Color (Dark Yellow)
-			Change background color of a card: 	Visual Pane -> General -> Effects -> Background (Light Gray)
-				Color Options: Black background with White text color.
-				Note: Backgrounds change when the theme is changed too.
+Two things to note:
+
+* Note: Visuals can be added via the COPY + PASTE command.
+
+* Card visualizations only display a single data point.
+
+
+
+Perform the following tasks:
+
+	- Add Title
+		- One for "Sales" & other for "Salesperson". 	
+		- Change/modify chart title:  		
+			* Click on chart -> Visualizations Pane -> General -> Title
+		- Optional: Turn on "Divider"					
+	- Change font size:			
+		* Visual Pane -> Visual -> Call Out Value -> Font = 45
+	- ROUND Decimal Places:			
+		* Visual Pane -> Visual -> Call Out Value -> 'Value Decimal Places' = 2
+	- Set up a border: 			
+		* Visual Pane -> General -> Effects -> Visual Border (10px black)
+	- Change text color: 			
+		* Visual Pane -> Visual -> Call Out Value -> Color (Dark Yellow)
+	- Change background color of a card: 	
+		* Visual Pane -> General -> Effects -> Background (Light Gray)
+	- Color Options: Black background with White text color.
+		Note: Backgrounds change when the theme is changed too.
 	
-Quadrant 3 (1/4 page)
-	
-	- Add the Skillable Office image to your report (Insert tab -> Image)
+Quadrant 3 (1/4 page)  
+
+Add the Skillable Office image to your report (Insert tab -> Image)
 
 	Note that large pictures will fail to display in Power BI
 
@@ -760,16 +782,16 @@ A: Select All > Format Tab > Align
 ## 5.3. Adding Elements
 Pictures are apart of elements. 
 
-Task: Create a new page titled 'Elements' to discuss more about elements.
-
 <img src = './resources/1-1-report-structure.png'>
 
-	Recall:
+Recall:
+
 	Visuals - Visualizations of semantic model data.
 	Elements - Provide visual interest but don't use semantic model data. 
 		Elements include text boxes, buttons, shapes, and images.
 
-Task: On the new page, let's cover the different ways to add text to a canvas page:  
+Task: Create a new page called "Adding Text". Perform the following subtasks:
+
 	1. (Not recommended) Create a textbox:
 		- (Similar to PowerPoint)	Insert -> Textbox  
 	2. (Preferred) Insert Shape: 	Insert -> Shapes -> Rectangle
@@ -777,41 +799,49 @@ Task: On the new page, let's cover the different ways to add text to a canvas pa
 		A simple background can always be added to a card/shape. 
 			Add text by accessing the settings in the pane.  
 	3. Create a card & then:  
-		1. Add a measure that says: 	msg = "Hello World!"
+
+		1. Add a measure that says: 	
+			msg = "Hello World!"
 		2. Add the measure under the "Fields" section of a card.
 
 			Subtask:
-			Add a salesmessage:
+				Add a salesmessage:
+				- SalesMsg = "The total sales is: " & SUM(Data[Total Sales])
 
-			SalesMsg = "The total sales is: " &
-			SUM(Data[Total Sales])
+			Subtask: Add text/background styles to a card:
+				* Format Shape Pane -> Shape -> Style:
+				Text: (Under same style category) Make sure to turn "ON" 
+				- Add your text, change font size to 30
 
-		Subtask: Add text/background styles to a card:
-		Format Shape Pane -> Shape -> Style:
-			- Text: (Under same style category) Make sure to turn "ON" 
-				Add your text, change font size to 30
+				- Fill: Change Color
+				If fill has been disabled here, then alternatively
+				* General -> Effects -> Background 
+			 	(works similar w/ shapes)
 
-			- Fill: Change Color
-				(If fill has been disabled here, 
-				then alternatively General -> Effects -> Background 
-			 	would work like what we've seen before w/ shapes)
+## 5.4. Buttons
 
+Createa new page named 'Buttons'. 
 
--- Subsection: Buttons --
+Pictures can work like links. 
 
-	Task: On a new page, add the following buttons under Insert -> Buttons:
+Task: 
+Insert a picture of the pands & add a link to the LA Zoo via the URL: 'lazoo.org'  
+
+	Q: Does the 'panda' link work when you export to PDF?  
+	A: NO!!
+
+Add the following buttons:
+
 		- Back Button (Once placed on canvas, Press Ctrl + Click to activate)
-		- Page navigation! (Just like in PowerPoint)
-			First create a page named "Home" or "Main Hub".
-			Create button (e.g. a Circle shape) 
-			Under the Shape tab in the Visual Pane, set Action -> Type -> Navigation, and link it to the previously created pages
-			'Products/Region' and 'Products/Quarter'."
+		- Page navigation (Just like in PowerPoint)
+			1. Create a page named "Home" or "Main Hub".
+			2. Create a button on 'Buttons' page (e.g. a Circle shape) 
+			3. Under the Shape tab in the Visual Pane, set: 
+				Action -> Type -> Navigation. 
+				Link it to the previously created pages.
 		- Bookmark Button
 			- Under Button (Visual Pane Tab) -> Action -> 
 				Type = "Bookmark" & BookMark = "Page 1" 
-		- Insert a PANDA pic & add a link to the LA ZOO via "lazoo.org"
-			Q: Does the 'panda' link work when you export to PDF?
-			A: NO!!
 		- Information Button
 			- Add a Tool Tip [Under Visual Pane -> Button -> Actions -> Tooltip]
 				Add text: "Please make sure to see the pages for the ENTIRE report"
