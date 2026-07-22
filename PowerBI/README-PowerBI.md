@@ -846,12 +846,12 @@ Add the following buttons:
 			- Add a Tool Tip [Under Visual Pane -> Button -> Actions -> Tooltip]
 				Add text: "Please make sure to see the pages for the ENTIRE report"
 			- Set it so nothing happens if the user accidently clicks it by mistake:
-				Button (Visual Pane Tab) -> Actions -> Type = "Bookmark" & BookMark = "None" 
-			- Give your tooltip a background color so people see easily via 
-				Visual Pane -> Button -> Button -> Style -> Fill <OR> Style -> Glow 
+				* Button (Visual Pane Tab) -> Actions -> Type = "Bookmark" & BookMark = "None" 
+			- Set a background color to the tooltip so that people see easily via: 
+				* Visual Pane -> Button -> Button -> Style -> Fill <OR> Style -> Glow 
 				OR 
-				General -> Effects -> Background
-		- Optional: Create a button that's clears all slicers
+				* General -> Effects -> Background
+		- Optional: Clears all slicers Button
 			Remember: To activate the effect, we must Ctrl + Click the button.
 		- Optional: A button on the report page could have the text 'Reset slicers', and when invoked, it uses the bookmark.
 		Additional Info on Bookmark Buttons Settings:
@@ -859,10 +859,9 @@ Add the following buttons:
 			Data -> Reset data
 			Display -> Spotlight, Showing/Highlighting
 			Current Page -> Deselecting means we don't jump to that page, but that those settings are applied.
-		- Q&A
-		If a page contains data, 
-		we can have Q&A access that data by going to said page and without selecting anything, click
-		the Visual Pane -> "Format Your Page" -> Page Information -> Allow Q & A
+		- Q&A Button
+		Q&A can access a pages data by going to said page and without selecting anything, click
+		* the Visual Pane -> "Format Your Page" -> Page Information -> Allow Q & A
 
 		Sample Q's to ask:
 			- count products
@@ -873,32 +872,37 @@ Add the following buttons:
 		After we have our Q&A result, 	
 		click on the "Turn this Q&A result into a standard visual" at the top right of visual to turn it into a standard visual 
 
-		Q:	You added the Q&A feature to let users find answers on their own. 
-			Which two configurations can you add to improve the search capabilities for them[end users]?"
-		A:	- Add a linguistic relationship schema to the dataset.
-				A linguistic schema describes terms and phrases that Q&A should understand for objects within a dataset, 
-				including parts of speech, synonyms, and phrasings that relate to that dataset.
-			- Add synonyms to model fields will help users search for them. 
-				For example, you can give a synonym of (Actuals) for the (Sales) measure. 
+Sample Question.
+
+	Q:	You added the Q&A feature to let users find answers on their own. 
+	
+	Which two configurations can you add to improve the search capabilities for them[end users]?"
+	
+	A:	
+		- Add a linguistic relationship schema to the dataset.
+			A linguistic schema describes terms and phrases that Q&A should understand for objects within a dataset, 
+			including parts of speech, synonyms, and phrasings that relate to that dataset.
+		- Add synonyms to model fields will help users search for them. 
+			For example, you can give a synonym of (Actuals) for the (Sales) measure. 
 
 
 ## 5.4. Background Formatting
---- Subsection: Background Formatting ---
 
 Create a new page called "Formats". 
+
 Click the background of your page, then go to Visualizations -> "Format your report page" on the sidebar
 
-TASK: CHANGE THE PAGE TO 1000 by 500 px  
+Task 5.4.1: Change the page size to: 1000 by 500 px  
 	
 	Q: "Can you make the canvas taller so you can scroll to more visuals rather than change pages"  
 	A: Yes, under 'Canvas Settings' -> 'Type' = Custom & Height = "1000px"
 
-Task: Change background color of Canvas 
+Task 5.4.2: Change background color of Canvas 
 	
 	'Canvas Background' applies color only to the main page canvas
 	Note: We MUST change the transparency color to not be 100%.
 	
-Task: Change color of Wallpaper
+Task 5.4.3: Change color of Wallpaper
 	
 	Wallpaper -> Color
 	Observe: Wallpaper effects foreground & background, whereas page background effects only background
@@ -906,21 +910,22 @@ Task: Change color of Wallpaper
 ### Themes
 Themes are similar to themes in MS Excel & MS Word, which applies across the entire report.
 
-Task: Choose a report theme
+Task 5.4.4.: Choose a report theme
 
 	View -> Themes & then pick your fav theme! (E.g. Choose Accessible Orchid)
 			
-Task: Change the default Settings (e.g. set a default wallpaper color for all pages)
+Task 5.4.5: Change the default Settings (e.g. set a default wallpaper color for all pages)
 	
 	View -> Themes-> Customize Theme -> Page -> Wallpaper -> Color 
 	(Feel free to change Page Background as well)
 							
-Optional: Create a background in PowerPoint & then upload the theme into PowerBI.
+Overview 2 Min Task: Take a moment to design your own filters, background, etc. in POWERBI. 
 
-Overview 2 Min Task: Take a moment to design your own filters, background, etc. in POWERBI. Be ready to then export
+Task 5.4.6.: Export the theme.
 
-#### EXPORT A THEME 
-	Once exported, try importing your theme into PowerBI. 	
+Optional Task: Create a background in PowerPoint & then upload the theme into PowerBI.
+
+Task 5.4.7: Once exported, try importing your theme into a new PowerBI report. 	
 
 
 ## 5.5. Additional Chart Formats
