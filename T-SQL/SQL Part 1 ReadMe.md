@@ -1019,9 +1019,8 @@ SELECT TRIM('      I love SQL   ') AS Result  -- Output: I love SQL (No Leading 
 
 Note: Use the `REPLACE` function to swap every space character with an empty string
 ``` sql
-SELECT REPLACE('   I   love   SQL   ', ' ', '') AS Result; -- Output: IloveSQL (No Spaces)
+SELECT REPLACE('   I   love   SQL   ', ' ', '') AS Result -- Output: IloveSQL (No Spaces)
 ```
-
 
 #### Exercise: Output the City, State from the Customers Table as a single column.
 ``` sql
