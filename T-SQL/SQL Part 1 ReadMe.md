@@ -761,7 +761,7 @@ Similar to Excel, SQL can use:
 * the `YEAR` function to ouput the current year:
 
 ``` sql
-	SELECT YEAR( GETDATE() );  -- Excel Equivalent Function: = YEAR ( TODAY() )  
+	SELECT YEAR( GETDATE() );  -- Excel Equivalent Function: = YEAR( TODAY() )  
 	-- in SQL, this also works: 
 	-- SELECT DATEPART( year, GETDATE() )	
 ```
@@ -790,7 +790,7 @@ ORDER BY YEAR(pubdate), MONTH(pubdate)
 SELECT  
 	bktitle,   
 	pubdate,  
-	YEAR(pubdate) -- Use Year function to return YEAR of each record.  
+	YEAR(pubdate) -- Use the Year function to return YEAR of each record.  
 FROM Titles  
 WHERE YEAR(pubdate) = 2017  -- Filter by 2017  
 -- Same as: -- WHERE DATEPART(year, pubdate) = 2017  
@@ -925,9 +925,9 @@ FROM sales;
 
 --- 
 
-### Nested Queries
+### 3.2.2. Nested Queries
 
-A nested query is a query placed inside another query. The inner query (subquery) provides data to the outer query, and can be used in the SELECT, FROM, or WHERE clauses. Subqueries are written in parentheses and can even contain additional nested queries i.e. nested queries can be formed by wrapping `SELECT` queries in parenthesis (Similar to a Nested Function in Excel)
+A nested query is a query placed inside another query. The inner query (subquery) gets evaluates first and provides data to the outer query, which can be used in the SELECT, FROM, or WHERE clauses. Subqueries are written in parentheses and act as additional  queries i.e. nested queries can be formed by wrapping `SELECT` queries in parenthesis (Similar to a Nested Function in Excel)
 
 #### Task: Show all salespersons whose commission rate is above average
 
@@ -1013,7 +1013,8 @@ Therefore, SQL string functions are functions that work with text data. They hel
 Similar to [the Excel Function](https://support.microsoft.com/en-us/office/trim-function-410388fa-c5df-49c6-b16c-9e5630b479f9), the TRIM() function removes leading & trailing spaces from text. 
 
 ``` sql
-SELECT TRIM('  First Quarter Earnings ') -- Note the use of single quotes.
+SELECT TRIM('      First  Quarter  Earnings   ')  -- Output: First Quarter Earnings (No Spaces)
+-- Note the use of single quotes above.
 ```
 
 #### Exercise: Output the City, State from the Customers Table as a single column.
