@@ -1009,7 +1009,7 @@ A `string` refers to text data in a SQL table. It's anything made of characters 
 
 Therefore, SQL string functions are functions that work with text data. They help clean, format, and extract information from strings like names and addresses, making data easier to organize and analyze.
 
-#### TRIM Function  
+### TRIM Function  
 Similar to [the Excel Function](https://support.microsoft.com/en-us/office/trim-function-410388fa-c5df-49c6-b16c-9e5630b479f9), the TRIM() function removes leading & trailing spaces from text. 
 
 ``` sql
@@ -1049,7 +1049,7 @@ SELECT
 FROM Customers;
 ```
 
-#### CONCAT Function
+### CONCAT Function
 Similar to [the Excel function](https://support.microsoft.com/en-us/office/concat-function-9b1a9a3f-94ff-41af-9736-694cbd6b4ca2), the CONCAT() function combines two or more text values into one text string.
 
 Exercise: Use the CONCAT() function to combine the customer name and city into one column.
@@ -1073,7 +1073,7 @@ SELECT
 FROM Slspers
 ```
 
-#### LOWER Function
+### LOWER Function
 Similar to [the Excel function](https://support.microsoft.com/en-us/office/lower-function-3f21df02-a80c-44b2-afaf-81358f9fdeb4), the LOWER() function changes all uppercase letters in a text string to lowercase.
 
 #### Exercise: From the previous example, convert the concatenated text to lowercase 
@@ -1097,10 +1097,10 @@ SELECT
 FROM Slspers  
 ```
 
-#### LEFT Function
+### LEFT Function
 Similar to [the Excel function](https://support.microsoft.com/en-us/office/left-function-9203d2d2-7960-479b-84c6-1ea52b99640c), the LEFT() function returns a specified number of characters from the start of a text string.
 
-### Demo: Output the word 'pine' from 'pineapple'
+#### Demo: Output the word 'pine' from 'pineapple'
 ``` sql
 SELECT LEFT('Pineapple',4) AS Result
 ```
@@ -1125,7 +1125,7 @@ SELECT
 FROM Slspers
 ```
 
-#### Optional Bonus: Substring Function
+### Optional Bonus: Substring Function
 SQL Servers SUBSTRING() function extracts a specific number of characters from a text string. Similar to Excels `MID` function, it contains three input arguments:
 * The text string containing the characters to extract
 * Starting_Position which is the position of the first character to extract
