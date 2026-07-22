@@ -886,7 +886,7 @@ Sample Question.
 			For example, you can give a synonym of (Actuals) for the (Sales) measure. 
 
 
-## 5.4. Background Formatting
+## 5.5. Background Formatting
 
 Create a new page called "Formats". 
 
@@ -914,7 +914,7 @@ A report theme can be chosen by going to:
 	1. View (Tab) -> Themes.  
 	2. Pick a theme! (e.g. 'Accessible Orchid')
 			
-Additionally, the default settings can be changed (e.g. set a default wallpaper color for all pages)
+Additionally, the default settings can be changed (e.g. set a default wallpaper color for all pages) via:
 	
 	View -> Themes-> Customize Theme -> Page -> Wallpaper -> Color 
 	(Feel free to change Page Background as well)
@@ -928,7 +928,7 @@ Optional Task: Themes can also be exported from PowerPoint. Create a background 
 Task 5.4.5: Once exported, try importing your theme into a new PowerBI report. 	
 
 
-## 5.5. Additional Chart Formats
+## 5.6. Additional Chart Formats
 This subchapter will focus on the fact that different charts have different ways of formatting. For example, the formats for Bar Chart slightly differ for Column Chart. 
 
 Task: Create a new page called 'Product/Quarterly Sales'.
