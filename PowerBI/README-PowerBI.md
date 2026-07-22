@@ -910,29 +910,29 @@ Task 5.4.3: Change color of Wallpaper
 ### Themes
 Themes are similar to themes in MS Excel & MS Word, which applies across the entire report.
 
-Task 5.4.4.: Choose a report theme
-
-	View -> Themes & then pick your fav theme! (E.g. Choose Accessible Orchid)
+A report theme can be chosen by going to:  
+	1. View (Tab) -> Themes.  
+	2. Pick a theme! (e.g. 'Accessible Orchid')
 			
-Task 5.4.5: Change the default Settings (e.g. set a default wallpaper color for all pages)
+Additionally, the default settings can be changed (e.g. set a default wallpaper color for all pages)
 	
 	View -> Themes-> Customize Theme -> Page -> Wallpaper -> Color 
 	(Feel free to change Page Background as well)
 							
 Overview 2 Min Task: Take a moment to design your own filters, background, etc. in POWERBI. 
 
-Task 5.4.6.: Export the theme.
+Task 5.4.4.: Export the theme.
 
-Optional Task: Create a background in PowerPoint & then upload the theme into PowerBI.
+Optional Task: Themes can also be exported from PowerPoint. Create a background in PowerPoint & then export the theme.
 
-Task 5.4.7: Once exported, try importing your theme into a new PowerBI report. 	
+Task 5.4.5: Once exported, try importing your theme into a new PowerBI report. 	
 
 
 ## 5.5. Additional Chart Formats
---- Subsection: Bar Chart Formatting ---
+This subchapter will focus on the fact that different charts have different ways of formatting. For example, the formats for Bar Chart slightly differ for Column Chart. 
 
-Create a new page called 'Product/Quarterly Sales'
-	
+Task: Create a new page called 'Product/Quarterly Sales'.
+
 Quadrant 1 (1/2 page):  
 
 	Create a 'BAR' chart mapping Product vs Sales (check off 2 fields: Product & Total Sales)
