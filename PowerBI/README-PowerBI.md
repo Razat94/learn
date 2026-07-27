@@ -658,6 +658,86 @@ Links:
 	- [Design Power BI reports](https://learn.microsoft.com/en-us/training/modules/power-bi-effective-reports/1-introduction)  
 	- [Design effective reports in Power BI](https://learn.microsoft.com/en-us/training/paths/power-bi-effective/)
 
+/* -------------------------------------------------------
+## <p id = "8"> Lesson 8: Data Modeling w/Calculated Columns & Measures | [Back to ToC](#toc)</p> 
+---------------------------------------------------------- */
+
+## 8.1. Calculated Columns
+In Power BI, a calculated column is a new column added to a table by using a DAX formula.  
+
+This new column:  
+- uses DAX to calculate a value for every row in that table.  
+- is a custom field that doesn't originally come from the raw data source & can be used in visuals, filters, or slicers (just like any other field).  
+	
+<br />
+
+> Note that Power Query transforms data before it is loaded in the data model, so custom columns made in Power Query will show up in your final tables. However, columns made later in the Table View will NOT appear in Power Query since they are created AFTER the data loading process has finished.
+
+Task: Create a static calculated column w/ the text value "Hello World!" for every row.
+[Source](https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-tutorial-create-calculated-columns)
+
+Solution:
+1. In the data pane of the Table View, right-click the table name and select 'New Column' from the context menu.
+	- Note that the Report View can be used to add columns as well by going to:
+		- Tables Tools (Contextual Tab) -> New Column 
+		OR
+		- Home Tab -> New Column 
+
+2. The result of step 1 will display a formula bar at the top. 
+	Replace the default text 'Column =' with the following:
+	
+	` First Column = "Hello World" `
+
+3. Press 'Enter' or clicking the Checkmark button next to the formula bar
+	
+Result: Since the column is added directly to the data model, calculated columns generate row-level values to all rows, making every row now display "Hello World!".
+
+> Note that unlike formulas in Excel, the column name must be placed before the '=' & the DAX expression shows up after.
+
+#### Optional Task: Try changing the value of 'firstNewColumn' to "I love PowerBI"
+		
+#### Task: Under the same Table View, use the ROUND() function to create a 'Rounded Total Sales' column:
+		
+	Solution:
+ 	Rounded Total Sales = ROUND(Data[Total Sales], 0)
+	
+#### Optional Task: Create a column joining the region & state. 
+
+	Solution:  
+	Combined Column = Data[Region] & "-" & Data[State]
+	
+#### Optional Task: Create a tax related column.  
+#### Task: Create a 'Duration' column to calculate the difference between Ship Date and Order Date. 
+				
+	Solution:  
+	Duration = Data[Shipped Date] - Data[Order Date]
+
+	Note: Once created, go to Column Tools (Tab) and change column data type to 'WHOLE NUMBER'	
+
+
+#### Task: Create a "Duration-Status-Message" column.  
+If the duration is <3, then the value is "acceptable" else otherwise it's "late". 
+		
+	Solution:
+	Duration-Status = IF(Data[Duration] < 3, "Acceptable", "Late")
+
+#### Bonus Task: Creates a new column that labels sales as either "Big Sale" or "Not Big Sale" based on the sales amount.
+
+	Sale Size = IF(Data[Total Sales] > 1000, "Big Sale","Not Big Sale")	
+
+#### Subtask: Create a visual that utilizes the measure		
+			
+	1. Create a page called "Status" 
+	2. Create a bar chart that counts "Acceptable" & "late" 
+	3. Drag the 'Duration-Status-Message' calculated field for BOTH the X & Y Axis. 
+	4. Optional: Add a card for the 'Duration-Status-Message' measure and another for the total Count.
+	
+NOTE:  
+- Calculated columns are computed row by row  
+- Storing values directly in the data model inflates the file size and slows down refreshes for large tables  
+- Takeaway: Adding custom columns to tables introduces overhead, which means it takes up more time and computer resources for the software to do its job.
+
+
 
 ## 8.2. Measures
 
@@ -1570,86 +1650,9 @@ Some common examples:
 		Add a bar chart for product sales 
 			Create a tooltip for quarterly sales so when we hover over a bar (e.g. laptops)
 			we see just Laptops sales for each quarter.		
-		
-/* -------------------------------------------------------
-## <p id = "8"> Lesson 8: Data Modeling w/Calculated Columns & Measures | [Back to ToC](#toc)</p> 
----------------------------------------------------------- */
-
-## 8.1. Calculated Columns
-In Power BI, a calculated column is a new column added to a table by using a DAX formula.  
-
-This new column:  
-- uses DAX to calculate a value for every row in that table.  
-- is a custom field that doesn't originally come from the raw data source & can be used in visuals, filters, or slicers (just like any other field).  
-	
-<br />
-
-> Note that Power Query transforms data before it is loaded in the data model, so custom columns made in Power Query will show up in your final tables. However, columns made later in the Table View will NOT appear in Power Query since they are created AFTER the data loading process has finished.
-
-Task: Create a static calculated column w/ the text value "Hello World!" for every row.
-[Source](https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-tutorial-create-calculated-columns)
-
-Solution:
-1. In the data pane of the Table View, right-click the table name and select 'New Column' from the context menu.
-	- Note that the Report View can be used to add columns as well by going to:
-		- Tables Tools (Contextual Tab) -> New Column 
-		OR
-		- Home Tab -> New Column 
-
-2. The result of step 1 will display a formula bar at the top. 
-	Replace the default text 'Column =' with the following:
-	
-	` First Column = "Hello World" `
-
-3. Press 'Enter' or clicking the Checkmark button next to the formula bar
-	
-Result: Since the column is added directly to the data model, calculated columns generate row-level values to all rows, making every row now display "Hello World!".
-
-> Note that unlike formulas in Excel, the column name must be placed before the '=' & the DAX expression shows up after.
-
-#### Optional Task: Try changing the value of 'firstNewColumn' to "I love PowerBI"
-		
-#### Task: Under the same Table View, use the ROUND() function to create a 'Rounded Total Sales' column:
-		
-	Solution:
- 	Rounded Total Sales = ROUND(Data[Total Sales], 0)
-	
-#### Optional Task: Create a column joining the region & state. 
-
-	Solution:  
-	Combined Column = Data[Region] & "-" & Data[State]
-	
-#### Optional Task: Create a tax related column.  
-#### Task: Create a 'Duration' column to calculate the difference between Ship Date and Order Date. 
-				
-	Solution:  
-	Duration = Data[Shipped Date] - Data[Order Date]
-
-	Note: Once created, go to Column Tools (Tab) and change column data type to 'WHOLE NUMBER'	
 
 
-#### Task: Create a "Duration-Status-Message" column.  
-If the duration is <3, then the value is "acceptable" else otherwise it's "late". 
-		
-	Solution:
-	Duration-Status = IF(Data[Duration] < 3, "Acceptable", "Late")
 
-#### Bonus Task: Creates a new column that labels sales as either "Big Sale" or "Not Big Sale" based on the sales amount.
-
-	Sale Size = IF(Data[Total Sales] > 1000, "Big Sale","Not Big Sale")	
-
-#### Subtask: Create a visual that utilizes the measure		
-			
-	1. Create a page called "Status" 
-	2. Create a bar chart that counts "Acceptable" & "late" 
-	3. Drag the 'Duration-Status-Message' calculated field for BOTH the X & Y Axis. 
-	4. Optional: Add a card for the 'Duration-Status-Message' measure and another for the total Count.
-	
-NOTE:  
-- Calculated columns are computed row by row  
-- Storing values directly in the data model inflates the file size and slows down refreshes for large tables  
-- Takeaway: Adding custom columns to tables introduces overhead, which means it takes up more time and computer resources for the software to do its job.
-	
 /* -------------------------------------------------------
 ## <p id = "7"> Lesson 8: Sharing & POWERBI SERVICE (PowerBI Online) | [Back to ToC](#toc)</p> 
 ---------------------------------------------------------- */
