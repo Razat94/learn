@@ -658,6 +658,105 @@ Links:
 	- [Design Power BI reports](https://learn.microsoft.com/en-us/training/modules/power-bi-effective-reports/1-introduction)  
 	- [Design effective reports in Power BI](https://learn.microsoft.com/en-us/training/paths/power-bi-effective/)
 
+
+## 8.2. Measures
+
+Measures are calculations that returns a single scalar value. They can:  
+- summarize large amounts of data.  
+- act as flags, logic checks, or filters for other calculations.
+
+Things to note:  
+- Measures do not create new columns of values for each row 
+	- (i.e. No per-row calculation) 
+- Measures operate on entire fields and the calculations are mainly used in visuals; measures are dynamic and get calculated on the fly so not to consume extra storage.  
+		
+<br/>
+
+#### Task: Create a measure named "Commission". 
+
+	Solution:  
+	Commission = SUM(Data[Total Sales]) * 0.02
+
+> Note: 2% doesn't work; it must be 0.02
+
+- After creating a measure, note that no new column has been added for each row since this measure applies to the whole field.
+- All measures can easily be viewed in the Model View in the side-pane.
+
+#### Task: Create a new page called "Commission". Add a column chart that maps out SalesPeople vs. Commission
+	Additionally:
+	- Create a Column CHART for the measure 'Commission'
+	- (Optional) Create a card showing sales person name/commission
+
+Note: 
+- An implicit measure is an automatic calculation created by dragging a numeric column directly onto a report visual. 
+	- For example, dragging a "Sales" column into a chart will make Power BI assume that the user wants the "Sum of Sales" and calculates it instantly.
+- A hardcoded measures is explicit. To change a measure that measures an average to a sum, the measure can't be changed by tweaking the options setting in the field menu; the formula needs to be rewritten itself since the calculation is hardcoded.
+	
+Recap of Measures:
+
+	- Calculated only when needed (mainly when you use them in a visual or report).
+	- Doesn't take up extra space in the data model.
+	- Measures are most efficient for larger data sets when calculations don’t need to be stored row by row.
+
+	- Although measures can be created and used just like calculated columns, NO calculation occurs UNTIL the measure is added to a visual.    
+	- For instance, Power BI can’t create relationships using measures. Although they exist in the semantic model, bogus results are returned when we attempt something and thus is why columns are only used.
+
+Calculated Columns:
+	
+	- Stored in memory for every row in your table, increasing the size of your model.
+	- Always calculated, even if not used in the report.
+		- link two tables based on a calculated value,
+	- Unlike a measure, a calculated column can be used in a slicer to filter on the report page.  
+
+## 8.3. The Display Folder   
+In Power BI, a Display Folder is a way to organize fields (columns, measures, hierarchies) in the Fields pane without changing the underlying data model. It’s purely for presentation and usability, especially in large models since it makes the Fields pane cleaner and easier to navigate.
+		
+Task: Create a display folder named 'Customized Columns' for each of the columns that were made.
+
+	Step 1: Go to the Model view
+	Step 2: Select the desired measures or columns
+	Step 3: In the Properties pane, in the 'Display folder' field, type the folder name & then press Enter. 
+
+	Custom Columns  
+  	├─ 'firstNewColumn'  
+  	├─ 'Rounded Total Sales'  
+  	└─ 'Duration-Status-Message'
+
+
+
+-- Additional Q's & Notes: --  
+
+	-- 
+	A measure is a named DAX formula that summarizes model data.
+	whereas
+	A parameter allows what-if scenarios or field selection	
+	-- 
+
+	You decide to remove unnecessary columns from your data model.
+	What are two potential performance benefits of doing this? Each correct answer presents a complete solution.
+
+
+	OPTIONAL EXCERCISE:
+	From Power BI Desktop, you open a Power BI report that contains three pages named Main, Error Rate, and On-time Rate.
+	You add a button to the Main page for navigation.
+	
+	You need to implement a solution that meets the following requirements:
+
+	- The navigation destination must change based on the output of a DAX measure named [Error Rate].
+	- If [Error Rate] is greater than 5%, the button must display the text “Error Rate” and navigate to the Error Rate page.
+	- Otherwise, the button must display the text “On-time Rate” and navigate to the On-Time Rate page.
+
+	What three actions should you perform? Each correct answer presents part of the solution.
+	
+	To configure a button for conditional page navigation, 
+	- you need to create a DAX measure that outputs the correct destination page name. 
+	- Then configure the button to use page navigation and use the newly created DAX measure to specify the navigation destination. 
+	- To change the button text to match the page name, conditional formatting must be used to set the text to equal the newly created DAX measure.
+	Wrong: No bookmarks are necessary.
+	It is not necessary to set the destination to a specific page since conditional formatting is used to specify the destination.
+
+
+	
 /* -------------------------------------------------------
 ## <p id = "5"> Lesson 5: Visuals & Analyzing such Visuals | [Back to ToC](#toc)</p> 
 ---------------------------------------------------------- */
@@ -666,8 +765,13 @@ Once the data is imported, visuals can be built in Power BI Desktop to explore t
 
 > Note: Users familiar with PivotTables and PivotCharts in Microsoft Excel will notice similarities with Power BI visuals!
 		
-Task: Create a blank report.  
-Import "Sales Data". Once the data has been imported, verify that the Fields in Data Pane (on far right side) appear & are sorted A-Z.
+Task: Create a report that utlizes the data in Sales Data.
+1. Open up Create a blank report.  
+2. Import "Sales Data".  
+3. Once the data has been imported, verify that the Fields in Data Pane (on far right side) appear & are sorted A-Z.
+
+Make sure to save the report now so that in case if the file crashes, you don't need to re-import the data again.
+Name it "My Day 2 Report"
 
 ## 5.1. Using Our First Page
 
@@ -759,6 +863,9 @@ Add the Skillable Office image to your report (Insert tab -> Image)
 
 	Note that large pictures will fail to display in Power BI
 
+	Add a title to the image "Life in the office"
+
+
 <img src = "./resources/large-file.jpg"/>
 
 ## 5.2. The Selection Pane
@@ -844,7 +951,7 @@ Add the following buttons:
 				Type = "Bookmark" & BookMark = "Page 1" 
 		- Information Button
 			- Add a Tool Tip [Under Visual Pane -> Button -> Actions -> Tooltip]
-				Add text: "Please make sure to see the pages for the ENTIRE report"
+				Add text: "This is a subtle message."
 			- Set it so nothing happens if the user accidently clicks it by mistake:
 				* Button (Visual Pane Tab) -> Actions -> Type = "Bookmark" & BookMark = "None" 
 			- Set a background color to the tooltip so that people see easily via: 
@@ -888,7 +995,7 @@ Sample Question.
 
 ## 5.5. Background Formatting
 
-Create a new page called "Formats". 
+Create a new page called "Background Formats". 
 
 Click the background of your page, then go to Visualizations -> "Format your report page" on the sidebar
 
@@ -1155,8 +1262,11 @@ The slicer visualization can be used to filter other visuals on the page.
 
 		Change text of headers to make it big:
 			Visual -> Values -> Font Size
-		Enable - SELECT ALL option:	
+		
+		If not enabled, enable the 'SELECT ALL' option:	
 			Visual -> Slicer Settings -> Selection -> Show "Select All" As an Option  
+		An annoyance is that by default, the Multi-Select with Ctrl is turned off. This means that you'll need to hold down ctrl + click to select values.
+			Turn OFF Multi-Select so that you can normal click the options.
 		Change Slicer Type style options from 'Vertical List' to 'Tile':  
 			Visual -> Slicer Settings -> Option -> Tile
 			Additionally we can make the font for "Values" to be bigger.
@@ -1474,7 +1584,7 @@ This new column:
 	
 <br />
 
-> Note that Power Query transforms data before it is loaded in the data model, so custom columns made in Power Query will show up in your final tables. However, columns made later in Table View will NOT appear in Power Query since they are created AFTER the data loading process has finished.
+> Note that Power Query transforms data before it is loaded in the data model, so custom columns made in Power Query will show up in your final tables. However, columns made later in the Table View will NOT appear in Power Query since they are created AFTER the data loading process has finished.
 
 Task: Create a static calculated column w/ the text value "Hello World!" for every row.
 [Source](https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-tutorial-create-calculated-columns)
@@ -1487,31 +1597,33 @@ Solution:
 		- Home Tab -> New Column 
 
 2. The result of step 1 will display a formula bar at the top. 
-	Replace the default text 'Column =' with the following column name and DAX expression:
+	Replace the default text 'Column =' with the following:
 	
-	` firstNewColumn = "Hello World" `
+	` First Column = "Hello World" `
 
 3. Press 'Enter' or clicking the Checkmark button next to the formula bar
 	
 Result: Since the column is added directly to the data model, calculated columns generate row-level values to all rows, making every row now display "Hello World!".
+
+> Note that unlike formulas in Excel, the column name must be placed before the '=' & the DAX expression shows up after.
 
 #### Optional Task: Try changing the value of 'firstNewColumn' to "I love PowerBI"
 		
 #### Task: Under the same Table View, use the ROUND() function to create a 'Rounded Total Sales' column:
 		
 	Solution:
- 	Rounded Total Sales = ROUND(SalesData[Total Sales], 0)
+ 	Rounded Total Sales = ROUND(Data[Total Sales], 0)
 	
 #### Optional Task: Create a column joining the region & state. 
 
 	Solution:  
-	ConcatColumn = SalesData[Region] & "-" & SalesData[State]
+	Combined Column = Data[Region] & "-" & Data[State]
 	
 #### Optional Task: Create a tax related column.  
 #### Task: Create a 'Duration' column to calculate the difference between Ship Date and Order Date. 
 				
 	Solution:  
-	Duration = SalesData[Shipped Date] - SalesData[Order Date]
+	Duration = Data[Shipped Date] - Data[Order Date]
 
 	Note: Once created, go to Column Tools (Tab) and change column data type to 'WHOLE NUMBER'	
 
@@ -1520,118 +1632,23 @@ Result: Since the column is added directly to the data model, calculated columns
 If the duration is <3, then the value is "acceptable" else otherwise it's "late". 
 		
 	Solution:
-	Duration-Status-Message = IF(SalesData[Duration] < 3, "Acceptable", "Late")
+	Duration-Status = IF(Data[Duration] < 3, "Acceptable", "Late")
 
 #### Bonus Task: Creates a new column that labels sales as either "Big Sale" or "Not Big Sale" based on the sales amount.
 
-	NewColumn = IF(SalesData[Total Sales] > 1000, "Big Sale","Not Big Sale")	
+	Sale Size = IF(Data[Total Sales] > 1000, "Big Sale","Not Big Sale")	
 
 #### Subtask: Create a visual that utilizes the measure		
 			
-	1. Create a bar chart that counts "Acceptable" & "late" 
-	2. Drag the 'Duration-Status-Message' calculated field for BOTH the X & Y Axis. 
-	3. Optional: Add a card for the 'Duration-Status-Message' measure and another for the total Count.
+	1. Create a page called "Status" 
+	2. Create a bar chart that counts "Acceptable" & "late" 
+	3. Drag the 'Duration-Status-Message' calculated field for BOTH the X & Y Axis. 
+	4. Optional: Add a card for the 'Duration-Status-Message' measure and another for the total Count.
 	
 NOTE:  
 - Calculated columns are computed row by row  
 - Storing values directly in the data model inflates the file size and slows down refreshes for large tables  
 - Takeaway: Adding custom columns to tables introduces overhead, which means it takes up more time and computer resources for the software to do its job.
-
-
-## 8.2. Measures
-
-Measures are calculations that returns a single scalar value. They can:  
-- summarize large amounts of data.  
-- act as flags, logic checks, or filters for other calculations.
-
-Things to note:  
-- Measures do not create new columns of values for each row 
-	- (i.e. No per-row calculation) 
-- Measures operate on entire fields and the calculations are mainly used in visuals; measures are dynamic and get calculated on the fly so not to consume extra storage.  
-		
-<br/>
-
-#### Task: Create a measure named "Commission". 
-
-	Solution:  
-	Commission = SUM(SalesData[Total Sales]) * 0.02
-			
-- After creating a measure, note that no new column has been added for each row since this measure applies to the whole field.
-		
-#### Task: Create a new page for Salespeople & add a bar chart that maps out SalesPeople vs. Total Sales
-	
-	Additionally:
-	- Create a GAGE CHART for the measure 'Commission'
-	- (Optional) Create a card showing sales person name/sales
-
-Note: 
-- An implicit measure is an automatic calculation created by dragging a numeric column directly onto a report visual. 
-	- For example, dragging a "Sales" column into a chart will make Power BI assume that the user wants the "Sum of Sales" and calculates it instantly.
-- A hardcoded measures is explicit. To change a measure that measures an average to a sum, the measure can't be changed by tweaking the options setting in the field menu; the formula needs to be rewritten itself since the calculation is hardcoded.
-	
-Recap of Measures:
-
-	- Calculated only when needed (mainly when you use them in a visual or report).
-	- Doesn't take up extra space in the data model.
-	- Measures are most efficient for larger data sets when calculations don’t need to be stored row by row.
-
-	- Although measures can be created and used just like calculated columns, NO calculation occurs UNTIL the measure is added to a visual.    
-	- For instance, Power BI can’t create relationships using measures. Although they exist in the semantic model, bogus results are returned when we attempt something and thus is why columns are only used.
-
-Calculated Columns:
-	
-	- Stored in memory for every row in your table, increasing the size of your model.
-	- Always calculated, even if not used in the report.
-		- link two tables based on a calculated value,
-	- Unlike a measure, a calculated column can be used in a slicer to filter on the report page.  
-
-## 8.3. The Display Folder   
-In Power BI, a Display Folder is a way to organize fields (columns, measures, hierarchies) in the Fields pane without changing the underlying data model.  
-
-Purpose:    
-- It’s purely for presentation and usability, especially in large models since it makes the Fields pane cleaner and easier to navigate.
-		
-Task: Create a display folder named 'Customized Calculated Columns' for each of the columns that were made.
-
-	Calcualted Columns  
-  	├─ 'firstNewColumn'  
-  	├─ 'Rounded Total Sales'  
-  	└─ 'Duration-Status-Message'
-
-	Step 1: Go to the Model view
-	Step 2: Select the desired measures or columns
-	Step 3: In the Properties pane, in the 'Display folder' field, type the folder name & then press Enter. 
-	
--- Additional Q's & Notes: --  
-
-	-- 
-	A measure is a named DAX formula that summarizes model data.
-	whereas
-	A parameter allows what-if scenarios or field selection	
-	-- 
-
-	You decide to remove unnecessary columns from your data model.
-	What are two potential performance benefits of doing this? Each correct answer presents a complete solution.
-
-
-	OPTIONAL EXCERCISE:
-	From Power BI Desktop, you open a Power BI report that contains three pages named Main, Error Rate, and On-time Rate.
-	You add a button to the Main page for navigation.
-	
-	You need to implement a solution that meets the following requirements:
-
-	- The navigation destination must change based on the output of a DAX measure named [Error Rate].
-	- If [Error Rate] is greater than 5%, the button must display the text “Error Rate” and navigate to the Error Rate page.
-	- Otherwise, the button must display the text “On-time Rate” and navigate to the On-Time Rate page.
-
-	What three actions should you perform? Each correct answer presents part of the solution.
-	
-	To configure a button for conditional page navigation, 
-	- you need to create a DAX measure that outputs the correct destination page name. 
-	- Then configure the button to use page navigation and use the newly created DAX measure to specify the navigation destination. 
-	- To change the button text to match the page name, conditional formatting must be used to set the text to equal the newly created DAX measure.
-	Wrong: No bookmarks are necessary.
-	It is not necessary to set the destination to a specific page since conditional formatting is used to specify the destination.
 	
 /* -------------------------------------------------------
 ## <p id = "7"> Lesson 8: Sharing & POWERBI SERVICE (PowerBI Online) | [Back to ToC](#toc)</p> 
