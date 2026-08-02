@@ -2,7 +2,9 @@
 
 [Link to Return to Learn Website](https://razat94.github.io/learn/)
 
-[Link to Download Files](https://files.educate360.com/temp/2025%20PowerBI%20Courseware.zip)
+[Link to Download Files](https://viltexfiles.blob.core.windows.net/ftproot/temp/Power%20BI.zip)
+<!-- Legacy:  https://files.educate360.com/temp/2025%20PowerBI%20Courseware.zip) -->
+
 > Make sure .ZIP file is unzipped before using files.
 
 
@@ -51,7 +53,9 @@ Day Two centers more heavily on analyzing & visualizing data through:
 ---------------------------------------------------------- */
 
 ### /* ------------ Lesson 0 - What is Power BI?  ------------ */
-Please refer to the [PowerPoint](https://docs.google.com/presentation/d/1q2-8hYULWp8ouBpQMGMV_SMCWjE6Rphl/edit?usp=sharing&ouid=113396737692127154003&rtpof=true&sd=true)
+Please refer to the [PowerPoint](./R%20-%20What%20is%20Power%20BI.pptx)
+
+<!-- [Legacy PowerPoint](https://docs.google.com/presentation/d/1q2-8hYULWp8ouBpQMGMV_SMCWjE6Rphl/edit?usp=sharing&ouid=113396737692127154003&rtpof=true&sd=true) -->
 
 General Overview:  
 	1. We create a report in Power BI Desktop  
