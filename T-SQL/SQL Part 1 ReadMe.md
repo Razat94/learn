@@ -416,11 +416,11 @@ In other words, this chapter will cover sorting & filtering.
 ## Lesson 2.1. Sorting with 'ORDER BY' Clause
 Sorting organizes query results in ascending or descending order.
 
-#### Task 2.1.1. Example: Sort data by a single column:  
+#### Task 2.1.1. Example: Sort data by a single column (name):  
 ``` sql
 SELECT *  
 FROM Customers   
-ORDER BY state ASC -- Sorts the table by state column  
+ORDER BY custname ASC -- Sorts the table by state column  
 -- IN SQL SERVER, ORDER BY defaults to ASC.  
 ```
 
@@ -542,6 +542,14 @@ WHERE state <> 'NY'
 -- ORDER BY state   
 ```
 
+Fun Fact: Similar to a double negative, notice that the NOT cluase can be placed before the <> operator to cancel it out.
+``` sql
+-- Displays all Customers from NY 
+SELECT *  
+FROM Customers  
+WHERE NOT state <> 'NY'
+```
+
 ### NULL Values
 In SQL, a `NULL` value represents void or empty data in a table field. Similar to a blank cell in Excel, in databases a `NULL` value is a placeholder that represents missing or blank data, and is different from a numeric zero or an empty string.
 
@@ -550,7 +558,7 @@ In SQL, a `NULL` value represents void or empty data in a table field. Similar t
 SELECT *  
 FROM Titles  
 WHERE devcost IS  
--- NOT  
+-- NOT  -- NOT keyword can be used to filter/exclude blanks and only see filled out values
 NULL  
 ```
 
@@ -688,14 +696,6 @@ FROM Customers
 WHERE custname LIKE 'The%'
 ```
 
-Optional Example #1: Show all book titles that contains the word 'The'
-``` sql
--- Solution
-SELECT *
-FROM Titles
-WHERE bktitle LIKE '%The%' 
-```
-
 #### EXACT MATCH  
 ``` sql
 SELECT * FROM Titles  
@@ -782,7 +782,8 @@ SELECT
 	pubdate  
 FROM Titles  
 WHERE YEAR(pubdate) = 2017  -- Filter by 2017  
-ORDER BY YEAR(pubdate), MONTH(pubdate)
+ORDER BY pubdate
+-- Also Works: -- ORDER BY YEAR(pubdate), MONTH(pubdate)
 ```
 
 #### Recap:
