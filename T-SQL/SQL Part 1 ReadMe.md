@@ -649,14 +649,17 @@ defined (a.k.a. known) development cost.
 ``` sql
 SELECT *
 FROM Titles
-WHERE slprice BETWEEN 30 AND 40 
-AND devcost IS NOT NULL
+WHERE 
+	slprice BETWEEN 30 AND 40
+	AND 
+	(devcost IS NOT NULL) -- Optional Parenthesis.
 ```
 
 ### OR  
 
 > Remember: ONE/ANY condition MUST be true. [Similar to Excel Function]
 
+The `OR` keyword can be used to filter for multiple states.  
 Exercise: Show all customers who are either in California or New York. 
 ``` sql
 SELECT custname, city, state 
@@ -691,14 +694,6 @@ FROM Customers
 WHERE custname LIKE 'A%';
 ```
 
-Optional Exercise: Show all customers that end with the letter 's'
-``` sql
--- Solution:
-SELECT * 
-FROM Customers
-WHERE custname LIKE '%s';
-```
-
 Optional Example #1: Show all customers that only begins with the word 'The'
 ``` sql
 -- Solution
@@ -707,6 +702,15 @@ FROM Customers
 WHERE custname LIKE 'The%'
 ```
 
+Optional Exercise #2: Show all customers that end with the letter 's'
+``` sql
+-- Solution:
+SELECT * 
+FROM Customers
+WHERE custname LIKE '%s';
+```
+
+### Other Examples...
 #### EXACT MATCH  
 ``` sql
 SELECT * FROM Titles  
