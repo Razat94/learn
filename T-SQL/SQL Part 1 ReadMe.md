@@ -233,6 +233,11 @@ SELECT
 FROM Slspers; 
 ```
 
+To rename a column permanently:
+``` sql
+EXEC sp_rename 'YourTableName.OldColumnName', 'NewColumnName', 'COLUMN';
+```
+
 #### ...more to discuss in Chapter 5! [Link to Lesson 5](#5). 
 
 ---
