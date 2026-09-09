@@ -752,6 +752,7 @@ Database functions are reusable expressions (blocks of code) used in SQL queries
 
 There are many built-in SQL functions that are similar to Excel functions (e.g., `SUM` and `CONCATENATE`), and users can also create their own custom functions (which will be discussed in Part 2).
 
+> Remember: Many SQL Functions work similarly to Excel Functions.
 
 ## Lesson 3.1 Date Functions
 
@@ -768,25 +769,27 @@ Please note that column names can be wrapped in parentheses. This is similar to 
 Exercise: Column Names Using Parenthesis:
 ``` sql
 SELECT
+	pubdate,
+	(pubdate),  -- Column name works with or without ()
+	CAST(pubdate AS Date) AS 'New Pub Date'
+
+	-- Bonus
 	bktitle, 
-	(bktitle), -- Column name works with or without ()
+	(bktitle), 
 	(slprice * 0.9),  -- Formulas can use () but are not required.
 
-	(pubdate),  
-	CAST(pubdate AS Date) AS 'New Pub Date'
 FROM titles
 ```
 
 Similar to Excel, SQL can use:  
-* the `YEAR` function to ouput the current year:
-
+* the `YEAR` function to ouput the current year.
 ``` sql
 	SELECT YEAR( GETDATE() );  -- Excel Equivalent Function: = YEAR( TODAY() )  
 	-- in SQL, this also works: 
 	-- SELECT DATEPART( year, GETDATE() )	
 ```
 
-* the `MONTH` and `DAY` functions too.
+* the `MONTH` and `DAY` functions work similarly.
 ``` sql
 	SELECT MONTH( GETDATE() )
 	SELECT DAY( GETDATE() )
@@ -794,52 +797,44 @@ Similar to Excel, SQL can use:
 
 <br/>
 
-#### Exercise: Filter By The Year 2017
+#### Demo Exercise: Filter by the Year 2017
 ``` sql
--- Example: Filter by 2017  
 SELECT  
 	bktitle,  
-	pubdate  
+	pubdate,
+	YEAR(pubdate) -- Use the Year function to return YEAR of each record.  
 FROM Titles  
-WHERE YEAR(pubdate) = 2017  -- Filter by 2017  
+WHERE YEAR(pubdate) = 2017  -- Filter by 2017  -- also works -- WHERE DATEPART(year, pubdate) = 2017  
 ORDER BY pubdate
 -- Also Works: -- ORDER BY YEAR(pubdate), MONTH(pubdate)
 ```
 
-#### Recap:
-``` sql
-SELECT  
-	bktitle,   
-	pubdate,  
-	YEAR(pubdate) -- Use the Year function to return YEAR of each record.  
-FROM Titles  
-WHERE YEAR(pubdate) = 2017  -- Filter by 2017  
--- Same as: -- WHERE DATEPART(year, pubdate) = 2017  
-```
-
-#### 1 Min Optional Exercise: Filter for months between May through Oct  
-``` sql
-SELECT  
- 	bktitle, CAST(pubdate AS DATE)  
-FROM Titles  
-WHERE MONTH(pubdate) BETWEEN 5 AND 10  
-```
-
-#### 1 Min Optional Exercise: Show booktitles published on July 2016
+#### 1 Min Optional Task: Show booktitles published on July 2016
 ``` sql
 -- Solution:  
 SELECT  
-	bktitle, CAST(pubdate AS DATE)  
+	bktitle, 
+	CAST(pubdate AS DATE)  -- Notice that using CAST creates a new column, so an alias name should be assigned. -- AS DATE
 FROM Titles  
 WHERE YEAR(pubdate) = 2016 AND MONTH(Pubdate) = 7  
 ORDER BY pubdate
 ```
 
-#### 1 Min Optional Exercise: Show titles published in 2016 or 2017
+#### 1 Min Optional Task: Filter for months BETWEEN May through Oct for all years.
+``` sql
+SELECT  
+ 	bktitle, 
+	CAST(pubdate AS DATE)  
+FROM Titles  
+WHERE MONTH(pubdate) BETWEEN 5 AND 10  -- NOTE: The keyword 'IS BETWEEN' will break the query.
+```
+
+#### 1 Min Optional Task: Show titles published in 2016 or 2017
 ``` sql
 -- Solution 1:
 SELECT
-	bktitle, CAST(pubdate AS Date) AS 'New Pub Date'
+	bktitle, 
+	CAST(pubdate AS Date) AS 'New Pub Date'
 FROM Titles
 WHERE YEAR(Pubdate) = 2017 OR YEAR(Pubdate) = 2016
 
@@ -868,6 +863,8 @@ WHERE pubdate BETWEEN '1/1/1994' AND '12/31/2013'
 — [Microsoft Learn: Aggregate Functions](https://learn.microsoft.com/en-us/sql/t-sql/functions/aggregate-functions-transact-sql?view=sql-server-ver17)
 
 The `COUNT` Function returns the total number of rows in a table, including those with NULL values.
+
+Exercise: Display the count of how many books were published in 2017.
 ``` sql
 SELECT	
 	COUNT(*),  
