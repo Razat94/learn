@@ -91,7 +91,9 @@ To show line numbers:
 ## Lesson 1.1 Additional Simple Queries
 
 ### SQL Comments
-Comments are used explain SQL code or add notes for the reader. They are ignored by the database engine and are not executed.
+The SQL Editor executes anything (e.g. words, numbers, etc.) written in it.
+Therefore, comments are used explain SQL code or add notes for the reader. 
+They are ignored by the database engine and are not executed.
 
 #### Example: Write a basic SQL query and include a comment via the use of -- 
 ``` sql
@@ -131,6 +133,15 @@ SELECT 'Have a nice day'  	-- Outputs simple text.
 SELECT 'Thank you!'			-- Notice the use of single quotes, as the use of double quotes will result in an error.
 PRINT 'Good Bye!' 			-- Displays a message or a value in the 'Messages' tab and is mainly used for debugging.
 ```
+
+SQL is generally whitespace-insensitive, meaning that extra spaces, tabs, or newlines between keywords and identifiers (names) are ignored by the parser.
+``` sql
+-- Output the first and last names of everyone in the `Slspers` table.
+SELECT 
+	'
+	Hello
+	World
+	'
 
 ---
 
@@ -173,7 +184,7 @@ SELECT fname, lname
 FROM slspers;
 ```
 
-SQL is generally whitespace-insensitive, meaning that extra spaces, tabs, or newlines between keywords and identifiers (names) are ignored by the parser.
+Remember that SQL is generally whitespace-insensitive, meaning that extra spaces, tabs, or newlines between keywords and identifiers (names) are ignored by the parser.
 ``` sql
 -- Output the first and last names of everyone in the `Slspers` table.
 SELECT 
