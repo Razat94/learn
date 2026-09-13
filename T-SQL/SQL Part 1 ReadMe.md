@@ -235,7 +235,7 @@ FROM Slspers;
 
 To rename a column permanently:
 ``` sql
-EXEC sp_rename 'YourTableName.OldColumnName', 'NewColumnName', 'COLUMN';
+EXEC sp_rename 'Slspers.[fname]', 'first_name', 'COLUMN';
 ```
 
 #### ...more to discuss in Chapter 5! [Link to Lesson 5](#5). 
@@ -341,7 +341,7 @@ WHERE TABLE_NAME = 'Slspers'
 ```
 
 
-## Lesson 1.8. The Command Line
+## Lesson 1.7. The Command Line
 The command line can be used to run T-SQL. 
 
 1. Open Command Prompt & type the following to connect to SQL Server: (Note: The server name will need to be changed)  
@@ -475,7 +475,7 @@ Below are more examples demonstrating various ways the WHERE clause can be used:
 	```
 
 
-### 2.3. Additional Keywords in WHERE Clause
+## 2.3. Additional Keywords in WHERE Clause
 
 ### SQL NOT Operator 
 The NOT operator is used in the WHERE clause to return records that do not match a specific condition.
@@ -1025,7 +1025,7 @@ WHERE devcost < ALL (
 
 ---
 
-## Lesson 3.3. Text(String) Functions
+## Lesson 3.3. Text (String) Functions
 A `string` refers to text data in a SQL table. It's anything made of characters (e.g. letters, numbers, symbols) and are usually written inside single quotes. Below are some examples:
 
 ```
@@ -1183,7 +1183,7 @@ FROM Slspers;
 -- in SSMS, Clicking on 'Messages' will display output of Count of Rows as well.
 ```
 
-#### The query below shows row #'s for each row i.e. show rows as a seperate column:
+#### Task: Create a seperate column that show row #'s for each row i.e. Show rows as a seperate column:
 ``` sql
 SELECT  
 	ROW_NUMBER() OVER (ORDER BY repid) AS row_num,  	
@@ -1194,10 +1194,11 @@ FROM Slspers
 DENSE_RANK() is a window function that assigns a unique rank to each row within a result set.
 [Source](https://learn.microsoft.com/en-us/sql/t-sql/functions/dense-rank-transact-sql?view=sql-server-ver17)
 
+
+#### Task: Get all rows from the `Slspers` table and calculates a rank for each salesperson based on their commrate.
 ``` sql
 SELECT  
-  fname, 
-  commrate,  
+  *, 
   DENSE_RANK() OVER (ORDER BY commrate DESC) AS SalaryRank  
   -- DENSE_RANK uses consecutive ranks that doesn't skip ranks after ties.  
 FROM Slspers  
@@ -1228,22 +1229,22 @@ The GROUP BY statement combines duplicates values into unique groups i.e. the GR
 
 Grouping data helps summarize, analyze & understand data more easily, such as viewing total sales by region or city.
 
-#### Output each distinct customer (like Excel's UNIQUE() function)  
+#### Task: Output each distinct customer (like Excel's UNIQUE() function)  
 ``` sql
 SELECT DISTINCT City  
 FROM Customers  
+
+-- Notice that the above example display a UNIQUE list of customers.
 ```
 
-> Notice in the above example the unique list of customers.
-
-Use the GROUP BY statement to achieve the same results.  
+#### Task: Use the GROUP BY statement to achieve the same results.  
 ``` sql
 SELECT city  
 FROM Customers  
 GROUP BY city  
 ```
 
-#### To add a column of the count of each city:
+#### Task: Add a column of the count of each city:
 ``` sql  
 SELECT city, COUNT(city)  
 FROM Customers  
@@ -1252,19 +1253,51 @@ GROUP BY city
 
 > Practice: Group the data by state & add a column of the count of each state,
 
-#### Demo Exercise: For each sales person, show the number (qty) of books sold
+#### Task: In the Sales Table, for each sales person, show the number (qty) of books sold
 ``` sql
--- Solution (Keep this query since we'll build off this soon)
+-- Solution (Keep this query since the next HAVING clause example builds off this)
 SELECT  
 	repid,  
 	SUM(qty) AS qty_Total   
-FROM sales  
+FROM Sales  
 -- WHERE YEAR(sldate) = 2012  
-GROUP BY repid  
--- ORDER BY repid
+GROUP BY repid
 ```
 
-#### Demo Exercise: List each commission rate along with the number of salespeople who have that rate.  
+
+## Lesson 4.3. HAVING Clause
+The HAVING clause filters results after they have been grouped (not before!).
+
+#### Demo Exercise: Show all sales people who made sales that begin with the letter 'E'
+``` sql
+SELECT  
+	repid,
+	SUM(qty) AS qty_Total  
+FROM Sales  
+-- WHERE YEAR(sldate) = 2012  
+GROUP BY repid  
+HAVING repid LIKE 'E%'
+```
+
+
+## Lesson 4.4. Additional Exercises
+```
+Remember the Acronym: (Huge Shoutout to Alice Zhao)  
+Start 	Fridays With 	Grandmas Homemade 	Oatmeal  
+SELECT 	FROM 	WHERE 	Group By Having 	Order By
+```
+
+#### Demo Exercise #1: Show a count of titles released per year BUT only show years with more than 5 titles released.
+``` sql
+SELECT 
+	YEAR(pubdate), 
+	COUNT(*) -- Also works: -- COUNT(pubdate)  
+FROM Titles  
+GROUP BY YEAR(pubdate) --  WITH ROLLUP  
+HAVING COUNT(*) > 5  
+```
+
+#### Demo Exercise #2: List each commission rate along with the number of salespeople who have that rate.  
 ``` sql
 SELECT	
 	commrate,  
@@ -1275,39 +1308,8 @@ FROM Slspers
 GROUP BY commrate
 ```
 
-## Lesson 4.3. HAVING Clause
-The HAVING clause filters results after they have been grouped (not before!).
 
-```
-Remember the Acronym: (Huge Shoutout to Alice Zhao)  
-Start 	Fridays With 	Grandmas Homemade 	Oatmeal  
-SELECT 	FROM 	WHERE 	Group By Having 	Order By
-```
-
-#### Demo Exercise: Show a count of titles released per year BUT only show years with more than 5 titles released.
-``` sql
-SELECT 
-	YEAR(pubdate), 
-	COUNT(*) -- Also works: -- COUNT(pubdate)  
-FROM Titles  
-GROUP BY YEAR(pubdate) --  WITH ROLLUP  
-HAVING COUNT(*) > 5  
-```
-
-#### Demo Exercise: Show all sales people who made sales that begin with the letter 'E'
-``` sql
-SELECT  
-	repid,
-	SUM(qty) AS qty_Total  
-FROM sales  
--- WHERE YEAR(sldate) = 2012  
-GROUP BY repid  
-HAVING repid LIKE 'E%'
-```
-
----
-
-## Lesson 4.4. ROLLUP
+## Lesson 4.5. ROLLUP
 The ROLLUP operator in SQL is used in conjunction  
 with the GROUP BY clause to generate  
 subtotals & grand totals for grouped data.  
@@ -1620,10 +1622,10 @@ WHERE S.qty >= 500
 -- Solution
 SELECT S.*, C.Custname, T.bktitle -- The order of the columns does not matter.
 FROM Sales s 
-JOIN Titles t
-    ON s.partnum = t.partnum
 JOIN Customers c
     ON s.custnum = c.custnum
+JOIN Titles t
+    ON s.partnum = t.partnum
 WHERE s.qty >= 500;
 ```
 
