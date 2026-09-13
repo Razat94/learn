@@ -340,51 +340,6 @@ FROM INFORMATION_SCHEMA.COLUMNS
 WHERE TABLE_NAME = 'Slspers'
 ```
 
-## Lesson 1.7. Backup Tables
-A backup table is a copy of a table that’s useful for testing queries on sample data. It's important to note that it's not good practice to create duplicate tables unless for testing purposes, sandboxes & overall backups.
-
-``` sql
--- Excercise: Create a Backup table
-SELECT *  
-INTO Slspers_Backup  
-FROM Slspers;  
-```
-
-Once the command is executed, the table can be viewed by:  
-1. First refreshing the Object Explorer by clicking the  'Refresh (F5)' button.  
-2. Hide the folder 'Tables' & expand the folder again.  
-
-When creating a new table, IntelliSense may not recognize the table name right away and can display a red squiggly line which indicates that the name is an invalid object name. To refresh the IntelliSense cache, do one of the following:
-
-- Press 'Ctrl' + 'Shift' + 'R' OR
-- On the toolbar, navigate to 'Edit' -> 'IntelliSense' -> 'Refresh Local Cache'.
-
-Albeit advanced, a 'NewCustomers' table can be created but with structure only  
-``` sql
-SELECT *  
-INTO NewCustomers  
-FROM Customers  
-WHERE 1 = 0;  
--- To create an empty table (structure only),   
--- use WHERE 1 = 0 or similar condition.
-```
-
-To delete a table, either:  
-- Right-click the table name in Object Explorer and select 'Delete'.
-- Run the following code:
-	``` sql
-	DROP TABLE IF EXISTS Slspers_Backup 
-	-- Note: This will PERMANENTLY delete the table unless either a backup has been stored or the changes haven't been committed yet!  
-	```  
- 
-
-
-Lastly, to truncate a table i.e. to remove all rows from a table:   
-``` TRUNCATE TABLE Slspers_Backup ```
-
-This content will be covered more extensively in the SQL Part 2 class.
-
----
 
 ## Lesson 1.8. The Command Line
 The command line can be used to run T-SQL. 
@@ -472,10 +427,10 @@ The SQL WHERE clause filters results by applying one or more conditions so that 
 
 #### Task 2.2.1. Simple Example of Where Clause
 ``` sql
+-- The WHERE clause acts as a Filter. Verify that 6 people are returned.  
 SELECT *  
 FROM Customers  
 WHERE state = 'NY'   
--- The WHERE clause acts as a Filter. Verify that 6 people are returned.  
 
 -- NOTE: In SQL Server, use single quotation marks (' ') for string literals.  
 -- Double quotation marks (" ") are not valid for this purpose and will not work in a query.
@@ -495,8 +450,10 @@ Below are more examples demonstrating various ways the WHERE clause can be used:
 	column    operator       value
 	```
 
-- WHERE clause used with showing book titles with dates past 1/1/2017
+- WHERE clause used with dates. 
 	``` sql 
+	-- Show all book titles with dates past 1/1/2017
+
 	SELECT 
 		bktitle, 
 		CAST(pubdate AS DATE) -- CAST is used to truncate the time portion  
@@ -517,31 +474,13 @@ Below are more examples demonstrating various ways the WHERE clause can be used:
 	ORDER BY discounted_price DESC  -- WILL WORK!  
 	```
 
-- WHERE Clause used with creating a new table from a filter:
-	``` sql
-	SELECT *  
-	INTO CA_Customers  -- Creates a new table called 'CA_Customers'  
-	FROM Customers  
-	WHERE state = 'CA'  
-	```
 
-	- TO DELETE:  
-	``` DROP TABLE CA_Customers ```  
-
-- Another Example  
-	``` sql
-	SELECT *  
-	INTO HighEarners  
-	FROM Slspers  
-	WHERE commrate > 0.04;  
-	```
-
-### 2.3. Additional Keywords
+### 2.3. Additional Keywords in WHERE Clause
 
 ### SQL NOT Operator 
 The NOT operator is used in the WHERE clause to return records that do not match a specific condition.
 
-#### Exercise: Returns all customers NOT from NY:
+#### Task 2.3.1: Returns all customers NOT from NY:
 ``` sql
 SELECT *  
 FROM Customers  
@@ -550,7 +489,7 @@ WHERE NOT state = 'NY'
 ```
 
 The <> operator can be used in lieu of the `NOT` keyword. 
-#### Task 2.3.1: Using `<>`, returns all customers NOT from NY:
+#### Task 2.3.2: Using `<>`, returns all customers NOT from NY:
 ``` sql
 SELECT *  
 FROM Customers  
@@ -558,7 +497,7 @@ WHERE state <> 'NY'
 -- ORDER BY state   
 ```
 
-Fun Fact: Similar to a double negative, notice that the NOT cluase can be placed before the <> operator to cancel it out.
+Fun Fact: Similar to a double negative, notice that the NOT clause can be placed before the <> operator to cancel it out.
 ``` sql
 -- Displays all Customers from NY 
 SELECT *  
@@ -569,7 +508,7 @@ WHERE NOT state <> 'NY'
 ### NULL Values
 In SQL, a `NULL` value represents void or empty data in a table field. Similar to a blank cell in Excel, in databases a `NULL` value is a placeholder that represents missing or blank data, and is different from a numeric zero or an empty string.
 
-#### Task 2.3.2 Example of WHERE clause with NULL:  
+#### Task 2.3.3 Example of WHERE clause with NULL:  
 ``` sql
 SELECT *  
 FROM Titles  
@@ -618,7 +557,7 @@ The AND operator displays a record if all the searched conditions are TRUE.
 
 > Remember: EVERY (All) condition MUST be true. [Similar to Excel Function]
 
-Exercise: Show only customers from Denver, CO since there are multiple Denver cities in America.
+#### Task 2.3.4: Show only customers from Denver, CO since there are multiple Denver cities in America.
 ``` sql
 SELECT *  
 FROM customers  
@@ -665,7 +604,7 @@ WHERE
 > Remember: ONE/ANY condition MUST be true. [Similar to Excel Function]
 
 The `OR` keyword can be used to filter for multiple states.  
-Exercise: Show all customers who are either in California or New York. 
+#### Task 2.3.5: Show all customers who are either in California or New York. 
 ``` sql
 SELECT custname, city, state 
 FROM Customers    
@@ -673,7 +612,9 @@ WHERE state = 'CA' OR state = 'NY'
 -- Also works: -- WHERE state IN ('CA', 'NY', 'TX');  
 ```
 
-#### Activity 2.3: Find the Problem:
+> Sample Exercise: Show people in 
+
+#### Activity 2.3.3: Find the Problem:
 Q: Show me people who live either in NY or CA. Amongst those people, they MUST have a zipcode of 92704.
 
 ``` sql
@@ -691,7 +632,7 @@ ORDER BY zipcode
 ## Lesson 2.4. omg LIKE finding data based on patterns
 The `LIKE` operator is used in a `WHERE` clause to search for data based on a string pattern.
 
-Exercise: Get all customers whose name starts with the letter 'A'  
+#### Task 2.4.1: Get all customers whose name starts with the letter 'A'  
 ``` sql
 -- Solution
 SELECT *  
@@ -742,6 +683,73 @@ FROM Titles
 -- WHERE partnum LIKE '401__' -- underscore represents 1 character  
 ORDER BY bktitle ASC  
 ```
+
+
+## Lesson 2.5. Backup Tables
+A backup table is a copy of a table that’s useful for testing queries on sample data. Note that it's not good practice to create duplicate tables unless for testing purposes, sandboxes & overall backups.
+
+``` sql
+-- Excercise: Create a Backup table
+SELECT *  
+INTO Slspers_Backup  
+FROM Slspers;  
+```
+
+Once the command is executed, the table can be viewed by:  
+1. First refreshing the Object Explorer by clicking the  'Refresh (F5)' button.  
+<img src = "./zz_refresh.jpg">
+2. Hide the folder 'Tables' & expand the folder again.  
+
+When creating a new table, IntelliSense may not recognize the table name right away and can display a red squiggly line which indicates that the name is an invalid object name. To refresh the IntelliSense cache, do one of the following:
+
+- Press 'Ctrl' + 'Shift' + 'R' OR
+- On the toolbar, navigate to 'Edit' -> 'IntelliSense' -> 'Refresh Local Cache'.
+
+The `WHERE` clause can be used when creating a new table from a filter:
+
+- Example 1:
+	``` sql
+	SELECT *  
+	INTO CA_Customers  -- Creates a new table called 'CA_Customers'  
+	FROM Customers  
+	WHERE state = 'CA'  
+	```
+
+	- TO DELETE:  
+	``` DROP TABLE CA_Customers ```  
+
+- Example 2:
+	``` sql
+	SELECT *  
+	INTO HighEarners  
+	FROM Slspers  
+	WHERE commrate > 0.04;  
+	```
+
+- Example 3: Albeit advanced, a 'NewCustomers' table can be created but with structure only  
+	``` sql
+	SELECT *  
+	INTO NewCustomers  
+	FROM Customers  
+	WHERE 1 = 0;  
+	-- To create an empty table (structure only),   
+	-- use WHERE 1 = 0 or similar condition.
+	```
+
+To delete a table, either:  
+- Right-click the table name in Object Explorer and select 'Delete' OR
+- Run the following code:
+	``` sql
+	DROP TABLE IF EXISTS Slspers_Backup 
+	-- Note: This will PERMANENTLY delete the table unless either a backup has been stored or the changes haven't been committed yet!  
+	```  
+ 
+
+Lastly, to truncate a table i.e. to remove all rows from a table:   
+``` TRUNCATE TABLE Slspers_Backup ```
+
+This content will be covered more extensively in the SQL Part 2 class.
+
 
 
 /* -------------------------------------------------------
@@ -977,11 +985,12 @@ WHERE commrate >
 ```
 
 #### Optional Subquery Demos
-Optional Demo #1: Show all books that are of the maximum salesprice:
+Optional Demo #1: Show all book names that are of the maximum salesprice 
+i.e. what book has the highest salesprice:
 ``` sql
 SELECT *
 FROM Titles
-WHERE slprice = (
+WHERE slprice = ( -- Note: Parenthesis are a must in nested functions
     SELECT MAX(slprice)
     FROM Titles
 )
@@ -1016,7 +1025,7 @@ WHERE devcost < ALL (
 
 ---
 
-## Lesson 3.3. String Functions
+## Lesson 3.3. Text(String) Functions
 A `string` refers to text data in a SQL table. It's anything made of characters (e.g. letters, numbers, symbols) and are usually written inside single quotes. Below are some examples:
 
 ```
