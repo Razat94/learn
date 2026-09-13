@@ -137,7 +137,6 @@ PRINT 'Good Bye!' 			-- Displays a message or a value in the 'Messages' tab and 
 SQL is generally whitespace-insensitive, meaning that extra spaces, tabs, or newlines between keywords and identifiers (names) are ignored by the parser.
 
 ``` sql
--- Output the first and last names of everyone in the `Slspers` table.
 SELECT 
 	'
 	Hello
@@ -172,9 +171,13 @@ SELECT CONCAT(
 
 ## Lesson 1.2. Selecting Data from a Database
 
-#### Task 1.2.1: Return all data from the `Slspers` table:  
+#### Task: Tell SQL Server to switch to the Pub1 database.
 ``` sql
 USE Pub1  
+```
+
+#### Task 1.2.1: Return all data from the `Slspers` table:  
+``` sql
 SELECT *  	 -- Selects ALL columns
 FROM slspers -- Note: Spelling matters. Typing 'slsperson' won't execute.
 ```
@@ -193,13 +196,13 @@ Queries can also be written to output individual columns.
 
 #### Task 1.2.3 Output the first and last names of everyone in the `Slspers` table.
 ``` sql
+-- Output the first and last names of everyone in the `Slspers` table.
 SELECT fname, lname  
 FROM slspers;
 ```
 
 Remember that SQL is generally whitespace-insensitive, meaning that extra spaces, tabs, or newlines between keywords and identifiers (names) are ignored by the parser.
 ``` sql
--- Output the first and last names of everyone in the `Slspers` table.
 SELECT 
 
 	fname, 
@@ -212,20 +215,22 @@ FROM slspers;
 ## Lesson 1.3. SQL Prefixes & Aliases
 A prefix can be used in front of a column or even table name to specify its source and avoid ambiguity
 
-``` sql
--- `Slspers` is a table prefix for the column `fname`
-SELECT  
-	Slspers.fname, 
-	Slspers.lname  
-FROM Pub1.Slspers;
-```
+- Example 1: Use `Slspers` as a table prefix for the column `fname` & `lname`
+	
+	``` sql 
+	SELECT  
+		Slspers.fname, 
+		Slspers.lname  
+	FROM Pub1.Slspers;
+	```
 
-Note that table prefixes can also be used before the wildcard asterisk (*).
-``` sql
-SELECT Slspers.* FROM Slspers    
--- Same as:  
--- SELECT * FROM Slspers
-```
+- Example 2: Table prefixes can also be used before the wildcard asterisk (*).
+
+	``` sql
+	SELECT Slspers.* FROM Slspers    
+	-- Same as:  
+	-- SELECT * FROM Slspers
+	```
 
 #### Alias 'AS' Keyword 
 In SQL, aliases are used to give a table or a column a temporary name and are useful when renaming long or confusing column names
@@ -275,7 +280,7 @@ SELECT
 FROM Titles
 ```
 
-ADVANCED: To create a new rounded column stored in the table:
+ADVANCED Task: Create a new rounded column stored in the table:
 ``` sql
 ALTER TABLE Titles
 ADD RoundedPrice INT;
@@ -297,7 +302,6 @@ SELECT
 	CAST(slprice * 1.2 AS DECIMAL(10,2)) AS Inflation  -- Better Solution:	Force two decimal places everywhere.
 FROM Titles
 ```
-
 
 > Remember: A calculated column doesn't exist in a table, yet SQL will calculate the function for each row when the query runs. 
 
