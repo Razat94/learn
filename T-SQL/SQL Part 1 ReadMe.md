@@ -135,6 +135,7 @@ PRINT 'Good Bye!' 			-- Displays a message or a value in the 'Messages' tab and 
 ```
 
 SQL is generally whitespace-insensitive, meaning that extra spaces, tabs, or newlines between keywords and identifiers (names) are ignored by the parser.
+
 ``` sql
 -- Output the first and last names of everyone in the `Slspers` table.
 SELECT 
@@ -142,17 +143,29 @@ SELECT
 	Hello
 	World
 	'
+```
 
 ---
 
 SQL Server provides built-in functions that format how data is displayed and can perform calculations e.g. rounding values.
 #### Example: Demonstrate the power of the functions.
 ``` sql
-SELECT FORMAT(1+3, 'C')  -- Output: $4.00, since FORMAT Function converts the number into a string. 'C' stands for Currency.
+SELECT FORMAT(1+3, 'C')  -- Output: $4.00, since FORMAT Function converts the number into a string. 
+-- 'C' stands for Currency. 'P' can be substituted for percentage
 SELECT FORMAT(123.490000000, '0.##')	-- Output: 123.49
 SELECT ROUND(235.415, 2) AS RoundValue;	-- Output: 235.420 
 -- Note: MS Excel has a round function too 
 -- = ROUND(D2,0) -- given that D2 = 235.415
+```
+
+#### Task: Convert 125 minutes into hours and format the result as text. 
+``` sql
+DECLARE @minutes INT = 125;
+
+SELECT CONCAT(
+    CAST(ROUND( @minutes/ 60.0, 2) AS DECIMAL(10,2)),
+    ' hr'
+);
 ```
 
 ---
@@ -326,9 +339,11 @@ For instance, to display a table structure:
 SP_HELP Slspers  
 ```
 
-Upon running the above procedure, notice that each column has a data type. Data Types are Column Types which are a columns attribute/definition that determines the kind of values the column can hold. Every column in a SQL table is required to have a specific Data Type assigned to it.
+Upon running the above procedure, notice that each column has a data type. 
 
-- Data types are constraints that specifies what kind of values a column can store and more importantly, what it cannot! For example, a column defined as a `DECIMAL` data type will contain only decimal numbers, so it enforces data validation since we wouldn't expect to see that column to hold some other value e.g. a date.
+Data Types are Column Types which are a columns attribute/definition that determines the kind of values the column can hold. Every column in a SQL table is required to have a specific Data Type assigned to it.
+
+- Data types are constraints that specifies what kind of values a column can store and more importantly, what it cannot! For example, a column defined as a `DECIMAL` data type will contain only values of decimal numbers, thereby enforcing data validation. i.e. we wouldn't expect that column to hold some other value e.g. a date.
 - This will be discussed more in Lesson 3 of SQL Part 2.
 
 Additionally, in the Object Explorer, right-click on the table of choice and click 'Design' to view and modify the table’s structure.
@@ -337,7 +352,7 @@ Additionally, in the Object Explorer, right-click on the table of choice and cli
 -- Albeit advanced, the below command also outputs column names  
 SELECT COLUMN_NAME  
 FROM INFORMATION_SCHEMA.COLUMNS  
-WHERE TABLE_NAME = 'Slspers'
+WHERE TABLE_NAME = 'Slspers' -- Replace 'Slspers' with the table of choice.
 ```
 
 
@@ -810,9 +825,10 @@ Similar to Excel, SQL can use:
 SELECT  
 	bktitle,  
 	pubdate,
-	YEAR(pubdate) -- Use the Year function to return YEAR of each record.  
+	YEAR(pubdate) -- YEAR function returns YEAR of each record.  
 FROM Titles  
-WHERE YEAR(pubdate) = 2017  -- Filter by 2017  -- also works -- WHERE DATEPART(year, pubdate) = 2017  
+WHERE YEAR(pubdate) = 2017  -- Filter by 2017  
+-- Also works -- WHERE DATEPART(year, pubdate) = 2017  
 ORDER BY pubdate
 -- Also Works: -- ORDER BY YEAR(pubdate), MONTH(pubdate)
 ```
@@ -822,13 +838,14 @@ ORDER BY pubdate
 -- Solution:  
 SELECT  
 	bktitle, 
+	pubdate,
 	CAST(pubdate AS DATE)  -- Notice that using CAST creates a new column, so an alias name should be assigned. -- AS DATE
 FROM Titles  
 WHERE YEAR(pubdate) = 2016 AND MONTH(Pubdate) = 7  
 ORDER BY pubdate
 ```
 
-#### 1 Min Optional Task: Filter for months BETWEEN May through Oct for all years.
+#### 1 Min Optional Task: Show book titles filtered for months BETWEEN May AND Oct for all years.
 ``` sql
 SELECT  
  	bktitle, 
@@ -837,7 +854,7 @@ FROM Titles
 WHERE MONTH(pubdate) BETWEEN 5 AND 10  -- NOTE: The keyword 'IS BETWEEN' will break the query.
 ```
 
-#### 1 Min Optional Task: Show titles published in 2016 or 2017
+#### 1 Min Optional Task: Show book titles published in 2016 or 2017
 ``` sql
 -- Solution 1:
 SELECT
@@ -1079,7 +1096,7 @@ FROM Customers;
 ### CONCAT Function
 Similar to [the Excel function](https://support.microsoft.com/en-us/office/concat-function-9b1a9a3f-94ff-41af-9736-694cbd6b4ca2), the CONCAT() function combines two or more text values into one text string.
 
-Exercise: Use the CONCAT() function to combine the customer name and city into one column.
+Exercise: From the `Slspers` table, use the CONCAT() function to combine the customer name and city into one column.
 ``` sql
 SELECT 
 	CONCAT(Custname, ' lives in ', City) AS CustomerInfo
@@ -1231,13 +1248,13 @@ Grouping data helps summarize, analyze & understand data more easily, such as vi
 
 #### Task: Output each distinct customer (like Excel's UNIQUE() function)  
 ``` sql
-SELECT DISTINCT City  
+SELECT DISTINCT city  
 FROM Customers  
 
 -- Notice that the above example display a UNIQUE list of customers.
 ```
 
-#### Task: Use the GROUP BY statement to achieve the same results.  
+#### Task: Use the `GROUP BY` statement to achieve the same results.  
 ``` sql
 SELECT city  
 FROM Customers  
