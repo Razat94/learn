@@ -31,18 +31,20 @@ We’ll continue using the data from the last part about the publishing company 
 
 Please contact me to request the data.
 
-This book will be utilizing SQL Server Management Studio as the primary graphical interface for writing, testing, and executing Transact-SQL (T-SQL) queries. [Link](https://learn.microsoft.com/en-us/ssms/sql-server-management-studio-ssms#:~:text=SQL%20Server%20Management%20Studio%20(SSMS)%20is%20an%20integrated%20environment%20for,in%20SQL%20Server%20Management%20Studio.)
+This book will be utilizing SQL Server Management Studio as the primary graphical interface for writing, testing, and executing Transact-SQL (T-SQL) queries. [Link to learn more.](https://learn.microsoft.com/en-us/ssms/sql-server-management-studio-ssms#:~:text=SQL%20Server%20Management%20Studio%20(SSMS)%20is%20an%20integrated%20environment%20for,in%20SQL%20Server%20Management%20Studio.)
 
 /* -------------------------------------------------------  
 ## <p id = "2"> LESSON 2: Manipulating Table Row Data | [Back to ToC](#toc) </p>  
 ---------------------------------------------------------- */  
 
-This lesson will cover how to insert, update, and delete records in a table.
+This lesson will cover how to modify (i.e. insert, update, and delete) records in a table.
+All modifications will be done on copied backups and not the original data. 
 
 ### Lesson 2.0: Creating Backup Tables 
-Before modifying any data, we will first create backup tables to ensure that all changes throughout these lessons are made to copies and not the original data. This way, even if a backup is altered or corrupted, the original remains intact.
+Before modifying any data, backup tables will be created to protect the original data.
+This way, even if the data in the backup is altered or corrupted, the original remains intact.
 
-#### Task 2.0.1: Create a backup table of `Titles` called `Titles_Revised`  
+#### Task 2.0.1: Create a backup table of `Titles` called `Titles_Revised` that retains all the original data.
 ``` sql
 SELECT *  
 INTO Titles_Revised  
@@ -55,26 +57,20 @@ FROM Titles
 > Additionally, refresh IntelliSense to avoid the red error underline on the newly created table name via:  
 > Edit (Tab) -> IntelliSense -> Refresh Local Cache (Ctrl + Shift + R)  
 
+--- 
 
-#### Task 2.0.2: Create an Empty Table `Slspers_Backup`  with the same structure as `Slspers`
-A useful trick is to create a new table with the same structure without copying any data.
+Task 2.0.2: Please make another backup table for Salesperson titled `Slspers_Backup`
 
 ``` sql
--- Create a backup copy of Slspers (no data or rows copied)
 SELECT *  
-INTO Slspers_Backup    
-FROM Slspers  
-WHERE 1 = 0  -- always false
--- Note: SQL Server does not support Boolean literals `TRUE` and `FALSE` in SQL queries. 
--- So instead, an expression can be used that evaluates to false.
+INTO Slspers_Backup  
+FROM Slspers
 ```
 
-Alternatively, the TRUNCATE statement can be used to remove all the rows from a table but keeps its structure:    
-``` 
-TRUNCATE TABLE Slspers_Backup 
-```
+---
+The next two tasks show how to create tables using a WHERE condition to filter specific data.
 
-#### (Optional) Task 2.0.3: Create an empty table called `CustomersCA` based on the structure of the `Customers` table.
+#### Task 2.0.3: Create a `CustomersCA` table with the same structure as `Customers`, containing only customers from `CA`.
 ``` sql
 SELECT *  
 INTO CustomersCA  
@@ -84,14 +80,33 @@ WHERE state = 'CA'
 
 > Additional Exercise: Create an empty table called `Cust2025`
 
-#### Different Ways to Delete a Table in SQL Server:
+#### Task 2.0.3: Create an empty table `Slspers_Template` with the same schema structure as `Slspers`
+A useful trick is to create a new table with the same structure <b>without copying any data.</b>
+
+``` sql
+-- Create a template copy of Slspers (no data or rows copied)
+SELECT *  
+INTO Slspers_Template    
+FROM Slspers  
+WHERE 1 = 0  -- always false
+-- Note: SQL Server does not support Boolean literals `TRUE` and `FALSE` in SQL queries. 
+-- So instead, an expression can be used that evaluates to false.
+```
+
+Alternatively, the TRUNCATE statement can be used to remove all the rows from a table but keep its structure:    
+``` 
+TRUNCATE TABLE Slspers_Backup 
+```
+
+#### Task 2.0.4: Use either of the following methods to delete the CustomersCA table in SQL Server:
 - Using T-SQL Commands:
 	- DROP TABLE `CustomersCA`  
 	- DROP TABLE IF EXISTS `CustomersCA` -- avoid errors if the table has already been deleted.
+
 - Using the SSMS Object Explorer (GUI):
-	- In the Object Explorer pane, navigate to the database of choice and find the table to delete (e.g., `CustomersCA`).
-	- Right-click the table and select Delete.
-	- When the Delete Object dialog box appears, verify the selection and click OK to drop the table
+	1. In the Object Explorer pane, navigate to the database of choice and find the table to delete (e.g., `CustomersCA`).
+	2. Right-click the table and select 'Delete'.
+	3. When the Delete Object dialog box appears, 	verify the selection and click OK to drop the table
 
 ---
 
@@ -100,14 +115,14 @@ WHERE state = 'CA'
 ### Lesson 2.1: CRUD Overview
 
 #### <u> Aww, CRUD! </u>
-In any database, CRUD refers to the four basic operations that can be performed on the data:  Create, Read, Update, & Delete.
-<br>  
+In database systems, CRUD refers to the four basic operations that can be performed on the data:
+
 C -- Create  
 R -- Read  
 U -- Update  
 D -- Delete	
 
-The below table lists out the four basic functions along with sample examples:
+The below table lists out the four basic functions in more detail along with the syntax:
 
 | Operation | SQL Example |
 |-----------|-------------|
@@ -118,22 +133,26 @@ The below table lists out the four basic functions along with sample examples:
 
 <br>
 
-The following subchapters will list out the common CRUD statements.
+> Note!
 
->> Note: The following queries will modify the backup tables.  
-Make sure to apply all changes to the BACKUP table, not the original table! 
+The following subchapters will cover common CRUD operations using queries that modify the backup tables `Slspers_Backup` & `Titles_Revised`. 
+
+Make sure to apply all changes to the <b>BACKUP</b> table, not the original table! 
 
 <br>
 
 --- 
 
-### Lesson 2.2: 
-### C: INSERT INTO statement
-/* ------------ C: INSERT INTO statement ------------ */
+### Lesson 2.2:  Letter 'C' - INSERT INTO keyword
+/* ----- C: INSERT INTO statement ----- */
 
+The following exercises will discuss how to add records (e.g. salespeople) into tables.
 > *Note:* In SQL, the keyword `INTO` usually indicates that data is being written into something.
 
-#### Insert ONE record (with all specified columns)
+To first see all table column names, either right click on the table and then go to 'DESIGN' or press 
+`SP_HELP Slspers_Backup`
+
+#### Task: Insert ONE record (with all specified columns)
 ```sql
 INSERT INTO Slspers_Backup
 -- Optional: (repid, fname, lname, commrate)
@@ -141,33 +160,62 @@ VALUES
 ('J01', 'Jane', 'Doe', 0.05);
 ```
 
-#### Insert a record with unspecified columns as NULL.  
+#### Task: Insert a record with unspecified columns as `NULL`.  
 ``` sql
 INSERT INTO Slspers_Backup (repid, fname)    
 VALUES  
 ('N01', 'Nick')  
 ```
 
-#### Insert MANY (2+) records at once.     
+#### Task: Insert MANY (2+) records at once.     
 ``` sql
 INSERT INTO Slspers_Backup    
 VALUES  
 ('P01', 'Angie', 'Lopez' , 0.05),  -- Notice the comma on all added rows except the last one.
 ('P01', 'Angel', 'Smith' , 0.05),  
-('P01', 'Steven', 'Stone' , 0.05)  -- Duplicate REPID 'P01' is intentional as it is a setup for a deletion example.  
+('P01', 'Steven', 'Stone' , 0.05)
+-- Duplicate REPID 'P01' is intentional as it is a setup for a deletion example.  
 ```
 
-#### TRUNCATE statement used to remove rows from the table
-``` sql 
-TRUNCATE TABLE Slspers_Backup 
-```
+---
 
-#### Copy all rows from `Slspers` and pastes the rows into `Slspers_Backup`
+### Adding Dates
+As you know, dates can be formatted as:
+
+	- yyyy/mm/dd
+	- mm/dd/yyyy
+	- dd/mm/yyyy
+
+To see the current session's active settings, run:  
+`DBCC USEROPTIONS`
+
+To change the format, use:  
+`SET DATEFORMAT YMD`
+
+#### Task: On the `Titles_Revised` table, add a book title and a date
 ``` sql
-INSERT INTO Slspers_Backup
+INSERT INTO Titles_Revised (bktitle, pubdate)
+VALUES
+('All About SQL', 2026-12-31)  
+```
+
+When done, the format can be changed back to MM/DD/YYY:  
+`SET DATEFORMAT MDY`
+
+---
+
+The next two tasks will demonstrate how to remove all rows from a table and insert them back from the original table.
+#### Task A: Use the TRUNCATE statement to remove all rows from `Titles_Revised` table.
+``` sql 
+TRUNCATE TABLE Titles_Revised 
+```
+
+#### Task B: Copy all rows from `Titles` and paste them into the blank `Titles_Revised` table
+``` sql
+INSERT INTO Titles_Revised
 SELECT *
-FROM Slspers;
--- WHERE fname LIKE 'A%';  -- Optional: insert only rows where first name starts with "A"
+FROM Titles;
+-- WHERE bktitle LIKE 'A%';  -- Optional way of inserting only rows where book title starts with "A"
 ```
 
 #### Optional Exercise: Insert data from one table `Potential_Customers` with a condition into another table `Customers`.  
@@ -178,36 +226,29 @@ FROM Potential_Customers
 WHERE State = 'CA';  
 ```
 
--- End of Subsection Exercise: Add the following information into SQL Table 'Titles'  
+---
 
-```  
-partnum bktitle                            devcost          slprice          pubdate  
-------- ---------------------------------- ---------------- ---------------- -----------------------  
-12345   The Role of SQL in Big Data        8000.00          45.00            2017-01-01 00:00:00  
-```  
-
+#### End of Subsection Task: Add yourself as a salesperson and assign yourself a fictional commission!
 Solution:  
 ``` sql
-INSERT INTO Titles_Revised  
--- optional -- (partnum, bktitle, devcost, slprice, pubdate)  
+INSERT INTO Slspers_Backup
 VALUES  
-(12345, 'The Role of SQL in Big Data', 8000, 45, '2017-01-01')  
+('R12345', 'Raza', 'Tahir', 0.15)  
 ```
 
 <br>
 
-### Lesson 2.3: 
-### R: SELECT statement
-/* ------------ R: SELECT statement ------------ */  
+### Lesson 2.3:  Letter 'R' - SELECT keyword
+/* ----- R: SELECT statement ----- */
 
-#### Output a table  
+#### Task: Output a table  
 ``` sql
 SELECT *  
 FROM Slspers_Backup  
 WHERE commrate = 0.05  
 ```
 
-#### Output another table.  
+#### Task: Output another table.  
 ``` sql
 SELECT *  
 FROM Titles_Revised  
@@ -225,22 +266,30 @@ ORDER BY commrate
 
 <br>
 
-### Lesson 2.4:
-### U: Update Table
-/* ------------ U: Update Table ------------ */
+### Lesson 2.4:  Letter 'U' - UPDATE keyword
+/* ----- U: UPDATE statement ----- */
 
-> *Note:* Before updating any rows with the `UPDATE` keyword, it's always a good idea to run a `SELECT` statement first to see exactly which rows will be updated. After knowing the results of the `SELECT` query, the conditions in the `WHERE` clause can then be reused in an `UPDATE` statement.
+> *Note:* Before updating any rows with the `UPDATE` keyword, it's always a good idea to run a `SELECT` statement first to see exactly which rows will be updated. 
+
+> After knowing the results of the `SELECT` query, the conditions in the `WHERE` clause can then be reused in an `UPDATE` statement.
 
 ---
 
-#### Demo: Update all salesperson commission from 0.3 to 0.6  
+Demo: Update all salesperson commission from 0.3 to 0.6 
+
+#### First, perform a check:  
+``` 
+SELECT * FROM Slspers_Backup WHERE commrate = 0.03  
+```
+
+####  Update all salesperson commission from 0.3 to 0.6 
 ```sql
 UPDATE Slspers_Backup
 SET commrate = 0.06
 WHERE commrate = 0.03;  -- NOTE: Always include a WHERE clause, or else the UPDATE statement will affect all records!
 ```
 
-Check:  
+#### Do a final Check:  
 ``` 
 SELECT * FROM Slspers_Backup WHERE commrate = 0.06  
 ```
@@ -248,7 +297,7 @@ SELECT * FROM Slspers_Backup WHERE commrate = 0.06
 #### Exercise #1: Fix the spelling mistake of 'Anne' (RepID 'W02') to 'Annie'    
 
 > Note Best Practice:  
-> When updating a specific SQL record, use a unique identifier (ideally the Primary Key) to ensure only one row is affected. Using non-unique values (like names or dates) risk updating multiple unintended records.
+> When updating a specific SQL record, use a unique identifier (ideally the Primary Key) to ensure only one row is affected. Using non-unique values (like names or dates) risk updating multiple unintended records with duplicate values.
 
 ``` sql
 -- Solution:  
@@ -257,7 +306,7 @@ SET fname = 'Annie'
 WHERE REPID = 'W02'  
 -- Bad Practice:   
 -- WHERE fname = 'Anne' 
--- This is not recommended since multiple records of 'Anne' could match
+-- Again, this is NOT recommended since multiple records of 'Anne' could match
 ```
 
 #### Exercise #2: From the newly created `Titles_Revised` table, update the `devcost` field for a range of part numbers between 40123 and 40125.
@@ -269,7 +318,7 @@ WHERE partnum BETWEEN 40123 AND 40125
 -- WHERE partnum BETWEEN 39904 AND 39906  
 ```
 
-#### Check the Updated Table 
+#### Finally, check the Updated Table 
 ``` sql 
 SELECT *  
 FROM Titles_Revised  
@@ -281,9 +330,9 @@ WHERE partnum BETWEEN 40123 AND 40125
 ``` sql
 UPDATE 	Titles_Revised  
 SET 	bktitle = 'Alex loves Windsurfing',  
-		devcost = 5000,  
-		slprice = 22,  
-		pubdate = '2017/11/01'  
+		devcost = 1000,  
+		slprice = 20,  
+		pubdate = '2017/12/31'  
 WHERE partnum = '40123'  
 ```
 
@@ -296,12 +345,10 @@ WHERE partnum = 40123
 
 <br>
 
-### Lesson 2.5:
-### D: Delete Rows
-/* ------------ D: Delete Rows ------------ */  
+### Lesson 2.5:  Letter 'D' - DELETE keyword
+/* ----- D: DELETE statement ----- */
 
 > Similar to the `UPDATE` statement, always verify which rows the `DELETE` query will remove by first running the `SELECT` query with the same `WHERE` clause.
-
 
 #### Delete all specified rows from `Titles_Revised` where `partnum` equals 40123.
 ``` sql
@@ -314,6 +361,14 @@ Check Updated Table
 SELECT *  
 FROM Titles_Revised  
 WHERE partnum = 40123  
+```
+
+Remember, to import that record from the original table:
+``` sql
+INSERT INTO Titles_Revised
+SELECT * 
+FROM Titles
+WHERE partnum = 40123
 ```
 
 Below are a few additional examples for deletions:
