@@ -149,8 +149,32 @@ Make sure to apply all changes to the <b>BACKUP</b> table, not the original tabl
 The following exercises will discuss how to add records (e.g. salespeople) into tables.
 > *Note:* In SQL, the keyword `INTO` usually indicates that data is being written into something.
 
-To first see all table column names, either right click on the table and then go to 'DESIGN' or press 
-`SP_HELP Slspers_Backup`
+---
+
+MS SQL Server holds many stored procedures that act as a saved set of SQL commands
+
+For instance, to display a table structure:  
+```
+SP_HELP Slspers  
+```
+
+Upon running the above procedure, notice that each column has a data type. 
+
+Data Types are Column Types which are a columns attribute/definition that determines the kind of values the column can hold. Every column in a SQL table is required to have a specific Data Type assigned to it.
+
+- Data types are constraints that specifies what kind of values a column can store and more importantly, what it cannot! For example, a column defined as a `DECIMAL` data type will contain only values of decimal numbers, thereby enforcing data validation. i.e. we wouldn't expect that column to hold some other value e.g. a date.
+- This will be discussed more in Lesson 3 of SQL Part 2.
+
+Additionally, in the Object Explorer, right-click on the table of choice and click 'Design' to view and modify the table’s structure.
+
+``` sql 
+-- Albeit advanced, the below command also outputs column names  
+SELECT COLUMN_NAME  
+FROM INFORMATION_SCHEMA.COLUMNS  
+WHERE TABLE_NAME = 'Slspers' -- Replace 'Slspers' with the table of choice.
+```
+
+---
 
 #### Task: Insert ONE record (with all specified columns)
 ```sql
