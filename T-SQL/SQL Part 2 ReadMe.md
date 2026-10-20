@@ -982,7 +982,7 @@ With our newly created .BACPAC file, we'll now find that importing a .bacpac fil
 	- Import all data  
 - When the progress is complete, click 'Close' and then verify that the new database is added.
 
-### To drop a database  
+### To drop a database  (In order for it to work, ensure that you've selected a seperate Database)
 ``` DROP DATABASE MyDatabase ```
 
 
