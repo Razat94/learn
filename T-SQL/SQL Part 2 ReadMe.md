@@ -374,6 +374,10 @@ WHERE partnum = 40123
 
 > Similar to the `UPDATE` statement, always verify which rows the `DELETE` query will remove by first running the `SELECT` query with the same `WHERE` clause.
 
+#### Delete all salespeople whose REPID is P01
+DELETE FROM Slspers_Backup
+WHERE repid = 'P01' 
+
 #### Delete all specified rows from `Titles_Revised` where `partnum` equals 40123.
 ``` sql
 DELETE FROM Titles_Revised
@@ -489,26 +493,26 @@ A SQL data type is an attribute of a column that determines the kind of values t
 For more information on field data types, please refer to the [Learn Microsoft Page.](https://learn.microsoft.com/en-us/sql/t-sql/data-types/data-types-transact-sql?view=sql-server-ver17)  
 
 ## Lesson 3.1. Creating and Deleting Tables
-Before covering the various CRUD operations related to affecting columns in a table in the next lesson, it's first important to understand how to create, delete & truncate tables as a whole.
+It's important to understand how to create, delete & truncate tables as a whole.
 
-#### Task: Create a table to store produce items. After the table has been created, insert a few sample entries with their prices and availability and finally query the table to display all produce items.
+#### Task: Create a table to store produce items. After the table has been created, we will insert a few sample entries with their prices and availability and finally query the table to display all produce items.
 
 Step 1: Create the table  
 ``` sql
 CREATE TABLE ProduceInventory (  
     ProduceName VARCHAR(50),  
     PricePerPound DECIMAL(5,2), -- Exactly 2 decimal places that goes up to 999.99  
-    InStock BIT NOT NULL  -- Closest thing to a Boolean type in T-SQL.  A value of `0` represents false, and `1` represents true.  
+    -- InStock BIT NOT NULL  -- Optional Column. This is the closest thing to a Boolean type in T-SQL.  A value of `0` represents false, and `1` represents true.  
 );  
 ```
 
 Step 2: Insert a few rows of data  
 ``` sql
-INSERT INTO ProduceInventory (ProduceName, PricePerPound, InStock)  
+INSERT INTO ProduceInventory (ProduceName, PricePerPound)  
 VALUES  
-('Cantaloupe', 0.50, 1),  
-('Cucumbers', 0.25, 1),  
-('Ginger', 0.99, 0);  
+('Cantaloupe', 0.50),  
+('Cucumbers', 0.25),  
+('Ginger', 0.99);  
 ```
 
 Step 3: Verify Data  
@@ -516,10 +520,10 @@ Step 3: Verify Data
 
 ```
 /* Following Output */  
-Produce		Price ($/lb)	In Stock?  
-Cantaloupe	$0.50 			TRUE  
-Cucumbers	$0.25 			TRUE  
-Ginger		$0.99 			FALSE  
+Produce		Price ($/lb)	
+Cantaloupe	$0.50 			  
+Cucumbers	$0.25 			  
+Ginger		$0.99 	  
 /* End of Output */  
 ```
 
@@ -532,10 +536,9 @@ DROP TABLE ProduceInventory  		-- used to drop/delete the table.
 
 /* ------------ ------------ */  
 
-With that out of the way, the next topic will cover how to use CRUD operations related to affecting columns in a table.
-
 ## 3.2. Using CRUD operations to affect columns.
-The previous Lesson 2 covered how to add and delete records (rows) in a table. This subsection will cover how to add and remove columns on a duplicate table.
+
+The previous Lesson 2 covered how to add and delete records (rows) in a table. The next main topic will cover how to use the various CRUD operations that was discussed in Chapter 2 to affect the underlying columns in a table.
 
 #### Recall: To Create a Duplicate Table 
 ``` sql
@@ -606,13 +609,13 @@ sp_help Slspers_Backup
 
 Fields marked as nullable means that the columns can contain NULL values i.e. values are optional
 ``` sql
-sp_help Slspers_Backup -- Check for nullable columns by looking at the table
+SP_HELP Slspers_Backup -- Check for nullable columns by looking at the table
 ```
 
-First, verify that a NULL (blank) value for the `Fname` field can be entered. 
+Verify that the column 'Fname' has a value 'yes' under 'Nullable'. Let's therefore verify that a NULL (blank) value for the `Fname` field can be entered. 
 ``` sql 
-INSERT INTO Slspers_Backup  
-VALUES ('N01', NULL, 'Nguyen', 0.05)  
+INSERT INTO Slspers_Backup  (fname, lname)
+VALUES (NULL, 'Nguyen')  
 ```
 
 Before moving on, ensure that the added row is deleted.
@@ -627,6 +630,7 @@ WHERE fname is NULL
 
 Assure that `fname` holds no `NULL` values.  
 ``` sql
+-- Should output an empty table
 SELECT * FROM Slspers_Backup  
 WHERE fname is NULL  
 ```
@@ -643,11 +647,10 @@ sp_help Slspers_Backup
 -- Note: The field `fname` is marked as 'No' in the "Nullable" column.
 ```  
 
-
 Assure that the following query does NOT work:  
 ``` sql
-INSERT INTO Slspers_Backup  
-VALUES ('N01', NULL, 'Nguyen', 0.05)  
+INSERT INTO Slspers_Backup (fname,lname)
+VALUES (NULL, 'Nguyen')  
 ```
 
 Executing the above query should now throw an error:  
@@ -661,6 +664,8 @@ Finally, to revert the column back to the way it was:
 ALTER TABLE Slspers_Backup   
 ALTER COLUMN fname VARCHAR(40) NULL;  
 ```
+
+Ultimately, this subsection has now covered how to add and remove columns on a duplicate table.
 
 ## Lesson 3.3. Numeric Constraints
 /* ------------ CONSTRAINTS  ------------ */
@@ -686,7 +691,7 @@ DELETE FROM Slspers_Backup
 WHERE commrate = 0.25
 ```
 
-The CHECK constraint will now be added to enforce a value range from 0 <= commrate <= 0.1,   
+The `CHECK` constraint will now be added to enforce a value range from 0 <= commrate <= 0.1,   
 ``` sql
 -- The constraint added will enforce Commission to be between 0 and 10%  
 ALTER TABLE Slspers_Backup  
@@ -707,10 +712,11 @@ CHECK (commrate)       | chk_commrate    | N/A   | N/A      | Enabled | Is_For_R
 
 > Note: Additionally, in SSMS Object Explorer, expand the `Tables` folder and then expand `Constraints` folder to view all corresponding constraints.
 
-Having added the constraint, running the initial insertion will now fail   
+Having added the constraint, running the initial insertion will now fail:   
 ``` sql
+-- Invalid insertion since 0.25 is greater than 0.1 (10%)  
 INSERT INTO Slspers_Backup  
-VALUES (1, 'Finnie', 'Nguyen', 0.25); -- Invalid insertion since 0.25 is greater than 0.1 (10%)  
+VALUES (1, 'Finnie', 'Nguyen', 0.25); 
 ```
 
 Use `DROP CONSTRAINT` to remove the constraint and allow all commission values:  
@@ -761,30 +767,32 @@ VALUES (1, 'Alice', 'Smith');
 ```
 
 Verify the insertions:  
+```
 SELECT * FROM Slspers_Backup  
+```
 
 #### Notice about dropping a constraint  
 If a column has a constraint, dropping the column won't work since the constraint is dependent on the column (e.g. 'commrate')
 ```sql
--- will NOT work  
+-- will NOT work if constraint is there.
 ALTER TABLE Slspers_Backup  
 DROP COLUMN commrate 
 ```
 
-The column can only be dropped after the constraint is removed.
+The column can only be dropped <b>AFTER</b> the constraint is removed.
 ``` sql
--- Step 1: First drop the default constraint  
+-- Step 1: First, drop the default constraint  
 ALTER TABLE Slspers_Backup  
-DROP CONSTRAINT df_commrate; -- remember that 'sp_help YourTableName' can be used to view the the constraints name.  
+DROP CONSTRAINT df_commrate; 
+-- remember that 'sp_help YourTableName' can be used to view the the constraints name.  
 
--- Step 2: Then drop the column  
+-- Step 2: Then, drop the column  
 ALTER TABLE Slspers_Backup  
 DROP COLUMN commrate  
 
 -- Step 3: Verify  
 sp_help YourTableName   
 ```
-
 
 /* ------------ Exercise: Try to add a default constraint  ------------ */  
 
@@ -794,7 +802,8 @@ CONSTRAINT generic_email DEFAULT 'iloveSQL@gmail.com';
 -- Recall: Using SSMS, there are different ways of verifing constraints.   
 One additional way is via the Design View. Right-click the table -> Design View   
 Once the view is open, make sure to click on "Email"  
-In the column properties pane, see the default under "Default Value or Binding".  
+Finally, in the column properties pane, set the default under "Default Value or Binding" and enter a value
+<img src = "./zz_default_constraint.png">
 
 #### Solution
 ``` sql
@@ -809,6 +818,8 @@ INSERT INTO
 Slspers_Backup (repid, fname, lname, commrate)  
 Values  
 ('E04', 'Raza', 'Tahir', 0.01)  
+
+SELECT * FROM Slspers_Backup
 ```
 
 ``` sql
@@ -820,13 +831,11 @@ DROP CONSTRAINT DF_Email;
 ## Lesson 3.5. Primary Key Constraint
 /* ------------ Primary KEY Constraint!!! ------------ */  
  
-A Primary Key is a unique identifier for each record in a table and cannot contain duplicates or NULL values!
-Only 1 primary key can be given per table unless it's a composite i.e. a combination of columns.  
+A primary key is a <b>unique</b> identifier for each record in a table and cannot contain duplicates or NULL values! Only 1 primary key can be assigned per table unless it's a composite i.e. a combination of columns.  
 
 > NOTE: Make sure that the following queries affect the DUPLICATE table.
 
 Warning: A column can't be turned into a primary key if the column already contains duplicates.  
-``` TRUNCATE TABLE Slspers_Backup  ```
 
 NOTE: SQL Server refuses to make a primary key if NULLs are allowed on a column.  
 ``` sql
@@ -861,20 +870,36 @@ DROP CONSTRAINT pk_slspers;
 
 ### How to AutoIncrement Primary Key Constraint  
 ``` sql
+-- We'll be adding a new column called 'REPID_NEW'
 -- Note: IDENTITY can only be set when the column is created  
 ALTER TABLE Slspers_Backup  
-ADD repid_new INT IDENTITY(1,1) PRIMARY KEY;  -- Starts at 1, increments by 1
--- We've added a new column 'REPID_NEW' 
+ADD repid_new INT IDENTITY(1,1) -- -- Starts at 1, increments by 1
+CONSTRAINT PK_Slspers_Backup PRIMARY KEY;  
+
 ```
 
 ``` sql
-INSERT INTO Slspers_Backup (fname, lname, commrate) -- notice no mention of the newly added column 'repid_new' 
-VALUES ('Raza', 'Tahir', 0.05)   
+INSERT INTO Slspers_Backup (fname, lname)
+VALUES ('Raza', 'Tahir')   
+
+-- Result: A new row is added with an automatically incremented value in the `repid_new` column. Every time this query runs, a new person will be added with a UNIQUE repid.
 ``` 
 
 Check
 ``` sql
 SELECT * FROM Slspers_Backup
+```
+
+-- To Remove Constraint  
+```
+ALTER TABLE Slspers_Backup  
+DROP CONSTRAINT PK_Slspers_Backup; 
+```
+
+-- THEN remove the column.
+```
+ALTER TABLE Slspers_Backup
+DROP COLUMN repid_new 
 ```
 
 /* -------------------------------------------------------  
