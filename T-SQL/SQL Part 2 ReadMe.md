@@ -70,13 +70,13 @@ FROM Slspers
 ---
 The next two tasks show how to create tables using a WHERE condition to filter specific data.
 
-#### Task 2.0.3: Create a `Customers_CA` table with the same structure as `Customers`, containing only customers from `CA`.
+#### Task 2.0.3: Create a `Customers_Backup` table with the same structure as `Customers`. 
 ``` sql
 -- This Backup Table will be used in the Views Chapter.
 SELECT *  
-INTO Customers_CA  
+INTO Customers_Backup
 FROM Customers  
-WHERE state = 'CA'
+-- WHERE state = 'CA' -- used to show only customers from `CA`.
 ```
 
 > Additional Exercise: Create an empty table called `Cust2025`
@@ -116,7 +116,7 @@ TRUNCATE TABLE Slspers_Template
 ### Lesson 2.1: CRUD Overview
 
 #### <u> Aww, CRUD! </u>
-In database systems, CRUD refers to the four basic operations that can be performed on the data:
+In database systems, the acronym 'CRUD' refers to the four basic operations (that can be performed on the data):
 
 C -- Create  
 R -- Read  
@@ -221,7 +221,7 @@ To change the format, use:
 ``` sql
 INSERT INTO Titles_Revised (bktitle, pubdate)
 VALUES
-('All About SQL', 2026-12-31)  
+('All About SQL', '2026-12-31')  -- Date literals MUST be enclosed within single quotes otherwise the engine thinks you're performing math.
 ```
 
 When done, the format can be changed back to MM/DD/YYY:  
@@ -235,7 +235,7 @@ The next two tasks will demonstrate how to remove all rows from a table and inse
 TRUNCATE TABLE Titles_Revised 
 ```
 
-#### Task B: Copy all rows from `Titles` and paste them into the blank `Titles_Revised` table
+#### Task B: Copy all rows from `Titles` and paste them into the <b> blank yet existing</b> `Titles_Revised` table
 ``` sql
 INSERT INTO Titles_Revised
 SELECT *
@@ -245,7 +245,7 @@ FROM Titles;
 
 #### Optional Exercise: Insert data from one table `Potential_Customers` with a condition into another table `Customers`.  
 ``` sql
-INSERT INTO Customers_CA  -- Note: Table has been created previously.
+INSERT INTO Customers_Backup  -- Note: Table has been created previously.
 SELECT *  
 FROM Potential_Customers  
 WHERE State = 'CA';  
@@ -270,10 +270,20 @@ VALUES
 ``` sql
 SELECT *  
 FROM Slspers_Backup  
-WHERE commrate = 0.05  
+WHERE commrate > 0.03  
 ```
 
-#### Task: Output another table.  
+
+#### Task: Selects all rows from `Slspers` with `commrate` between 0.03 and 0.04, ordered by `commrate`.
+``` sql
+SELECT *  
+FROM Slspers_Backup   
+WHERE commrate BETWEEN 0.03 and 0.04  
+ORDER BY commrate
+```
+
+
+#### Bonus Task: Output another table.  
 ``` sql
 SELECT *  
 FROM Titles_Revised  
@@ -281,13 +291,6 @@ WHERE partnum BETWEEN 40123 AND 40125
 -- BETWEEN 39906 AND 39909 (alternative example)
 ```
 
-#### Exercise: Selects all rows from `Slspers` with `commrate` between 0.03 and 0.04, ordered by `commrate`.
-``` sql
-SELECT *  
-FROM Slspers_Backup   
-WHERE commrate BETWEEN 0.03 and 0.04  
-ORDER BY commrate
-```
 
 <br>
 
@@ -354,7 +357,7 @@ WHERE partnum BETWEEN 40123 AND 40125
 #### (Optional) Exercise: Update multiple columns in a single row of a table
 ``` sql
 UPDATE 	Titles_Revised  
-SET 	bktitle = 'Alex loves Windsurfing <3',  
+SET 	bktitle = 'Alex loves Windsurfing <3',  -- emoji not accepted 
 		devcost = 1000,  
 		slprice = 20,  
 		pubdate = '2017/12/31'  
@@ -388,7 +391,7 @@ FROM Titles_Revised
 WHERE partnum = 40123  
 ```
 
-Remember, to import that record from the original table:
+Recall that individual records can be imported from the original table:
 ``` sql
 INSERT INTO Titles_Revised
 SELECT * 
@@ -555,7 +558,7 @@ Remember:
 ``` sql
 ALTER TABLE Slspers_Backup  
 ADD email varchar(40)  
--- NOTE: Every column will contain NULL  
+-- NOTE: Every row value in this column will be NULL  
 ```
 
 ``` sql
@@ -668,10 +671,9 @@ Ultimately, this subsection has now covered how to add and remove columns on a d
 
 This subchapter will cover how to create a constraint after a table is already created.
 
-Constraints are rules that limit data. If the constraint is active, then inserting invalid data will fail.  
-In SQL Server, constraints are separate objects that can be dropped/removed to allow the user to enter invalid data again.  
+Constraints are <b>rules</b> that limit data. In SQL Server, constraints are separate objects that can be dropped/removed to allow the user to enter invalid data again.  
 
-#### Task: Add a rule (constraint) to make sure commission values are between 0 and 10% (0 to 0.1).  
+#### Task: Add a rule (constraint) to make sure commission values are between 0 and 25% (0 to 0.25).  
 
 First, check to see if invalid data can be inputted:  
 ``` sql
@@ -687,14 +689,16 @@ DELETE FROM Slspers_Backup
 WHERE commrate = 0.25
 ```
 
-The `CHECK` constraint will now be added to enforce a value range from 0 <= commrate <= 0.1,   
+The `CHECK` constraint will now be added to enforce a value range from 0 <= commrate <= 0.25,   
 ``` sql
--- The constraint added will enforce Commission to be between 0 and 10%  
+-- Add constraint to force Commission to be b/w 0% and 25%  
 ALTER TABLE Slspers_Backup  
-ADD CONSTRAINT chk_commrate CHECK (commrate >= 0 AND commrate <= 0.1);  
+ADD CONSTRAINT chk_commrate CHECK (commrate > 0 AND commrate <= 0.25);  
 ```
 
-Constraints are stored in the metadata of a database, so they can always look up later.
+Constraints are stored in the metadata of a database, so they can always look up later.  
+<img src = './zz_constraints.png'>
+
 ``` sql
 -- To verify constraint  
 EXEC sp_help 'Slspers_Backup';  
@@ -726,6 +730,18 @@ Since the constraint is removed, re-inserting the initial data will now work.
 ``` sql
 INSERT INTO Slspers_Backup  
 VALUES (1, 'Finnie', 'Nguyen', 0.25);  
+```
+
+---
+Constraints are rules that can be turned on/off for future changes.
+``` sql
+-- Activate/Enable (Check)
+ALTER TABLE myTable
+CHECK CONSTRAINT myConstraint
+
+-- Deactivate/Disable (NOCHECK)
+ALTER TABLE myTable
+NOCHECK CONSTRAINT myConstraint
 ```
 
 
@@ -1061,7 +1077,7 @@ In this sublesson, we'll further understand views by going through some examples
 ``` sql
 CREATE VIEW CA_S_Cust AS  
 SELECT custname, city, state  
-FROM Customers_CA
+FROM Customers_Backup
 WHERE custname LIKE 'S%' AND state = 'CA'
 WITH CHECK OPTION -- This rule forces the view to reject any rows that don’t meet the view's filter. It turns the filter into a data validation rule i.e. without 'WITH CHECK OPTION', a user can forcefully use the view to insert or update data in a way that violates the view's own WHERE clause.
 -- Note: The ORDER BY clause is invalid in views.
