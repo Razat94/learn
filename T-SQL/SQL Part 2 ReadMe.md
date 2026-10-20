@@ -253,7 +253,7 @@ WHERE State = 'CA';
 
 ---
 
-#### End of Subsection Task: Add yourself as a salesperson and assign yourself a fictional commission!
+#### End of Subsection 2.2. Task: Add yourself as a salesperson and assign yourself a fictional commission!
 Solution:  
 ``` sql
 INSERT INTO Slspers_Backup
@@ -300,23 +300,23 @@ ORDER BY commrate
 
 ---
 
-Demo: Update all salesperson commission from 0.3 to 0.6 
+Demo: Double the commission that we added for ourselves! 
 
 #### First, perform a check:  
 ``` 
-SELECT * FROM Slspers_Backup WHERE commrate = 0.03  
+SELECT * FROM Slspers_Backup WHERE repid = 'R12345' 
 ```
 
 ####  Update all salesperson commission from 0.3 to 0.6 
 ```sql
 UPDATE Slspers_Backup
 SET commrate = 0.06
-WHERE commrate = 0.03;  -- NOTE: Always include a WHERE clause, or else the UPDATE statement will affect all records!
+WHERE repid = 'R12345'  -- NOTE: Always include a WHERE clause, or else the UPDATE statement will affect all records!
 ```
 
 #### Do a final Check:  
 ``` 
-SELECT * FROM Slspers_Backup WHERE commrate = 0.06  
+SELECT * FROM Slspers_Backup WHERE repid = 'R12345'   
 ```
 
 #### Exercise #1: Fix the spelling mistake of 'Anne' (RepID 'W02') to 'Annie'    
@@ -334,16 +334,16 @@ WHERE REPID = 'W02'
 -- Again, this is NOT recommended since multiple records of 'Anne' could match
 ```
 
-#### Exercise #2: From the newly created `Titles_Revised` table, update the `devcost` field for a range of part numbers between 40123 and 40125.
+#### Exercise #2: From the newly created `Titles_Revised` table, update the `slprice` field for a range of part numbers between 40123 and 40125.
 ``` sql
 -- Solution
 UPDATE Titles_Revised  
-SET devcost = 21000  
+SET slprice = 30  
 WHERE partnum BETWEEN 40123 AND 40125 
 -- WHERE partnum BETWEEN 39904 AND 39906  
 ```
 
-#### Finally, check the Updated Table 
+#### Check the updated table 
 ``` sql 
 SELECT *  
 FROM Titles_Revised  
@@ -354,14 +354,14 @@ WHERE partnum BETWEEN 40123 AND 40125
 #### (Optional) Exercise: Update multiple columns in a single row of a table
 ``` sql
 UPDATE 	Titles_Revised  
-SET 	bktitle = 'Alex loves Windsurfing',  
+SET 	bktitle = 'Alex loves Windsurfing <3',  
 		devcost = 1000,  
 		slprice = 20,  
 		pubdate = '2017/12/31'  
 WHERE partnum = '40123'  
 ```
 
-Check Updated Row  
+#### Check the updated Row  
 ``` sql
 SELECT *  
 FROM Titles_Revised  
@@ -374,10 +374,6 @@ WHERE partnum = 40123
 /* ----- D: DELETE statement ----- */
 
 > Similar to the `UPDATE` statement, always verify which rows the `DELETE` query will remove by first running the `SELECT` query with the same `WHERE` clause.
-
-#### Delete all salespeople whose REPID is P01
-DELETE FROM Slspers_Backup
-WHERE repid = 'P01' 
 
 #### Delete all specified rows from `Titles_Revised` where `partnum` equals 40123.
 ``` sql
@@ -400,35 +396,34 @@ FROM Titles
 WHERE partnum = 40123
 ```
 
-Below are a few additional examples for deletions:
+Final things to note:
+- All rows can be deleted via `TRUNCATE` keyword:
+	``` sql
+	TRUNCATE TABLE Titles_Revised  
+	```
+
+- All rows can be deleted via `DELETE` keyword and not specify any condition:  
+	``` sql
+	DELETE FROM Titles_Revised  
+	```
+
+Below are additional examples for deletions:
 ``` sql
 -- 'DELETE FROM' is standard syntax used in SQL.
-DELETE FROM Customers_CA  
+DELETE FROM Customers  
 WHERE custnum = 31004;
 
 -- (SQL Server only) The FROM keyword is optional and so the DELETE command is equivalent to DELETE FROM
+
+-- Delete all salespeople whose REPID is P01
 DELETE Slspers_Backup
-WHERE repid = 'W02';
-```
+WHERE repid = 'P01' 
 
-(Option 1) All rows can be deleted via `TRUNCATE` keyword:
-``` sql
-TRUNCATE TABLE Titles_Revised  
-```
-
-(Option 2) All rows can be deleted via `DELETE` keyword and not specify any condition:  
-``` sql
-DELETE FROM Titles_Revised  
-```
-
-#### Exercise: Attempt to delete the Salesperson Paul that was added earlier:  
-('P01', 'Paul', 'Smith' , 0.05)
-
-> Solution:  
-``` sql
+-- Deletions can occur with more than 1 condition.  
 DELETE Slspers_Backup  
 WHERE REPID = 'P01' AND fname = 'Paul'  
 ```
+
 
 #### ===== End of Chapter Exercise =====  
 
