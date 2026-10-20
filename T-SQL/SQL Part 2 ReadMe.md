@@ -70,10 +70,11 @@ FROM Slspers
 ---
 The next two tasks show how to create tables using a WHERE condition to filter specific data.
 
-#### Task 2.0.3: Create a `CustomersCA` table with the same structure as `Customers`, containing only customers from `CA`.
+#### Task 2.0.3: Create a `Customers_CA` table with the same structure as `Customers`, containing only customers from `CA`.
 ``` sql
+-- This Backup Table will be used in the Views Chapter.
 SELECT *  
-INTO CustomersCA  
+INTO Customers_CA  
 FROM Customers  
 WHERE state = 'CA'
 ```
@@ -95,18 +96,18 @@ WHERE 1 = 0  -- always false
 
 Alternatively, the TRUNCATE statement can be used to remove all the rows from a table but keep its structure:    
 ``` 
-TRUNCATE TABLE Slspers_Backup 
+TRUNCATE TABLE Slspers_Template  
 ```
 
-#### Task 2.0.4: Use either of the following methods to delete the CustomersCA table in SQL Server:
-- Using T-SQL Commands:
-	- DROP TABLE `CustomersCA`  
-	- DROP TABLE IF EXISTS `CustomersCA` -- avoid errors if the table has already been deleted.
-
+#### Task 2.0.4: Use either of the following methods to delete the Slspers_Template table in SQL Server:
 - Using the SSMS Object Explorer (GUI):
-	1. In the Object Explorer pane, navigate to the database of choice and find the table to delete (e.g., `CustomersCA`).
+	1. In the Object Explorer pane, navigate to the database of choice and find the table to delete (e.g., `Slspers_Template`).
 	2. Right-click the table and select 'Delete'.
 	3. When the Delete Object dialog box appears, 	verify the selection and click OK to drop the table
+
+- Using T-SQL Commands:
+	- DROP TABLE `Slspers_Template`  
+	- DROP TABLE IF EXISTS `Slspers_Template` -- avoid errors if the table has already been deleted.
 
 ---
 
@@ -244,7 +245,7 @@ FROM Titles;
 
 #### Optional Exercise: Insert data from one table `Potential_Customers` with a condition into another table `Customers`.  
 ``` sql
-INSERT INTO CustomersCA  -- Note: Table has been created previously.
+INSERT INTO Customers_CA  -- Note: Table has been created previously.
 SELECT *  
 FROM Potential_Customers  
 WHERE State = 'CA';  
@@ -402,7 +403,7 @@ WHERE partnum = 40123
 Below are a few additional examples for deletions:
 ``` sql
 -- 'DELETE FROM' is standard syntax used in SQL.
-DELETE FROM CustomersCA  
+DELETE FROM Customers_CA  
 WHERE custnum = 31004;
 
 -- (SQL Server only) The FROM keyword is optional and so the DELETE command is equivalent to DELETE FROM
@@ -992,16 +993,17 @@ With our newly created .BACPAC file, we'll now find that importing a .bacpac fil
 
 
 ## Lesson 4.1. Explanation of Views  
-A view gives the user a different way to look at data in a table (hence the name).  
-For example, a view is great for hiding certain fields in a table.
+At its core, a standard SQL view is a saved subquery. With a view, you don't have to rewrite the query every time you need to use it.
 
-More formally, a SQL View is a virtual table and is essentially a saved query that references a table.  So think of it like a query that pretends to be a table.  
+A view gives the user a different way to look at data in a table (hence the name).  
+For example, a view is great for hiding certain fields in a table e.g. a view named 'activeCustomers' to show only...active customers!
+
+More formally, a SQL View is a virtual table and is essentially a saved query that references a table.  So think of it like a query that pretends to be a table. 
  
 > Views are similar to dashboards in Excel/PowerBI & Views in SharePoint Lists  
-> Fun Analogy: Think of a view like a work phone or laptop since it acts like a device with limited features.
 
 > Note: A view does not store data on its own since it just stores the query.  
-> If the original data changes, then the view will automatically reflect it. 
+> If the original data changes, then the view will automatically reflect it.   
 > Note that a user can also insert data (via DML statements) against a view to modify the underlying base table.
 
 Views can be based on:  
@@ -1012,6 +1014,7 @@ Views can be based on:
 - Functions  
 
 #### Why Views Matter  
+- Take up little to no memory/disk space.
 - Security  
 	- A view can expose only specific rows and columns. So instead of giving users direct full access to a table, a view can be created that allow users to only see the data through that.
 	- DBAs can refuse/restrict access to tables but only grant access to views.  
@@ -1024,32 +1027,48 @@ Views can be based on:
 
 
 ## Lesson 4.2. Create a View via the Object Explorer Interface
+This subchapter will show how views get queried in pretty much the same way a traditional table is queried. 
+
 As we've seen, views can be created using raw SQL code, but here's how to access & create views via the Object Explorer in SSMS.
+
+#### Task: Create a view for users to view <b>some</b> data from the `Titles_Revised` table. 
 
 Step 1: Navigate to the database where the view will be created. Expand the database, and notice the "Views" folder.
 
 <img src = './Views_Folder.png'>
 
-Step 2: Right-click on the 'Views' folder and select "New View." On the alert, choose the table to base the view on. In this example, select the `Titles_Revised` table, click 'Add', and then close the dialog box.
+Step 2: Right-click on the 'Views' folder and select "New View" to display an alert.
 
-Step 3: Let's suppose the goal is for users to view some data from the `Titles_Revised` table. To do that, simply select all the fields we'd like to include. Clicking each field will add the column to the view.
+Step 3: On the alert, choose the table to base the view on. In this example, select the `Titles_Revised` table, click 'Add', and then close the alert dialog box.
 
-Step 4: Once all the fields have been added, save the view. Click the save icon or just close the window and confirm the save. Give the view a name, like `TitlesInfo`.
+Step 4: The goal is for users to view some data from the `Titles_Revised` table. To do that, simply select all the fields to include by clicking each field will add the column to the view (e.g. bktitle & pubdate).
 
-Result: Now the view is created. To run it, expand the Views folder, find the new view, right-click it, and select "Select Top 1000 Rows" or run a SELECT query. You'll see the data returns in a standard table.
+Step 5: Once all the fields have been added, save the view by clicking the save icon (Ribbon) or just close the window and confirm the save. Either option will prompt the user to assign the view a name, e.g. `TitlesInfo`.
+
+Result: Now the view is created. To run it, expand the Views folder, find the new view, right-click it, and select "Select Top 1000 Rows" or run a SELECT query:  
+``` SELECT * FROM TitlesInfo ```  
+The data is outputted as if its from a standard table.
+
+At its core, this view acts like a subquery:
+``` sql
+SELECT * FROM (
+	SELECT bktitle, pubdate
+	FROM dbo.Titles_Revised
+) AS Books -- necessary
+```
 
 ---
 
 ## Lesson 4.3. Sample Exercises with Views
-In this sublesson, we'll understand views by going through some examples.
+In this sublesson, we'll further understand views by going through some examples.
 
-### Example #1: Create a view to show only people from state 'CA'  
+### Example #1: Create a view to show only people from state 'CA' whose custname begins with letter 'S'
 ``` sql
-CREATE VIEW CA_Cust AS  
+CREATE VIEW CA_S_Cust AS  
 SELECT custname, city, state  
-FROM Customers  
-WHERE state = 'CA'
-WITH CHECK OPTION -- This rule forces the view to reject any rows that don’t meet the view's filter
+FROM Customers_CA
+WHERE custname LIKE 'S%' AND state = 'CA'
+WITH CHECK OPTION -- This rule forces the view to reject any rows that don’t meet the view's filter. It turns the filter into a data validation rule i.e. without 'WITH CHECK OPTION', a user can forcefully use the view to insert or update data in a way that violates the view's own WHERE clause.
 -- Note: The ORDER BY clause is invalid in views.
 ```
 
@@ -1063,15 +1082,15 @@ Result:  After a View is created, expand/refresh the `Views` folder in the Objec
 Now that a view is created, that view can be queried like a table.  
 ``` sql
 SELECT * FROM Customers	-- Original Query still works
-SELECT * FROM CA_Cust  	-- The view will only return customers from California.
+SELECT * FROM CA_S_Cust  	-- The view will only return customers from California whose name begins with 'S'.
 ```
 
 Data can now be inserted through the view, and it will update the original Customers table.
 ``` sql
 -- Will work
-INSERT INTO CA_Cust
+INSERT INTO CA_S_Cust
 VALUES 
-('Nickkis Design', 'Oakland', 'CA')
+('Shoe Design', 'Oakland', 'CA')
 ```
 
 Due to the `WITH CHECK OPTION`, any INSERT, UPDATE, or MERGE through the view must satisfy the view’s defining WHERE clause condition(s).
@@ -1080,13 +1099,13 @@ Due to the `WITH CHECK OPTION`, any INSERT, UPDATE, or MERGE through the view mu
 -- Will NOT work
 INSERT INTO CA_Cust
 VALUES 
-('Nickkis Design', 'Brooklyn', 'NY')
+('Zehra Design', 'Oakland', 'CA')
 ```
 
 If needed, delete any customers from the view as well:  
 ``` sql
-DELETE FROM CA_Cust
-WHERE custname LIKE 'Nickki%'
+DELETE FROM CA_S_Cust
+WHERE custname LIKE 'Shoe%'
 ```
 
 Since a view doesn't store data itself and is just a saved query on a table, the view will always show real-time data.  
@@ -1094,7 +1113,7 @@ Since a view doesn't store data itself and is just a saved query on a table, the
 - Deleting data on the original table will update the view.
 
 Syntax to Delete (Drop) a View  
-``` DROP VIEW CA_Cust  ```
+``` DROP VIEW CA_S_Cust  ```
 
 --- 
 
@@ -1114,7 +1133,7 @@ WITH CHECK OPTION
 
 ``` sql
 Insertions will ONLY work when the number of values matches the number of columns.  
--- INSERT INTO Top_Salesperson VALUES (1, 'John', 'Smith', 0.5); -- Won't Work since this inserts 4 values, but the view only has 3 columns.  
+-- INSERT INTO Top_Salesperson VALUES (1, 'John', 'Smith', 0.5); -- Won't Work; this query inserts 4 values, but the view only has 3 columns.  
 -- INSERT INTO Top_Salesperson VALUES (1, 'John', 0.05);  -- Will Work  
 
 Adding records where commrate is above 0.04 will ONLY work.  
@@ -1124,28 +1143,32 @@ Adding records where commrate is above 0.04 will ONLY work.
 -- Verify: -- SELECT * FROM Top_Salesperson  
 ```
 
-#### Subtask: Alter the Salesperson view to now only display fname & commrate  
+#### Subtask: Alter the Salesperson view to now only display fname & commrate, and also change the commission requirement to 0.03  
 ``` sql
 -- Change ALTER VIEW with CREATE VIEW to update the view instead of making a new one.  
 CREATE OR ALTER VIEW Top_Salesperson AS 
 SELECT fname, commrate    
 FROM Slspers_Backup  
-WHERE commrate > 0.04  
+WHERE commrate > 0.03  
 WITH CHECK OPTION
 ```
 
 Verify:  
 ``` SELECT * FROM Top_Salesperson ```
 
-NOTE: Once the view has been dropped, users won't be able to use the view:  
+#### Dropping Views
+> NOTE: Once the view has been dropped, users won't be able to use the view:  
 
 
 ``` sql
 DROP VIEW Top_Salesperson
+```
+
+``` sql
 SELECT * FROM Top_Salesperson -- Won't work 
 ```
 
-Bonus Option: Users can be Granted read only permissions, but not be given any permissions to perform insert/update/delete operations.
+Bonus Option: Users can be granted read only permissions, but not be given any permissions to perform insert/update/delete operations.
 ``` sql
 GRANT SELECT ON CA_Cust TO some_user;
 REVOKE INSERT, UPDATE, DELETE ON CA_Cust FROM some_user;
@@ -1192,7 +1215,7 @@ WHERE partnum IN ('40256', '40257')
 -- WHERE partnum BETWEEN '40250' AND '40259' -- also works
 
 
--- Using the View, update the price in both the view & table  
+-- Using the View, update the price in both the view & actual table  
 UPDATE mediumprice  
 SET slprice = 30  
 WHERE partnum = '40257'  
