@@ -1,0 +1,25 @@
+Simple example
+Imagine you have a database with an Employees table containing:
+
+Employee ID
+
+Name
+
+Salary
+
+Social Security Number
+
+Department
+
+
+You create a view:
+sql
+CREATE VIEW Employee_Overview AS
+SELECT Name, Department
+FROM Employee_Full_Details;
+Now, someone can run:
+
+
+sql
+SELECT * FROM EmployeeInfo;
+They only see the employee names and departments, not the salaries or Social Security Numbers.

@@ -800,10 +800,10 @@ sp_help YourTableName
 Make a new constraint to add generic emails  
 CONSTRAINT generic_email DEFAULT 'iloveSQL@gmail.com';  
 
--- Recall: Using SSMS, there are different ways of verifing constraints.   
-One additional way is via the Design View. Right-click the table -> Design View   
-Once the view is open, make sure to click on "Email"  
-Finally, in the column properties pane, set the default under "Default Value or Binding" and enter a value
+Recall that in SSMS, there are different ways of creating constraints. One way is via the Design View:  
+	- Right-click the table -> Design View   
+	- Once the view is open, make sure to click on "Email"  
+	- Finally, in the column properties pane, set the default under "Default Value or Binding" and enter a value
 <img src = "./zz_default_constraint.png">
 
 #### Solution
@@ -1005,7 +1005,7 @@ More formally, a SQL View is a virtual table and is essentially a saved query th
 
 > Note: A view does not store data on its own since it just stores the query.  
 > If the original data changes, then the view will automatically reflect it.   
-> Note that a user can also insert data (via DML statements) against a view to modify the underlying base table.
+> NOTE that a user can also insert data (via DML statements) against a view to modify the underlying base table.
 
 Views can be based on:  
 - One entire table  
@@ -1034,21 +1034,25 @@ As we've seen, views can be created using raw SQL code, but here's how to access
 
 #### Task: Create a view for users to view <b>some</b> data from the `Titles_Revised` table. 
 
-Step 1: Navigate to the database where the view will be created. Expand the database, and notice the "Views" folder.
+1. Navigate to the database where the view will be created. Expand the database, and notice the "Views" folder.
 
-<img src = './Views_Folder.png'>
+	<img src = './Views_Step_1.png'>
 
-Step 2: Right-click on the 'Views' folder and select "New View" to display an alert.
+2. Right-click on the 'Views' folder and select "New View" to display an alert.
 
-Step 3: On the alert, choose the table to base the view on. In this example, select the `Titles_Revised` table, click 'Add', and then close the alert dialog box.
+	<img src = './Views_Step_2.png'>
 
-Step 4: The goal is for users to view some data from the `Titles_Revised` table. To do that, simply select all the fields to include by clicking each field will add the column to the view (e.g. bktitle & pubdate).
+3. On the alert, select the table to base the view on. In this example, select the `Titles_Revised` table, click 'Add' only <u>once</u>, and then close the alert dialog box.
 
-Step 5: Once all the fields have been added, save the view by clicking the save icon (Ribbon) or just close the window and confirm the save. Either option will prompt the user to assign the view a name, e.g. `TitlesInfo`.
+4. The goal is for users to view some column data from the `Titles_Revised` table. To do that, simply select each field to include in the view by clicking on the respective checkbox (e.g. bktitle & pubdate).
 
-Result: Now the view is created. To run it, expand the Views folder, find the new view, right-click it, and select "Select Top 1000 Rows" or run a SELECT query:  
-``` SELECT * FROM TitlesInfo ```  
-The data is outputted as if its from a standard table.
+5. Once all the fields have been added, save the view by clicking the save icon (Ribbon) or just close the window and confirm the save. Either option will prompt the user to assign the view a name, e.g. `Titles_Info`.
+
+Result: With the view now created, run it by expanding the Views folder, finding the new view, right-clicking it, and select "Select Top 1000 Rows" or run a SELECT query:  
+``` SELECT * FROM Titles_Info ```  
+Note that the data is outputted as if its from a standard table.
+
+> sp_help 'Titles_Info' will now return information about the view's name, owner, type, creation date, and column details (such as column names and data types)
 
 At its core, this view acts like a subquery:
 ``` sql
@@ -1242,10 +1246,26 @@ WHERE partnum = '40257'
 DROP VIEW mediumprice  
 ```
 
+To recap, Views are tools to encapsulate and abstract data and can work with other applications like MS Power BI.
 
 /* -------------------------------------------------------  
 ## <p id = "procedure"> Bonus Lesson: Procedures | [Back to ToC](#toc)</p>   
 ---------------------------------------------------------- */  
+
+A SQL procedure is a saved, reusable block of SQL code that can run whenever needed.
+
+Having covered views, a view cannot be written as an INSERT INTO statement because a view represents a virtual table, not an action.
+
+Incorrect: 
+CREATE VIEW user_view AS 
+INSERT INTO users ...
+
+A procedure does what a view can't, and that is have the definition contain DML statements such as INSERT, UPDATE, DELETE
+
+For instance, a very common procedure is to create/delete backup tables, which a view definition cannot use a SELECT INTO statement!
+
+
+
 
 Before understanding what a procedure is, let's first understand what is conditional logic. Conditional logic makes specific actions occur only if certain conditions/criteria are met (e.g., "If it rains, bring an umbrella").
 
@@ -1799,13 +1819,15 @@ CREATE TABLE person (
 BEGIN TRANSACTION;
 BEGIN TRY  
 	-- Some SQL statements  
+	INSERT INTO perso VALUES ('Alice')  
+	-- Table 'person' misspelled on purpose.
 
-	 EXEC('
-	 INSERT INTO perso VALUES ('Alice')  
-	 ');
+	-- EXEC(' 
+	--	INSERT INTO perso VALUES ('Alice')  
+	-- ');
 	-- Wrapping the below code with EXEC statement so that the statement is compiled at runtime & the error is catchable.
 	-- It’s not required, but it helps to avoid running the query twice to view the output e.g. when mispelling a table name.
-	-- INSERT INTO perso VALUES ('Alice')  -- Table 'Person' misspelled on purpose.  
+
 	COMMIT
 END TRY  
 BEGIN CATCH  
