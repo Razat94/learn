@@ -146,7 +146,13 @@ SELECT
 
 ---
 
-SQL Server provides built-in functions that format how data is displayed and can perform calculations e.g. rounding values.
+SQL Server provides global variables that provides quick information about the database and SQL Server itself.
+``` sql
+SELECT @@VERSION		-- Global system variable in SQL Server that returns version, edition, and build information.
+SELECT @@SERVERNAME		-- returns the name of the local server running SQL Server.
+```
+
+SQL Server also provides built-in functions that format how data is displayed and can perform calculations e.g. rounding values.
 #### Example: Demonstrate the power of the functions.
 ``` sql
 SELECT FORMAT(1+3, 'C')  -- Output: $4.00, since FORMAT Function converts the number into a string. 

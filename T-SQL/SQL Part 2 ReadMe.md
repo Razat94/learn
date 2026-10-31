@@ -59,12 +59,12 @@ FROM Titles
 
 --- 
 
-Task 2.0.2: Please make another backup table for Salesperson titled `Slspers_Backup`
+Task 2.0.2: Please make another backup table for Salesperson titled `Slspers_Backup` 
 
 ``` sql
 SELECT *  
 INTO Slspers_Backup  
-FROM Slspers
+FROM Pub1.dbo.Slspers -- Retrieves data from the Slspers table in the Pub1 database.
 ```
 
 ---
@@ -205,7 +205,7 @@ VALUES
 ---
 
 ### Adding Dates
-As you know, dates can be formatted as:
+As you know, a date value can be formatted as:
 
 	- yyyy/mm/dd
 	- mm/dd/yyyy
@@ -221,7 +221,7 @@ To change the format, use:
 ``` sql
 INSERT INTO Titles_Revised (bktitle, pubdate)
 VALUES
-('All About SQL', '2026-12-31')  -- Date literals MUST be enclosed within single quotes otherwise the engine thinks you're performing math.
+('All About SQL', '2026-12-31')  -- Date literals MUST be enclosed within single quotes otherwise the engine will interpret them as subtraction i.e. a math expression.
 ```
 
 When done, the format can be changed back to MM/DD/YYY:  
@@ -310,7 +310,7 @@ Demo: Double the commission that we added for ourselves!
 SELECT * FROM Slspers_Backup WHERE repid = 'R12345' 
 ```
 
-####  Update all salesperson commission from 0.3 to 0.6 
+####  Update MY salesperson commission to 0.6 
 ```sql
 UPDATE Slspers_Backup
 SET commrate = 0.06
@@ -499,8 +499,9 @@ It's important to understand how to create, delete & truncate tables as a whole.
 Step 1: Create the table  
 ``` sql
 CREATE TABLE ProduceInventory (  
-    ProduceName VARCHAR(50),  
-    PricePerPound DECIMAL(5,2), -- Exactly 2 decimal places that goes up to 999.99  
+    ProduceName VARCHAR(50),    
+		-- VARCHAR(MAX) is the maximum capacity for a non-unicode	(data types designed primarily for English alphabets) string data type in SQL Server.
+    PricePerPound DECIMAL(5,2), -- 5 total digits with 2 decimal places (max 999.99).
     -- InStock BIT NOT NULL  -- Optional Column. This is the closest thing to a Boolean type in T-SQL.  A value of `0` represents false, and `1` represents true.  
 );  
 ```
@@ -537,20 +538,9 @@ DROP TABLE ProduceInventory  		-- used to drop/delete the table.
 
 ## 3.2. Using CRUD operations to affect columns.
 
-The previous Lesson 2 covered how to add and delete records (rows) in a table. The next main topic will cover how to use the various CRUD operations that was discussed in Chapter 2 to affect the underlying columns in a table.
+The previous Lesson 2 covered how to add and delete records (rows) in a table. This lesson will cover how to use the various CRUD operations that was discussed in Chapter 2 to affect the underlying columns in a table.
 
-#### Recall: To Create a Duplicate Table 
-``` sql
-SELECT *  
-INTO Slspers_Backup  
-FROM Slspers  
--- Please keep this table as it will be used in upcoming examples throughout this chapter.
-```
-
-Remember:  
--- The Object Explorer must be refreshed to see the new table.  
--- Additionally, refresh IntelliSense to avoid the red error underline on the table name by going to:  
--- Edit -> IntelliSense -> Refresh Local Cache (Ctrl + Shift + R)  
+Make sure the `Slspers_Backup` table is available in the database for the upcoming examples in this chapter.
 
 
 /* ------------ C: ADD Column to ALTER TABLE ------------ */  
@@ -558,7 +548,7 @@ Remember:
 ``` sql
 ALTER TABLE Slspers_Backup  
 ADD email varchar(40)  
--- NOTE: Every row value in this column will be NULL  
+-- NOTE: All existing rows would all have NULL values in this column.
 ```
 
 ``` sql
@@ -569,7 +559,7 @@ sp_help Slspers_Backup
 ``` sql
 -- Fill every salesperson with generic email  
 UPDATE Slspers_Backup  
-SET email = 'test@outlook.com'  
+SET email = 'secondtest@outlook.com'  
 WHERE email IS NULL;  
 ```
 
@@ -669,11 +659,11 @@ Ultimately, this subsection has now covered how to add and remove columns on a d
 ## Lesson 3.3. Numeric Constraints
 /* ------------ CONSTRAINTS  ------------ */
 
-This subchapter will cover how to create a constraint after a table is already created.
+Constraints are <b><u>rules</u></b> that limit data. In SQL Server, constraints are separate properties that can be created after a table has been created. Constraints can be dropped/removed to allow the user to enter invalid data again. 
 
-Constraints are <b>rules</b> that limit data. In SQL Server, constraints are separate objects that can be dropped/removed to allow the user to enter invalid data again.  
+In SQL Server, constraints are always tied to a table or column and can not exist on their own. If a table is dropped, its internal constraints are automatically removed too.
 
-#### Task: Add a rule (constraint) to make sure commission values are between 0 and 25% (0 to 0.25).  
+#### Task: Add a rule (constraint) to assure that commission values are between 0 and 25% (0 to 0.25).  
 
 First, check to see if invalid data can be inputted:  
 ``` sql
@@ -682,11 +672,10 @@ INSERT INTO Slspers_Backup
 VALUES (1, 'Finnie', 'Nguyen', 0.25);  
 ```
 
-NOTE: As seen before in the previous example, please ensure that there are NO existing commrate values that can violate the new constraint to be added.
-
+NOTE: As seen before in the last example, please ensure that there are NO existing commrate values that will violate the new constraint.
 ``` sql
 DELETE FROM Slspers_Backup  
-WHERE commrate = 0.25
+WHERE commrate >= 0.25
 ```
 
 The `CHECK` constraint will now be added to enforce a value range from 0 <= commrate <= 0.25,   
@@ -806,9 +795,9 @@ DROP COLUMN commrate
 sp_help YourTableName   
 ```
 
-/* ------------ Exercise: Try to add a default constraint  ------------ */  
+/* ------------ Exercise: Adding a default constraint  ------------ */  
 
--- Make a new constraint to add generic emails  
+Make a new constraint to add generic emails  
 CONSTRAINT generic_email DEFAULT 'iloveSQL@gmail.com';  
 
 -- Recall: Using SSMS, there are different ways of verifing constraints.   
@@ -822,6 +811,7 @@ Finally, in the column properties pane, set the default under "Default Value or 
 ALTER TABLE Slspers_Backup
 ADD email VARCHAR(20) 
     CONSTRAINT DF_Email DEFAULT 'iloveSQL@gmail.com'
+	-- optional constraint that sets the default email address for each row to be 'iloveSQL@gmail.com'.
 ```
 
 ``` sql
@@ -1648,10 +1638,10 @@ An Index can be created on a table by using the `CREATE INDEX` command. An index
 > Indexes can slow down data modification (e.g. when adding or change data), so only use indexes for things that get searched a lot.
 
 (Taken from w3Schools:)
-Suppose we have a table called Slspers with a column LastName. We can make an index on LastName like this:  
+Create an index on LastName:  
 ``` sql
 CREATE INDEX idx_lastname
-ON Slspers (LastName);
+ON Slspers_Backup (Lname);
 ```
 
 Now, to search for all Slspers with a certain last name, SQL Server can use the index to find them faster:
@@ -1659,8 +1649,8 @@ Now, to search for all Slspers with a certain last name, SQL Server can use the 
 ``` sql
 --  SQL Server looks up 'Smith' in the index instead of scanning every row in the table.
 SELECT * 
-FROM Slspers
-WHERE LastName = 'Smith';
+FROM Slspers_Backup
+WHERE LastName = 'Powell';
 ```
 
 In the Object Explorer, each table in the Tables folder has a list of indexes under: 
@@ -1701,13 +1691,13 @@ Some common examples of transactions could be:
 	Step 2: Deduct items from Inventory table.  
 	Step 3: Update customer’s balance in Accounts table.  
 
-- HRIS Systems to manage employee records.
-		Example: Have a procedure named DeleteEmployee that removes an employee record and includes TRY...CATCH blocks for robust error handling across different tables.
+- HRIS Systems to manage employee records.  
+	Example: Have a procedure named `DeleteEmployee` that removes an employee record and includes `TRY...CATCH` blocks for robust error handling across different tables.
 
 To keep data accurate and reliable during database operations, experts follow four key principles known as ACID properties:
 
 - Atomicity - Transactions must be all-or-nothing. If any part fails, the whole transaction is canceled.
-	> When runing multiple queries, transactions ensure that a series of operations are executed as a single unit of work.   
+	> When running multiple queries, transactions ensure that a series of operations are executed as a single unit of work.   
 	> Think of it as 'ALL OR NOTHING'. Either the statements all succeed (committed) or all fail (rolled back).  
 	
 	> Once a transaction is committed or rolled back, the transaction ends and can't be undone or rolled back.  
