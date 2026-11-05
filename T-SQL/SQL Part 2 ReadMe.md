@@ -205,7 +205,7 @@ VALUES
 ---
 
 ### Adding Dates
-As you know, a date value can be formatted as:
+A date value can be formatted as:
 
 	- yyyy/mm/dd
 	- mm/dd/yyyy
@@ -993,46 +993,45 @@ With our newly created .BACPAC file, we'll now find that importing a .bacpac fil
 ---------------------------------------------------------- */  
 
 
-## Lesson 4.1. Explanation of Views  
-At its core, a standard SQL view is a saved subquery. With a view, you don't have to rewrite the query every time you need to use it.
+## Lesson 4.1. Introduction & Explanation of Views  
+At its core, a standard SQL view is a saved subquery. 
 
-A view gives the user a different way to look at data in a table (hence the name).  
-For example, a view is great for hiding certain fields in a table e.g. a view named 'activeCustomers' to show only...active customers!
+More formally, a SQL View is a virtual table and is essentially a saved query that references a table. So think of it like a stored query definition that pretends to be a table. 
 
-More formally, a SQL View is a virtual table and is essentially a saved query that references a table.  So think of it like a query that pretends to be a table. 
- 
-> Views are similar to dashboards in Excel/PowerBI & Views in SharePoint Lists  
-
-> Note: A view does not store data on its own since it just stores the query.  
-> If the original data changes, then the view will automatically reflect it.   
-> NOTE that a user can also insert data (via DML statements) against a view to modify the underlying base table.
-
-Views can be based on:  
+A view can be:  
 - One entire table  
 - A few columns from a table  
 - Multiple joined tables  
 - Subqueries  
 - Functions  
 
-#### Why Views Matter  
+One of the general benefits of a view is that it gives the user a different way to look at data in a table (hence the name).  
+- Views in SQL Server are similar to views in Excel and SharePoint Lists in that all three let you look at a subset or arrangement of data.
+- For example, a view is great for hiding certain fields in a table e.g. a view named 'activeCustomers' to show only...active customers!
+
+#### A few things to note:
+- A view does not store data on its own since it stores a certain query. So if the original data changes, then the view will automatically reflect it.   
+- A user can insert data (via DML statements) <u>against</u> a view to modify the underlying base table but can not have a DML statement be apart of the definition.
+
+
+#### Recap: Why Views Matter  
 - Take up little to no memory/disk space.
 - Security  
-	- A view can expose only specific rows and columns. So instead of giving users direct full access to a table, a view can be created that allow users to only see the data through that.
-	- DBAs can refuse/restrict access to tables but only grant access to views.  
-
+	- A view can consist of a specific set of rows and columns. So instead of giving users direct full access to a table, users can be provided a view that only consists of a filtered subset of the data.
+		- DBAs can refuse/restrict access to tables but only grant access to views.  
 - Ease of access  
 	- Views reduce complexity. Instead of loading all 100 columns of a table, the user can then retrieve the 3 columns they need to work with.  
-	- Ultimately, it helps when manipulating/joining large tables.  
+	- Ultimately, it can help when manipulating/joining large tables.  
 
 <br/>
 
 
 ## Lesson 4.2. Create a View via the Object Explorer Interface
-This subchapter will show how views get queried in pretty much the same way a traditional table is queried. 
 
-As we've seen, views can be created using raw SQL code, but here's how to access & create views via the Object Explorer in SSMS.
+Views can be created and queried via raw SQL code, similar to how traditional tables are created and queried.
 
-#### Task: Create a view for users to view <b>some</b> data from the `Titles_Revised` table. 
+#### Task: Create a view for users to view <b>some</b> data from the `Titles_Revised` table <u>via the Object Explorer in SSMS</u>:
+
 
 1. Navigate to the database where the view will be created. Expand the database, and notice the "Views" folder.
 
@@ -1048,11 +1047,11 @@ As we've seen, views can be created using raw SQL code, but here's how to access
 
 5. Once all the fields have been added, save the view by clicking the save icon (Ribbon) or just close the window and confirm the save. Either option will prompt the user to assign the view a name, e.g. `Titles_Info`.
 
-Result: With the view now created, run it by expanding the Views folder, finding the new view, right-clicking it, and select "Select Top 1000 Rows" or run a SELECT query:  
-``` SELECT * FROM Titles_Info ```  
-Note that the data is outputted as if its from a standard table.
+Result: With the view now created, run it by expanding the Views folder, finding the new view, right-clicking it, and select "Select Top 1000 Rows" OR run a SELECT query:  
 
-> sp_help 'Titles_Info' will now return information about the view's name, owner, type, creation date, and column details (such as column names and data types)
+``` SELECT * FROM Titles_Info ```  
+Note that the data is outputted as if its from a standard table. 
+
 
 At its core, this view acts like a subquery:
 ``` sql
@@ -1062,9 +1061,13 @@ SELECT * FROM (
 ) AS Books -- necessary
 ```
 
+
+Lastly, use the below query to return information about the view's name, owner, type, creation date, and column details (such as column names and data types)  
+``` sp_help 'Titles_Info' ```
+
 ---
 
-## Lesson 4.3. Sample Exercises with Views
+## Lesson 4.3. Create a View via SQL Code
 In this sublesson, we'll further understand views by going through some examples.
 
 ### Example #1: Create a view to show only people from state 'CA' whose custname begins with letter 'S'
@@ -1073,7 +1076,7 @@ CREATE VIEW CA_S_Cust AS
 SELECT custname, city, state  
 FROM Customers_Backup
 WHERE custname LIKE 'S%' AND state = 'CA'
-WITH CHECK OPTION -- This rule forces the view to reject any rows that don’t meet the view's filter. It turns the filter into a data validation rule i.e. without 'WITH CHECK OPTION', a user can forcefully use the view to insert or update data in a way that violates the view's own WHERE clause.
+WITH CHECK OPTION -- This rule forces the view to reject any rows that don’t meet the view's filter. It turns the filter into a data validation rule i.e. without 'WITH CHECK OPTION', a user can make the view insert or update invalid data.
 -- Note: The ORDER BY clause is invalid in views.
 ```
 
@@ -1126,33 +1129,28 @@ Syntax to Delete (Drop) a View
 Create a virtual table called 'Top_Salesperson' that shows repid, fname & commrate whose commrate > 0.04.  
 
 ``` sql
-CREATE VIEW Top_Salesperson AS  
+CREATE OR ALTER VIEW Top_Salesperson -- Views don't need to be rewritten every time it's needed to be used.
+AS  
 SELECT repid, fname, commrate  -- 3 Columns    
 FROM Slspers_Backup  
 WHERE commrate > 0.04  
 WITH CHECK OPTION
 ```
 
--- Displays the SQL code used to define the view.  
+Verify:  
+``` SELECT * FROM Top_Salesperson ```
+
+Display the SQL code used to define the view.  
 ``` sp_helptext Top_Salesperson ```
 
-``` sql
-Insertions will ONLY work when the number of values matches the number of columns.  
--- INSERT INTO Top_Salesperson VALUES (1, 'John', 'Smith', 0.5); -- Won't Work; this query inserts 4 values, but the view only has 3 columns.  
--- INSERT INTO Top_Salesperson VALUES (1, 'John', 0.05);  -- Will Work  
-
-Adding records where commrate is above 0.04 will ONLY work.  
--- INSERT INTO Top_Salesperson VALUES (1, 'Elvis', 0.03);  -- Won't Work    
--- INSERT INTO Top_Salesperson VALUES (1, 'Elvis', 0.06);  -- Will Work 
-
--- Verify: -- SELECT * FROM Top_Salesperson  
-```
 
 #### Subtask: Alter the Salesperson view to now only display fname & commrate, and also change the commission requirement to 0.03  
 ``` sql
 -- Change ALTER VIEW with CREATE VIEW to update the view instead of making a new one.  
 CREATE OR ALTER VIEW Top_Salesperson AS 
-SELECT fname, commrate    
+SELECT 
+	UPPER(fname) AS uppercase_name, -- When modifying a column with a function, the database has no inherent column name to store in the view's metadata
+	commrate    
 FROM Slspers_Backup  
 WHERE commrate > 0.03  
 WITH CHECK OPTION
@@ -1161,8 +1159,28 @@ WITH CHECK OPTION
 Verify:  
 ``` SELECT * FROM Top_Salesperson ```
 
-#### Dropping Views
-> NOTE: Once the view has been dropped, users won't be able to use the view:  
+
+### Using DML statements against a view
+Insertions will ONLY work when the number of values matches the number of columns.  
+``` sql
+-- INSERT INTO Top_Salesperson VALUES (1, 'John', 'Smith', 0.5); -- Won't Work; this query inserts 4 values, but the view only has 2 columns.  
+-- INSERT INTO Top_Salesperson VALUES ('John', 0.05);  -- Will Work  
+```
+
+Adding records where commrate is above 0.03 will ONLY work.  
+``` sql
+-- INSERT INTO Top_Salesperson VALUES ('Elvis', 0.02);  -- Won't Work    
+-- INSERT INTO Top_Salesperson VALUES ('Elvis', 0.06);  -- Will Work 
+```
+
+Verify:  
+``` SELECT * FROM Top_Salesperson  ```  
+``` SELECT * FROM Slspers_Backup   ```
+
+--- 
+
+### Dropping Views
+A view can be deleted via the ```DROP VIEW ``` command. Once the view has been dropped, users won't be able to use the view:  
 
 
 ``` sql
@@ -1376,7 +1394,7 @@ NOTE: The difference between VIEWS & PROCEDURES
 - A view definition can't use or contain DML statements such as INSERT, UPDATE, DROP and DELETE. 
 	- A View definition can only use a SELECT query since it doesn't data.
 
-> Note: While you cannot contain DML inside the view definition, you can use DML statements against a view. This will be discussed later. 
+> Note: While a DML cannot be contained inside the view definition, DML statements can be used against a view. This will be discussed later. 
 
 So a View:  
 - Can't accept parameters (no input).  
@@ -1639,7 +1657,7 @@ Creating indexes helps improve efficiency by specifically supporting your most f
 
 Indexes are similar to how you look through a book to find a certain part.
 
-Imagine you’re trying to find the word “transactions” in a book. You could look at every page one by one, or you could use the book’s index to quickly go straight to the page where the word is. For example:  
+Imagine you're trying to find the word “transactions” in a book. You could look at every page one by one, or you could use the book’s index to quickly go straight to the page where the word is. For example:  
 - Table of Contents
 - Table of Indexes
 - Glossary of Terms, including the page number where the term was first used
