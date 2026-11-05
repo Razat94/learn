@@ -1098,7 +1098,7 @@ Data can now be inserted through the view, and it will update the original Custo
 -- Will work
 INSERT INTO CA_S_Cust
 VALUES 
-('Shoe Design', 'Oakland', 'CA')
+('Shoe Design by Zehra', 'Oakland', 'CA')
 ```
 
 Due to the `WITH CHECK OPTION`, any INSERT, UPDATE, or MERGE through the view must satisfy the view’s defining WHERE clause condition(s).
@@ -1107,7 +1107,7 @@ Due to the `WITH CHECK OPTION`, any INSERT, UPDATE, or MERGE through the view mu
 -- Will NOT work
 INSERT INTO CA_Cust
 VALUES 
-('Zehra Design', 'Oakland', 'CA')
+('Zehra Design', 'Brooklyn', 'NY')
 ```
 
 If needed, delete any customers from the view as well:  
